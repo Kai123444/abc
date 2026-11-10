@@ -6,7 +6,7 @@ Wochenziele in TSS, Stunden grob geschätzt (Rad 38, Lauf 52, Schwimmen 48, Kraf
 
 | Phase | Zeitraum | Belastungsart | Intensitätsverteilung | Load/Woche (ohne Erholung) | Stunden | CTL am Ende |
 |---|---|---|---|---|---|---|
-| 0 Wiedereinstieg und Tests | 16.11.-29.11.2026 | Reaktivierung, Leistungsdiagnostik | locker, Tests Sa 14.11./Di 17.11. | 330 | 8-8 | 31 |
+| 0 Wiedereinstieg und Tests | 09.11.-29.11.2026 | Reaktivierung, Leistungsdiagnostik | locker, Tests Sa 14.11./Di 17.11. | 337-397 | 8-10 | 32 |
 | 1 Grundlage I | 30.11.-24.01.2027 | Aerobes Volumen, Kraftausdauer, Technik | ca. 85 % Z1-Z2 / 15 % darüber | 380-505 | 10-13 | 52 |
 | 2 Grundlage II / Aufbau | 25.01.-21.03.2027 | Schwelle, Tempo, aerobe Leistung | ca. 80 / 15 / 5 (pyramidal) | 515-600 | 13-15 | 67 |
 | 3 Aufbau intensiv | 22.03.-16.05.2027 | VO2max, Koppeltraining, lange Ausdauer | ca. 75 / 15 / 10 | 605-700 | 15-17 | 81 |
@@ -30,10 +30,11 @@ Wochenziele in TSS, Stunden grob geschätzt (Rad 38, Lauf 52, Schwimmen 48, Kraf
 
 | Woche ab | Phase | Art | TSS | Std. | Rad | Lauf | Schw. | Kraft | CTL | Form |
 |---|---|---|---|---|---|---|---|---|---|---|
-| 16.11. | 0 | Reaktivierung | 330 | 8 | 121 | 59 | 110 | 40 | 31 | -15 |
-| 23.11. | 0 | Erholung | 240 | 6 | 96 | 47 | 77 | 20 | 31 | -7 |
-| 30.11. | 1 | Aerobes Volumen | 380 | 10 | 154 | 76 | 110 | 40 | 35 | -14 |
-| 07.12. | 1 | Aerobes Volumen | 405 | 10 | 171 | 84 | 110 | 40 | 38 | -16 |
+| 09.11. | 0 | Reaktivierung | 397 | 10 | 196 | 65 | 104 | 32 | - | - |
+| 16.11. | 0 | Reaktivierung | 337 | 8 | 90 | 125 | 102 | 20 | 31 | -15 |
+| 23.11. | 0 | Erholung | 240 | 6 | 96 | 47 | 77 | 20 | 32 | -7 |
+| 30.11. | 1 | Aerobes Volumen | 380 | 10 | 154 | 76 | 110 | 40 | 35 | -13 |
+| 07.12. | 1 | Aerobes Volumen | 405 | 10 | 171 | 84 | 110 | 40 | 39 | -16 |
 | 14.12. | 1 | Aerobes Volumen | 430 | 11 | 188 | 92 | 110 | 40 | 42 | -17 |
 | 21.12. | 1 | Erholung | 300 | 7 | 136 | 67 | 77 | 20 | 42 | -7 |
 | 28.12. | 1 | Aerobes Volumen | 445 | 11 | 198 | 97 | 110 | 40 | 45 | -13 |

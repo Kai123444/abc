@@ -90,6 +90,28 @@ def _stufentest(client: IntervalsClient, a) -> int:
     return 0
 
 
+def _woche(client: IntervalsClient, a) -> int:
+    """Testwochen 09.-22.11.2026: Kollisionen mit dem Rad-Stufentest entfernen, Hinweise und die
+    Einheiten der nächsten Woche eintragen (idempotent über external_id)."""
+    from . import wochenplan
+    evs = client.events(date(2026, 11, 9), date(2026, 11, 15))
+    weg = [(e, grund) for tag, name, grund in wochenplan.ENTFERNEN for e in evs
+           if e["start_date_local"][:10] == tag and e.get("name") == name]
+    neu = wochenplan.HINWEISE + wochenplan.naechste_woche_events()
+    for e, grund in weg:
+        print(f"Entfernen: {e['start_date_local'][:10]} {e['name']} – {grund}")
+    for e in neu:
+        print(f"Eintragen: {e['start_date_local'][:10]} {e['name']} ({e.get('type', e['category'])})")
+    if not a.apply:
+        print("Vorschau – mit --apply in intervals.icu schreiben.")
+        return 0
+    for e, _ in weg:
+        client.delete_event(e["id"])
+    client.upsert_events(neu)
+    print("✔ Wochen angepasst.")
+    return 0
+
+
 def _saison(client: IntervalsClient, a) -> int:
     """Saisonplan (Wochenziele, Phasen-Notizen) in den Kalender schreiben; der Hauptwettkampf
     muss im Kalender schon stehen.
@@ -147,7 +169,7 @@ def _saison(client: IntervalsClient, a) -> int:
 def main(argv: list[str] | None = None) -> int:
     p = argparse.ArgumentParser(prog="trainingsplan", description=__doc__,
                                 formatter_class=argparse.RawDescriptionHelpFormatter)
-    p.add_argument("befehl", choices=["analyse", "sync", "anpassen", "stufentest", "saison"])
+    p.add_argument("befehl", choices=["analyse", "sync", "anpassen", "stufentest", "saison", "woche"])
     p.add_argument("--basis-ab", type=date.fromisoformat,
                    help="Vergleichszeitraum ab Datum (z.B. 2026-08-01): Normalwochen statt 4 Wochen")
     p.add_argument("--alten-plan-loeschen", action="store_true",
@@ -178,6 +200,8 @@ def main(argv: list[str] | None = None) -> int:
             return _stufentest(client, a)
         if a.befehl == "saison":
             return _saison(client, a)
+        if a.befehl == "woche":
+            return _woche(client, a)
         wellness, akt = _daten(client, a.heute, a.basis_ab)
     except IntervalsError as exc:
         print(f"Fehler: {exc}", file=sys.stderr)

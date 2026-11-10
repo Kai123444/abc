@@ -22,8 +22,8 @@ from datetime import date, timedelta
 
 # (Montag, TSS gesamt pro Woche, Erholungs-/Taperwoche?)  – 3 Belastungswochen : 1 Erholungswoche
 WOCHEN: list[tuple[str, int, bool]] = [
-    # Phase 0 Wiedereinstieg und Tests
-    ("2026-11-16", 330, False), ("2026-11-23", 240, True),
+    # Phase 0 Wiedereinstieg und Tests (Woche 09.11. mit Rad-Stufentest, Woche 16.11. mit Lauf-Stufentest)
+    ("2026-11-09", 397, False), ("2026-11-16", 337, False), ("2026-11-23", 240, True),
     # Phase 1 Grundlage I
     ("2026-11-30", 380, False), ("2026-12-07", 405, False), ("2026-12-14", 430, False),
     ("2026-12-21", 300, True),
@@ -184,6 +184,13 @@ PHASEN: list[tuple[str, str, str]] = [
 ]
 
 
+# Testwochen: Verteilung nach den tatsächlich geplanten Einheiten (Stufentests, Vereinstraining, Sportunterricht)
+_SPORT_FEST = {
+    "2026-11-09": {"Ride": 196, "Run": 65, "Swim": 104, "Other": 32},
+    "2026-11-16": {"Ride": 90, "Run": 125, "Swim": 102, "Other": 20},
+}
+
+
 def _stufe(stufen: list, tag: str):
     wert = stufen[0][1]
     for ab, w in stufen:
@@ -194,6 +201,8 @@ def _stufe(stufen: list, tag: str):
 
 def verteilung(gesamt: int, tag: str = "2026-11-16", erholung: bool = False) -> dict[str, int]:
     """Wochenload auf Sportarten verteilen: Schwimmen und Kraft fest, Rest an Rad und Lauf."""
+    if tag in _SPORT_FEST:
+        return dict(_SPORT_FEST[tag])
     if tag in _TAPER_SCHWIMMEN:
         swim, kraft, anteil = _TAPER_SCHWIMMEN[tag], _TAPER_KRAFT[tag], 0.33
     else:
@@ -260,7 +269,7 @@ RENNTAG_TSS = 170
 
 # (von, bis, Phase, Belastungsart, Intensitätsverteilung, Rad, Lauf, Schwimmen/Kraft)
 PHASEN_UEBERSICHT = [
-    ("2026-11-16", "2026-11-29", "0 Wiedereinstieg und Tests", "Reaktivierung, Leistungsdiagnostik",
+    ("2026-11-09", "2026-11-29", "0 Wiedereinstieg und Tests", "Reaktivierung, Leistungsdiagnostik",
      "locker, Tests Sa 14.11./Di 17.11.", "Stufentest, Z2", "Stufentest, locker", "Verein, Kraft-Technik"),
     ("2026-11-30", "2027-01-24", "1 Grundlage I", "Aerobes Volumen, Kraftausdauer, Technik",
      "ca. 85 % Z1-Z2 / 15 % darüber", "Z2 lang (Sa 3-4 h), Sweet Spot 2x20, Kraftausdauer 4x8 min",
@@ -301,6 +310,8 @@ def simulation() -> dict[str, tuple[float, float]]:
     ctl, atl = 28.0, 43.0
     out = {}
     for tag, tss, _ in WOCHEN:
+        if tag < "2026-11-16":  # Startwerte gelten für den 16.11.
+            continue
         if tag == "2027-08-02":
             for d in RENNWOCHE_VORBEREITUNG:
                 ctl += (d - ctl) * kc
