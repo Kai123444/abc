@@ -6,7 +6,7 @@ Wochenziele in TSS, Stunden grob geschätzt (Rad 38, Lauf 52, Schwimmen 48, Kraf
 
 | Phase | Zeitraum | Belastungsart | Intensitätsverteilung | Load/Woche (ohne Erholung) | Stunden | CTL am Ende |
 |---|---|---|---|---|---|---|
-| 0 Wiedereinstieg und Tests | 09.11.-29.11.2026 | Reaktivierung, Leistungsdiagnostik | locker, Tests Sa 14.11./Di 17.11. | 304-442 | 7-11 | 31 |
+| 0 Wiedereinstieg und Tests | 09.11.-29.11.2026 | Reaktivierung, Leistungsdiagnostik | locker, Tests Sa 14.11./Di 17.11. | 304-411 | 7-10 | 31 |
 | 1 Grundlage I | 30.11.-24.01.2027 | Aerobes Volumen, Kraftausdauer, Technik | ca. 85 % Z1-Z2 / 15 % darüber | 380-505 | 10-13 | 52 |
 | 2 Grundlage II / Aufbau | 25.01.-21.03.2027 | Schwelle, Tempo, aerobe Leistung | ca. 80 / 15 / 5 (pyramidal) | 515-600 | 13-15 | 67 |
 | 3 Aufbau intensiv | 22.03.-16.05.2027 | VO2max, Koppeltraining, lange Ausdauer | ca. 75 / 15 / 10 | 605-700 | 15-17 | 81 |
@@ -30,7 +30,7 @@ Wochenziele in TSS, Stunden grob geschätzt (Rad 38, Lauf 52, Schwimmen 48, Kraf
 
 | Woche ab | Phase | Art | TSS | Std. | Rad | Lauf | Schw. | Kraft | CTL | Form |
 |---|---|---|---|---|---|---|---|---|---|---|
-| 09.11. | 0 | Reaktivierung | 442 | 11 | 198 | 55 | 157 | 32 | - | - |
+| 09.11. | 0 | Reaktivierung | 411 | 10 | 167 | 55 | 157 | 32 | - | - |
 | 16.11. | 0 | Reaktivierung | 304 | 7 | 87 | 100 | 102 | 15 | 30 | -13 |
 | 23.11. | 0 | Erholung | 240 | 6 | 96 | 47 | 77 | 20 | 31 | -7 |
 | 30.11. | 1 | Aerobes Volumen | 380 | 10 | 154 | 76 | 110 | 40 | 35 | -14 |

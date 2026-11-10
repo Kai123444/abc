@@ -1,7 +1,7 @@
 """Konkrete Einheiten für die Testwochen 09.-22.11.2026 (Phase 0) als intervals.icu-Workouts.
 
 Sonderfall dieser Woche: Schulevent "24 Stunden Schwimmen" von Fr 13.11. bis Sa 14.11.; du schwimmst
-dort nur 4 km locker. Am Fr trainierst du ausnahmsweise (Rad), dazu Sportunterricht und das Schwimmen. Der
+dort nur 4 km locker. Am Fr kommen Sportunterricht und das Schwimmen zusammen (kein Radtraining). Der
 Rad-Stufentest liegt deshalb am So 15.11. (ein freier Tag davor) und der Lauf-Stufentest am Mi 18.11.
 
 Zonen sind noch die alten Einstellungen (FTP 280 W, Lauf-HF-Zonen veraltet). Deshalb Rad in Prozent
@@ -20,6 +20,8 @@ ENTFERNEN = [
     ("2026-11-16", "Kraft: Beine und Core", "Mo: Kraft ohne Beine nach dem Rad-Stufentest"),
     ("2026-11-18", "Rad Grundlage", "Mi: Lauf-Stufentest, Rad am Di"),
     ("2026-11-19", "Lauf locker", "Do: nach dem Lauftest kein Lauf"),
+    ("2026-11-13", "Rad Grundlage (Freitag, Sondertraining)",
+     "Fr: gestrichen, Sportunterricht und Schulevent reichen vor dem Rad-Stufentest am So"),
 ]
 
 # Verschieben/ändern: (altes Datum, Name, neues Datum, geänderte Felder)
@@ -35,10 +37,10 @@ VERSCHIEBEN = [
 
 # Neue Einheiten und Hinweise dieser Woche
 DIESE_WOCHE = [
-    {"category": "NOTE", "name": "Fr: Schulevent und Rad, So: Rad-Stufentest",
+    {"category": "NOTE", "name": "Fr: Schulevent, So: Rad-Stufentest",
      "start_date_local": "2026-11-13T00:00:00",
-     "description": "Beim Schulevent schwimmst du nur 4 km locker. Am Freitag kommen Rad (Vormittag), "
-                    "Sportunterricht und das Schwimmen zusammen, deshalb liegt der Rad-Stufentest am "
+     "description": "Beim Schulevent schwimmst du nur 4 km locker. Am Freitag kommen Sportunterricht und "
+                    "das Schwimmen zusammen, ein Radtraining am Nachmittag entfällt. Der Rad-Stufentest liegt am "
                     "Sonntag mit einem freien Samstag davor. Sportunterricht am Fr ruhig laufen, kein "
                     "Zeitlauf. Sa locker, früh schlafen, abends kohlenhydratreich essen. So 2-3 h vor "
                     "dem Test frühstücken. Ausweichtermin Mo 16.11., falls der Schlaf unter 7 h war oder "
@@ -48,11 +50,6 @@ DIESE_WOCHE = [
      "start_date_local": "2026-11-13T00:00:00", "moving_time": 5400,
      "description": "4 km locker, kein Tempo, mehr nicht. Technik sauber, Schultern schonen.",
      "external_id": "woche-2026-11-13-24h"},
-    {"category": "WORKOUT", "type": "Ride", "name": "Rad Grundlage (Freitag, Sondertraining)",
-     "start_date_local": "2026-11-13T00:00:00", "moving_time": 3600,
-     "description": "Möglichst am Vormittag, vor dem Event. Locker, damit der Sonntag frisch bleibt.\n"
-                    "Warmup\n- 10m ramp 45-55%\n\nGrundlage, Trittfrequenz 85-95\n- 40m 58%\n\nCooldown\n- 10m 50%",
-     "external_id": "woche-2026-11-13-radgrundlage"},
 ]
 
 # Nächste Woche (16.-22.11.): Lauf-Stufentest am Mi (verschoben, Id 154094124)
