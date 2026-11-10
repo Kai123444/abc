@@ -101,6 +101,9 @@ class IntervalsClient:
     def update_event(self, event_id: int, felder: dict) -> dict:
         return self._request("PUT", self._athlete(f"/events/{event_id}"), body=felder)
 
+    def delete_event(self, event_id: int) -> None:
+        self._request("DELETE", self._athlete(f"/events/{event_id}"))
+
     def upsert_events(self, events: list[dict]) -> list[dict]:
         """Legt geplante Workouts an bzw. aktualisiert sie (Match über external_id)."""
         if not events:
