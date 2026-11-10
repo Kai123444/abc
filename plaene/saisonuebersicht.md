@@ -59,7 +59,7 @@ Wochenziele in TSS, Stunden grob geschätzt (Rad 38, Lauf 52, Schwimmen 48, Kraf
 | 17.05. | 4 | Renntempo | 710 | 17 | 326 | 184 | 170 | 30 | 84 | -9 |
 | 24.05. | 4 | Renntempo | 730 | 17 | 339 | 191 | 170 | 30 | 87 | -13 |
 | 31.05. | 4 | Renntempo | 745 | 18 | 349 | 196 | 170 | 30 | 90 | -14 |
-| 07.06. | 4 | Erholung + Formcheck Sa 12.06. | 480 | 11 | 221 | 125 | 119 | 15 | 87 | +5 |
+| 07.06. | 4 | Erholung + Cottbus Olympische Distanz Sa 12.06. | 480 | 11 | 221 | 125 | 119 | 15 | 87 | +5 |
 | 14.06. | 4 | Renntempo | 735 | 18 | 342 | 193 | 170 | 30 | 89 | -7 |
 | 21.06. | 4 | Renntempo | 750 | 18 | 352 | 198 | 170 | 30 | 92 | -11 |
 | 28.06. | 4 | Renntempo | 760 | 18 | 358 | 202 | 170 | 30 | 95 | -12 |
@@ -79,5 +79,6 @@ Wochenziele in TSS, Stunden grob geschätzt (Rad 38, Lauf 52, Schwimmen 48, Kraf
 |---|---|---|---|---|---|
 | **08.08.** | **DM Kurzdistanz** | Kurzdistanz | **A** | ~170 TSS | Taper 2 Wochen, siehe Notiz |
 | **05.09.** | **Hölle von Q (Harz)** | Mitteldistanz: 2 km / 90 km / 10 km laut Eintrag | **B** | ~300-350 TSS | Schlüsselwoche 23.08., Rennwoche 30.08. mit kurzem Taper, Rad nicht über 75 % FTP |
+| 12.06. | Cottbus | Olympische Distanz (Schwimmen 1,5 km / Rad 40 km / Lauf 10 km (Vergleich: Kurzdistanz im Juni 2026 in 2:19 h)) | B | ~150 TSS | B-Rennen und Generalprobe für die DM, 8 Wochen vorher. Mini-Taper Mi-Fr (-40 %): Mo 60 min locker, Di Schwimmen (Verein) + 5x1 min Renntempo Lauf, Mi 45 min Rad mit 3x5 min Renntempo, Do Schwimmen Technik, Fr 30 min locker mit 3x30 s Öffnern. Pacing, Wechsel und Verpflegung wie bei der DM üben. So locker 60 min oder frei, Mo locker, ab Di wieder Belastung. Ersetzt den Formcheck. |
 
 Renntag 08.08.2027 (Prognose am Morgen): CTL 86, ATL 67, Form +20.

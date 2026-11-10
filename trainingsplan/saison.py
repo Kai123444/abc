@@ -103,10 +103,6 @@ RETESTS = [
     ("2027-03-20", "Retest Stufentests",
      "Zweiter Retest: Rad-Stufentest, Lauf-Stufentest, CSS-Test. Vergleich mit November und "
      "Januar zeigt, ob Aufbau und Zonen passen."),
-    ("2027-06-12", "Formcheck Renntempo",
-     "In der Erholungswoche: 20-min-Radtest (FTP kontrollieren) und 5-km-Lauf auf Zeit. Daraus "
-     "Renntempo ableiten: Rad ca. 85-90 % FTP über 40 km, Lauf etwa 10-km-Pace. Entfällt, wenn in "
-     "dieser Woche ein Rennen liegt."),
     ("2027-07-10", "Generalprobe Kurzdistanz",
      "In der Erholungswoche: Koppel 30 km Rad im Renntempo + 5 km Lauf im Renntempo, "
      "Verpflegung und Wechsel üben, 1,5 km Freiwasser mit Neopren."),
@@ -149,8 +145,9 @@ PHASEN: list[tuple[str, str, str]] = [
      "Kurzdistanz-spezifisch (1,5 km / 40 km / 10 km, ca. 2:30 h): Renntempo-Blöcke Rad 3x12 min "
      "bei 100-105 % FTP, Brick Rad 40 min bei 85-90 % FTP + Lauf 10 km im Renntempo (alle 2 Wochen), "
      "Freiwasser mit Neopren ab Mai, 1,5 km am Stück, lange Radfahrt bis 4-5 h, langer Lauf bis 100 min. "
-     "Rennen vor der DM (Regionalliga) werden nach Terminen eingeplant: Supersprint/Sprint ersetzt die "
-     "Samstags-Brick-Einheit, eine Kurzdistanz bekommt einen Mini-Taper (Do-Sa, -40 %). "
+     "Sa 12.06. Cottbus (Olympische Distanz = B-Rennen und Generalprobe für die DM, Mini-Taper Mi-Fr, "
+     "ersetzt den Formcheck). Weitere Rennen vor der DM nach Termin: Supersprint/Sprint ersetzt die "
+     "Samstags-Brick-Einheit. "
      "Zwei Spitzenblöcke zu 3 Wochen (710-760 TSS, ca. 18-19 h). Spitzenwochen dürfen 20-21 h "
      "erreichen, wenn der Mehrumfang locker ist (Z1-Z2, zusätzliches Rad/Schwimmen) und die Ampel grün "
      "bleibt. Erholungswochen am 07.06. und 05.07.; die Wochen 12. und 19.07. fallen leicht ab.\n"
@@ -285,7 +282,7 @@ PHASEN_UEBERSICHT = [
 ]
 
 _TESTWOCHEN = {"2027-01-18": "Retest Sa 23.01.", "2027-03-15": "Retest Sa 20.03.",
-               "2027-06-07": "Formcheck Sa 12.06.", "2027-07-05": "Generalprobe Sa 10.07.",
+               "2027-06-07": "Cottbus Olympische Distanz Sa 12.06.", "2027-07-05": "Generalprobe Sa 10.07.",
                "2027-08-23": "Mitteldistanz-Schlüsselwoche (Brick 100 km + 10-14 km)",
                "2027-08-30": "Hölle von Q (Mitteldistanz, B) So 05.09."}
 
@@ -385,7 +382,14 @@ def uebersicht_markdown() -> str:
 # (Datum, Name, Klasse, Kategorie, Distanzen, geschätzte TSS, Vorbereitung/Hinweis)
 # Messwerte der Vorjahresrennen (Regionalliga-Termine 2026, intervals.icu) als Orientierung für die Rennlast:
 #   Supersprint ca. 40 TSS, Sprint ca. 80-90 TSS, Kurzdistanz (1,4 km / 42 km / 10 km) ca. 145 TSS in 2:19 h.
-RENNEN: list[tuple[str, str, str, str, str, int, str]] = []
+RENNEN: list[tuple[str, str, str, str, str, int, str]] = [
+    ("2027-06-12", "Cottbus", "Olympische Distanz", "RACE_B",
+     "Schwimmen 1,5 km / Rad 40 km / Lauf 10 km (Vergleich: Kurzdistanz im Juni 2026 in 2:19 h)", 150,
+     "B-Rennen und Generalprobe für die DM, 8 Wochen vorher. Mini-Taper Mi-Fr (-40 %): Mo 60 min locker, "
+     "Di Schwimmen (Verein) + 5x1 min Renntempo Lauf, Mi 45 min Rad mit 3x5 min Renntempo, Do Schwimmen "
+     "Technik, Fr 30 min locker mit 3x30 s Öffnern. Pacing, Wechsel und Verpflegung wie bei der DM üben. "
+     "So locker 60 min oder frei, Mo locker, ab Di wieder Belastung. Ersetzt den Formcheck."),
+]
 
 
 def rennen_events() -> list[dict]:
@@ -396,7 +400,6 @@ def rennen_events() -> list[dict]:
         out.append({"category": kat, "type": "Other", "name": f"{name} ({klasse})",
                     "start_date_local": f"{tag}T00:00:00",
                     "description": (f"{klasse}: {dist}. Geschätzte Rennlast ca. {tss} TSS.\n{hinweis}\n"
-                                    "Termin = Vorjahr + 52 Wochen (geschätzt), bitte mit Ausschreibung/Ligakalender "
-                                    "abgleichen."),
+                                    "Termin und Distanz laut Athlet."),
                     "external_id": f"saison-rennen-{tag}-{name[:5].lower().strip()}"})
     return out
