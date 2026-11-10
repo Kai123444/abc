@@ -36,6 +36,12 @@ VERSCHIEBEN = [
     ("2026-11-11", "Ride", "2026-11-11",
      {"moving_time": 2700, "description": "Grundlage, locker, Trittfrequenz 85-95\n- 45m 57%"}),
     ("2026-11-17", "Lauf-Stufentest", "2026-11-18", {}),
+    # Heute (Di 10.11.): MTB statt Kadenz-Grundlage, gleiche Dauer
+    ("2026-11-10", "Kadenz-Grundlage", "2026-11-10",
+     {"type": "MountainBikeRide", "name": "MTB locker (statt Kadenz-Grundlage)", "moving_time": 4320,
+      "description": "Gleiche Dauer wie geplant (72 min), aber locker und gleichmäßig: Puls unter ca. 150, "
+                     "Anstiege im Sitzen und ruhig, keine Intervalle. Die Kadenz-Intervalle entfallen.\n"
+                     "- 72m 55%"}),
 ]
 
 # Neue Einheiten und Hinweise dieser Woche
@@ -76,17 +82,29 @@ NAECHSTE_WOCHE = [
      "Warmup\n- 10m ramp 45-57%\n\nGrundlage, Trittfrequenz 85-95, essen und trinken (60 g Kohlenhydrate/h)\n"
      "- 100m 58%\n\nCooldown\n- 10m 50%", 120),
     ("2026-11-23", "WeightTraining", "Kraft: Beine und Oberkörper (Technik)",
-     "Erholungswoche, Technik und Gewichte finden (RIR 3): Front- oder Goblet-Kniebeuge 3x8, Rumänisches "
+     "Erste Aufbauwoche, Technik und Gewichte finden (RIR 3): Front- oder Goblet-Kniebeuge 3x8, Rumänisches "
      "Kreuzheben 3x8, Bulgarian Split Squat 3x6 je Seite, Hip Thrust 3x10, Wadenheben 3x12, danach Klimmzüge "
-     "3x8, Rudern 3x10, Bankdrücken 3x8, Plank 3x45 s. Ab 30.11. beginnt der Aufbau mit +2,5 kg pro Fortschritt.", 55),
+     "3x8, Rudern 3x10, Bankdrücken 3x8, Plank 3x45 s. Danach +2,5 kg pro Fortschritt.", 55),
     ("2026-11-25", "WeightTraining", "Kraft: Oberkörper und Core (vor dem Lauf)",
-     "Erholungswoche, 35 min vor den Bahnintervallen, RIR 3: Bankdrücken 3x8, Klimmzüge oder Latzug 3x8, Face Pulls "
+     "35 min vor den Bahnintervallen, RIR 3: Bankdrücken 3x8, Klimmzüge oder Latzug 3x8, Face Pulls "
      "2x15, Plank 3x45 s, Pallof Press 2x10 je Seite. Aktivierung: Glute Bridge 2x10, Wadenheben 2x12, 2x5 leichte "
      "Hocksprünge. Keine schweren Beine vor dem Laufen.", 35),
     ("2026-11-25", "Run", "Bahn: Einstieg 5x400 m",
-     "Erste Bahneinheit nach dem Lauf-Stufentest, Erholungswoche. Paces nach dem Test anpassen, vorläufig "
+     "Erste Bahneinheit nach dem Lauf-Stufentest. Paces nach dem Test anpassen, vorläufig "
      "4:15/km. Qualität vor Menge, die 5. Runde so schnell wie die erste.\n"
      "Warmup\n- 15m 6:50/km Pace\n\nIntervalle 5x\n- 400mtr 4:15/km Pace\n- 200mtr 7:15/km Pace\n\nCooldown\n- 8m 7:00/km Pace", 50),
+    ("2026-11-24", "Ride", "Rad locker",
+     "Beine ausdrehen nach dem Montag, Trittfrequenz 85-95.\n- 10m ramp 45-55%\n- 40m 57%\n- 10m 50%", 60),
+    ("2026-11-24", "Swim", "Vereinstraining", "Wie geplant im Verein.", 70),
+    ("2026-11-26", "Ride", "Rad Schlüssel: Sweet Spot",
+     "Erste Intensität nach den Tests, Prozente beziehen sich auf die neue FTP.\nWarmup\n- 15m ramp 50-75%\n\n"
+     "Sweet Spot 2x\n- 15m 88%\n- 5m 55%\n\nCooldown\n- 10m 50%", 65),
+    ("2026-11-26", "Swim", "Vereinstraining", "Wie geplant im Verein.", 70),
+    ("2026-11-28", "Ride", "Rad in den Bergen",
+     "Im Harz, Anstiege im eigenen Tempo, nicht über 75 % FTP, Essen und Trinken üben. Erste Bergfahrt "
+     "ohne Intervalle.\nWarmup\n- 10m ramp 45-57%\n\nGrundlage\n- 100m 58%\n\nCooldown\n- 10m 50%", 120),
+    ("2026-11-29", "Run", "Hügellauf locker",
+     "Hügelgelände, bergauf kräftig, bergab traben oder gehen, Puls niedrig halten.\n- 55m 6:50/km Pace", 55),
     ("2026-11-22", "Run", "Lauf locker lang",
      "Der längste Lauf der Woche, ruhig, gern im Hügelgelände (bergauf locker, bergab traben oder gehen). "
      "Danach Dehnen/Mobilisation.\n- 45m 6:50/km Pace", 45),

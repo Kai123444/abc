@@ -149,13 +149,13 @@ class TestAnpassen(unittest.TestCase):
             if rec and tag not in saison.TAPER_WOCHEN:
                 self.assertLess(tss, werte[i - 1][1] * 0.8)
         # keine Steigerung über 8 % von Woche zu Woche (außer nach Erholungs-/Taperwoche)
-        for (_, a, ra), (_, b, rb) in zip(werte, werte[1:]):
-            if not ra and not rb:
+        for (ta, a, ra), (_, b, rb) in zip(werte, werte[1:]):
+            if not ra and not rb and ta >= "2026-11-23":  # Testwochen davor zählen nicht
                 self.assertLessEqual(b / a, 1.08)
         # Lauf-Load wächst gegenüber der letzten Belastungswoche höchstens ~13 % pro Woche
         letzte = None
         for tag, tss, rec in werte:
-            if rec or tag < "2026-11-30":  # Testwoche zählt nicht als Ausgangspunkt
+            if rec or tag < "2026-11-23":  # Testwochen zählen nicht als Ausgangspunkt
                 continue
             lauf = saison.verteilung(tss, tag, rec)["Run"]
             if letzte:

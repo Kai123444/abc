@@ -6,9 +6,9 @@ Wochenziele in TSS, Stunden grob geschätzt (Rad 38, Lauf 52, Schwimmen 48, Kraf
 
 | Phase | Zeitraum | Belastungsart | Intensitätsverteilung | Load/Woche (ohne Erholung) | Stunden | CTL am Ende |
 |---|---|---|---|---|---|---|
-| 0 Wiedereinstieg und Tests | 09.11.-29.11.2026 | Reaktivierung, Leistungsdiagnostik | locker, Tests Sa 14.11./Di 17.11. | 311-411 | 7-10 | 31 |
-| 1 Grundlage I | 30.11.-24.01.2027 | Aerobes Volumen, Kraftausdauer, Technik | ca. 85 % Z1-Z2 / 15 % darüber | 380-505 | 10-12 | 52 |
-| 2 Grundlage II / Aufbau | 25.01.-21.03.2027 | Schwelle, Tempo, aerobe Leistung | ca. 80 / 15 / 5 (pyramidal) | 515-600 | 13-15 | 67 |
+| 0 Tests | 09.11.-22.11.2026 | Reaktivierung, Leistungsdiagnostik | locker, Tests Sa 14.11./Di 17.11. | 311-411 | 7-10 | 31 |
+| 1 Grundlage I | 23.11.-24.01.2027 | Aerobes Volumen, Kraftausdauer, Technik | ca. 85 % Z1-Z2 / 15 % darüber | 380-515 | 10-13 | 54 |
+| 2 Grundlage II / Aufbau | 25.01.-21.03.2027 | Schwelle, Tempo, aerobe Leistung | ca. 80 / 15 / 5 (pyramidal) | 525-600 | 13-15 | 68 |
 | 3 Aufbau intensiv | 22.03.-16.05.2027 | VO2max, Koppeltraining, lange Ausdauer | ca. 75 / 15 / 10 | 605-700 | 15-17 | 81 |
 | 4 Wettkampfvorbereitung | 17.05.-25.07.2027 | Renntempo, Spezifik, Spitzenvolumen | ca. 75 / 15 / 10 mit Renntempo | 635-760 | 15-18 | 92 |
 | Taper und Rennen | 26.07.-08.08.2027 | Frische, Schärfe, Renntempo-Öffner | locker + wenige scharfe Reize | 520-600 | 12-14 | 88 |
@@ -18,7 +18,7 @@ Wochenziele in TSS, Stunden grob geschätzt (Rad 38, Lauf 52, Schwimmen 48, Kraf
 
 | Phase | Rad | Lauf | Schwimmen / Kraft |
 |---|---|---|---|
-| 0 Wiedereinstieg und Tests | Stufentest, Z2 | Stufentest, locker | Verein, Kraft Mo Oberkörper + Beine leicht (ab 16.11.), Mi vor dem Lauf |
+| 0 Tests | Stufentest, Z2 | Stufentest, locker | Verein, Kraft Mo Oberkörper + Beine leicht (ab 16.11.), Mi vor dem Lauf |
 | 1 Grundlage I | Sa 3-4 h in den Bergen: Z2 mit Kraftausdauer am Anstieg 4-5x6-8 min, Bergsprints, Sweet Spot 2x20 | Mi Bahn 6-10x400, 4 Läufe, So Hügellauf 60-75 min, Steigerungen | Verein + Technik; Kraftraum Mo Beine + Oberkörper, Mi Oberkörper/Core, RIR 2-3 |
 | 2 Grundlage II / Aufbau | Berg-Schwelle 3x15 / 2x20 bergauf, Kraftausdauer 5x8, Over-Unders, Bergsprints | Mi Bahn 10-12x400 / 3x800 / 4-5x1000, So Bergläufe 8x60 s | CSS-Sätze 10x100; Kraftraum Mo Maximalkraft (4-6 Wdh.), Mi Oberkörper + Sprünge |
 | 3 Aufbau intensiv | Sa 4-5 h Berge: VO2max 5x4-5 min bergauf, 2x30 Tempo am Anstieg, Koppel 1x/Woche | 6x1 km (3-5-km-Tempo), Koppellauf 15-20 min | 8x200 bei CSS; Kraftraum Mo 35-40 min Erhalt, Mi 20 min Core |
@@ -32,36 +32,36 @@ Wochenziele in TSS, Stunden grob geschätzt (Rad 38, Lauf 52, Schwimmen 48, Kraf
 |---|---|---|---|---|---|---|---|---|---|---|
 | 09.11. | 0 | Reaktivierung | 411 | 10 | 167 | 55 | 157 | 32 | - | - |
 | 16.11. | 0 | Reaktivierung | 311 | 7 | 87 | 100 | 102 | 22 | 31 | -13 |
-| 23.11. | 0 | Erholung | 240 | 6 | 97 | 48 | 77 | 18 | 31 | -7 |
-| 30.11. | 1 | Aerobes Volumen | 380 | 10 | 157 | 78 | 110 | 35 | 35 | -14 |
-| 07.12. | 1 | Aerobes Volumen | 405 | 10 | 174 | 86 | 110 | 35 | 38 | -16 |
-| 14.12. | 1 | Aerobes Volumen | 430 | 11 | 191 | 94 | 110 | 35 | 42 | -17 |
-| 21.12. | 1 | Erholung | 300 | 7 | 137 | 68 | 77 | 18 | 42 | -7 |
-| 28.12. | 1 | Aerobes Volumen | 445 | 11 | 201 | 99 | 110 | 35 | 45 | -13 |
-| 04.01. | 1 | Aerobes Volumen | 475 | 12 | 208 | 102 | 130 | 35 | 49 | -16 |
-| 11.01. | 1 | Aerobes Volumen | 505 | 12 | 228 | 112 | 130 | 35 | 52 | -17 |
-| 18.01. | 1 | Erholung + Retest Sa 23.01. | 340 | 8 | 155 | 76 | 91 | 18 | 52 | -4 |
-| 25.01. | 2 | Schwelle | 515 | 13 | 234 | 116 | 130 | 35 | 55 | -12 |
-| 01.02. | 2 | Schwelle | 535 | 13 | 248 | 122 | 130 | 35 | 58 | -15 |
-| 08.02. | 2 | Schwelle | 555 | 14 | 261 | 129 | 130 | 35 | 62 | -15 |
-| 15.02. | 2 | Erholung | 370 | 9 | 175 | 86 | 91 | 18 | 60 | -1 |
-| 22.02. | 2 | Schwelle | 560 | 14 | 265 | 130 | 130 | 35 | 63 | -10 |
-| 01.03. | 2 | Schwelle | 580 | 14 | 257 | 138 | 150 | 35 | 66 | -13 |
-| 08.03. | 2 | Schwelle | 600 | 15 | 270 | 145 | 150 | 35 | 69 | -14 |
-| 15.03. | 2 | Erholung + Retest Sa 20.03. | 400 | 10 | 180 | 97 | 105 | 18 | 67 | +1 |
-| 22.03. | 3 | VO2max | 605 | 15 | 280 | 150 | 150 | 25 | 70 | -9 |
-| 29.03. | 3 | VO2max | 630 | 15 | 296 | 159 | 150 | 25 | 73 | -13 |
-| 05.04. | 3 | VO2max | 655 | 16 | 312 | 168 | 150 | 25 | 76 | -14 |
-| 12.04. | 3 | Erholung | 430 | 10 | 203 | 110 | 105 | 12 | 74 | +2 |
-| 19.04. | 3 | VO2max | 655 | 16 | 312 | 168 | 150 | 25 | 77 | -9 |
-| 26.04. | 3 | VO2max | 680 | 16 | 328 | 177 | 150 | 25 | 80 | -13 |
+| 23.11. | 1 | Aerobes Volumen | 380 | 10 | 157 | 78 | 110 | 35 | 34 | -16 |
+| 30.11. | 1 | Aerobes Volumen | 405 | 10 | 174 | 86 | 110 | 35 | 38 | -17 |
+| 07.12. | 1 | Aerobes Volumen | 430 | 11 | 191 | 94 | 110 | 35 | 41 | -18 |
+| 14.12. | 1 | Aerobes Volumen | 455 | 11 | 208 | 102 | 110 | 35 | 45 | -18 |
+| 21.12. | 1 | Erholung | 300 | 7 | 137 | 68 | 77 | 18 | 45 | -5 |
+| 28.12. | 1 | Aerobes Volumen | 470 | 12 | 218 | 107 | 110 | 35 | 48 | -13 |
+| 04.01. | 1 | Aerobes Volumen | 495 | 12 | 221 | 109 | 130 | 35 | 52 | -15 |
+| 11.01. | 1 | Aerobes Volumen | 515 | 13 | 234 | 116 | 130 | 35 | 55 | -16 |
+| 18.01. | 1 | Erholung + Retest Sa 23.01. | 340 | 8 | 155 | 76 | 91 | 18 | 54 | -3 |
+| 25.01. | 2 | Schwelle | 525 | 13 | 241 | 119 | 130 | 35 | 57 | -11 |
+| 01.02. | 2 | Schwelle | 545 | 13 | 255 | 125 | 130 | 35 | 60 | -14 |
+| 08.02. | 2 | Schwelle | 560 | 14 | 265 | 130 | 130 | 35 | 63 | -15 |
+| 15.02. | 2 | Erholung | 370 | 9 | 175 | 86 | 91 | 18 | 62 | -0 |
+| 22.02. | 2 | Schwelle | 560 | 14 | 265 | 130 | 130 | 35 | 65 | -9 |
+| 01.03. | 2 | Schwelle | 580 | 14 | 257 | 138 | 150 | 35 | 67 | -12 |
+| 08.03. | 2 | Schwelle | 600 | 15 | 270 | 145 | 150 | 35 | 70 | -13 |
+| 15.03. | 2 | Erholung + Retest Sa 20.03. | 400 | 10 | 180 | 97 | 105 | 18 | 68 | +1 |
+| 22.03. | 3 | VO2max | 605 | 15 | 280 | 150 | 150 | 25 | 71 | -8 |
+| 29.03. | 3 | VO2max | 630 | 15 | 296 | 159 | 150 | 25 | 74 | -12 |
+| 05.04. | 3 | VO2max | 655 | 16 | 312 | 168 | 150 | 25 | 77 | -14 |
+| 12.04. | 3 | Erholung | 430 | 10 | 203 | 110 | 105 | 12 | 75 | +2 |
+| 19.04. | 3 | VO2max | 655 | 16 | 312 | 168 | 150 | 25 | 77 | -8 |
+| 26.04. | 3 | VO2max | 680 | 16 | 328 | 177 | 150 | 25 | 80 | -12 |
 | 03.05. | 3 | VO2max | 700 | 17 | 323 | 182 | 170 | 25 | 83 | -14 |
 | 10.05. | 3 | Erholung | 460 | 11 | 211 | 118 | 119 | 12 | 81 | +3 |
 | 17.05. | 4 | Renntempo | 710 | 17 | 333 | 187 | 170 | 20 | 84 | -9 |
 | 24.05. | 4 | Renntempo | 730 | 17 | 346 | 194 | 170 | 20 | 87 | -13 |
 | 31.05. | 4 | Renntempo | 745 | 18 | 355 | 200 | 170 | 20 | 90 | -14 |
 | 07.06. | 4 | Erholung + Cottbus Olympische Distanz Sa 12.06. | 480 | 11 | 225 | 126 | 119 | 10 | 87 | +5 |
-| 14.06. | 4 | Renntempo | 735 | 17 | 349 | 196 | 170 | 20 | 89 | -7 |
+| 14.06. | 4 | Renntempo | 735 | 17 | 349 | 196 | 170 | 20 | 90 | -7 |
 | 21.06. | 4 | Renntempo | 750 | 18 | 358 | 202 | 170 | 20 | 92 | -11 |
 | 28.06. | 4 | Renntempo | 760 | 18 | 365 | 205 | 170 | 20 | 95 | -12 |
 | 05.07. | 4 | Erholung + Generalprobe Sa 10.07. | 490 | 12 | 231 | 130 | 119 | 10 | 91 | +7 |

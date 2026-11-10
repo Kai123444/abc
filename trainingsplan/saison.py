@@ -22,15 +22,16 @@ from datetime import date, timedelta
 
 # (Montag, TSS gesamt pro Woche, Erholungs-/Taperwoche?)  – 3 Belastungswochen : 1 Erholungswoche
 WOCHEN: list[tuple[str, int, bool]] = [
-    # Phase 0 Wiedereinstieg und Tests (Woche 09.11. mit Rad-Stufentest, Woche 16.11. mit Lauf-Stufentest)
-    ("2026-11-09", 411, False), ("2026-11-16", 311, False), ("2026-11-23", 240, True),
+    # Phase 0 Tests (Woche 09.11. mit Rad-Stufentest, Woche 16.11. mit Lauf-Stufentest); kein Deload danach,
+    # der Wiedereinstieg ist kurz: Belastung steigt ab 23.11. (erster Block 4 Wochen, dann Erholungswoche 21.12.)
+    ("2026-11-09", 411, False), ("2026-11-16", 311, False),
     # Phase 1 Grundlage I
-    ("2026-11-30", 380, False), ("2026-12-07", 405, False), ("2026-12-14", 430, False),
+    ("2026-11-23", 380, False), ("2026-11-30", 405, False), ("2026-12-07", 430, False), ("2026-12-14", 455, False),
     ("2026-12-21", 300, True),
-    ("2026-12-28", 445, False), ("2027-01-04", 475, False), ("2027-01-11", 505, False),
+    ("2026-12-28", 470, False), ("2027-01-04", 495, False), ("2027-01-11", 515, False),
     ("2027-01-18", 340, True),
     # Phase 2 Grundlage II / Aufbau
-    ("2027-01-25", 515, False), ("2027-02-01", 535, False), ("2027-02-08", 555, False),
+    ("2027-01-25", 525, False), ("2027-02-01", 545, False), ("2027-02-08", 560, False),
     ("2027-02-15", 370, True),
     ("2027-02-22", 560, False), ("2027-03-01", 580, False), ("2027-03-08", 600, False),
     ("2027-03-15", 400, True),
@@ -93,7 +94,7 @@ KRAFTPLAN = (
     "ermüdende Beinaktivierung (35-40 min): so leidet die Qualität der Intervalle nicht. Do entfällt. Last nach "
     "Wiederholungen in Reserve (RIR) steuern, nicht nach Gewicht: in den ersten 2 Wochen Gewichte finden "
     "(RIR 3-4), danach +2,5 kg, wenn alle Sätze sauber sind.\n"
-    "Phase 1 (30.11.-24.01.) Aufbau, 3x8-10, RIR 2-3:\n"
+    "Phase 1 (23.11.-24.01.) Aufbau, 3x8-10, RIR 2-3:\n"
     "- Mo Beine: Kniebeuge (Front oder Goblet) 3x8, Rumänisches Kreuzheben 3x8, Bulgarian Split Squat 3x8 je Seite, "
     "Hip Thrust 3x10, Wadenheben stehend 3x12-15, Tibialis-Raises 2x15. Waden und Hüfte sind die Laufvorsorge. "
     "Danach Oberkörper: Klimmzüge oder Latzug 3x8, Rudern 3x10, Plank 3x45 s.\n"
@@ -171,12 +172,13 @@ RETESTS = [
 
 # (Montag, Name, Beschreibung)
 PHASEN: list[tuple[str, str, str]] = [
-    ("2026-11-16", "Phase 0: Wiedereinstieg und Tests (bis 29.11.)",
+    ("2026-11-16", "Phase 0: Tests (bis 22.11.)",
      "Ziel: nach Krankheit/Off-Season wieder Normalbetrieb, Schwellenwerte ermitteln "
-     "(Rad-Stufentest 14.11., Lauf-Stufentest 17.11.). Load 240-330 pro Woche.\n"
+     "(Rad-Stufentest 14.11., Lauf-Stufentest 17.11.). Load 310-410 pro Woche inkl. beider Tests. Der Wiedereinstieg ist kurz: du bist\n"
+     "seit Wochen wieder bei Normalwochen, HRV und Ruhepuls sind auf Basis, deshalb kein Deload danach.\n"
      "Erwartung: CTL 26 -> ca. 31, Form -7 bis -15. HRV (~90) und Ruhepuls (~47) bleiben auf "
      "deiner Basis, Schlaf ~8 h. Danach FTP, LTHR und Zonen aus den Tests übernehmen."),
-    ("2026-11-30", "Phase 1: Grundlage I (30.11.-24.01.)",
+    ("2026-11-23", "Phase 1: Grundlage I (23.11.-24.01.)",
      "Intensitätsverteilung ca. 85 % Z1-Z2, 15 % darüber. Beinkraft über die Berge am Wochenende statt im "
      "Studio. Rad: Sa 3-4 h in den Bergen, Z2 mit Kraftausdauer am Anstieg: Dezember 4x6 min, Januar "
      "5x8 min bei 50-60 U/min und 70-78 % FTP (Pause 4 min locker), ab Mitte Dezember 1x pro Woche "
@@ -184,14 +186,14 @@ PHASEN: list[tuple[str, str, str]] = [
      "2x20 min bei 88-93 % FTP. Lauf: 4 Läufe, So 60-75 min im Hügelgelände (bergauf kräftig, bergab "
      "traben oder gehen), Steigerungsläufe 6x20 s, Lauf-ABC, Mi Intervalle auf der Bahn (6-10x400 m, Verein). Schwimmen: Vereinstraining plus Technik. "
      "Kraftraum: Mo Beine schwer + Oberkörper, Mi Oberkörper/Core vor dem Lauf (siehe Notiz Krafttraining). "
-     "Load 380 -> 505, ca. 9 -> 13 h.\n"
+     "Load 380 -> 515, ca. 9,5 -> 13 h, erster Block 4 Wochen bis 14.12., danach Erholungswoche.\n"
      "Deine Radbasis aus 2020-2022 kommt schnell zurück, Engpässe sind Laufen und Schwimmen.\n"
-     "Erwartung: CTL 31 -> ca. 52 (+3 pro Woche), Form -13 bis -18 in Belastungswochen, "
+     "Erwartung: CTL 31 -> ca. 55 (+3,5 pro Woche), Form -13 bis -18 in Belastungswochen, "
      "-4 bis 0 in Erholungswochen. In der 3. Belastungswoche sind HRV 5-10 % unter Basis und "
      "Ruhepuls +1-3 bpm normal."),
-    ("2026-11-30", "Wochenstruktur und Kontrolle", WOCHENSTRUKTUR + "\n\n" + KONTROLLE),
-    ("2026-11-30", "Krafttraining Kraftraum", KRAFTPLAN),
-    ("2026-11-30", "Mittwochs-Intervalle Lauf", LAUFINTERVALLE),
+    ("2026-11-23", "Wochenstruktur und Kontrolle", WOCHENSTRUKTUR + "\n\n" + KONTROLLE),
+    ("2026-11-23", "Krafttraining Kraftraum", KRAFTPLAN),
+    ("2026-11-23", "Mittwochs-Intervalle Lauf", LAUFINTERVALLE),
     ("2027-07-05", "Sauna: Erholung und Hitzeanpassung", SAUNA),
     ("2027-01-25", "Phase 2: Grundlage II / Aufbau (25.01.-21.03.)",
      "Intensität steigt (pyramidal ca. 80/15/5). Rad: Sa in den Bergen mit Bergintervallen statt "
@@ -199,7 +201,7 @@ PHASEN: list[tuple[str, str, str]] = [
      "50-60 U/min, wöchentlich 6-8x10 s Bergsprint, Over-Unders 3x(2x6 min bei 95/105 %) am Do. "
      "Lauf: Mi Bahnintervalle (10-12x400 m, 3x800 m, 4-5x1000 m an der Schwellenpace), So Bergläufe 8x60 s bergauf. Schwimmen: CSS-Sätze 10x100 m. Kraftraum Mo Maximalkraft, Mi Oberkörper vor dem Lauf, ab März "
      "Erhalt. Load 515 -> 600, ca. 13 -> 15 h.\n"
-     "Erwartung: CTL 52 -> ca. 69, Form -14 bis -17. Ruhepuls im Wochenmittel +1-2 bpm in "
+     "Erwartung: CTL 55 -> ca. 70, Form -14 bis -17. Ruhepuls im Wochenmittel +1-2 bpm in "
      "Belastungswochen."),
     ("2027-03-22", "Phase 3: Aufbau intensiv (22.03.-09.05.)",
      "VO2max: Rad 5x4-5 min bei 110-120 % FTP (Pause gleich lang) oder 30/30; Lauf 6x1 km bei "
@@ -340,9 +342,9 @@ RENNTAG_TSS = 170
 
 # (von, bis, Phase, Belastungsart, Intensitätsverteilung, Rad, Lauf, Schwimmen/Kraft)
 PHASEN_UEBERSICHT = [
-    ("2026-11-09", "2026-11-29", "0 Wiedereinstieg und Tests", "Reaktivierung, Leistungsdiagnostik",
+    ("2026-11-09", "2026-11-22", "0 Tests", "Reaktivierung, Leistungsdiagnostik",
      "locker, Tests Sa 14.11./Di 17.11.", "Stufentest, Z2", "Stufentest, locker", "Verein, Kraft Mo Oberkörper + Beine leicht (ab 16.11.), Mi vor dem Lauf"),
-    ("2026-11-30", "2027-01-24", "1 Grundlage I", "Aerobes Volumen, Kraftausdauer, Technik",
+    ("2026-11-23", "2027-01-24", "1 Grundlage I", "Aerobes Volumen, Kraftausdauer, Technik",
      "ca. 85 % Z1-Z2 / 15 % darüber", "Sa 3-4 h in den Bergen: Z2 mit Kraftausdauer am Anstieg 4-5x6-8 min, Bergsprints, Sweet Spot 2x20",
      "Mi Bahn 6-10x400, 4 Läufe, So Hügellauf 60-75 min, Steigerungen", "Verein + Technik; Kraftraum Mo Beine + Oberkörper, Mi Oberkörper/Core, RIR 2-3"),
     ("2027-01-25", "2027-03-21", "2 Grundlage II / Aufbau", "Schwelle, Tempo, aerobe Leistung",
