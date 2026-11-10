@@ -86,7 +86,7 @@ NAECHSTE_WOCHE = [
     ("2026-11-25", "Run", "Bahn: Einstieg 5x400 m",
      "Erste Bahneinheit nach dem Lauf-Stufentest, Erholungswoche. Paces nach dem Test anpassen, vorläufig "
      "4:15/km. Qualität vor Menge, die 5. Runde so schnell wie die erste.\n"
-     "Warmup\n- 15m 6:50/km Pace\n\nIntervalle 5x\n- 400m 4:15/km Pace\n- 200m 7:15/km Pace\n\nCooldown\n- 8m 7:00/km Pace", 50),
+     "Warmup\n- 15m 6:50/km Pace\n\nIntervalle 5x\n- 400mtr 4:15/km Pace\n- 200mtr 7:15/km Pace\n\nCooldown\n- 8m 7:00/km Pace", 50),
     ("2026-11-22", "Run", "Lauf locker lang",
      "Der längste Lauf der Woche, ruhig, gern im Hügelgelände (bergauf locker, bergab traben oder gehen). "
      "Danach Dehnen/Mobilisation.\n- 45m 6:50/km Pace", 45),
