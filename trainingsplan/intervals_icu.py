@@ -18,14 +18,30 @@ from datetime import date
 BASE_URL = "https://intervals.icu/api/v1"
 
 
+KEY_DATEI = "intervals_api_key.txt"
+
+
 class IntervalsError(RuntimeError):
     pass
+
+
+def _key_aus_datei() -> str | None:
+    """Liest den Key aus intervals_api_key.txt (erste Zeile ohne '#')."""
+    try:
+        with open(KEY_DATEI, encoding="utf-8") as f:
+            for zeile in f:
+                zeile = zeile.strip()
+                if zeile and not zeile.startswith("#"):
+                    return zeile
+    except FileNotFoundError:
+        pass
+    return None
 
 
 class IntervalsClient:
     def __init__(self, api_key: str | None = None, athlete_id: str | None = None,
                  base_url: str = BASE_URL, timeout: float = 30.0):
-        self.api_key = api_key or os.environ.get("INTERVALS_API_KEY")
+        self.api_key = api_key or os.environ.get("INTERVALS_API_KEY") or _key_aus_datei()
         if not self.api_key:
             raise IntervalsError(
                 "Kein API-Key gefunden. Setze INTERVALS_API_KEY "
