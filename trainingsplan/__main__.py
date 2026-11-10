@@ -121,7 +121,7 @@ def _saison(client: IntervalsClient, a) -> int:
         else:
             neu.append(ev)
     notiz = saison.notiz_events(notizen)
-    gewollt = {n["external_id"] for n in notiz}
+    gewollt = {n["external_id"] for n in saison.notiz_events(set())}  # alle gewünschten, auch schon vorhandene
     veraltet = [e for e in alle if e["category"] == "NOTE"
                 and str(e.get("external_id") or "").startswith("saison-note-")
                 and e["external_id"] not in gewollt]
