@@ -91,44 +91,53 @@ def _stufentest(client: IntervalsClient, a) -> int:
 
 
 def _saison(client: IntervalsClient, a) -> int:
-    """Saisonplan (Wochenziele + Phasen-Notizen) in den intervals.icu-Kalender schreiben.
-    Bestehende Wochenziele werden aktualisiert; die alten Werte landen vorher in
-    plaene/backup_wochenziele_vorher.json."""
-    import json
+    """Saisonplan (Wochenziele, Phasen-Notizen) in den Kalender schreiben; der Hauptwettkampf
+    muss im Kalender schon stehen.
+    Mit --alten-plan-loeschen werden vorher alle Einträge einer angewendeten Plan-Vorlage
+    (Wochenziele, Notizen, Workouts mit plan_applied) entfernt."""
     from . import saison
-    von, bis = date(2026, 11, 16), date(2027, 8, 9)
-    bestehend = client.events(von, bis, category="TARGET,NOTE")
+    von, bis = date(2026, 11, 16), date(2027, 8, 16)
+    weit = (date(2026, 10, 1), date(2028, 1, 1))
+    alle = client.events(*weit, category="TARGET,NOTE,WORKOUT,RACE_A")
+    vorlage = [e for e in alle if e.get("plan_applied")
+               and not str(e.get("external_id") or "").startswith("saison-")]
+    print(f"Vorlagenplan: {len(vorlage)} Einträge "
+          f"({', '.join(f'{k} {sum(1 for e in vorlage if e['category'] == k)}' for k in ('TARGET', 'NOTE', 'WORKOUT'))})")
+    if a.apply and a.alten_plan_loeschen:
+        for e in vorlage:
+            client.delete_event(e["id"])
+        vorlage_ids = {e["id"] for e in vorlage}
+        alle = [e for e in alle if e["id"] not in vorlage_ids]
+    bestehend = [e for e in alle if von <= date.fromisoformat(e["start_date_local"][:10]) <= bis]
     ziele = {(e["start_date_local"][:10], e.get("type")): e for e in bestehend
              if e.get("category") == "TARGET"}
     notizen = {e["start_date_local"][:10] for e in bestehend if e.get("category") == "NOTE"}
-    neu, aendern, backup = [], [], []
+    neu, aendern = [], []
     for ev in saison.ziel_events():
         alt = ziele.get((ev["start_date_local"][:10], ev["type"]))
-        if alt and not str(alt.get("external_id") or "").startswith("saison-"):
-            backup.append({"id": alt["id"], "datum": alt["start_date_local"][:10],
-                           "sport": alt["type"], "load_target": alt.get("load_target")})
-            aendern.append((alt["id"], ev["load_target"]))
-        elif alt:
-            aendern.append((alt["id"], ev["load_target"]))
+        if alt:
+            if alt.get("load_target") != ev["load_target"]:
+                aendern.append((alt["id"], ev["load_target"]))
         else:
             neu.append(ev)
     notiz = saison.notiz_events(notizen)
-    print("Woche      Soll-TSS  bisher")
+    gewollt = {n["external_id"] for n in notiz}
+    veraltet = [e for e in alle if e["category"] == "NOTE"
+                and str(e.get("external_id") or "").startswith("saison-note-")
+                and e["external_id"] not in gewollt]
+    print("Woche      Soll-TSS")
     for tag, tss, rec in saison.WOCHEN:
-        alt = sum((ziele.get((tag, sp)) or {}).get("load_target") or 0 for sp in saison.SPLIT)
-        print(f"{tag}  {tss:6d}{' E' if rec else '  '}  {alt or '-'}")
+        print(f"{tag}  {tss:6d}{' E' if rec else '  '}")
     print(f"\n{len(aendern)} Wochenziele werden geändert, {len(neu)} neu angelegt, "
-          f"{len(notiz)} Notizen angelegt.")
+          f"{len(notiz)} Notizen, {len(veraltet)} veraltete Notizen entfernt, Hauptwettkampf {saison.RENNTAG} bleibt unverändert.")
     if not a.apply:
-        print("Vorschau – mit --apply in intervals.icu schreiben.")
+        print("Vorschau – mit --apply in intervals.icu schreiben "
+              "(--alten-plan-loeschen entfernt zusätzlich den Vorlagenplan).")
         return 0
-    if backup:
-        pfad = Path("plaene/backup_wochenziele_vorher.json")
-        pfad.parent.mkdir(exist_ok=True)
-        if not pfad.exists():
-            pfad.write_text(json.dumps(backup, indent=1, ensure_ascii=False), encoding="utf-8")
     for eid, load in aendern:
         client.update_event(eid, {"load_target": load})
+    for e in veraltet:
+        client.delete_event(e["id"])
     client.upsert_events(neu + notiz)
     print("✔ Saisonplan eingetragen.")
     return 0
@@ -140,6 +149,8 @@ def main(argv: list[str] | None = None) -> int:
     p.add_argument("befehl", choices=["analyse", "sync", "anpassen", "stufentest", "saison"])
     p.add_argument("--basis-ab", type=date.fromisoformat,
                    help="Vergleichszeitraum ab Datum (z.B. 2026-08-01): Normalwochen statt 4 Wochen")
+    p.add_argument("--alten-plan-loeschen", action="store_true",
+                   help="saison: Einträge einer angewendeten Plan-Vorlage vorher löschen")
     p.add_argument("--rad", type=date.fromisoformat, help="stufentest: Datum Rad-Stufentest")
     p.add_argument("--lauf", type=date.fromisoformat, help="stufentest: Datum Lauf-Stufentest")
     p.add_argument("--plan", default="plaene/trainingsplan.json", help="Plan als .json oder .csv")

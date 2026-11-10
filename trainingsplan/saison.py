@@ -3,7 +3,7 @@
 Annahmen (aus deinen Daten ab August 2026):
 * Normalwoche ~345 TSS, Spitzenwoche 443 TSS, CTL-Höchststand 37, aktuell ~26.
 * CTL-Anstieg höchstens ~2-3 pro Woche, alle 4 Wochen eine Erholungswoche (-30 %).
-* Saisonhöhepunkt Sommer 2027 (Termine offen): Wochenziele bis Mai, danach nur Phasenhinweise.
+* Hauptwettkampf Sonntag 08.08.2027: Aufbau bis Mitte Juli, 2 Wochen Taper, Form am Renntag +10 bis +20.
 """
 
 from __future__ import annotations
@@ -25,14 +25,18 @@ WOCHEN: list[tuple[str, int, bool]] = [
     ("2027-04-12", 325, True),
     ("2027-04-19", 475, False), ("2027-04-26", 485, False), ("2027-05-03", 495, False),
     ("2027-05-10", 335, True),
-    # Juni-August: Platzhalter, an die Wettkampftermine anpassen (Taper vor dem Hauptwettkampf)
+    # Vorbereitung auf den Hauptwettkampf am Sonntag 08.08.2027
     ("2027-05-17", 470, False), ("2027-05-24", 480, False), ("2027-05-31", 480, False),
     ("2027-06-07", 330, True),
-    ("2027-06-14", 460, False), ("2027-06-21", 470, False), ("2027-06-28", 470, False),
-    ("2027-07-05", 330, True),
-    ("2027-07-12", 460, False), ("2027-07-19", 470, False), ("2027-07-26", 470, False),
-    ("2027-08-02", 330, True),
+    ("2027-06-14", 470, False), ("2027-06-21", 480, False), ("2027-06-28", 490, False),
+    ("2027-07-05", 340, True),
+    ("2027-07-12", 480, False), ("2027-07-19", 470, False),
+    # Taper: -25 %, Rennwoche ~200 (ohne Rennen), Woche danach locker
+    ("2027-07-26", 360, True), ("2027-08-02", 200, True), ("2027-08-09", 120, True),
 ]
+
+RENNTAG = "2027-08-08"
+TAPER_WOCHEN = {"2027-07-26", "2027-08-02", "2027-08-09"}  # keine "Erholungswoche"-Notiz
 
 # Verteilung auf die Sportarten (wie im bisherigen Plan: Rad > Lauf > Schwimmen > Sonstiges)
 SPLIT = {"Ride": 0.53, "Run": 0.21, "Swim": 0.16, "Other": 0.10}
@@ -73,16 +77,25 @@ PHASEN: list[tuple[str, str, str]] = [
      "Erwartung: CTL 57 -> ca. 62 (flacherer Anstieg), Form -4 bis -9. Mehr Intensität heißt "
      "stärkere Reaktion: nach harten Tagen HRV 10-15 % niedriger ist normal und sollte nach "
      "48 h zurück sein. Ab hier die Ampel (Gelb/Rot) ernst nehmen."),
-    ("2027-05-17", "Phase 4: Wettkampfsaison Juni-September (Termine offen)",
-     "CTL halten (ca. 58-65), Load 400-480 pro Woche, Intensität bleibt, Volumen sinkt. "
-     "Vor dem Hauptwettkampf Taper über 7-10 Tage: Load -40 %, kurze intensive Reize bleiben.\n"
-     "Erwartung am Wettkampftag: Form +10 bis +20, HRV über Basis, Ruhepuls an oder unter "
-     "Basis. Nach dem Wettkampf 5-7 Tage locker. Wochenziele ab Mai sind Platzhalter und werden "
-     "an die Wettkampftermine angepasst."),
-    ("2027-10-04", "Phase 5: Off-Season (Oktober/November)",
-     "2-4 Wochen aktive Pause (Load unter 150, andere Sportarten), danach wieder Grundlage.\n"
-     "Erwartung: CTL fällt auf ca. 30-35, Form +20 bis +30. Das ist gewollt. Beim "
-     "Wiedereinstieg die Wochenload über 3-4 Wochen auf deine Normalwoche anheben."),
+    ("2027-05-17", "Phase 4: Wettkampfvorbereitung (17.05.-25.07.)",
+     "Wettkampfspezifisch: Koppeltraining Rad -> Lauf, Wettkampftempo-Blöcke, lange Z2-Einheiten, "
+     "eine Intensitätseinheit pro Sportart. Load 470-490, Erholungswochen am 07.06. und 05.07. "
+     "(2 Blöcke zu 3 Wochen, danach letzter Block 12.-25.07.).\n"
+     "Erwartung: CTL 62 -> ca. 65 Mitte Juli (Höhepunkt der Fitness), Form -3 bis -9. Die Ampel "
+     "ernst nehmen: bei Gelb Umfang kürzen, aber die Schlüsseleinheiten behalten."),
+    ("2027-07-26", "Taper und Höchstform (26.07.-08.08.)",
+     "Volumen -25 % (Woche 360), Rennwoche ca. 200 TSS plus Rennen, Intensität bleibt kurz und "
+     "scharf (2-3 Reize à 3-5 min im Renntempo), nichts Neues ausprobieren, Schlaf 8-9 h, "
+     "ausreichend Kohlenhydrate.\n"
+     "Erwartung: CTL sinkt nur leicht (ca. 65 -> 58), ATL fällt von ca. 66 auf ca. 40, "
+     "Form am Renntag ca. +16 (Ziel +10 bis +20), HRV über Basis (90 oder mehr), Ruhepuls an oder "
+     "unter Basis (46-47). Liegt in der Rennwoche die HRV unter ca. 78 oder der Ruhepuls über "
+     "ca. 51: Intensität weglassen, nur locker aktivieren."),
+    ("2027-08-09", "Nach dem Wettkampf (ab 09.08.)",
+     "Eine Woche locker (Load ca. 120), danach entscheiden: Spätsaison mit kurzem Aufbau oder "
+     "direkt Off-Season (2-4 Wochen aktive Pause, Load unter 150).\n"
+     "Erwartung: Form bleibt erst hoch (+15 bis +25), CTL fällt in der Pause auf ca. 30-35. "
+     "Beim Wiedereinstieg die Wochenload über 3-4 Wochen auf die Normalwoche anheben."),
 ]
 
 
@@ -119,7 +132,7 @@ def notiz_events(vorhandene_notizen: set[str]) -> list[dict]:
         d = montag(tag)
         out.append((d, name, text))
     for tag, _, erholung in WOCHEN:
-        if erholung:
+        if erholung and tag not in TAPER_WOCHEN:
             d = montag(tag)
             out.append((d, "Erholungswoche", ERHOLUNG_TEXT))
     for tag, text in RETESTS:
