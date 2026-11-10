@@ -56,8 +56,12 @@ DIESE_WOCHE = [
 # (Tag, Typ, Name, Beschreibung, Minuten)
 NAECHSTE_WOCHE = [
     ("2026-11-16", "WeightTraining", "Kraft: Oberkörper und Core",
-     "Nur Oberkörper und Core, kein Beintraining. Klimmzüge/Rudern 3x8, Liegestütze 3x12, Schulterdrücken 3x10, "
+     "Wie gewohnt montags, Oberkörper und Core, Beine bleiben nach dem Rad-Stufentest draußen. Klimmzüge oder Latzug 3x8, Rudern 3x10, Liegestütze 3x12, Schulterdrücken 3x10, "
      "Plank 3x45 s, Seitstütz 2x30 s je Seite, Rückenstrecker 2x12.", 40),
+    ("2026-11-19", "WeightTraining", "Kraft: Einstieg Beine (leicht)",
+     "Gewichte finden, nicht trainieren bis zur Erschöpfung: Goblet-Kniebeuge 2x8, Rumänisches Kreuzheben 2x8, "
+     "Split Squat 2x6 je Seite, Wadenheben 2x12, Plank 2x45 s. Jeweils 3-4 Wiederholungen in Reserve. Einen Tag "
+     "nach dem Lauftest kein Muskelkater provozieren. Danach Sauna möglich (10-15 min).", 30),
     ("2026-11-17", "Ride", "Rad locker",
      "Regeneration nach dem Test, Beine ausdrehen.\n- 10m ramp 45-52%\n- 30m 55%\n- 5m 50%", 45),
     ("2026-11-17", "Swim", "Vereinstraining",
@@ -70,6 +74,13 @@ NAECHSTE_WOCHE = [
      "Beinkraft, noch ohne Intervalle (die kommen ab Dezember).\n"
      "Warmup\n- 10m ramp 45-57%\n\nGrundlage, Trittfrequenz 85-95, essen und trinken (60 g Kohlenhydrate/h)\n"
      "- 100m 58%\n\nCooldown\n- 10m 50%", 120),
+    ("2026-11-23", "WeightTraining", "Kraft: Oberkörper und Core",
+     "Erholungswoche: Klimmzüge oder Latzug 3x8, Rudern 3x10, Bankdrücken 3x8, Schulterdrücken 2x10, "
+     "Plank 3x45 s, Pallof Press 2x10 je Seite. RIR 3.", 45),
+    ("2026-11-25", "WeightTraining", "Kraft: Beine Technik",
+     "Erholungswoche, Technik und Gewichte finden (RIR 3): Front- oder Goblet-Kniebeuge 3x8, Rumänisches "
+     "Kreuzheben 3x8, Bulgarian Split Squat 3x6 je Seite, Hip Thrust 3x10, Wadenheben 3x12. Ab 30.11. "
+     "beginnt der Aufbau mit +2,5 kg pro Fortschritt.", 40),
     ("2026-11-22", "Run", "Lauf locker lang",
      "Der längste Lauf der Woche, ruhig, gern im Hügelgelände (bergauf locker, bergab traben oder gehen). "
      "Danach Dehnen/Mobilisation.\n- 45m 6:50/km Pace", 45),
