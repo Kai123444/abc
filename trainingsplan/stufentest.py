@@ -4,7 +4,7 @@ Rad:  Start 140 W, alle 4 min +20 W (12 Stufen bis 360 W) (Stufen wechseln autom
       oft drücken, bis "Ausfahren" erscheint. Alternativ modus="rampe": ein einziger Schritt,
       ein Lap-Druck startet das Ausfahren (weniger gut auswertbar).
 Lauf: Start 9 km/h, alle 4 min +1 km/h (Stufen wechseln automatisch). Zum vorzeitigen Ende
-      LAP so oft drücken, bis "Ausfahren" erscheint (Garmin-Lap springt nur einen Schritt weiter).
+      LAP so oft drücken, bis "Auslaufen" erscheint (Garmin-Lap springt nur einen Schritt weiter).
 
 Auswertung (ohne Laktat):
   Leistung/Geschwindigkeit max = letzte volle Stufe
@@ -67,10 +67,10 @@ def lauf_stufentest(datum: date, start_kmh: float = 9.0, schritt_kmh: float = 1.
     zeilen = ["Warmup", f"- 10m {_pace(start_kmh - 1)} Pace", "",
               f"Stufen (je {stufe_min} min +{schritt_kmh:g} km/h) – laufen bis zur Erschöpfung"]
     zeilen += [f"- {stufe_min}m {_pace(start_kmh + i * schritt_kmh)} Pace" for i in range(stufen)]
-    zeilen += ["", "Ausfahren", f"- Ausfahren 10m {_pace(start_kmh - 1.5)} Pace", "",
+    zeilen += ["", "Auslaufen", f"- Auslaufen 10m {_pace(start_kmh - 1.5)} Pace", "",
                f"Ablauf: Die Stufen wechseln automatisch alle {stufe_min} min. Wenn du die Pace nicht mehr "
                "halten kannst, hör auf zu beschleunigen, laufe locker und drücke die LAP-Taste so "
-               "oft, bis der Schritt Ausfahren erscheint (jeder Druck springt eine Stufe weiter). "
+               "oft, bis der Schritt Auslaufen erscheint (jeder Druck springt eine Stufe weiter). "
                "Notiere, in welcher Stufe und nach wie viel Sekunden du ausgestiegen bist.",
                "Hinweise: Laufband (1 % Steigung) oder 400-m-Bahn, Pace exakt halten, "
                "Brustgurt tragen. Nicht am Tag nach einem harten Rad-Test."]
