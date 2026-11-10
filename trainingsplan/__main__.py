@@ -1,8 +1,9 @@
 """CLI: python -m trainingsplan <befehl>
 
   analyse  – Trainings-/Gesundheitsdaten aus intervals.icu auswerten
-  sync     – Plan (angepasst) nach intervals.icu übertragen
-             (ohne --apply nur Vorschau, nichts wird geschrieben)
+  sync     – Plan aus Datei (angepasst) nach intervals.icu übertragen
+  anpassen – bereits in intervals.icu geplante Einheiten anpassen
+  (sync/anpassen ohne --apply: nur Vorschau, nichts wird geschrieben)
 """
 
 from __future__ import annotations
@@ -15,7 +16,7 @@ from pathlib import Path
 from .analyse import Bewertung, bewerte
 from .anpassen import passe_an
 from .intervals_icu import IntervalsClient, IntervalsError
-from .plan import Einheit, lade_plan
+from .plan import Einheit, einheit_aus_event, lade_plan
 
 AMPEL = {"gruen": "🟢 GRÜN – Plan wie geplant",
          "gelb": "🟡 GELB – Umfang/Intensität reduziert",
@@ -38,16 +39,17 @@ def bericht(b: Bewertung, vorher: list[Einheit], nachher: list[Einheit], heute: 
              "acwr": "Akut:Chronisch", "fatigue_3d": "Müdigkeit (3 T.)",
              "soreness_3d": "Muskelkater (3 T.)", "stress_3d": "Stress (3 T.)"}
     z += ["| Kennzahl | Wert |", "|---|---|"]
-    z += [f"| {namen.get(k, k)} | {v} |" for k, v in b.kennzahlen.items()]
+    z += [f"| {namen.get(k, k)} | {v} |" for k, v in b.kennzahlen.items() if k != "hinweis"]
+    if "hinweis" in b.kennzahlen:
+        z += ["", f"_{b.kennzahlen['hinweis']}_"]
     z += ["", "## Auffälligkeiten", ""]
     z += [f"- {s.text}" for s in b.signale] or ["- keine"]
-    alt = {e.external_id: e for e in vorher}
     geaendert = [e for e in nachher if e.angepasst]
     z += ["", "## Planänderungen", ""]
     if not geaendert:
         z.append("- keine")
     for e in geaendert:
-        o = alt.get(e.external_id) or next((x for x in vorher if x.datum == e.datum), e)
+        o = next((x for x in vorher if x.external_id == e.external_id and x.datum == e.datum), e)
         z.append(f"- **{e.datum:%a %d.%m.}** {o.name}: {o.dauer_min:.0f} min"
                  f"{f' / {o.load:.0f} TSS' if o.load else ''} → {e.name}: {e.dauer_min:.0f} min"
                  f"{f' / {e.load:.0f} TSS' if e.load else ''} ({'; '.join(e.angepasst)})")
@@ -58,7 +60,7 @@ def bericht(b: Bewertung, vorher: list[Einheit], nachher: list[Einheit], heute: 
 def main(argv: list[str] | None = None) -> int:
     p = argparse.ArgumentParser(prog="trainingsplan", description=__doc__,
                                 formatter_class=argparse.RawDescriptionHelpFormatter)
-    p.add_argument("befehl", choices=["analyse", "sync"])
+    p.add_argument("befehl", choices=["analyse", "sync", "anpassen"])
     p.add_argument("--plan", default="plaene/trainingsplan.json", help="Plan als .json oder .csv")
     p.add_argument("--heute", type=date.fromisoformat, default=date.today())
     p.add_argument("--horizont", type=int, default=7, help="Tage, die angepasst werden")
@@ -75,7 +77,16 @@ def main(argv: list[str] | None = None) -> int:
         return 2
     b = bewerte(wellness, akt, a.heute)
 
-    plan = lade_plan(a.plan) if Path(a.plan).exists() else []
+    if a.befehl == "anpassen":
+        try:
+            evs = client.events(a.heute, a.heute + timedelta(days=a.horizont - 1))
+        except IntervalsError as exc:
+            print(f"Fehler: {exc}", file=sys.stderr)
+            return 2
+        plan = sorted((einheit_aus_event(e) for e in evs if e.get("category") == "WORKOUT"),
+                      key=lambda e: e.datum)
+    else:
+        plan = lade_plan(a.plan) if Path(a.plan).exists() else []
     if a.befehl == "sync" and not plan:
         print(f"Fehler: Plan {a.plan} nicht gefunden", file=sys.stderr)
         return 2
@@ -85,7 +96,22 @@ def main(argv: list[str] | None = None) -> int:
     Path(a.bericht).mkdir(parents=True, exist_ok=True)
     (Path(a.bericht) / f"{a.heute.isoformat()}.md").write_text(text, encoding="utf-8")
 
-    if a.befehl == "sync":
+    if a.befehl == "anpassen":
+        geaendert = [e for e in neu if e.angepasst and e.event_id]
+        if not a.apply:
+            print(f"Vorschau: {len(geaendert)} Einheiten würden geändert. Mit --apply übernehmen.")
+            return 0
+        for e in geaendert:
+            ev = e.to_event()
+            felder = {k: ev[k] for k in ("name", "description", "moving_time", "icu_training_load")
+                      if k in ev}
+            try:
+                client.update_event(e.event_id, felder)
+            except IntervalsError as exc:
+                print(f"Fehler bei {e.datum} {e.name}: {exc}", file=sys.stderr)
+                return 2
+        print(f"✔ {len(geaendert)} Einheiten in intervals.icu angepasst.")
+    elif a.befehl == "sync":
         kommend = [e for e in neu if e.datum >= a.heute]
         if not a.apply:
             print(f"Vorschau: {len(kommend)} Einheiten würden übertragen. Mit --apply hochladen.")

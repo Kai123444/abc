@@ -20,7 +20,10 @@ TYP_MAP = {
     "ski": "NordicSki", "rudern": "Rowing", "rowing": "Rowing",
 }
 
-INTENSITAETEN = ("ruhe", "locker", "mittel", "hart")
+INTENSITAETEN = ("ruhe", "locker", "mittel", "hart", "test")
+_TEST_WOERTER = re.compile(r"(ftp-?test|ramp-?test|leistungstest|\btest\b)", re.I)
+# Termine, die nicht verschoben/verändert werden (Schule, Verein, Wettkampf)
+_FIX_WOERTER = re.compile(r"(sportunterricht|schulsport|vereinstraining|wettkampf|rennen|\brace\b)", re.I)
 _HART_WOERTER = re.compile(
     r"\b(vo2|vo2max|schwelle|threshold|ftp|intervall|interval|sweet ?spot|tempo|"
     r"sprint|anaerob|race|wettkampf|hit|hiit|z4|z5|z6|z7)\b", re.I)
@@ -38,6 +41,8 @@ class Einheit:
     angepasst: list[str] = field(default_factory=list)
     # stabile ID: bleibt bei Anpassungen gleich, damit intervals.icu das Event ersetzt
     external_id: str = ""
+    fix: bool = False                  # fester Termin -> wird nie angepasst
+    event_id: int | None = None        # ID eines bestehenden intervals.icu-Events
 
     def __post_init__(self):
         if not self.external_id:
@@ -80,6 +85,8 @@ def _intensitaet(roh: dict, name: str, beschreibung: str) -> str:
     wert = (roh.get("intensitaet") or roh.get("intensity") or "").strip().lower()
     if wert in INTENSITAETEN:
         return wert
+    if _TEST_WOERTER.search(name):
+        return "test"
     if _HART_WOERTER.search(f"{name} {beschreibung}"):
         return "hart"
     return "locker"
@@ -99,6 +106,26 @@ def _einheit(roh: dict) -> Einheit:
         load=float(load) if load not in (None, "") else None,
         intensitaet=_intensitaet(roh, name, beschreibung),
         beschreibung=beschreibung,
+        fix=str(roh.get("fix", "")).strip().lower() in ("1", "true", "ja", "x")
+        or bool(_FIX_WOERTER.search(name)),
+    )
+
+
+def einheit_aus_event(ev: dict) -> Einheit:
+    """Wandelt ein bestehendes intervals.icu-WORKOUT-Event in eine Einheit."""
+    name = ev.get("name") or ev.get("type") or "Workout"
+    beschreibung = ev.get("description") or ""
+    return Einheit(
+        datum=date.fromisoformat(ev["start_date_local"][:10]),
+        name=name,
+        typ=ev.get("type") or "Ride",
+        dauer_min=round((ev.get("moving_time") or 0) / 60),
+        load=ev.get("icu_training_load"),
+        intensitaet=_intensitaet({}, name, beschreibung),
+        beschreibung=beschreibung,
+        external_id=ev.get("external_id") or f"icu-{ev.get('id')}",
+        fix=bool(_FIX_WOERTER.search(f"{name} {beschreibung}")),
+        event_id=ev.get("id"),
     )
 
 

@@ -46,6 +46,7 @@ class IntervalsClient:
         req = urllib.request.Request(url, data=data, method=method)
         req.add_header("Authorization", self._auth)
         req.add_header("Accept", "application/json")
+        req.add_header("User-Agent", "trainingsplan-sync/1.0")
         if data is not None:
             req.add_header("Content-Type", "application/json")
         try:
@@ -81,6 +82,9 @@ class IntervalsClient:
                               "category": category}) or []
 
     # -- Schreiben --------------------------------------------------------
+    def update_event(self, event_id: int, felder: dict) -> dict:
+        return self._request("PUT", self._athlete(f"/events/{event_id}"), body=felder)
+
     def upsert_events(self, events: list[dict]) -> list[dict]:
         """Legt geplante Workouts an bzw. aktualisiert sie (Match über external_id)."""
         if not events:

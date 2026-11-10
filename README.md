@@ -33,7 +33,13 @@ python -m trainingsplan analyse                 # nur auswerten
 python -m trainingsplan sync                    # Vorschau der angepassten Einheiten
 python -m trainingsplan sync --apply            # nach intervals.icu hochladen
 python -m trainingsplan sync --apply --ohne-anpassung   # Plan 1:1 übertragen
+python -m trainingsplan anpassen                # bereits in intervals.icu geplante Einheiten: Vorschau
+python -m trainingsplan anpassen --apply        # … und dort direkt ändern
 ```
+
+`anpassen` arbeitet mit dem Kalender in intervals.icu selbst. Feste Termine
+(Sportunterricht, Vereinstraining, Wettkampf) werden nie verändert. Tests
+(FTP-Test, Ramp-Test …) werden bei Gelb/Rot durch eine lockere Einheit ersetzt.
 
 Jeder Lauf schreibt einen Bericht nach `berichte/JJJJ-MM-TT.md`.
 Einheiten werden über eine stabile `external_id` upserted – mehrfaches
@@ -54,6 +60,10 @@ Ausführen erzeugt keine Duplikate, angepasste Einheiten ersetzen die alten.
 
 **Grün** (0–1 Pkt.): Plan bleibt; bei guter Form lockere Einheiten +5 %.
 **Gelb** (2–3 Pkt. oder ein deutliches Signal): Umfang −15 %, harte Einheiten −25 % Wiederholungen.
+Sind nur Belastungskennzahlen auffällig, HRV, Ruhepuls und Schlaf aber normal,
+wird Rot auf Gelb abgestuft.
+Intervallblöcke behalten ihre Intervalldauer, dafür sinkt die Anzahl der Wiederholungen.
+
 **Rot** (≥ 4 Pkt.): nächste 3 Tage harte/mittlere Einheiten → lockere Z2-Grundlage (60 % Dauer), danach −20 %.
 
 Faustregeln, kein ärztlicher Rat.

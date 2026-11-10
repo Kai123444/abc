@@ -49,6 +49,13 @@ class TestAnalyse(unittest.TestCase):
         self.assertEqual(b.status, "gruen")
 
 
+class TestKoerperOk(unittest.TestCase):
+    def test_nur_belastung_auffaellig_wird_gelb(self):
+        b = bewerte(wellness(ctl=26, atl=40), aktivitaeten(pro_tag=7, letzte_woche=47), HEUTE)
+        self.assertEqual(b.status, "gelb")
+        self.assertIn("hinweis", b.kennzahlen)
+
+
 class TestAnpassen(unittest.TestCase):
     def setUp(self):
         self.plan = lade_plan(BEISPIEL)
@@ -63,6 +70,9 @@ class TestAnpassen(unittest.TestCase):
         self.assertEqual(skaliere_beschreibung("- 10m Z2\n- 1h30m 70%", 0.8), "- 8m Z2\n- 72m 70%")
         self.assertEqual(skaliere_beschreibung("Main Set 5x\n- 4m 115%", 1.0, 0.75),
                          "Main Set 4x\n- 4m 115%")
+        # Intervalle im Block bleiben gleich lang, nur Anzahl sinkt
+        self.assertEqual(skaliere_beschreibung("- 15m 50%\n\nMain Set 6x\n- 1m 68%\n- 6m 65%\n\n- 15m 55%", 0.85, 0.85),
+                         "- 13m 50%\n\nMain Set 5x\n- 1m 68%\n- 6m 65%\n\n- 13m 55%")
         self.assertEqual(skaliere_beschreibung("- 2km Z2", 0.5), "- 2km Z2")
 
     def test_rot_streicht_intensitaet(self):
@@ -78,6 +88,22 @@ class TestAnpassen(unittest.TestCase):
         b = bewerte(wellness(), aktivitaeten(), HEUTE)
         neu = passe_an(self.plan, b, HEUTE)
         self.assertEqual([e.to_event() for e in neu], [e.to_event() for e in self.plan])
+
+    def test_event_import_fix_und_test(self):
+        from trainingsplan.plan import einheit_aus_event
+        sport = einheit_aus_event({"id": 1, "start_date_local": "2026-11-13T00:00:00", "type": "Run",
+                                   "name": "3000 m Sportunterricht (Run)", "moving_time": 1980})
+        ftp = einheit_aus_event({"id": 2, "start_date_local": "2026-11-14T00:00:00", "type": "Ride",
+                                 "name": "FTP-Test (Ride)", "moving_time": 3960,
+                                 "icu_training_load": 79, "description": "- 20m 100%"})
+        self.assertTrue(sport.fix)
+        self.assertEqual(ftp.intensitaet, "test")
+        self.assertEqual(ftp.external_id, "icu-2")
+        b = bewerte(wellness(ctl=26, atl=40), aktivitaeten(pro_tag=7, letzte_woche=47), HEUTE)
+        neu = passe_an([sport, ftp], b, HEUTE)
+        self.assertFalse(neu[0].angepasst)
+        self.assertEqual(neu[1].intensitaet, "locker")
+        self.assertEqual(neu[1].event_id, 2)
 
     def test_event_format(self):
         ev = self.plan[0].to_event()

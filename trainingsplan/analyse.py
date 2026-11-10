@@ -155,6 +155,10 @@ def bewerte(wellness: list[dict], aktivitaeten: list[dict], heute: date) -> Bewe
             signale.append(Signal("Belastungssprung", 1, f"Wochenload {acwr:.1f}× über 4-Wochen-Schnitt"))
 
     punkte = sum(s.punkte for s in signale)
+    koerper = {"HRV", "Ruhepuls", "Schlaf", "Müdigkeit", "Muskelkater", "Stress",
+               "Verletzung/Krankheit"}
+    koerper_ok = (all(x in k for x in ("hrv_7d", "ruhepuls_7d", "schlaf_h_7d"))
+                  and not any(s.name in koerper for s in signale))
     harte_signale = any(s.punkte == 2 for s in signale)
     if punkte >= 4 or (harte_signale and punkte >= 3):
         status = "rot"
@@ -162,5 +166,10 @@ def bewerte(wellness: list[dict], aktivitaeten: list[dict], heute: date) -> Bewe
         status = "gelb"
     else:
         status = "gruen"
+    if status == "rot" and koerper_ok:
+        # Nur Belastungskennzahlen auffällig, HRV/Ruhepuls/Schlaf normal:
+        # der Körper verkraftet es aktuell -> bremsen, aber nicht stoppen.
+        status = "gelb"
+        k["hinweis"] = "Rot auf Gelb abgestuft: HRV, Ruhepuls und Schlaf sind unauffällig"
     frisch = status == "gruen" and punkte == 0 and k.get("form_pct", 0) > 5 and k.get("acwr", 1.0) < 1.2
     return Bewertung(status=status, frisch=frisch, punkte=punkte, signale=signale, kennzahlen=k)
