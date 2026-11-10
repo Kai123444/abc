@@ -1,0 +1,14 @@
+{
+  "einheiten": [
+    {"datum": "2026-11-11", "name": "Grundlage", "typ": "Rad", "dauer_min": 90, "load": 65,
+     "intensitaet": "locker", "beschreibung": "- 10m ramp Z1-Z2\n- 70m Z2\n- 10m Z1"},
+    {"datum": "2026-11-12", "name": "VO2max 5x4", "typ": "Rad", "dauer_min": 70, "load": 85,
+     "intensitaet": "hart",
+     "beschreibung": "Warmup\n- 15m ramp 50-75%\n\nMain Set 5x\n- 4m 115%\n- 4m 55%\n\nCooldown\n- 10m 50%"},
+    {"datum": "2026-11-13", "name": "Ruhetag", "typ": "Rad", "dauer_min": 0, "intensitaet": "ruhe"},
+    {"datum": "2026-11-14", "name": "Sweet Spot 3x15", "typ": "Rad", "dauer_min": 85, "load": 90,
+     "beschreibung": "- 15m ramp 50-75%\n\n3x\n- 15m 90%\n- 5m 55%\n\n- 10m 50%"},
+    {"datum": "2026-11-15", "name": "Lockerer Lauf", "typ": "Lauf", "dauer_min": 45, "load": 40,
+     "beschreibung": "- 45m Z2 HR"}
+  ]
+}
