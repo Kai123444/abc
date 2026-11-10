@@ -47,8 +47,8 @@ WOCHEN: list[tuple[str, int, bool]] = [
     ("2027-07-12", 695, False), ("2027-07-19", 635, False),
     # Taper: Woche -2 ca. -20 %, Rennwoche 520 = ca. 345 Vorbereitung + ca. 170 Rennen, danach locker
     ("2027-07-26", 600, True), ("2027-08-02", 520, True), ("2027-08-09", 160, True),
-    # Spätsaison: Erfurt Sprint (So 22.08.), Hölle von Q (So 05.09., Rennwoche mit Rennen)
-    ("2027-08-16", 400, True), ("2027-08-23", 480, True), ("2027-08-30", 540, True),
+    # Spätsaison: Erfurt Sprint (So 22.08.), Mitteldistanz-Schlüsselwoche, Hölle von Q (Mitteldistanz, B-Rennen, So 05.09.)
+    ("2027-08-16", 400, True), ("2027-08-23", 560, True), ("2027-08-30", 540, True),
 ]
 
 RENNTAG = "2027-08-08"
@@ -164,12 +164,24 @@ PHASEN: list[tuple[str, str, str]] = [
      "Liegt in der Rennwoche die HRV unter ca. 78 oder der Ruhepuls über ca. 51: Intensität weglassen, "
      "nur locker aktivieren."),
     ("2027-08-09", "Nach dem Wettkampf und Spätsaison (ab 09.08.)",
-     "Woche 09.08. locker (Load ca. 160). Danach kurze Spätsaison: So 22.08. Erfurt (Sprint, ohne Druck, "
-     "Taper nur 2 Tage), So 05.09. Hölle von Q (2 km / 90 km / 10 km, B-Rennen, Rennwoche 30.08.). "
-     "Cottbus (Sa 04.09.) und Lichterfeld (So 05.09.) kollidieren mit Hölle von Q: nur eines davon "
-     "starten, wenn überhaupt. Danach Off-Season (2-4 Wochen aktive Pause, Load unter 150).\n"
+     "Woche 09.08. locker (Load ca. 160). Danach kurze Spätsaison mit einem Ziel: Hölle von Q, "
+     "Mitteldistanz im Harz, B-Rennen am So 05.09. So 22.08. Erfurt (Sprint) nur als Trainingsrennen "
+     "ohne Taper. Cottbus (Sa 04.09.) und Lichterfeld (So 05.09.) kollidieren mit Hölle von Q und "
+     "entfallen. Danach Off-Season (2-4 Wochen aktive Pause, Load unter 150).\n"
      "Erwartung: Form bleibt nach der DM hoch (+10 bis +20), CTL fällt in der Spätsaison von ca. 86 "
-     "auf ca. 78. Beim Wiedereinstieg im Herbst die Wochenload über 3-4 Wochen auf die Normalwoche anheben."),
+     "auf ca. 78 und bleibt dort. Beim Wiedereinstieg im Herbst die Wochenload über 3-4 Wochen auf "
+     "die Normalwoche anheben."),
+    ("2027-08-23", "Hölle von Q: Mitteldistanz (B-Rennen, 05.09.)",
+     "Mitteldistanz im Harz (laut deinem Kalender 2 km Schwimmen / 90 km Rad / 10 km Lauf, Rennzeit "
+     "geschätzt 4:15-5:15 h, Rennlast ca. 300-350 TSS; bei Halbmarathon-Lauf ca. +60). Anders als die "
+     "Kurzdistanz: Pacing und Verpflegung entscheiden.\n"
+     "Schlüsselwoche 23.08. (560): Sa Brick 100 km Rad bei 70-78 % FTP + 10-14 km Lauf, Neopren-"
+     "Schwimmen 2 km am Stück, langer Lauf 16-18 km, Verpflegung 80-90 g Kohlenhydrate pro Stunde "
+     "üben. Rennwoche 30.08. (540 mit Rennen): Mo 60-70 min mit 3x10 min Renntempo, Di Schwimmen "
+     "1.500 m, Mi locker, Do 20 min mit Öffnern, Fr frei, Sa 30 min Öffnerrunde und Material.\n"
+     "Rennplan: Rad nicht über 75 % FTP (IF höchstens 0,75), Laufen die ersten 5 km bewusst zurückhaltend, "
+     "bei Hitze Natrium dazu. Erwartung: Form am Renntag ca. +3 bis +8 (kurzer Taper, B-Rennen), das "
+     "reicht für ein starkes Rennen."),
 ]
 
 
@@ -273,7 +285,8 @@ PHASEN_UEBERSICHT = [
 _TESTWOCHEN = {"2027-01-18": "Retest Sa 23.01.", "2027-03-15": "Retest Sa 20.03.",
                "2027-05-24": "Blankenburg Supersprint Sa 29.05.", "2027-06-07": "Teichland Kurzdistanz So 13.06.",
                "2027-07-05": "Generalprobe Sa 10.07.", "2027-08-16": "Erfurt Sprint So 22.08.",
-               "2027-08-30": "Hölle von Q So 05.09."}
+               "2027-08-23": "Mitteldistanz-Schlüsselwoche (Brick 100 km + 10-14 km)",
+               "2027-08-30": "Hölle von Q (Mitteldistanz, B) So 05.09."}
 
 
 def phase_fuer(tag: str) -> tuple:
@@ -360,9 +373,10 @@ def uebersicht_markdown() -> str:
           "| 13.06. | Teichland | Kurzdistanz | B | ~145 TSS | " + RENNEN[1][6] + " |",
           "| **08.08.** | **DM Kurzdistanz** | Kurzdistanz | **A** | ~170 TSS | Taper 2 Wochen, siehe Notiz |",
           "| 22.08. | Erfurt | Sprint | C | ~90 TSS | " + RENNEN[2][6] + " |",
-          "| 04.09. | Cottbus | Supersprint | C | ~40 TSS | " + RENNEN[3][6] + " |",
-          "| 05.09. | Lichterfeld-Schacksdorf / Hölle von Q | Sprint / 2 km-90 km-10 km | C / B | ~80 / ~330 TSS | "
-          "Entweder-oder, Hölle von Q hat Vorrang |"]
+          "| 04.09. | Cottbus | Supersprint | C | ~40 TSS | entfällt (Vortag der Hölle von Q) |",
+          "| **05.09.** | **Hölle von Q (Harz)** | Mitteldistanz: 2 km / 90 km / 10 km laut Eintrag | **B** | "
+          "~300-350 TSS | Schlüsselwoche 23.08., Rennwoche 30.08. mit kurzem Taper, Rad nicht über 75 % FTP |",
+          "| 05.09. | Lichterfeld-Schacksdorf | Sprint | C | ~80 TSS | entfällt (kollidiert mit Hölle von Q) |"]
     c, a = sim["renntag"]
     z += ["", f"Renntag 08.08.2027 (Prognose am Morgen): CTL {c:.0f}, ATL {a:.0f}, Form {c - a:+.0f}.", ""]
     return "\n".join(z)
@@ -386,10 +400,10 @@ RENNEN: list[tuple[str, str, str, str, str, int, str]] = [
      "Zwei Wochen nach der DM, ohne Druck. Taper nur 2 Tage (-30 %), danach 1-2 Tage locker."),
     ("2027-09-04", "Cottbus Multisport", "Supersprint", "RACE_C",
      "Schwimmen ca. 0,2 km / Rad ca. 10 km / Lauf ca. 2,2 km (Vorjahr: 7 + 15 + 10 min)", 40,
-     "KOLLIDIERT mit Hölle von Q (So 05.09., 90 km Rad): nur starten, wenn Hölle von Q entfällt."),
+     "KOLLIDIERT mit Hölle von Q (Mitteldistanz, B-Rennen, So 05.09.): nur starten, wenn Hölle von Q entfällt."),
     ("2027-09-05", "Lichterfeld-Schacksdorf Multisport", "Sprint", "RACE_C",
      "Schwimmen ca. 0,7 km / Rad ca. 20 km / Lauf ca. 5,5 km (Vorjahr: 14 + 32 + 24 min)", 80,
-     "KOLLIDIERT mit Hölle von Q am selben Tag: Entweder-oder."),
+     "KOLLIDIERT mit Hölle von Q (Mitteldistanz, B-Rennen) am selben Tag: Hölle von Q hat Vorrang."),
 ]
 
 
