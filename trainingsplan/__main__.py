@@ -94,7 +94,7 @@ def _woche(client: IntervalsClient, a) -> int:
     """Testwochen 09.-22.11.2026 (24-h-Schwimmen am Fr/Sa): Einheiten verschieben/entfernen und die
     Einheiten der Woche eintragen (idempotent über external_id und Namen)."""
     from . import wochenplan
-    evs = client.events(date(2026, 11, 9), date(2026, 11, 22))
+    evs = client.events(date(2026, 11, 9), date(2026, 11, 30))
     finde = lambda tag, name: [e for e in evs if e["start_date_local"][:10] == tag and e.get("name") == name]
     weg = [(e, grund) for tag, name, grund in wochenplan.ENTFERNEN for e in finde(tag, name)]
     versch = [(e, neu, felder) for alt, name, neu, felder in wochenplan.VERSCHIEBEN for e in finde(alt, name)

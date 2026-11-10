@@ -72,39 +72,58 @@ ERHOLUNG_TEXT = ("Fokus auf leichtere Belastungen, reduziertes Volumen und Anpas
 
 WOCHENSTRUKTUR = (
     "Vorschlag für die Standardwoche (3 Schlüsseleinheiten, Rest locker; Schwimmen Di/Do = Vereinstraining; "
-    "Kraftraum Mo-Do):\n"
-    "Mo: KRAFT Oberkörper und Core (45-50 min, deine gewohnte Montags-Einheit), Rad locker 60 min\n"
-    "Di: Schwimmen (Verein) + SCHLÜSSEL Lauf (Tempo/Intervalle)\n"
-    "Mi: SCHLÜSSEL Rad (Schwelle/VO2max) 90-120 min, abends KRAFT Beine (50-55 min, schwer)\n"
-    "Do: Schwimmen (Verein) + Rad Z2/Kadenz 60-90 min, optional Kraft kurz 25 min (Core, Hüfte, Plyometrik), Sauna\n"
-    "Fr: Sportunterricht/Lauf locker\n"
+    "Kraftraum Mo-Do; Mi Lauf-Intervalle auf der Bahn):\n"
+    "Mo: KRAFT Beine schwer + Oberkörper (55-60 min), Rad locker 45-60 min optional\n"
+    "Di: Rad locker/Kadenz 60-75 min (Beine ausdrehen nach Montag), Schwimmen (Verein)\n"
+    "Mi: SCHLÜSSEL Lauf = Intervalle auf der Bahn (Einlaufen 3-4 km, 400-1000 m Wiederholungen, Auslaufen), "
+    "keine Kraft\n"
+    "Do: SCHLÜSSEL Rad (Sweet Spot/Schwelle/VO2max) 75-105 min, Schwimmen (Verein), optional Kraft Oberkörper/Core "
+    "30 min, Sauna\n"
+    "Fr: Sportunterricht/Lauf locker 30-40 min oder frei\n"
     "Sa: SCHLÜSSEL langes Rad 3-5 h in den Bergen (Kraftausdauer und Bergintervalle am Anstieg, "
     "ab März mit Koppellauf 20-30 min)\n"
-    "So: langer Lauf 75-100 min im Hügelgelände (bergauf kräftig, bergab kontrolliert), optional Schwimmen frei 45 min\n"
-    "Ein voller Ruhetag oder maximal locker pro Woche. Nie zwei harte Tage hintereinander in derselben "
-    "Sportart, nach der Erholungswoche erst am 2. Tag wieder hart. Beine schwer nur Mi (>= 48 h vor dem "
-    "Samstag, am Mittwoch nach dem Rad); nie schwere Beine vor dem Lauf-Schlüssel am Dienstag.")
+    "So: langer Lauf 75-100 min im Hügelgelände (bergauf kräftig, bergab kontrolliert); in Berge-Blöcken mit "
+    "sehr langem Samstag stattdessen Rad Z2 2-3 h und der Lauf wandert auf den Freitag\n"
+    "Ein voller Ruhetag oder maximal locker pro Woche. Beine schwer nur Mo (>= 48 h vor den Mittwochs-Intervallen "
+    "und am Tag nach dem Wochenende); Di nur locker. Nie zwei harte Tage hintereinander in derselben Sportart.")
 
 KRAFTPLAN = (
-    "Kraftraum Mo-Do, orientiert an deinen letzten Einheiten (meist montags, 45-60 min, ca. 1x pro Woche). "
-    "Jetzt 2x pro Woche: Mo Oberkörper und Core, Mi Beine. Last nach Wiederholungen in Reserve (RIR) steuern, "
-    "nicht nach Gewicht: in den ersten 2 Wochen Gewichte finden (RIR 3-4), danach +2,5 kg, wenn alle Sätze sauber sind.\n"
+    "Kraftraum Mo-Do, orientiert an deinen letzten Einheiten (meist montags, 45-60 min). Dein Radsport-Hintergrund "
+    "erlaubt schwere Beine am Montag auch nach einem langen Radwochenende. Mo = Ganzkörper mit schweren Beinen, "
+    "Do = optional kurz Oberkörper und Core. Last nach Wiederholungen in Reserve (RIR) steuern, nicht nach "
+    "Gewicht: in den ersten 2 Wochen Gewichte finden (RIR 3-4), danach +2,5 kg, wenn alle Sätze sauber sind.\n"
     "Phase 1 (30.11.-24.01.) Aufbau, 3x8-10, RIR 2-3:\n"
-    "- Mo Oberkörper/Core: Klimmzüge oder Latzug 3x8, Bankdrücken oder Kurzhantel 3x8, Rudern 3x10, Schulterdrücken 3x10, "
-    "Face Pulls 2x15, Plank 3x45 s, Pallof Press 2x10 je Seite.\n"
-    "- Mi Beine: Kniebeuge (Front oder Goblet) 3x8, Rumänisches Kreuzheben 3x8, Bulgarian Split Squat 3x8 je Seite, "
+    "- Mo Beine: Kniebeuge (Front oder Goblet) 3x8, Rumänisches Kreuzheben 3x8, Bulgarian Split Squat 3x8 je Seite, "
     "Hip Thrust 3x10, Wadenheben stehend 3x12-15, Tibialis-Raises 2x15. Waden und Hüfte sind die Laufvorsorge.\n"
+    "- Mo Oberkörper anschließend: Klimmzüge oder Latzug 3x8, Rudern 3x10, Bankdrücken oder Kurzhantel 3x8, Plank 3x45 s.\n"
+    "- Do optional (30 min): Schulterdrücken 3x10, Face Pulls 2x15, Pallof Press 2x10, Seitstütz 2x30 s.\n"
     "Phase 2 (25.01.-21.03.) Maximalkraft, 3-4x4-6 bei 80-87 % 1RM, RIR 1-2:\n"
-    "- Mi Beine: Kniebeuge, Trap-Bar- oder Kreuzheben (nie bis zum Versagen), Step-ups schwer 3x6 je Seite, "
-    "Nordic Hamstring 2x5, Wadenheben schwer 4x8. Mo Oberkörper: Klimmzüge/Bankdrücken/Rudern 4x5-6 plus Core. "
-    "Do optional: Hocksprünge oder Boxjumps 3x5, Skipping, 20-25 min (nur frisch).\n"
-    "Phase 3 (22.03.-16.05.) Erhalt und Explosivkraft: nur noch 2 kurze Einheiten à 35-40 min, 2-3x3-5 bei 85 %, "
-    "dazu Sprünge 3x5. Berge am Samstag liefern die Kraftausdauer.\n"
-    "Phase 4 (17.05.-25.07.): 1x pro Woche 35 min (Beine 2x4 bei 85 %, Zug/Rumpf), in Erholungswochen aussetzen oder "
-    "ganz leicht. Letzte Beineinheit 14 Tage vor der DM (25.07.), letzte Oberkörper/Core-Einheit 7 Tage vorher (01.08.). "
-    "Vor Cottbus (12.06.) in der Woche keine schweren Beine.\n"
-    "Wichtig: Beinkraft nie am Tag vor dem Lauf-Schlüssel (Di) und nie am Tag vor einem Test oder Rennen. Muskelkater "
-    "über 48 h oder HRV/Ruhepuls auffällig: Einheit leichter machen, nicht ausfallen lassen.")
+    "- Mo Beine: Kniebeuge, Trap-Bar- oder Kreuzheben (nie bis zum Versagen), Step-ups schwer 3x6 je Seite, "
+    "Nordic Hamstring 2x5, Wadenheben schwer 4x8. Oberkörper kurz (Klimmzüge/Bankdrücken/Rudern 3x5).\n"
+    "- Do optional: Hocksprünge oder Boxjumps 3x5, Skipping, Core, 20-25 min (nur frisch).\n"
+    "Phase 3 (22.03.-16.05.) Erhalt und Explosivkraft: Mo 35-40 min (Beine 2-3x3-5 bei 85 %, Sprünge 3x5, "
+    "Oberkörper kurz), Do entfällt. Berge am Samstag liefern die Kraftausdauer.\n"
+    "Phase 4 (17.05.-25.07.): 1x pro Woche Mo 35 min (Beine 2x4 bei 85 %, Zug/Rumpf), in Erholungswochen "
+    "aussetzen oder ganz leicht. Letzte Beineinheit 14 Tage vor der DM (25.07.), letzte Oberkörper/Core-Einheit "
+    "7 Tage vorher (01.08.). In der Woche von Cottbus (12.06.) keine schweren Beine.\n"
+    "Wichtig: Beinkraft nie am Tag vor den Mittwochs-Intervallen (also nicht am Di) und nie am Tag vor einem Test "
+    "oder Rennen. Muskelkater über 48 h oder HRV/Ruhepuls auffällig: Einheit leichter machen, nicht ausfallen lassen.")
+
+LAUFINTERVALLE = (
+    "Auswertung deiner Mittwochsläufe in Cottbus (22 Läufe, Juni bis September 2026): Ablauf immer gleich. Gegen "
+    "17:00 Einlaufen 3,5-4,9 km locker (6:15-6:50/km, Puls 136-152), ab ca. 17:50 Intervalle auf der Bahn.\n"
+    "- 400-m-Wiederholungen bei 3:50-4:05/km (1:32-1:38 pro Runde), die schnellste bei 3:29. 800 m bei 3:54-4:04/km.\n"
+    "- Pausen: 200 m Trab (7:00-7:20/km) oder 400 m Trab (5:30-6:30/km).\n"
+    "- Umfang: 4 bis 16 Wiederholungen (16x400 am 03.06., 13 am 26.08., 12 am 16.09.), Intensitätsanteil 4-6 km.\n"
+    "- Puls: im Schnitt 166-176, zum Ende der Serie 183-194 (Maximum 198). Das ist VO2max-Training an der Grenze, "
+    "nicht Schwelle.\n"
+    "- Einordnung: 400er bei 3:50/km passen zu deiner 5-km-Rennpace (4:03/km in Erfurt nach dem Rad) und zur "
+    "10-km-Pace (4:21/km in Teichland).\n"
+    "Vorgehen jetzt: Wiedereinstieg bei 70 % Volumen. Dezember 6-8x400 m bei 4:05-4:15/km, Pause 200 m; Januar "
+    "10x400 oder 5x600; Februar 12x400 bei 3:55-4:05 oder 3x800; März/April 4-5x1000 m an der Schwellenpace "
+    "(ca. 4:10-4:15/km) oder 6x1 km bei 3-5-km-Tempo. Nicht schneller als die Zielpace in den ersten Wiederholungen: "
+    "bei der Hälfte der Serien sinkt die Qualität (z. B. 26.08. von 3:43 auf 5:35). Paces nach dem Lauf-Stufentest "
+    "am 18.11. anpassen. Pro Woche nur eine harte Laufeinheit, dazu der lange Lauf am Sonntag.")
 
 SAUNA = (
     "Sauna steht dir zur Verfügung. Zwei Nutzungen:\n"
@@ -157,10 +176,10 @@ PHASEN: list[tuple[str, str, str]] = [
      "Intensitätsverteilung ca. 85 % Z1-Z2, 15 % darüber. Beinkraft über die Berge am Wochenende statt im "
      "Studio. Rad: Sa 3-4 h in den Bergen, Z2 mit Kraftausdauer am Anstieg: Dezember 4x6 min, Januar "
      "5x8 min bei 50-60 U/min und 70-78 % FTP (Pause 4 min locker), ab Mitte Dezember 1x pro Woche "
-     "6x10 s Bergsprint (steil, volle Pause 2-3 min). Dazu eine Sweet-Spot-Einheit unter der Woche "
+     "6x10 s Bergsprint (steil, volle Pause 2-3 min). Dazu eine Sweet-Spot-Einheit am Do "
      "2x20 min bei 88-93 % FTP. Lauf: 4 Läufe, So 60-75 min im Hügelgelände (bergauf kräftig, bergab "
-     "traben oder gehen), Steigerungsläufe 6x20 s, Lauf-ABC. Schwimmen: Vereinstraining plus Technik. "
-     "Kraftraum 2x pro Woche (Mo Oberkörper/Core, Mi Beine, siehe Notiz Krafttraining). "
+     "traben oder gehen), Steigerungsläufe 6x20 s, Lauf-ABC, Mi Intervalle auf der Bahn (6-10x400 m, Verein). Schwimmen: Vereinstraining plus Technik. "
+     "Kraftraum: Mo Beine schwer + Oberkörper, Do optional kurz (siehe Notiz Krafttraining). "
      "Load 380 -> 505, ca. 9 -> 13 h.\n"
      "Deine Radbasis aus 2020-2022 kommt schnell zurück, Engpässe sind Laufen und Schwimmen.\n"
      "Erwartung: CTL 31 -> ca. 52 (+3 pro Woche), Form -13 bis -18 in Belastungswochen, "
@@ -168,12 +187,13 @@ PHASEN: list[tuple[str, str, str]] = [
      "Ruhepuls +1-3 bpm normal."),
     ("2026-11-30", "Wochenstruktur und Kontrolle", WOCHENSTRUKTUR + "\n\n" + KONTROLLE),
     ("2026-11-30", "Krafttraining Kraftraum", KRAFTPLAN),
+    ("2026-11-30", "Mittwochs-Intervalle Lauf", LAUFINTERVALLE),
     ("2027-07-05", "Sauna: Erholung und Hitzeanpassung", SAUNA),
     ("2027-01-25", "Phase 2: Grundlage II / Aufbau (25.01.-21.03.)",
      "Intensität steigt (pyramidal ca. 80/15/5). Rad: Sa in den Bergen mit Bergintervallen statt "
      "Flachstück: Schwelle 3x15 oder 2x20 min bergauf bei 95-100 % FTP, Kraftausdauer 5x8 min bei "
-     "50-60 U/min, wöchentlich 6-8x10 s Bergsprint, Over-Unders 3x(2x6 min bei 95/105 %) unter der "
-     "Woche. Lauf: Tempoläufe 2x15-20 min an der Schwellenpace, So Bergläufe 8x60 s bergauf. Schwimmen: CSS-Sätze 10x100 m. Kraftraum 2x Maximalkraft, ab März "
+     "50-60 U/min, wöchentlich 6-8x10 s Bergsprint, Over-Unders 3x(2x6 min bei 95/105 %) am Do. "
+     "Lauf: Mi Bahnintervalle (10-12x400 m, 3x800 m, 4-5x1000 m an der Schwellenpace), So Bergläufe 8x60 s bergauf. Schwimmen: CSS-Sätze 10x100 m. Kraftraum Mo Maximalkraft, ab März "
      "Erhalt. Load 515 -> 600, ca. 13 -> 15 h.\n"
      "Erwartung: CTL 52 -> ca. 69, Form -14 bis -17. Ruhepuls im Wochenmittel +1-2 bpm in "
      "Belastungswochen."),
@@ -317,19 +337,19 @@ RENNTAG_TSS = 170
 # (von, bis, Phase, Belastungsart, Intensitätsverteilung, Rad, Lauf, Schwimmen/Kraft)
 PHASEN_UEBERSICHT = [
     ("2026-11-09", "2026-11-29", "0 Wiedereinstieg und Tests", "Reaktivierung, Leistungsdiagnostik",
-     "locker, Tests Sa 14.11./Di 17.11.", "Stufentest, Z2", "Stufentest, locker", "Verein, Kraft Oberkörper (Beine leicht ab 19.11.)"),
+     "locker, Tests Sa 14.11./Di 17.11.", "Stufentest, Z2", "Stufentest, locker", "Verein, Kraft Mo Oberkörper + Beine leicht (ab 16.11.)"),
     ("2026-11-30", "2027-01-24", "1 Grundlage I", "Aerobes Volumen, Kraftausdauer, Technik",
      "ca. 85 % Z1-Z2 / 15 % darüber", "Sa 3-4 h in den Bergen: Z2 mit Kraftausdauer am Anstieg 4-5x6-8 min, Bergsprints, Sweet Spot 2x20",
-     "4 Läufe, So Hügellauf 60-75 min, Steigerungen, Lauf-ABC", "Verein + Technik; Kraftraum 2x (Mo Oberkörper, Mi Beine), RIR 2-3"),
+     "Mi Bahn 6-10x400, 4 Läufe, So Hügellauf 60-75 min, Steigerungen", "Verein + Technik; Kraftraum Mo Beine + Oberkörper, RIR 2-3"),
     ("2027-01-25", "2027-03-21", "2 Grundlage II / Aufbau", "Schwelle, Tempo, aerobe Leistung",
      "ca. 80 / 15 / 5 (pyramidal)", "Berg-Schwelle 3x15 / 2x20 bergauf, Kraftausdauer 5x8, Over-Unders, Bergsprints",
-     "Tempoläufe 2x15-20 min, So Bergläufe 8x60 s", "CSS-Sätze 10x100; Kraftraum 2x Maximalkraft (4-6 Wdh.)"),
+     "Mi Bahn 10-12x400 / 3x800 / 4-5x1000, So Bergläufe 8x60 s", "CSS-Sätze 10x100; Kraftraum Mo Maximalkraft (4-6 Wdh.)"),
     ("2027-03-22", "2027-05-16", "3 Aufbau intensiv", "VO2max, Koppeltraining, lange Ausdauer",
      "ca. 75 / 15 / 10", "Sa 4-5 h Berge: VO2max 5x4-5 min bergauf, 2x30 Tempo am Anstieg, Koppel 1x/Woche",
-     "6x1 km (3-5-km-Tempo), Koppellauf 15-20 min", "8x200 bei CSS; Kraftraum 2 kurze Einheiten Erhalt/Explosiv"),
+     "6x1 km (3-5-km-Tempo), Koppellauf 15-20 min", "8x200 bei CSS; Kraftraum Mo 35-40 min Erhalt/Explosiv"),
     ("2027-05-17", "2027-07-25", "4 Wettkampfvorbereitung", "Renntempo, Spezifik, Spitzenvolumen",
      "ca. 75 / 15 / 10 mit Renntempo", "Berge jede 2. Woche, dazwischen 3x12 min bei 100-105 % FTP, Brick 40 min bei 85-90 % FTP + 10-km-Lauf",
-     "Langer Lauf bis 100 min, Brick-Lauf 10 km Renntempo", "Freiwasser mit Neopren, 1,5 km am Stück; Kraftraum 1x Erhalt bis 14 Tage vor DM; Sauna-Block 05.-25.07."),
+     "Langer Lauf bis 100 min, Brick-Lauf 10 km Renntempo", "Freiwasser mit Neopren, 1,5 km am Stück; Kraftraum Mo 35 min Erhalt bis 14 Tage vor DM; Sauna-Block 05.-25.07."),
     ("2027-07-26", "2027-08-08", "Taper und Rennen", "Frische, Schärfe, Renntempo-Öffner",
      "locker + wenige scharfe Reize", "3-5 Reize à 3-5 min im Renntempo, Öffner", "kurze Tempoläufe, Öffner",
      "locker, Technik; letzte Beinkraft 14 Tage, Oberkörper 7 Tage vorher"),
