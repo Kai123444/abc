@@ -1,9 +1,12 @@
 """Grobe Saisonplanung 2026/27: Wochenziele (TARGET) und Phasen-Notizen (NOTE) für intervals.icu.
 
-Annahmen (aus deinen Daten ab August 2026):
-* Normalwoche ~345 TSS, Spitzenwoche 443 TSS, CTL-Höchststand 37, aktuell ~26.
-* CTL-Anstieg höchstens ~2-3 pro Woche, alle 4 Wochen eine Erholungswoche (-30 %).
-* Hauptwettkampf Sonntag 08.08.2027: Aufbau bis Mitte Juli, 2 Wochen Taper, Form am Renntag +10 bis +20.
+Grundlagen (aus intervals.icu, Strava-Import ab 2020):
+* Rad-Basis: 2020-2022 je 6-9 h/Woche (12-16k TSS/Jahr), CTL-Maximum 74 (Juli 2021), 29 % der
+  aktiven Wochen über 400 TSS. 2023-2025 fast Pause, 2026 Wiedereinstieg als Triathlet (CTL bis 40).
+* Limitierend sind Laufen (bis 2026 kaum Läufe) und Schwimmen -> Lauf-Load steigt nur etwa 10 % pro
+  Woche, Schwimmen ist durch das Vereinstraining (2 x 70 min, ca. 105 TSS) fest vorgegeben.
+* Hauptwettkampf: DM Kurzdistanz am Sonntag 08.08.2027 (1,5 km / 40 km / 10 km, geschätzt ca. 2:30 h,
+  ca. 200-220 TSS). Aufbau bis Mitte Juli, 2 Wochen Taper, Form am Renntag +10 bis +20.
 """
 
 from __future__ import annotations
@@ -26,29 +29,38 @@ WOCHEN: list[tuple[str, int, bool]] = [
     ("2027-04-19", 475, False), ("2027-04-26", 485, False), ("2027-05-03", 495, False),
     ("2027-05-10", 335, True),
     # Vorbereitung auf den Hauptwettkampf am Sonntag 08.08.2027
-    ("2027-05-17", 470, False), ("2027-05-24", 480, False), ("2027-05-31", 480, False),
-    ("2027-06-07", 330, True),
-    ("2027-06-14", 470, False), ("2027-06-21", 480, False), ("2027-06-28", 490, False),
-    ("2027-07-05", 340, True),
-    ("2027-07-12", 480, False), ("2027-07-19", 470, False),
-    # Taper: -25 %, Rennwoche ~200 (ohne Rennen), Woche danach locker
-    ("2027-07-26", 360, True), ("2027-08-02", 200, True), ("2027-08-09", 120, True),
+    ("2027-05-17", 490, False), ("2027-05-24", 500, False), ("2027-05-31", 510, False),
+    ("2027-06-07", 340, True),
+    ("2027-06-14", 500, False), ("2027-06-21", 510, False), ("2027-06-28", 520, False),
+    ("2027-07-05", 350, True),
+    ("2027-07-12", 510, False), ("2027-07-19", 490, False),
+    # Taper: -25 %, Rennwoche 400 = ca. 190 Vorbereitung + ca. 210 Rennen, Woche danach locker
+    ("2027-07-26", 370, True), ("2027-08-02", 400, True), ("2027-08-09", 120, True),
 ]
 
 RENNTAG = "2027-08-08"
 TAPER_WOCHEN = {"2027-07-26", "2027-08-02", "2027-08-09"}  # keine "Erholungswoche"-Notiz
 
-# Verteilung auf die Sportarten (wie im bisherigen Plan: Rad > Lauf > Schwimmen > Sonstiges)
-SPLIT = {"Ride": 0.53, "Run": 0.21, "Swim": 0.16, "Other": 0.10}
+# Schwimmen und Kraft sind feste Größen (Vereinstraining, Krafttraining), der Rest geht an Rad/Lauf.
+SCHWIMMEN = {"normal": 105, "erholung": 75, "2027-07-26": 80, "2027-08-02": 60, "2027-08-09": 30}
+KRAFT = {"normal": 30, "erholung": 20, "2027-07-26": 20, "2027-08-02": 10, "2027-08-09": 0}
 
 ERHOLUNG_TEXT = ("Fokus auf leichtere Belastungen, reduziertes Volumen und Anpassung des Körpers an "
                  "Trainingsstress (Radfahren, Laufen, Schwimmen, Andere)")
-# (Samstag, Beschreibung) – Retests ausgeruht in der Erholungswoche
+# (Samstag, Name, Beschreibung) – Retests/Formchecks ausgeruht in der Erholungswoche
 RETESTS = [
-    ("2027-01-23", "Rad-Stufentest und Lauf-Stufentest wiederholen (ausgeruht, in der Erholungswoche). "
-                   "Danach FTP, Laufschwelle, LTHR und Zonen in intervals.icu aktualisieren."),
-    ("2027-03-20", "Zweiter Retest: Rad-Stufentest und Lauf-Stufentest. Vergleich mit November und "
-                   "Januar zeigt, ob Aufbau und Zonen passen."),
+    ("2027-01-23", "Retest Stufentests",
+     "Rad-Stufentest und Lauf-Stufentest wiederholen (ausgeruht, in der Erholungswoche). "
+     "Danach FTP, Laufschwelle, LTHR und Zonen in intervals.icu aktualisieren."),
+    ("2027-03-20", "Retest Stufentests",
+     "Zweiter Retest: Rad-Stufentest und Lauf-Stufentest. Vergleich mit November und "
+     "Januar zeigt, ob Aufbau und Zonen passen."),
+    ("2027-06-12", "Formcheck Renntempo",
+     "In der Erholungswoche: 20-min-Radtest (FTP kontrollieren) und 5-km-Lauf auf Zeit. Daraus "
+     "Renntempo ableiten: Rad ca. 85-90 % FTP über 40 km, Lauf etwa 10-km-Pace."),
+    ("2027-07-10", "Generalprobe Kurzdistanz",
+     "In der Erholungswoche: Koppel 30 km Rad im Renntempo + 5 km Lauf im Renntempo, "
+     "Verpflegung und Wechsel üben. Optional ein Sprint-Triathlon als Formtest."),
 ]
 
 # (Montag, Name, Beschreibung)
@@ -61,7 +73,9 @@ PHASEN: list[tuple[str, str, str]] = [
     ("2026-11-30", "Phase 1: Grundlage I (30.11.-24.01.)",
      "Aerobes Volumen (Z2), Schwimmtechnik, Kraft 1-2x pro Woche, höchstens eine "
      "Intensitätseinheit pro Woche (Sweet Spot bis 2x15 min). Load 340 -> 410, alle 4 Wochen "
-     "Erholungswoche.\n"
+     "Erholungswoche. Deine Radbasis aus 2020-2022 (6-9 h/Woche, CTL bis 74) ist da und kommt "
+     "schnell zurück. Engpässe sind Laufen und Schwimmen: 3 Läufe pro Woche mit einem langen "
+     "Lauf, Lauf-Load nur etwa +10 % pro Woche, Schwimmen = Vereinstraining plus Technik.\n"
      "Erwartung: CTL 32 -> ca. 46 (+2,5 pro Woche), Form -10 bis -13 in Belastungswochen, "
      "0 bis -4 in Erholungswochen. In der 3. Belastungswoche sind HRV 5-10 % unter Basis und "
      "Ruhepuls +1-3 bpm normal, in der Erholungswoche kommt beides zurück."),
@@ -78,19 +92,20 @@ PHASEN: list[tuple[str, str, str]] = [
      "stärkere Reaktion: nach harten Tagen HRV 10-15 % niedriger ist normal und sollte nach "
      "48 h zurück sein. Ab hier die Ampel (Gelb/Rot) ernst nehmen."),
     ("2027-05-17", "Phase 4: Wettkampfvorbereitung (17.05.-25.07.)",
-     "Wettkampfspezifisch: Koppeltraining Rad -> Lauf, Wettkampftempo-Blöcke, lange Z2-Einheiten, "
-     "eine Intensitätseinheit pro Sportart. Load 470-490, Erholungswochen am 07.06. und 05.07. "
-     "(2 Blöcke zu 3 Wochen, danach letzter Block 12.-25.07.).\n"
-     "Erwartung: CTL 62 -> ca. 65 Mitte Juli (Höhepunkt der Fitness), Form -3 bis -9. Die Ampel "
-     "ernst nehmen: bei Gelb Umfang kürzen, aber die Schlüsseleinheiten behalten."),
+     "Kurzdistanz (1,5 km / 40 km / 10 km, geschätzt ca. 2:30 h): Koppeltraining Rad -> Lauf, "
+     "Renntempo-Blöcke (Rad 3x15 min im Renntempo, Lauf 3x2 km), lange Radfahrt bis 3 h, langer Lauf "
+     "bis 90 min, Freiwasserschwimmen ab Mai, 1,5 km am Stück. Load 490-520, Erholungswochen am "
+     "07.06. und 05.07., letzter Block 12.-25.07.\n"
+     "Erwartung: CTL 62 -> ca. 66 Mitte Juli (dein Maximum war 74 im Jahr 2021), Form -3 bis -9. "
+     "Die Ampel ernst nehmen: bei Gelb Umfang kürzen, aber die Schlüsseleinheiten behalten."),
     ("2027-07-26", "Taper und Höchstform (26.07.-08.08.)",
-     "Volumen -25 % (Woche 360), Rennwoche ca. 200 TSS plus Rennen, Intensität bleibt kurz und "
-     "scharf (2-3 Reize à 3-5 min im Renntempo), nichts Neues ausprobieren, Schlaf 8-9 h, "
-     "ausreichend Kohlenhydrate.\n"
-     "Erwartung: CTL sinkt nur leicht (ca. 65 -> 58), ATL fällt von ca. 66 auf ca. 40, "
-     "Form am Renntag ca. +16 (Ziel +10 bis +20), HRV über Basis (90 oder mehr), Ruhepuls an oder "
-     "unter Basis (46-47). Liegt in der Rennwoche die HRV unter ca. 78 oder der Ruhepuls über "
-     "ca. 51: Intensität weglassen, nur locker aktivieren."),
+     "Volumen -25 % (Woche 370), Rennwoche ca. 190 TSS Vorbereitung plus Rennen (ca. 200-220 TSS, "
+     "Wochenziel 400 enthält das Rennen). Intensität bleibt kurz und scharf (2-3 Reize à 3-5 min im "
+     "Renntempo), nichts Neues ausprobieren, Schlaf 8-9 h, ausreichend Kohlenhydrate.\n"
+     "Erwartung: CTL sinkt nur leicht (ca. 66 -> 60), ATL fällt von ca. 69 auf ca. 42, Form am "
+     "Renntag ca. +18 (Ziel +10 bis +20), HRV über Basis (90 oder mehr), Ruhepuls an oder unter "
+     "Basis (46-47). Liegt in der Rennwoche die HRV unter ca. 78 oder der Ruhepuls über ca. 51: "
+     "Intensität weglassen, nur locker aktivieren."),
     ("2027-08-09", "Nach dem Wettkampf (ab 09.08.)",
      "Eine Woche locker (Load ca. 120), danach entscheiden: Spätsaison mit kurzem Aufbau oder "
      "direkt Off-Season (2-4 Wochen aktive Pause, Load unter 150).\n"
@@ -99,10 +114,15 @@ PHASEN: list[tuple[str, str, str]] = [
 ]
 
 
-def verteilung(gesamt: int) -> dict[str, int]:
-    teile = {sport: round(gesamt * anteil) for sport, anteil in SPLIT.items()}
-    teile["Ride"] += gesamt - sum(teile.values())  # Rundung ausgleichen
-    return teile
+def verteilung(gesamt: int, tag: str = "2026-11-16", erholung: bool = False) -> dict[str, int]:
+    """Wochenload auf Sportarten verteilen. Lauf bekommt vom Rest 36 % (ab März 38 %), weil Laufen
+    der Engpass für die 10 km nach dem Rad ist und langsam wachsen soll."""
+    art = tag if tag in SCHWIMMEN else ("erholung" if erholung else "normal")
+    swim, kraft = SCHWIMMEN[art], KRAFT[art]
+    rest = max(gesamt - swim - kraft, 0)
+    anteil = 0.35 if tag in TAPER_WOCHEN else (0.38 if tag >= "2027-03-01" else 0.36)
+    lauf = round(rest * anteil)
+    return {"Ride": rest - lauf, "Run": lauf, "Swim": swim, "Other": kraft}
 
 
 def montag(datum: str) -> date:
@@ -114,9 +134,9 @@ def montag(datum: str) -> date:
 def ziel_events() -> list[dict]:
     """Alle Wochenziele als TARGET-Events (external_id = saison-<Montag>-<Sport>)."""
     out = []
-    for tag, tss, _ in WOCHEN:
+    for tag, tss, erholung in WOCHEN:
         d = montag(tag)
-        for sport, load in verteilung(tss).items():
+        for sport, load in verteilung(tss, tag, erholung).items():
             out.append({"category": "TARGET", "type": sport, "name": "Weekly",
                         "start_date_local": f"{d.isoformat()}T00:00:00",
                         "end_date_local": f"{(d + timedelta(days=1)).isoformat()}T00:00:00",
@@ -135,8 +155,8 @@ def notiz_events(vorhandene_notizen: set[str]) -> list[dict]:
         if erholung and tag not in TAPER_WOCHEN:
             d = montag(tag)
             out.append((d, "Erholungswoche", ERHOLUNG_TEXT))
-    for tag, text in RETESTS:
-        out.append((date.fromisoformat(tag), "Retest Stufentests", text))
+    for tag, name, text in RETESTS:
+        out.append((date.fromisoformat(tag), name, text))
     events = []
     for d, name, text in out:
         if name == "Erholungswoche" and d.isoformat() in vorhandene_notizen:

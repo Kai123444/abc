@@ -139,18 +139,28 @@ class TestAnpassen(unittest.TestCase):
         from trainingsplan import saison
         ziele = saison.ziel_events()
         self.assertEqual(len(ziele), len(saison.WOCHEN) * 4)
-        for tag, tss, _ in saison.WOCHEN:
-            self.assertEqual(sum(saison.verteilung(tss).values()), tss)
+        for tag, tss, rec in saison.WOCHEN:
+            v = saison.verteilung(tss, tag, rec)
+            self.assertEqual(sum(v.values()), tss)
+            self.assertTrue(all(x >= 0 for x in v.values()), (tag, v))
             saison.montag(tag)  # wirft bei Nicht-Montag
-        # Erholungswoche alle 4 Wochen, danach wieder mehr Last
-        werte = [(t, tss, rec) for t, tss, rec in saison.WOCHEN]
-        for i, (_, tss, rec) in enumerate(werte):
-            if rec and i >= 1:
+        werte = list(saison.WOCHEN)
+        for i, (tag, tss, rec) in enumerate(werte):
+            if rec and tag not in saison.TAPER_WOCHEN:
                 self.assertLess(tss, werte[i - 1][1] * 0.8)
-        # keine Steigerung über 8 % von Woche zu Woche (außer nach Erholungswoche)
+        # keine Steigerung über 8 % von Woche zu Woche (außer nach Erholungs-/Taperwoche)
         for (_, a, ra), (_, b, rb) in zip(werte, werte[1:]):
             if not ra and not rb:
                 self.assertLessEqual(b / a, 1.08)
+        # Lauf-Load wächst gegenüber der letzten Belastungswoche höchstens ~13 % pro Woche
+        letzte = None
+        for tag, tss, rec in werte:
+            if rec:
+                continue
+            lauf = saison.verteilung(tss, tag, rec)["Run"]
+            if letzte:
+                self.assertLessEqual(lauf / letzte, 1.13, tag)
+            letzte = lauf
 
     def test_event_format(self):
         ev = self.plan[0].to_event()
