@@ -3,7 +3,7 @@
 Rad:  Start 140 W, alle 4 min +20 W (12 Stufen bis 360 W) (Stufen wechseln automatisch). Zum vorzeitigen Ende LAP so
       oft drücken, bis "Ausfahren" erscheint. Alternativ modus="rampe": ein einziger Schritt,
       ein Lap-Druck startet das Ausfahren (weniger gut auswertbar).
-Lauf: Start 9 km/h, alle 3 min +1 km/h (Stufen wechseln automatisch). Zum vorzeitigen Ende
+Lauf: Start 9 km/h, alle 4 min +1 km/h (Stufen wechseln automatisch). Zum vorzeitigen Ende
       LAP so oft drücken, bis "Ausfahren" erscheint (Garmin-Lap springt nur einen Schritt weiter).
 
 Auswertung (ohne Laktat):
@@ -62,18 +62,19 @@ def rad_stufentest(datum: date, start_w: int = 140, schritt_w: int = 20, stufen:
 
 
 def lauf_stufentest(datum: date, start_kmh: float = 9.0, schritt_kmh: float = 1.0,
-                    stufen: int = 9, name: str = "Lauf-Stufentest") -> Einheit:
+                    stufen: int = 9, stufe_min: int = 4,
+                    name: str = "Lauf-Stufentest") -> Einheit:
     zeilen = ["Warmup", f"- 10m {_pace(start_kmh - 1)} Pace", "",
-              f"Stufen (je {STUFE_MIN} min +{schritt_kmh:g} km/h) – laufen bis zur Erschöpfung"]
-    zeilen += [f"- {STUFE_MIN}m {_pace(start_kmh + i * schritt_kmh)} Pace" for i in range(stufen)]
+              f"Stufen (je {stufe_min} min +{schritt_kmh:g} km/h) – laufen bis zur Erschöpfung"]
+    zeilen += [f"- {stufe_min}m {_pace(start_kmh + i * schritt_kmh)} Pace" for i in range(stufen)]
     zeilen += ["", "Ausfahren", f"- Ausfahren 10m {_pace(start_kmh - 1.5)} Pace", "",
-               "Ablauf: Die Stufen wechseln automatisch alle 3 min. Wenn du die Pace nicht mehr "
+               f"Ablauf: Die Stufen wechseln automatisch alle {stufe_min} min. Wenn du die Pace nicht mehr "
                "halten kannst, hör auf zu beschleunigen, laufe locker und drücke die LAP-Taste so "
                "oft, bis der Schritt Ausfahren erscheint (jeder Druck springt eine Stufe weiter). "
                "Notiere, in welcher Stufe und nach wie viel Sekunden du ausgestiegen bist.",
                "Hinweise: Laufband (1 % Steigung) oder 400-m-Bahn, Pace exakt halten, "
                "Brustgurt tragen. Nicht am Tag nach einem harten Rad-Test."]
-    dauer = 20 + STUFE_MIN * stufen
+    dauer = 20 + stufe_min * stufen
     return Einheit(datum=datum, name=name, typ="Run", dauer_min=dauer, load=60,
                    intensitaet="test", beschreibung="\n".join(zeilen), fix=True)
 

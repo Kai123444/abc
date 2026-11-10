@@ -131,7 +131,8 @@ class TestAnpassen(unittest.TestCase):
         self.assertIn("- 48m ramp 140-380w", rad_stufentest(HEUTE, modus="rampe").beschreibung)
         self.assertTrue(r.fix)
         l = lauf_stufentest(HEUTE)
-        self.assertIn("- 3m 4:00/km Pace", l.beschreibung)
+        self.assertIn("- 4m 4:00/km Pace", l.beschreibung)
+        self.assertEqual(l.dauer_min, 56)
         self.assertEqual(maximalwert(300, 120, 20, 4), 310)
 
     def test_event_format(self):
