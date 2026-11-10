@@ -1,7 +1,8 @@
 """Konkrete Einheiten für die Testwochen 09.-22.11.2026 (Phase 0) als intervals.icu-Workouts.
 
-Sonderfall dieser Woche: 24-Stunden-Schwimmen der Schule von Fr 13.11. bis Sa 14.11. (4 km locker).
-Deshalb liegt der Rad-Stufentest am So 15.11. und der Lauf-Stufentest am Mi 18.11. (3 Tage Abstand).
+Sonderfall dieser Woche: Schulevent "24 Stunden Schwimmen" von Fr 13.11. bis Sa 14.11.; du schwimmst
+dort nur 4 km locker. Am Fr trainierst du ausnahmsweise (Rad), dazu Sportunterricht und das Schwimmen. Der
+Rad-Stufentest liegt deshalb am So 15.11. (ein freier Tag davor) und der Lauf-Stufentest am Mi 18.11.
 
 Zonen sind noch die alten Einstellungen (FTP 280 W, Lauf-HF-Zonen veraltet). Deshalb Rad in Prozent
 mit niedriger Z2 und Laufen nach Pace (deine lockeren Läufe liegen bei 6:30-7:00/km). Nach den
@@ -34,19 +35,18 @@ VERSCHIEBEN = [
 
 # Neue Einheiten und Hinweise dieser Woche
 DIESE_WOCHE = [
-    {"category": "NOTE", "name": "Fr bis Sa: 24-h-Schwimmen, So: Rad-Stufentest",
+    {"category": "NOTE", "name": "Fr: Schulevent und Rad, So: Rad-Stufentest",
      "start_date_local": "2026-11-13T00:00:00",
-     "description": "Der Rad-Stufentest liegt am Sonntag, damit du nach dem Event schlafen und dich erholen kannst. "
-                    "Während der 24 h: locker schwimmen (nicht schneller als ca. 2:10/100 m), Schultern warm "
-                    "halten, regelmäßig essen und trinken (Kohlenhydrate, Salz), zwischendurch schlafen, wenn möglich. "
-                    "Sa: nach dem Event mindestens 8-9 h schlafen, abends kohlenhydratreich essen. Sportunterricht "
-                    "am Fr ruhig laufen, kein Zeitlauf. So früh genug frühstücken (2-3 h vor dem Test). "
-                    "Ausweichtermin Mo 16.11., falls dein Schlaf unter 7 h war oder HRV/Ruhepuls auffällig sind "
-                    "(HRV unter ca. 78, Ruhepuls über ca. 51).",
+     "description": "Beim Schulevent schwimmst du nur 4 km locker. Am Freitag kommen Rad (Vormittag), "
+                    "Sportunterricht und das Schwimmen zusammen, deshalb liegt der Rad-Stufentest am "
+                    "Sonntag mit einem freien Samstag davor. Sportunterricht am Fr ruhig laufen, kein "
+                    "Zeitlauf. Sa locker, früh schlafen, abends kohlenhydratreich essen. So 2-3 h vor "
+                    "dem Test frühstücken. Ausweichtermin Mo 16.11., falls der Schlaf unter 7 h war oder "
+                    "HRV/Ruhepuls auffällig sind (HRV unter ca. 78, Ruhepuls über ca. 51).",
      "external_id": "woche-2026-11-13-testhinweis"},
-    {"category": "WORKOUT", "type": "Swim", "name": "24-Stunden-Schwimmen (Schule), 4 km",
+    {"category": "WORKOUT", "type": "Swim", "name": "Schulevent: 4 km locker schwimmen",
      "start_date_local": "2026-11-13T00:00:00", "moving_time": 5400,
-     "description": "4 km locker, verteilt über die 24 h. Technik sauber, kein Tempo, Schultern schonen.",
+     "description": "4 km locker, kein Tempo, mehr nicht. Technik sauber, Schultern schonen.",
      "external_id": "woche-2026-11-13-24h"},
     {"category": "WORKOUT", "type": "Ride", "name": "Rad Grundlage (Freitag, Sondertraining)",
      "start_date_local": "2026-11-13T00:00:00", "moving_time": 3600,
