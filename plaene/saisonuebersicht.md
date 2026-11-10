@@ -19,10 +19,10 @@ Wochenziele in TSS, Stunden grob geschätzt (Rad 38, Lauf 52, Schwimmen 48, Kraf
 | Phase | Rad | Lauf | Schwimmen / Kraft |
 |---|---|---|---|
 | 0 Wiedereinstieg und Tests | Stufentest, Z2 | Stufentest, locker | Verein, Kraft Oberkörper/Core |
-| 1 Grundlage I | Z2 lang (Sa 3-4 h), Sweet Spot 2x20, Kraftausdauer 4x8 min | 4 Läufe, langer Lauf 60-75 min, Steigerungen, Lauf-ABC | Verein + Technik; Oberkörper/Core 2x |
-| 2 Grundlage II / Aufbau | Schwelle 3x15 / 2x20, Over-Unders, Z2 lang | Tempoläufe 2x15-20 min, Berge 8x60 s | CSS-Sätze 10x100; Oberkörper/Core 1-2x |
-| 3 Aufbau intensiv | VO2max 5x4-5 min, 30/30, Sa 4-5 h mit 2x30 Tempo, Koppel 1x/Woche | 6x1 km (3-5-km-Tempo), Koppellauf 15-20 min | 8x200 bei CSS; Oberkörper/Core 1x |
-| 4 Wettkampfvorbereitung | 3x12 min bei 100-105 % FTP, Brick 40 min bei 85-90 % FTP + 10-km-Lauf | Langer Lauf bis 100 min, Brick-Lauf 10 km Renntempo | Freiwasser mit Neopren, 1,5 km am Stück; Oberkörper/Core 1x |
+| 1 Grundlage I | Sa 3-4 h in den Bergen: Z2 mit Kraftausdauer am Anstieg 4-5x6-8 min, Bergsprints, Sweet Spot 2x20 | 4 Läufe, So Hügellauf 60-75 min, Steigerungen, Lauf-ABC | Verein + Technik; Oberkörper/Core 2x |
+| 2 Grundlage II / Aufbau | Berg-Schwelle 3x15 / 2x20 bergauf, Kraftausdauer 5x8, Over-Unders, Bergsprints | Tempoläufe 2x15-20 min, So Bergläufe 8x60 s | CSS-Sätze 10x100; Oberkörper/Core 1-2x |
+| 3 Aufbau intensiv | Sa 4-5 h Berge: VO2max 5x4-5 min bergauf, 2x30 Tempo am Anstieg, Koppel 1x/Woche | 6x1 km (3-5-km-Tempo), Koppellauf 15-20 min | 8x200 bei CSS; Oberkörper/Core 1x |
+| 4 Wettkampfvorbereitung | Berge jede 2. Woche, dazwischen 3x12 min bei 100-105 % FTP, Brick 40 min bei 85-90 % FTP + 10-km-Lauf | Langer Lauf bis 100 min, Brick-Lauf 10 km Renntempo | Freiwasser mit Neopren, 1,5 km am Stück; Oberkörper/Core 1x |
 | Taper und Rennen | 3-5 Reize à 3-5 min im Renntempo, Öffner | kurze Tempoläufe, Öffner | locker, Technik; letzte Kraft 7 Tage vorher |
 | Spätsaison | locker, 1-2 Renntempo-Blöcke | locker, Brick vor Hölle von Q | locker, Technik |
 

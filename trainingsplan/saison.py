@@ -77,8 +77,9 @@ WOCHENSTRUKTUR = (
     "Mi: SCHLÜSSEL Rad (Schwelle/VO2max) 90-120 min + Lauf locker 30-40 min abends\n"
     "Do: Schwimmen (Verein) + Rad Z2/Kadenz 60-90 min\n"
     "Fr: Sportunterricht/Lauf locker, Kraft Oberkörper/Core (ab Mai nur noch 1x pro Woche)\n"
-    "Sa: SCHLÜSSEL langes Rad 3-5 h (ab März mit Koppellauf 20-30 min)\n"
-    "So: langer Lauf 75-100 min, optional Schwimmen frei 45 min\n"
+    "Sa: SCHLÜSSEL langes Rad 3-5 h in den Bergen = deine Beinkraft (Kraftausdauer und Bergintervalle am Anstieg, "
+    "ab März mit Koppellauf 20-30 min)\n"
+    "So: langer Lauf 75-100 min im Hügelgelände (bergauf kräftig, bergab kontrolliert), optional Schwimmen frei 45 min\n"
     "Ein voller Ruhetag oder maximal locker pro Woche. Nie zwei harte Tage hintereinander in derselben "
     "Sportart, nach der Erholungswoche erst am 2. Tag wieder hart.")
 
@@ -87,7 +88,9 @@ KONTROLLE = (
     "- CTL-Anstieg höchstens ca. 4 pro Woche, Belastungsverhältnis (7 Tage zu Normalwoche) zwischen 0,8 und 1,3.\n"
     "- Lauf-Load wächst höchstens ca. 10-12 % pro Woche; bei Schmerzen im Schienbein/Achilles/Knie "
     "sofort Lauf ersetzen (Rad/Aquajogging). Ohne Beinkrafttraining den Laufumfang besonders konsequent "
-    "bei höchstens +10 % pro Woche halten und nie zwei lange Läufe in einer Woche.\n"
+    "bei höchstens +10 % pro Woche halten und nie zwei lange Läufe in einer Woche. Bergab laufen ist hohe "
+    "Bremsbelastung: in den ersten 8 Wochen bergab traben oder gehen, Höhenmeter pro Woche um höchstens "
+    "20-25 % steigern. Radberge sind dagegen gelenkschonend und die beste Beinkraft.\n"
     "- Ampel (HRV, Ruhepuls, Schlaf, Form): Gelb = Umfang -15 %, Rot = Intensität streichen. HRV 7-Tage-Mittel "
     "unter ca. 78 oder Ruhepuls über ca. 51 sind deine Gelb-Schwellen.\n"
     "- Schlaf mindestens 8 h in Belastungswochen, Verpflegung (60-90 g Kohlenhydrate/h "
@@ -117,29 +120,32 @@ PHASEN: list[tuple[str, str, str]] = [
      "Erwartung: CTL 26 -> ca. 31, Form -7 bis -15. HRV (~90) und Ruhepuls (~47) bleiben auf "
      "deiner Basis, Schlaf ~8 h. Danach FTP, LTHR und Zonen aus den Tests übernehmen."),
     ("2026-11-30", "Phase 1: Grundlage I (30.11.-24.01.)",
-     "Intensitätsverteilung ca. 85 % Z1-Z2, 15 % darüber. Rad: lange Z2-Fahrt (Sa 3-4 h), eine "
-     "Sweet-Spot-Einheit 2x20 min bei 88-93 % FTP, Kraftausdauer 4x8 min bei 50-60 U/min. "
-     "Lauf: 4 Läufe, ein langer Lauf 60-75 min, Steigerungsläufe 6x20 s, Lauf-ABC. Schwimmen: "
-     "Vereinstraining plus Technik. Kraft 2x pro Woche nur Oberkörper und Core, kein Beintraining: "
-     "Beinkraft kommt über das Rad (Kraftausdauer, später Berge) und Läufe (Steigerungen, Bergläufe). "
-     "Optional 10 min Bodyweight nach dem Lauf (einbeinige Wadenheber, Step-ups, Glute Bridges) als "
-     "Verletzungsvorsorge. Load 380 -> 505, ca. 9 -> 13 h.\n"
+     "Intensitätsverteilung ca. 85 % Z1-Z2, 15 % darüber. Beinkraft über die Berge am Wochenende statt im "
+     "Studio. Rad: Sa 3-4 h in den Bergen, Z2 mit Kraftausdauer am Anstieg: Dezember 4x6 min, Januar "
+     "5x8 min bei 50-60 U/min und 70-78 % FTP (Pause 4 min locker), ab Mitte Dezember 1x pro Woche "
+     "6x10 s Bergsprint (steil, volle Pause 2-3 min). Dazu eine Sweet-Spot-Einheit unter der Woche "
+     "2x20 min bei 88-93 % FTP. Lauf: 4 Läufe, So 60-75 min im Hügelgelände (bergauf kräftig, bergab "
+     "traben oder gehen), Steigerungsläufe 6x20 s, Lauf-ABC. Schwimmen: Vereinstraining plus Technik. "
+     "Kraft 2x pro Woche nur Oberkörper und Core. Optional 10 min Bodyweight nach dem Lauf "
+     "(einbeinige Wadenheber, Step-ups, Glute Bridges). Load 380 -> 505, ca. 9 -> 13 h.\n"
      "Deine Radbasis aus 2020-2022 kommt schnell zurück, Engpässe sind Laufen und Schwimmen.\n"
      "Erwartung: CTL 31 -> ca. 52 (+3 pro Woche), Form -13 bis -18 in Belastungswochen, "
      "-4 bis 0 in Erholungswochen. In der 3. Belastungswoche sind HRV 5-10 % unter Basis und "
      "Ruhepuls +1-3 bpm normal."),
     ("2026-11-30", "Wochenstruktur und Kontrolle", WOCHENSTRUKTUR + "\n\n" + KONTROLLE),
     ("2027-01-25", "Phase 2: Grundlage II / Aufbau (25.01.-21.03.)",
-     "Intensität steigt (pyramidal ca. 80/15/5). Rad: Schwelle 3x15 oder 2x20 min bei 95-100 % "
-     "FTP, Over-Unders 3x(2x6 min bei 95/105 %), Z2 lang. Lauf: Tempoläufe 2x15-20 min an der "
-     "Schwellenpace, Bergläufe 8x60 s. Schwimmen: CSS-Sätze 10x100 m. Kraft Oberkörper/Core 2x, später "
+     "Intensität steigt (pyramidal ca. 80/15/5). Rad: Sa in den Bergen mit Bergintervallen statt "
+     "Flachstück: Schwelle 3x15 oder 2x20 min bergauf bei 95-100 % FTP, Kraftausdauer 5x8 min bei "
+     "50-60 U/min, wöchentlich 6-8x10 s Bergsprint, Over-Unders 3x(2x6 min bei 95/105 %) unter der "
+     "Woche. Lauf: Tempoläufe 2x15-20 min an der Schwellenpace, So Bergläufe 8x60 s bergauf. Schwimmen: CSS-Sätze 10x100 m. Kraft Oberkörper/Core 2x, später "
      "Erhalt. Load 515 -> 600, ca. 13 -> 15 h.\n"
      "Erwartung: CTL 52 -> ca. 69, Form -14 bis -17. Ruhepuls im Wochenmittel +1-2 bpm in "
      "Belastungswochen."),
     ("2027-03-22", "Phase 3: Aufbau intensiv (22.03.-09.05.)",
      "VO2max: Rad 5x4-5 min bei 110-120 % FTP (Pause gleich lang) oder 30/30; Lauf 6x1 km bei "
      "3-5-km-Tempo; Schwimmen 8x200 m bei CSS. Einmal pro Woche Koppeltraining (60-90 min Rad "
-     "Sweet Spot + 15-20 min Lauf im Renntempo), Samstag 4-5 h Z2 mit 2x30 min Tempo. "
+     "Sweet Spot + 15-20 min Lauf im Renntempo), Samstag 4-5 h in den Bergen mit VO2max-Intervallen "
+     "bergauf (5x4-5 min) oder 2x30 min Tempo am Anstieg, Bergsprints bleiben. "
      "Load 605 -> 700, ca. 15 -> 17 h.\n"
      "Erwartung: CTL 69 -> ca. 83, Form -10 bis -14. Mehr Intensität heißt stärkere Reaktion: "
      "nach harten Tagen HRV 10-15 % niedriger ist normal und sollte nach 48 h zurück sein. "
@@ -148,6 +154,8 @@ PHASEN: list[tuple[str, str, str]] = [
      "Kurzdistanz-spezifisch (1,5 km / 40 km / 10 km, ca. 2:30 h): Renntempo-Blöcke Rad 3x12 min "
      "bei 100-105 % FTP, Brick Rad 40 min bei 85-90 % FTP + Lauf 10 km im Renntempo (alle 2 Wochen), "
      "Freiwasser mit Neopren ab Mai, 1,5 km am Stück, lange Radfahrt bis 4-5 h, langer Lauf bis 100 min. "
+     "Berge bleiben die Beinkraft, aber nur noch jede zweite Woche; dazwischen Renntempo auf dem "
+     "Profil der Strecke (flach oder wellig wie bei der DM), in der Rennwoche keine Bergintervalle. "
      "Sa 12.06. Cottbus (Olympische Distanz = B-Rennen und Generalprobe für die DM, Mini-Taper Mi-Fr, "
      "ersetzt den Formcheck). Weitere Rennen vor der DM nach Termin: Supersprint/Sprint ersetzt die "
      "Samstags-Brick-Einheit. "
@@ -275,16 +283,16 @@ PHASEN_UEBERSICHT = [
     ("2026-11-09", "2026-11-29", "0 Wiedereinstieg und Tests", "Reaktivierung, Leistungsdiagnostik",
      "locker, Tests Sa 14.11./Di 17.11.", "Stufentest, Z2", "Stufentest, locker", "Verein, Kraft Oberkörper/Core"),
     ("2026-11-30", "2027-01-24", "1 Grundlage I", "Aerobes Volumen, Kraftausdauer, Technik",
-     "ca. 85 % Z1-Z2 / 15 % darüber", "Z2 lang (Sa 3-4 h), Sweet Spot 2x20, Kraftausdauer 4x8 min",
-     "4 Läufe, langer Lauf 60-75 min, Steigerungen, Lauf-ABC", "Verein + Technik; Oberkörper/Core 2x"),
+     "ca. 85 % Z1-Z2 / 15 % darüber", "Sa 3-4 h in den Bergen: Z2 mit Kraftausdauer am Anstieg 4-5x6-8 min, Bergsprints, Sweet Spot 2x20",
+     "4 Läufe, So Hügellauf 60-75 min, Steigerungen, Lauf-ABC", "Verein + Technik; Oberkörper/Core 2x"),
     ("2027-01-25", "2027-03-21", "2 Grundlage II / Aufbau", "Schwelle, Tempo, aerobe Leistung",
-     "ca. 80 / 15 / 5 (pyramidal)", "Schwelle 3x15 / 2x20, Over-Unders, Z2 lang",
-     "Tempoläufe 2x15-20 min, Berge 8x60 s", "CSS-Sätze 10x100; Oberkörper/Core 1-2x"),
+     "ca. 80 / 15 / 5 (pyramidal)", "Berg-Schwelle 3x15 / 2x20 bergauf, Kraftausdauer 5x8, Over-Unders, Bergsprints",
+     "Tempoläufe 2x15-20 min, So Bergläufe 8x60 s", "CSS-Sätze 10x100; Oberkörper/Core 1-2x"),
     ("2027-03-22", "2027-05-16", "3 Aufbau intensiv", "VO2max, Koppeltraining, lange Ausdauer",
-     "ca. 75 / 15 / 10", "VO2max 5x4-5 min, 30/30, Sa 4-5 h mit 2x30 Tempo, Koppel 1x/Woche",
+     "ca. 75 / 15 / 10", "Sa 4-5 h Berge: VO2max 5x4-5 min bergauf, 2x30 Tempo am Anstieg, Koppel 1x/Woche",
      "6x1 km (3-5-km-Tempo), Koppellauf 15-20 min", "8x200 bei CSS; Oberkörper/Core 1x"),
     ("2027-05-17", "2027-07-25", "4 Wettkampfvorbereitung", "Renntempo, Spezifik, Spitzenvolumen",
-     "ca. 75 / 15 / 10 mit Renntempo", "3x12 min bei 100-105 % FTP, Brick 40 min bei 85-90 % FTP + 10-km-Lauf",
+     "ca. 75 / 15 / 10 mit Renntempo", "Berge jede 2. Woche, dazwischen 3x12 min bei 100-105 % FTP, Brick 40 min bei 85-90 % FTP + 10-km-Lauf",
      "Langer Lauf bis 100 min, Brick-Lauf 10 km Renntempo", "Freiwasser mit Neopren, 1,5 km am Stück; Oberkörper/Core 1x"),
     ("2027-07-26", "2027-08-08", "Taper und Rennen", "Frische, Schärfe, Renntempo-Öffner",
      "locker + wenige scharfe Reize", "3-5 Reize à 3-5 min im Renntempo, Öffner", "kurze Tempoläufe, Öffner",

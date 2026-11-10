@@ -66,10 +66,13 @@ NAECHSTE_WOCHE = [
     ("2026-11-20", "NOTE", "Ruhetag",
      "Frei oder 20 min Mobilisation. Morgen lange Radeinheit, vorher gut essen und schlafen.", 0),
     ("2026-11-21", "Ride", "Rad Grundlage lang",
+     "In den Bergen fahren (Harz), Anstiege im eigenen Tempo, nicht über 75 % FTP. Der Berg ist deine "
+     "Beinkraft, noch ohne Intervalle (die kommen ab Dezember).\n"
      "Warmup\n- 10m ramp 45-57%\n\nGrundlage, Trittfrequenz 85-95, essen und trinken (60 g Kohlenhydrate/h)\n"
      "- 100m 58%\n\nCooldown\n- 10m 50%", 120),
     ("2026-11-22", "Run", "Lauf locker lang",
-     "Der längste Lauf der Woche, ruhig. Danach Dehnen/Mobilisation.\n- 45m 6:50/km Pace", 45),
+     "Der längste Lauf der Woche, ruhig, gern im Hügelgelände (bergauf locker, bergab traben oder gehen). "
+     "Danach Dehnen/Mobilisation.\n- 45m 6:50/km Pace", 45),
 ]
 
 
