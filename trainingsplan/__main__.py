@@ -96,7 +96,7 @@ def _saison(client: IntervalsClient, a) -> int:
     plaene/backup_wochenziele_vorher.json."""
     import json
     from . import saison
-    von, bis = date(2026, 11, 16), date(2027, 5, 17)
+    von, bis = date(2026, 11, 16), date(2027, 8, 9)
     bestehend = client.events(von, bis, category="TARGET,NOTE")
     ziele = {(e["start_date_local"][:10], e.get("type")): e for e in bestehend
              if e.get("category") == "TARGET"}

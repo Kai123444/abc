@@ -25,6 +25,13 @@ WOCHEN: list[tuple[str, int, bool]] = [
     ("2027-04-12", 325, True),
     ("2027-04-19", 475, False), ("2027-04-26", 485, False), ("2027-05-03", 495, False),
     ("2027-05-10", 335, True),
+    # Juni-August: Platzhalter, an die Wettkampftermine anpassen (Taper vor dem Hauptwettkampf)
+    ("2027-05-17", 470, False), ("2027-05-24", 480, False), ("2027-05-31", 480, False),
+    ("2027-06-07", 330, True),
+    ("2027-06-14", 460, False), ("2027-06-21", 470, False), ("2027-06-28", 470, False),
+    ("2027-07-05", 330, True),
+    ("2027-07-12", 460, False), ("2027-07-19", 470, False), ("2027-07-26", 470, False),
+    ("2027-08-02", 330, True),
 ]
 
 # Verteilung auf die Sportarten (wie im bisherigen Plan: Rad > Lauf > Schwimmen > Sonstiges)
@@ -70,8 +77,8 @@ PHASEN: list[tuple[str, str, str]] = [
      "CTL halten (ca. 58-65), Load 400-480 pro Woche, Intensität bleibt, Volumen sinkt. "
      "Vor dem Hauptwettkampf Taper über 7-10 Tage: Load -40 %, kurze intensive Reize bleiben.\n"
      "Erwartung am Wettkampftag: Form +10 bis +20, HRV über Basis, Ruhepuls an oder unter "
-     "Basis. Nach dem Wettkampf 5-7 Tage locker. Wochenziele werden ergänzt, sobald die "
-     "Wettkampftermine feststehen."),
+     "Basis. Nach dem Wettkampf 5-7 Tage locker. Wochenziele ab Mai sind Platzhalter und werden "
+     "an die Wettkampftermine angepasst."),
     ("2027-10-04", "Phase 5: Off-Season (Oktober/November)",
      "2-4 Wochen aktive Pause (Load unter 150, andere Sportarten), danach wieder Grundlage.\n"
      "Erwartung: CTL fällt auf ca. 30-35, Form +20 bis +30. Das ist gewollt. Beim "
