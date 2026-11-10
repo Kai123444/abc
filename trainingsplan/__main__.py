@@ -96,7 +96,7 @@ def _saison(client: IntervalsClient, a) -> int:
     Mit --alten-plan-loeschen werden vorher alle Einträge einer angewendeten Plan-Vorlage
     (Wochenziele, Notizen, Workouts mit plan_applied) entfernt."""
     from . import saison
-    von, bis = date(2026, 11, 16), date(2027, 8, 16)
+    von, bis = date(2026, 11, 16), date(2027, 9, 13)
     weit = (date(2026, 10, 1), date(2028, 1, 1))
     alle = client.events(*weit, category="TARGET,NOTE,WORKOUT,RACE_A")
     vorlage = [e for e in alle if e.get("plan_applied")
@@ -139,7 +139,7 @@ def _saison(client: IntervalsClient, a) -> int:
         client.update_event(eid, {"load_target": load})
     for e in veraltet:
         client.delete_event(e["id"])
-    client.upsert_events(neu + notiz)
+    client.upsert_events(neu + notiz + saison.rennen_events())
     print("✔ Saisonplan eingetragen.")
     return 0
 

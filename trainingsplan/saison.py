@@ -11,7 +11,8 @@ Grundlagen (aus intervals.icu, Strava-Import ab 2020 und Angaben des Athleten):
   wird nach Anpassungsfähigkeit (CTL-Anstieg höchstens ~4 pro Woche), nicht nach freier Zeit.
 * Engpässe: Laufen (bis 2026 kaum Läufe) und Schwimmen -> Lauf-Load steigt nur ~10 % pro Woche,
   Schwimmen ist durch das Vereinstraining (Di/Do je 70 min) fest vorgegeben und wächst in Stufen.
-* Hauptwettkampf: DM Kurzdistanz, 08.08.2027 (1,5 km / 40 km / 10 km, geschätzt ca. 2:30 h, ca. 210 TSS).
+* Hauptwettkampf: DM Kurzdistanz, 08.08.2027 (1,5 km / 40 km / 10 km; die Kurzdistanz in Teichland 2026 dauerte 2:19 h bei ca. 145 TSS, für die DM
+  rechne ich mit ca. 170 TSS).
   Zweiwöchiger Taper, Form am Renntag +15 bis +20 bei CTL ~86.
 """
 
@@ -44,19 +45,22 @@ WOCHEN: list[tuple[str, int, bool]] = [
     ("2027-06-14", 735, False), ("2027-06-21", 750, False), ("2027-06-28", 760, False),
     ("2027-07-05", 490, True),
     ("2027-07-12", 695, False), ("2027-07-19", 635, False),
-    # Taper: Woche -2 ca. -20 %, Rennwoche 560 = ca. 345 Vorbereitung + ca. 210 Rennen, danach locker
-    ("2027-07-26", 600, True), ("2027-08-02", 560, True), ("2027-08-09", 160, True),
+    # Taper: Woche -2 ca. -20 %, Rennwoche 520 = ca. 345 Vorbereitung + ca. 170 Rennen, danach locker
+    ("2027-07-26", 600, True), ("2027-08-02", 520, True), ("2027-08-09", 160, True),
+    # Spätsaison: Erfurt Sprint (So 22.08.), Hölle von Q (So 05.09., Rennwoche mit Rennen)
+    ("2027-08-16", 400, True), ("2027-08-23", 480, True), ("2027-08-30", 540, True),
 ]
 
 RENNTAG = "2027-08-08"
-TAPER_WOCHEN = {"2027-07-26", "2027-08-02", "2027-08-09"}  # keine "Erholungswoche"-Notiz
+TAPER_WOCHEN = {"2027-07-26", "2027-08-02", "2027-08-09", "2027-08-16", "2027-08-23", "2027-08-30"}  # Sonderwochen
 
 # Schwimmen und Kraft sind feste Größen (Vereinstraining, Krafttraining), der Rest geht an Rad/Lauf.
 # Stufen: (gilt ab Datum, Belastungswoche); Erholungswochen = 70 % davon.
 _SCHWIMMEN = [("2026-11-16", 110), ("2027-01-01", 130), ("2027-03-01", 150), ("2027-05-01", 170)]
 _KRAFT = [("2026-11-16", 40), ("2027-04-01", 30)]
-_TAPER_SCHWIMMEN = {"2027-07-26": 130, "2027-08-02": 70, "2027-08-09": 30}  # Rennwoche inkl. Renn-Schwimmen
-_TAPER_KRAFT = {"2027-07-26": 20, "2027-08-02": 10, "2027-08-09": 0}
+_TAPER_SCHWIMMEN = {"2027-07-26": 130, "2027-08-02": 70, "2027-08-09": 30,  # Rennwoche inkl. Renn-Schwimmen
+                    "2027-08-16": 100, "2027-08-23": 120, "2027-08-30": 90}
+_TAPER_KRAFT = {"2027-07-26": 20, "2027-08-02": 10, "2027-08-09": 0, "2027-08-16": 20, "2027-08-23": 30, "2027-08-30": 10}
 # Lauf-Anteil vom Rest (Rad + Lauf): Laufen ist der Engpass und wächst langsam
 _LAUF_ANTEIL = [("2026-11-16", 0.33), ("2027-03-01", 0.35), ("2027-05-01", 0.36)]
 # geschätzte TSS pro Stunde (konservativ) für die Stundenschätzung
@@ -91,6 +95,7 @@ KONTROLLE = (
     "TSS und Zonen nicht.")
 
 # (Samstag, Name, Beschreibung) – Tests/Formchecks ausgeruht in der Erholungswoche
+# (Formcheck im Juni entfällt: Teichland am 13.06. ist der Test unter Wettkampfbedingungen)
 RETESTS = [
     ("2027-01-23", "Retest Stufentests",
      "Rad-Stufentest und Lauf-Stufentest wiederholen (ausgeruht, in der Erholungswoche). "
@@ -99,13 +104,6 @@ RETESTS = [
     ("2027-03-20", "Retest Stufentests",
      "Zweiter Retest: Rad-Stufentest, Lauf-Stufentest, CSS-Test. Vergleich mit November und "
      "Januar zeigt, ob Aufbau und Zonen passen."),
-    ("2027-05-22", "Standortbestimmung B-Rennen",
-     "Empfehlung: ein Sprint- oder Kurzdistanz-Triathlon oder Duathlon in dieser Woche als "
-     "Generalprobe für Wechsel, Pacing und Verpflegung. Danach Wochenload ca. -10 %. Termin bitte "
-     "eintragen, dann plane ich ihn mit Mini-Taper ein."),
-    ("2027-06-12", "Formcheck Renntempo",
-     "In der Erholungswoche: 20-min-Radtest (FTP kontrollieren) und 5-km-Lauf auf Zeit. Daraus "
-     "Renntempo ableiten: Rad ca. 85-90 % FTP über 40 km, Lauf etwa 10-km-Pace."),
     ("2027-07-10", "Generalprobe Kurzdistanz",
      "In der Erholungswoche: Koppel 30 km Rad im Renntempo + 5 km Lauf im Renntempo, "
      "Verpflegung und Wechsel üben, 1,5 km Freiwasser mit Neopren."),
@@ -148,6 +146,8 @@ PHASEN: list[tuple[str, str, str]] = [
      "Kurzdistanz-spezifisch (1,5 km / 40 km / 10 km, ca. 2:30 h): Renntempo-Blöcke Rad 3x12 min "
      "bei 100-105 % FTP, Brick Rad 40 min bei 85-90 % FTP + Lauf 10 km im Renntempo (alle 2 Wochen), "
      "Freiwasser mit Neopren ab Mai, 1,5 km am Stück, lange Radfahrt bis 4-5 h, langer Lauf bis 100 min. "
+     "Regionalliga-Rennen: Sa 29.05. Blankenburg (Supersprint, ersetzt die Samstags-Brick-Einheit), "
+     "So 13.06. Teichland (Kurzdistanz = B-Rennen und Generalprobe für die DM, Mini-Taper Do-Sa). "
      "Zwei Spitzenblöcke zu 3 Wochen (710-760 TSS, ca. 18-19 h). Spitzenwochen dürfen 20-21 h "
      "erreichen, wenn der Mehrumfang locker ist (Z1-Z2, zusätzliches Rad/Schwimmen) und die Ampel grün "
      "bleibt. Erholungswochen am 07.06. und 05.07.; die Wochen 12. und 19.07. fallen leicht ab.\n"
@@ -155,7 +155,7 @@ PHASEN: list[tuple[str, str, str]] = [
      "-14 in Blöcken. Die Zahlen hängen an einer korrekten FTP-Einstellung."),
     ("2027-07-26", "Taper und Höchstform (26.07.-08.08.)",
      "Woche -2 (26.07.): Volumen ca. -20 % (600), Intensität unverändert. Rennwoche: ca. 345 TSS "
-     "Vorbereitung plus Rennen (ca. 200-220 TSS), Wochenziel 560 enthält das Rennen. Mo/Di "
+     "Vorbereitung plus Rennen (ca. 150-180 TSS), Wochenziel 520 enthält das Rennen. Mo/Di "
      "je 1 Qualitätsreiz (3-5 Reize à 3-5 min im Renntempo), Mi/Do locker mit 3x30 s Öffnern, Fr "
      "frei, Sa 20 min Öffnungsrunde. Letzte schwere Kraft 14 Tage vorher, nichts Neues "
      "ausprobieren, Schlaf 8-9 h, Kohlenhydrate ab 2 Tage vorher erhöhen.\n"
@@ -163,11 +163,13 @@ PHASEN: list[tuple[str, str, str]] = [
      "(Ziel +15 bis +20), HRV über Basis (90 oder mehr), Ruhepuls an oder unter Basis (46-47). "
      "Liegt in der Rennwoche die HRV unter ca. 78 oder der Ruhepuls über ca. 51: Intensität weglassen, "
      "nur locker aktivieren."),
-    ("2027-08-09", "Nach dem Wettkampf (ab 09.08.)",
-     "Eine Woche locker (Load ca. 160), danach entscheiden: Spätsaison mit kurzem Aufbau oder "
-     "direkt Off-Season (2-4 Wochen aktive Pause, Load unter 150).\n"
-     "Erwartung: Form bleibt erst hoch (+15 bis +25), CTL fällt in der Pause auf ca. 40-50. "
-     "Beim Wiedereinstieg die Wochenload über 3-4 Wochen auf die Normalwoche anheben."),
+    ("2027-08-09", "Nach dem Wettkampf und Spätsaison (ab 09.08.)",
+     "Woche 09.08. locker (Load ca. 160). Danach kurze Spätsaison: So 22.08. Erfurt (Sprint, ohne Druck, "
+     "Taper nur 2 Tage), So 05.09. Hölle von Q (2 km / 90 km / 10 km, B-Rennen, Rennwoche 30.08.). "
+     "Cottbus (Sa 04.09.) und Lichterfeld (So 05.09.) kollidieren mit Hölle von Q: nur eines davon "
+     "starten, wenn überhaupt. Danach Off-Season (2-4 Wochen aktive Pause, Load unter 150).\n"
+     "Erwartung: Form bleibt nach der DM hoch (+10 bis +20), CTL fällt in der Spätsaison von ca. 86 "
+     "auf ca. 78. Beim Wiedereinstieg im Herbst die Wochenload über 3-4 Wochen auf die Normalwoche anheben."),
 ]
 
 
@@ -243,6 +245,7 @@ def notiz_events(vorhandene_notizen: set[str]) -> list[dict]:
 # Übersicht: welche Belastungsart wann
 # ---------------------------------------------------------------------------------------------
 RENNWOCHE_VORBEREITUNG = [80, 100, 50, 70, 0, 40]  # Mo-Sa vor dem Rennen (ohne Rennen)
+RENNTAG_TSS = 170
 
 # (von, bis, Phase, Belastungsart, Intensitätsverteilung, Rad, Lauf, Schwimmen/Kraft)
 PHASEN_UEBERSICHT = [
@@ -263,12 +266,14 @@ PHASEN_UEBERSICHT = [
     ("2027-07-26", "2027-08-08", "Taper und Rennen", "Frische, Schärfe, Renntempo-Öffner",
      "locker + wenige scharfe Reize", "3-5 Reize à 3-5 min im Renntempo, Öffner", "kurze Tempoläufe, Öffner",
      "locker, Technik; letzte schwere Kraft 14 Tage vorher"),
-    ("2027-08-09", "2027-08-15", "Nach dem Rennen", "Regeneration", "locker", "locker", "locker", "frei"),
+    ("2027-08-09", "2027-09-05", "Spätsaison", "Regeneration, dann Sprint und Hölle von Q",
+     "locker, wenige scharfe Reize", "locker, 1-2 Renntempo-Blöcke", "locker, Brick vor Hölle von Q", "locker, Technik"),
 ]
 
 _TESTWOCHEN = {"2027-01-18": "Retest Sa 23.01.", "2027-03-15": "Retest Sa 20.03.",
-               "2027-06-07": "Formcheck Sa 12.06.", "2027-07-05": "Generalprobe Sa 10.07.",
-               "2027-05-17": "B-Rennen empfohlen (Sa 22.05.)"}
+               "2027-05-24": "Blankenburg Supersprint Sa 29.05.", "2027-06-07": "Teichland Kurzdistanz So 13.06.",
+               "2027-07-05": "Generalprobe Sa 10.07.", "2027-08-16": "Erfurt Sprint So 22.08.",
+               "2027-08-30": "Hölle von Q So 05.09."}
 
 
 def phase_fuer(tag: str) -> tuple:
@@ -290,9 +295,9 @@ def simulation() -> dict[str, tuple[float, float]]:
                 ctl += (d - ctl) * kc
                 atl += (d - atl) * ka
             out["renntag"] = (ctl, atl)
+            ctl += (RENNTAG_TSS - ctl) * kc  # Rennen am Sonntag
+            atl += (RENNTAG_TSS - atl) * ka
             out[tag] = (ctl, atl)
-            continue
-        if tag == "2027-08-09":
             continue
         for _ in range(7):
             ctl += (tss / 7 - ctl) * kc
@@ -335,9 +340,11 @@ def uebersicht_markdown() -> str:
         if tag == "2027-07-26":
             art = "Taper (-20 %)"
         elif tag == "2027-08-02":
-            art = "Rennwoche (Rennen So)"
+            art = "Rennwoche DM (Rennen So 08.08., Werte nach dem Rennen)"
         elif tag == "2027-08-09":
             art = "Regeneration"
+        elif tag in ("2027-08-16", "2027-08-23", "2027-08-30"):
+            art = "Spätsaison"
         if tag in _TESTWOCHEN:
             art += f" + {_TESTWOCHEN[tag]}"
         if tag in sim:
@@ -347,6 +354,54 @@ def uebersicht_markdown() -> str:
             cf = "- | -"
         z.append(f"| {date.fromisoformat(tag):%d.%m.} | {ph[2].split(' ', 1)[0]} | {art} | {tss} | "
                  f"{stunden(tss, tag, rec):.0f} | {v['Ride']} | {v['Run']} | {v['Swim']} | {v['Other']} | {cf} |")
+    z += ["", "## Rennkalender 2027 (Regionalliga Ost laut Vorjahr, Termine geschätzt)", "",
+          "| Datum | Rennen | Distanz | Rolle | Rennlast | Vorbereitung |", "|---|---|---|---|---|---|",
+          "| 29.05. | Blankenburg (Harz) | Supersprint | C | ~40 TSS | " + RENNEN[0][6] + " |",
+          "| 13.06. | Teichland | Kurzdistanz | B | ~145 TSS | " + RENNEN[1][6] + " |",
+          "| **08.08.** | **DM Kurzdistanz** | Kurzdistanz | **A** | ~170 TSS | Taper 2 Wochen, siehe Notiz |",
+          "| 22.08. | Erfurt | Sprint | C | ~90 TSS | " + RENNEN[2][6] + " |",
+          "| 04.09. | Cottbus | Supersprint | C | ~40 TSS | " + RENNEN[3][6] + " |",
+          "| 05.09. | Lichterfeld-Schacksdorf / Hölle von Q | Sprint / 2 km-90 km-10 km | C / B | ~80 / ~330 TSS | "
+          "Entweder-oder, Hölle von Q hat Vorrang |"]
     c, a = sim["renntag"]
     z += ["", f"Renntag 08.08.2027 (Prognose am Morgen): CTL {c:.0f}, ATL {a:.0f}, Form {c - a:+.0f}.", ""]
     return "\n".join(z)
+
+
+# ---------------------------------------------------------------------------------------------
+# Rennkalender 2027 (Regionalliga Ost laut Vorjahr, Termin = Vorjahr + 52 Wochen, geschätzt)
+# ---------------------------------------------------------------------------------------------
+# (Datum, Name, Klasse, Kategorie, Distanzen, geschätzte TSS, Vorbereitung/Hinweis)
+RENNEN: list[tuple[str, str, str, str, str, int, str]] = [
+    ("2027-05-29", "Blankenburg (Harz) Multisport", "Supersprint", "RACE_C",
+     "Rad ca. 24 km + Lauf ca. 2,8 km (Vorjahr: 47 + 17 min; Schwimmen nicht aufgezeichnet)", 40,
+     "Kein Taper. Freitag 45 min locker mit 3 Steigerungen, das Rennen ersetzt die Samstags-Brick-Einheit. "
+     "Danach Sonntag langer Lauf nur 60 min."),
+    ("2027-06-13", "Teichland Multisport", "Kurzdistanz", "RACE_B",
+     "Schwimmen ca. 1,4 km / Rad ca. 42 km / Lauf ca. 10 km (Vorjahr: 28 + 63 + 43 min, gesamt 2:19 h)", 145,
+     "B-Rennen und Generalprobe für die DM. Mini-Taper Do-Sa (-40 %), Intensität kurz halten. Pacing, "
+     "Wechsel und Verpflegung wie bei der DM üben. Danach Mo/Di locker, ab Mittwoch wieder Belastung."),
+    ("2027-08-22", "Erfurt Triathlon", "Sprint", "RACE_C",
+     "Schwimmen ca. 0,65 km / Rad ca. 19 km / Lauf ca. 5 km (Vorjahr: 14 + 26 + 20 min)", 90,
+     "Zwei Wochen nach der DM, ohne Druck. Taper nur 2 Tage (-30 %), danach 1-2 Tage locker."),
+    ("2027-09-04", "Cottbus Multisport", "Supersprint", "RACE_C",
+     "Schwimmen ca. 0,2 km / Rad ca. 10 km / Lauf ca. 2,2 km (Vorjahr: 7 + 15 + 10 min)", 40,
+     "KOLLIDIERT mit Hölle von Q (So 05.09., 90 km Rad): nur starten, wenn Hölle von Q entfällt."),
+    ("2027-09-05", "Lichterfeld-Schacksdorf Multisport", "Sprint", "RACE_C",
+     "Schwimmen ca. 0,7 km / Rad ca. 20 km / Lauf ca. 5,5 km (Vorjahr: 14 + 32 + 24 min)", 80,
+     "KOLLIDIERT mit Hölle von Q am selben Tag: Entweder-oder."),
+]
+
+
+def rennen_events() -> list[dict]:
+    """Rennen des Vorjahres als Platzhalter-Termine (RACE_B/RACE_C) im Kalender."""
+    out = []
+    for tag, name, klasse, kat, dist, tss, hinweis in RENNEN:
+        d = date.fromisoformat(tag)
+        out.append({"category": kat, "type": "Other", "name": f"{name} ({klasse})",
+                    "start_date_local": f"{tag}T00:00:00",
+                    "description": (f"{klasse}: {dist}. Geschätzte Rennlast ca. {tss} TSS.\n{hinweis}\n"
+                                    "Termin = Vorjahr + 52 Wochen (geschätzt), bitte mit Ausschreibung/Ligakalender "
+                                    "abgleichen."),
+                    "external_id": f"saison-rennen-{tag}-{name[:5].lower().strip()}"})
+    return out

@@ -11,8 +11,8 @@ Wochenziele in TSS, Stunden grob geschätzt (Rad 38, Lauf 52, Schwimmen 48, Kraf
 | 2 Grundlage II / Aufbau | 25.01.-21.03.2027 | Schwelle, Tempo, aerobe Leistung | ca. 80 / 15 / 5 (pyramidal) | 515-600 | 13-15 | 67 |
 | 3 Aufbau intensiv | 22.03.-16.05.2027 | VO2max, Koppeltraining, lange Ausdauer | ca. 75 / 15 / 10 | 605-700 | 15-17 | 81 |
 | 4 Wettkampfvorbereitung | 17.05.-25.07.2027 | Renntempo, Spezifik, Spitzenvolumen | ca. 75 / 15 / 10 mit Renntempo | 635-760 | 15-18 | 92 |
-| Taper und Rennen | 26.07.-08.08.2027 | Frische, Schärfe, Renntempo-Öffner | locker + wenige scharfe Reize | 560-600 | 13-14 | 86 |
-| Nach dem Rennen | 09.08.-15.08.2027 | Regeneration | locker | 160 | 4-4 | - |
+| Taper und Rennen | 26.07.-08.08.2027 | Frische, Schärfe, Renntempo-Öffner | locker + wenige scharfe Reize | 520-600 | 12-14 | 88 |
+| Spätsaison | 09.08.-05.09.2027 | Regeneration, dann Sprint und Hölle von Q | locker, wenige scharfe Reize | 160-540 | 4-13 | 74 |
 
 ## Schlüsseleinheiten pro Phase
 
@@ -24,7 +24,7 @@ Wochenziele in TSS, Stunden grob geschätzt (Rad 38, Lauf 52, Schwimmen 48, Kraf
 | 3 Aufbau intensiv | VO2max 5x4-5 min, 30/30, Sa 4-5 h mit 2x30 Tempo, Koppel 1x/Woche | 6x1 km (3-5-km-Tempo), Koppellauf 15-20 min | 8x200 bei CSS; Kraft 1x Erhalt |
 | 4 Wettkampfvorbereitung | 3x12 min bei 100-105 % FTP, Brick 40 min bei 85-90 % FTP + 10-km-Lauf | Langer Lauf bis 100 min, Brick-Lauf 10 km Renntempo | Freiwasser mit Neopren, 1,5 km am Stück; Kraft 1x |
 | Taper und Rennen | 3-5 Reize à 3-5 min im Renntempo, Öffner | kurze Tempoläufe, Öffner | locker, Technik; letzte schwere Kraft 14 Tage vorher |
-| Nach dem Rennen | locker | locker | frei |
+| Spätsaison | locker, 1-2 Renntempo-Blöcke | locker, Brick vor Hölle von Q | locker, Technik |
 
 ## Woche für Woche
 
@@ -56,10 +56,10 @@ Wochenziele in TSS, Stunden grob geschätzt (Rad 38, Lauf 52, Schwimmen 48, Kraf
 | 26.04. | 3 | VO2max | 680 | 16 | 325 | 175 | 150 | 30 | 80 | -13 |
 | 03.05. | 3 | VO2max | 700 | 17 | 320 | 180 | 170 | 30 | 83 | -14 |
 | 10.05. | 3 | Erholung | 460 | 11 | 209 | 117 | 119 | 15 | 81 | +3 |
-| 17.05. | 4 | Renntempo + B-Rennen empfohlen (Sa 22.05.) | 710 | 17 | 326 | 184 | 170 | 30 | 84 | -9 |
-| 24.05. | 4 | Renntempo | 730 | 17 | 339 | 191 | 170 | 30 | 87 | -13 |
+| 17.05. | 4 | Renntempo | 710 | 17 | 326 | 184 | 170 | 30 | 84 | -9 |
+| 24.05. | 4 | Renntempo + Blankenburg Supersprint Sa 29.05. | 730 | 17 | 339 | 191 | 170 | 30 | 87 | -13 |
 | 31.05. | 4 | Renntempo | 745 | 18 | 349 | 196 | 170 | 30 | 90 | -14 |
-| 07.06. | 4 | Erholung + Formcheck Sa 12.06. | 480 | 11 | 221 | 125 | 119 | 15 | 87 | +5 |
+| 07.06. | 4 | Erholung + Teichland Kurzdistanz So 13.06. | 480 | 11 | 221 | 125 | 119 | 15 | 87 | +5 |
 | 14.06. | 4 | Renntempo | 735 | 18 | 342 | 193 | 170 | 30 | 89 | -7 |
 | 21.06. | 4 | Renntempo | 750 | 18 | 352 | 198 | 170 | 30 | 92 | -11 |
 | 28.06. | 4 | Renntempo | 760 | 18 | 358 | 202 | 170 | 30 | 95 | -12 |
@@ -67,7 +67,21 @@ Wochenziele in TSS, Stunden grob geschätzt (Rad 38, Lauf 52, Schwimmen 48, Kraf
 | 12.07. | 4 | Renntempo | 695 | 17 | 317 | 178 | 170 | 30 | 92 | -1 |
 | 19.07. | 4 | Renntempo | 635 | 15 | 278 | 157 | 170 | 30 | 92 | +0 |
 | 26.07. | Taper | Taper (-20 %) | 600 | 14 | 302 | 148 | 130 | 20 | 91 | +3 |
-| 02.08. | Taper | Rennwoche (Rennen So) | 560 | 13 | 322 | 158 | 70 | 10 | 86 | +20 |
-| 09.08. | Nach | Regeneration | 160 | 4 | 87 | 43 | 30 | 0 | - | - |
+| 02.08. | Taper | Rennwoche DM (Rennen So 08.08., Werte nach dem Rennen) | 520 | 12 | 295 | 145 | 70 | 10 | 88 | +8 |
+| 09.08. | Spätsaison | Regeneration | 160 | 4 | 87 | 43 | 30 | 0 | 78 | +34 |
+| 16.08. | Spätsaison | Spätsaison + Erfurt Sprint So 22.08. | 400 | 10 | 188 | 92 | 100 | 20 | 75 | +23 |
+| 23.08. | Spätsaison | Spätsaison | 480 | 12 | 221 | 109 | 120 | 30 | 74 | +11 |
+| 30.08. | Spätsaison | Spätsaison + Hölle von Q So 05.09. | 540 | 13 | 295 | 145 | 90 | 10 | 74 | +3 |
+
+## Rennkalender 2027 (Regionalliga Ost laut Vorjahr, Termine geschätzt)
+
+| Datum | Rennen | Distanz | Rolle | Rennlast | Vorbereitung |
+|---|---|---|---|---|---|
+| 29.05. | Blankenburg (Harz) | Supersprint | C | ~40 TSS | Kein Taper. Freitag 45 min locker mit 3 Steigerungen, das Rennen ersetzt die Samstags-Brick-Einheit. Danach Sonntag langer Lauf nur 60 min. |
+| 13.06. | Teichland | Kurzdistanz | B | ~145 TSS | B-Rennen und Generalprobe für die DM. Mini-Taper Do-Sa (-40 %), Intensität kurz halten. Pacing, Wechsel und Verpflegung wie bei der DM üben. Danach Mo/Di locker, ab Mittwoch wieder Belastung. |
+| **08.08.** | **DM Kurzdistanz** | Kurzdistanz | **A** | ~170 TSS | Taper 2 Wochen, siehe Notiz |
+| 22.08. | Erfurt | Sprint | C | ~90 TSS | Zwei Wochen nach der DM, ohne Druck. Taper nur 2 Tage (-30 %), danach 1-2 Tage locker. |
+| 04.09. | Cottbus | Supersprint | C | ~40 TSS | KOLLIDIERT mit Hölle von Q (So 05.09., 90 km Rad): nur starten, wenn Hölle von Q entfällt. |
+| 05.09. | Lichterfeld-Schacksdorf / Hölle von Q | Sprint / 2 km-90 km-10 km | C / B | ~80 / ~330 TSS | Entweder-oder, Hölle von Q hat Vorrang |
 
 Renntag 08.08.2027 (Prognose am Morgen): CTL 86, ATL 67, Form +20.
