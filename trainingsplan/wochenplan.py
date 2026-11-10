@@ -97,8 +97,8 @@ NAECHSTE_WOCHE = [
      "Beine ausdrehen nach dem Montag, Trittfrequenz 85-95.\n- 10m ramp 45-55%\n- 70m 57%\n- 10m 50%", 90),
     ("2026-11-24", "Swim", "Vereinstraining", "Wie geplant im Verein.", 70),
     ("2026-11-26", "Ride", "Rad Schlüssel: Sweet Spot",
-     "Erste Intensität nach den Tests, Prozente beziehen sich auf die neue FTP.\nWarmup\n- 20m ramp 50-75%\n\n"
-     "Sweet Spot 2x\n- 20m 88%\n- 5m 55%\n\nZ2 locker\n- 25m 62%\n\nCooldown\n- 10m 50%", 100),
+     "Erste Intensität nach den Tests, Prozente beziehen sich auf die neue FTP.\nWarmup\n- 15m ramp 50-75%\n\n"
+     "Sweet Spot 2x\n- 15m 88%\n- 5m 55%\n\nCooldown\n- 10m 50%", 65),
     ("2026-11-26", "Swim", "Vereinstraining", "Wie geplant im Verein.", 70),
     ("2026-11-28", "Ride", "Rad in den Bergen",
      "Im Harz, Anstiege im eigenen Tempo, nicht über 75 % FTP, Essen und Trinken üben. Erste Bergfahrt "

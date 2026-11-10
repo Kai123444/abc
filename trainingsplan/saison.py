@@ -63,8 +63,8 @@ _TAPER_SCHWIMMEN = {"2027-07-26": 130, "2027-08-02": 70, "2027-08-09": 30,  # Re
                     "2027-08-16": 100, "2027-08-23": 120, "2027-08-30": 90}
 _TAPER_KRAFT = {"2027-07-26": 20, "2027-08-02": 10, "2027-08-09": 0, "2027-08-16": 20, "2027-08-23": 30, "2027-08-30": 10}
 # Lauf-Anteil vom Rest (Rad + Lauf): Laufen ist der Engpass und wächst langsam
-_LAUF_ANTEIL = [("2026-11-16", 0.26), ("2027-02-01", 0.28), ("2027-03-01", 0.31), ("2027-04-01", 0.32),
-                ("2027-05-01", 0.34), ("2027-05-17", 0.36)]
+_LAUF_ANTEIL = [("2026-11-16", 0.26), ("2027-02-01", 0.27), ("2027-03-01", 0.29), ("2027-04-01", 0.31),
+                ("2027-05-01", 0.33), ("2027-05-17", 0.35)]
 # geschätzte TSS pro Stunde (konservativ) für die Stundenschätzung
 TSS_PRO_STUNDE = {"Ride": 34, "Run": 48, "Swim": 35, "Other": 14}  # aus deinen Aktivitäten seit August gemessen
 # Rad: TSS pro Stunde steigt mit dem Intensitätsanteil (Grundlage Z2 ca. 32, später Schwelle/VO2max/Renntempo)
