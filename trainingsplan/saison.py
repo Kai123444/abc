@@ -12,7 +12,7 @@ Grundlagen (aus intervals.icu, Strava-Import ab 2020 und Angaben des Athleten):
 * Engpässe: Laufen (bis 2026 kaum Läufe) und Schwimmen -> Lauf-Load steigt nur ~10 % pro Woche,
   Schwimmen ist durch das Vereinstraining (Di/Do je 70 min) fest vorgegeben und wächst in Stufen.
 * Hauptwettkampf: DM Kurzdistanz, 08.08.2027 (1,5 km / 40 km / 10 km, geschätzt ca. 2:30 h, ca. 210 TSS).
-  Zweiwöchiger Taper, Form am Renntag +15 bis +20 bei CTL ~84.
+  Zweiwöchiger Taper, Form am Renntag +15 bis +20 bei CTL ~86.
 """
 
 from __future__ import annotations
@@ -38,14 +38,14 @@ WOCHEN: list[tuple[str, int, bool]] = [
     ("2027-04-12", 430, True),
     ("2027-04-19", 655, False), ("2027-04-26", 680, False), ("2027-05-03", 700, False),
     ("2027-05-10", 460, True),
-    # Phase 4 Wettkampfvorbereitung (zwei Spitzenblöcke, 17-18 h)
-    ("2027-05-17", 700, False), ("2027-05-24", 715, False), ("2027-05-31", 725, False),
-    ("2027-06-07", 470, True),
-    ("2027-06-14", 715, False), ("2027-06-21", 725, False), ("2027-06-28", 730, False),
-    ("2027-07-05", 480, True),
-    ("2027-07-12", 680, False), ("2027-07-19", 620, False),
-    # Taper: Woche -2 ca. -20 %, Rennwoche 550 = ca. 340 Vorbereitung + ca. 210 Rennen, danach locker
-    ("2027-07-26", 580, True), ("2027-08-02", 550, True), ("2027-08-09", 160, True),
+    # Phase 4 Wettkampfvorbereitung (zwei Spitzenblöcke, 18-19 h, Spitzenwochen bis ~21 h möglich)
+    ("2027-05-17", 710, False), ("2027-05-24", 730, False), ("2027-05-31", 745, False),
+    ("2027-06-07", 480, True),
+    ("2027-06-14", 735, False), ("2027-06-21", 750, False), ("2027-06-28", 760, False),
+    ("2027-07-05", 490, True),
+    ("2027-07-12", 695, False), ("2027-07-19", 635, False),
+    # Taper: Woche -2 ca. -20 %, Rennwoche 560 = ca. 345 Vorbereitung + ca. 210 Rennen, danach locker
+    ("2027-07-26", 600, True), ("2027-08-02", 560, True), ("2027-08-09", 160, True),
 ]
 
 RENNTAG = "2027-08-08"
@@ -147,18 +147,19 @@ PHASEN: list[tuple[str, str, str]] = [
     ("2027-05-17", "Phase 4: Wettkampfvorbereitung (17.05.-25.07.)",
      "Kurzdistanz-spezifisch (1,5 km / 40 km / 10 km, ca. 2:30 h): Renntempo-Blöcke Rad 3x12 min "
      "bei 100-105 % FTP, Brick Rad 40 min bei 85-90 % FTP + Lauf 10 km im Renntempo (alle 2 Wochen), "
-     "Freiwasser mit Neopren ab Mai, 1,5 km am Stück, lange Radfahrt bis 4 h, langer Lauf bis 100 min. "
-     "Zwei Spitzenblöcke zu 3 Wochen (700-730 TSS, ca. 17-18 h; bei grüner Ampel einzelne Wochen bis 20 h), "
-     "Erholungswochen am 07.06. und 05.07.; Wochen 12. und 19.07. leicht abfallend.\n"
-     "Erwartung: CTL 83 -> ca. 93 Ende Juni (dein bisheriges Maximum war 74 im Jahr 2021), Form -10 bis "
+     "Freiwasser mit Neopren ab Mai, 1,5 km am Stück, lange Radfahrt bis 4-5 h, langer Lauf bis 100 min. "
+     "Zwei Spitzenblöcke zu 3 Wochen (710-760 TSS, ca. 18-19 h). Spitzenwochen dürfen 20-21 h "
+     "erreichen, wenn der Mehrumfang locker ist (Z1-Z2, zusätzliches Rad/Schwimmen) und die Ampel grün "
+     "bleibt. Erholungswochen am 07.06. und 05.07.; die Wochen 12. und 19.07. fallen leicht ab.\n"
+     "Erwartung: CTL 83 -> ca. 95 Ende Juni (dein bisheriges Maximum war 74 im Jahr 2021), Form -10 bis "
      "-14 in Blöcken. Die Zahlen hängen an einer korrekten FTP-Einstellung."),
     ("2027-07-26", "Taper und Höchstform (26.07.-08.08.)",
-     "Woche -2 (26.07.): Volumen ca. -20 % (580), Intensität unverändert. Rennwoche: ca. 340 TSS "
-     "Vorbereitung plus Rennen (ca. 200-220 TSS), Wochenziel 550 enthält das Rennen. Mo/Di "
+     "Woche -2 (26.07.): Volumen ca. -20 % (600), Intensität unverändert. Rennwoche: ca. 345 TSS "
+     "Vorbereitung plus Rennen (ca. 200-220 TSS), Wochenziel 560 enthält das Rennen. Mo/Di "
      "je 1 Qualitätsreiz (3-5 Reize à 3-5 min im Renntempo), Mi/Do locker mit 3x30 s Öffnern, Fr "
      "frei, Sa 20 min Öffnungsrunde. Letzte schwere Kraft 14 Tage vorher, nichts Neues "
      "ausprobieren, Schlaf 8-9 h, Kohlenhydrate ab 2 Tage vorher erhöhen.\n"
-     "Erwartung: CTL sinkt von ca. 93 auf ca. 84, ATL fällt auf ca. 66, Form am Renntag ca. +19 "
+     "Erwartung: CTL sinkt von ca. 95 auf ca. 86, ATL fällt auf ca. 67, Form am Renntag ca. +20 "
      "(Ziel +15 bis +20), HRV über Basis (90 oder mehr), Ruhepuls an oder unter Basis (46-47). "
      "Liegt in der Rennwoche die HRV unter ca. 78 oder der Ruhepuls über ca. 51: Intensität weglassen, "
      "nur locker aktivieren."),
@@ -236,3 +237,116 @@ def notiz_events(vorhandene_notizen: set[str]) -> list[dict]:
                        "end_date_local": f"{(d + timedelta(days=1)).isoformat()}T00:00:00",
                        "external_id": f"saison-note-{d.isoformat()}-{name[:7].lower().strip(':')}"})
     return events
+
+
+# ---------------------------------------------------------------------------------------------
+# Übersicht: welche Belastungsart wann
+# ---------------------------------------------------------------------------------------------
+RENNWOCHE_VORBEREITUNG = [80, 100, 50, 70, 0, 40]  # Mo-Sa vor dem Rennen (ohne Rennen)
+
+# (von, bis, Phase, Belastungsart, Intensitätsverteilung, Rad, Lauf, Schwimmen/Kraft)
+PHASEN_UEBERSICHT = [
+    ("2026-11-16", "2026-11-29", "0 Wiedereinstieg und Tests", "Reaktivierung, Leistungsdiagnostik",
+     "locker, Tests Sa 14.11./Di 17.11.", "Stufentest, Z2", "Stufentest, locker", "Verein, Kraft-Technik"),
+    ("2026-11-30", "2027-01-24", "1 Grundlage I", "Aerobes Volumen, Kraftausdauer, Technik",
+     "ca. 85 % Z1-Z2 / 15 % darüber", "Z2 lang (Sa 3-4 h), Sweet Spot 2x20, Kraftausdauer 4x8 min",
+     "4 Läufe, langer Lauf 60-75 min, Steigerungen, Lauf-ABC", "Verein + Technik; Kraft 2x schwer"),
+    ("2027-01-25", "2027-03-21", "2 Grundlage II / Aufbau", "Schwelle, Tempo, aerobe Leistung",
+     "ca. 80 / 15 / 5 (pyramidal)", "Schwelle 3x15 / 2x20, Over-Unders, Z2 lang",
+     "Tempoläufe 2x15-20 min, Berge 8x60 s", "CSS-Sätze 10x100; Kraft 2x, später Erhalt"),
+    ("2027-03-22", "2027-05-16", "3 Aufbau intensiv", "VO2max, Koppeltraining, lange Ausdauer",
+     "ca. 75 / 15 / 10", "VO2max 5x4-5 min, 30/30, Sa 4-5 h mit 2x30 Tempo, Koppel 1x/Woche",
+     "6x1 km (3-5-km-Tempo), Koppellauf 15-20 min", "8x200 bei CSS; Kraft 1x Erhalt"),
+    ("2027-05-17", "2027-07-25", "4 Wettkampfvorbereitung", "Renntempo, Spezifik, Spitzenvolumen",
+     "ca. 75 / 15 / 10 mit Renntempo", "3x12 min bei 100-105 % FTP, Brick 40 min bei 85-90 % FTP + 10-km-Lauf",
+     "Langer Lauf bis 100 min, Brick-Lauf 10 km Renntempo", "Freiwasser mit Neopren, 1,5 km am Stück; Kraft 1x"),
+    ("2027-07-26", "2027-08-08", "Taper und Rennen", "Frische, Schärfe, Renntempo-Öffner",
+     "locker + wenige scharfe Reize", "3-5 Reize à 3-5 min im Renntempo, Öffner", "kurze Tempoläufe, Öffner",
+     "locker, Technik; letzte schwere Kraft 14 Tage vorher"),
+    ("2027-08-09", "2027-08-15", "Nach dem Rennen", "Regeneration", "locker", "locker", "locker", "frei"),
+]
+
+_TESTWOCHEN = {"2027-01-18": "Retest Sa 23.01.", "2027-03-15": "Retest Sa 20.03.",
+               "2027-06-07": "Formcheck Sa 12.06.", "2027-07-05": "Generalprobe Sa 10.07.",
+               "2027-05-17": "B-Rennen empfohlen (Sa 22.05.)"}
+
+
+def phase_fuer(tag: str) -> tuple:
+    for ph in PHASEN_UEBERSICHT:
+        if ph[0] <= tag <= ph[1]:
+            return ph
+    return PHASEN_UEBERSICHT[-1]
+
+
+def simulation() -> dict[str, tuple[float, float]]:
+    """CTL/ATL am Ende jeder Woche (Startwerte 16.11.: CTL 28, ATL 43; Last gleichmäßig verteilt)."""
+    from math import exp
+    kc, ka = 1 - exp(-1 / 42), 1 - exp(-1 / 7)
+    ctl, atl = 28.0, 43.0
+    out = {}
+    for tag, tss, _ in WOCHEN:
+        if tag == "2027-08-02":
+            for d in RENNWOCHE_VORBEREITUNG:
+                ctl += (d - ctl) * kc
+                atl += (d - atl) * ka
+            out["renntag"] = (ctl, atl)
+            out[tag] = (ctl, atl)
+            continue
+        if tag == "2027-08-09":
+            continue
+        for _ in range(7):
+            ctl += (tss / 7 - ctl) * kc
+            atl += (tss / 7 - atl) * ka
+        out[tag] = (ctl, atl)
+    return out
+
+
+def uebersicht_markdown() -> str:
+    sim = simulation()
+    z = ["# Saisonübersicht bis zur DM Kurzdistanz (08.08.2027)", "",
+         "Wochenziele in TSS, Stunden grob geschätzt (Rad 38, Lauf 52, Schwimmen 48, Kraft 22 TSS/h). "
+         "CTL/Form am Wochenende laut Simulation; sie stimmen nur bei korrekter FTP-Einstellung.", "",
+         "## Phasen im Überblick", "",
+         "| Phase | Zeitraum | Belastungsart | Intensitätsverteilung | Load/Woche (ohne Erholung) | Stunden | CTL am Ende |",
+         "|---|---|---|---|---|---|---|"]
+    for von, bis, name, art, vert, *_ in PHASEN_UEBERSICHT:
+        wk = [(t, l, r) for t, l, r in WOCHEN if von <= t <= bis]
+        if not wk:
+            continue
+        mit_sim = [t for t, _, _ in wk if t in sim]
+        ctl_ende = f"{sim[mit_sim[-1]][0]:.0f}" if mit_sim else "-"
+        voll = [(t, l, r) for t, l, r in wk if not r] or wk  # Belastungswochen, sonst alle
+        lo, hi = min(l for _, l, _ in voll), max(l for _, l, _ in voll)
+        load = f"{lo}-{hi}" if lo != hi else f"{lo}"
+        std = [stunden(l, t, r) for t, l, r in voll]
+        z.append(f"| {name} | {date.fromisoformat(von):%d.%m.}-{date.fromisoformat(bis):%d.%m.%Y} | {art} | {vert} | "
+                 f"{load} | {min(std):.0f}-{max(std):.0f} | {ctl_ende} |")
+    z += ["", "## Schlüsseleinheiten pro Phase", "",
+          "| Phase | Rad | Lauf | Schwimmen / Kraft |", "|---|---|---|---|"]
+    for _, _, name, _, _, rad, lauf, swim in PHASEN_UEBERSICHT:
+        z.append(f"| {name} | {rad} | {lauf} | {swim} |")
+    z += ["", "## Woche für Woche", "",
+          "| Woche ab | Phase | Art | TSS | Std. | Rad | Lauf | Schw. | Kraft | CTL | Form |",
+          "|---|---|---|---|---|---|---|---|---|---|---|"]
+    for tag, tss, rec in WOCHEN:
+        ph = phase_fuer(tag)
+        v = verteilung(tss, tag, rec)
+        art = "Erholung" if rec and tag not in TAPER_WOCHEN else ph[3].split(",")[0]
+        if tag == "2027-07-26":
+            art = "Taper (-20 %)"
+        elif tag == "2027-08-02":
+            art = "Rennwoche (Rennen So)"
+        elif tag == "2027-08-09":
+            art = "Regeneration"
+        if tag in _TESTWOCHEN:
+            art += f" + {_TESTWOCHEN[tag]}"
+        if tag in sim:
+            c, a = sim[tag]
+            cf = f"{c:.0f} | {c - a:+.0f}"
+        else:
+            cf = "- | -"
+        z.append(f"| {date.fromisoformat(tag):%d.%m.} | {ph[2].split(' ', 1)[0]} | {art} | {tss} | "
+                 f"{stunden(tss, tag, rec):.0f} | {v['Ride']} | {v['Run']} | {v['Swim']} | {v['Other']} | {cf} |")
+    c, a = sim["renntag"]
+    z += ["", f"Renntag 08.08.2027 (Prognose am Morgen): CTL {c:.0f}, ATL {a:.0f}, Form {c - a:+.0f}.", ""]
+    return "\n".join(z)

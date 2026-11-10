@@ -152,6 +152,8 @@ def main(argv: list[str] | None = None) -> int:
                    help="Vergleichszeitraum ab Datum (z.B. 2026-08-01): Normalwochen statt 4 Wochen")
     p.add_argument("--alten-plan-loeschen", action="store_true",
                    help="saison: Einträge einer angewendeten Plan-Vorlage vorher löschen")
+    p.add_argument("--uebersicht", action="store_true",
+                   help="saison: Übersicht nach plaene/saisonuebersicht.md schreiben (ohne Kalenderzugriff)")
     p.add_argument("--rad", type=date.fromisoformat, help="stufentest: Datum Rad-Stufentest")
     p.add_argument("--lauf", type=date.fromisoformat, help="stufentest: Datum Lauf-Stufentest")
     p.add_argument("--plan", default="plaene/trainingsplan.json", help="Plan als .json oder .csv")
@@ -162,6 +164,14 @@ def main(argv: list[str] | None = None) -> int:
     p.add_argument("--bericht", default="berichte", help="Ordner für Markdown-Berichte")
     a = p.parse_args(argv)
 
+    if a.befehl == "saison" and a.uebersicht:
+        from . import saison
+        text = saison.uebersicht_markdown()
+        pfad = Path("plaene/saisonuebersicht.md")
+        pfad.parent.mkdir(exist_ok=True)
+        pfad.write_text(text, encoding="utf-8")
+        print(text)
+        return 0
     try:
         client = IntervalsClient()
         if a.befehl == "stufentest":
