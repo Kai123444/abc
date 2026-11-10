@@ -125,14 +125,14 @@ class TestAnpassen(unittest.TestCase):
     def test_stufentests(self):
         from trainingsplan.stufentest import lauf_stufentest, maximalwert, rad_stufentest
         r = rad_stufentest(HEUTE)
-        self.assertIn("- 3m 300w", r.beschreibung)
+        self.assertIn("- 4m 300w", r.beschreibung)
         self.assertIn("- Ausfahren 10m 90w", r.beschreibung)
-        self.assertEqual(r.dauer_min, 62)
-        self.assertIn("- 42m ramp 100-380w", rad_stufentest(HEUTE, modus="rampe").beschreibung)
+        self.assertEqual(r.dauer_min, 68)
+        self.assertIn("- 48m ramp 140-380w", rad_stufentest(HEUTE, modus="rampe").beschreibung)
         self.assertTrue(r.fix)
         l = lauf_stufentest(HEUTE)
         self.assertIn("- 3m 4:00/km Pace", l.beschreibung)
-        self.assertEqual(maximalwert(300, 90, 20), 310)
+        self.assertEqual(maximalwert(300, 120, 20, 4), 310)
 
     def test_event_format(self):
         ev = self.plan[0].to_event()

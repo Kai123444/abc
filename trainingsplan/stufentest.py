@@ -1,6 +1,6 @@
 """Stufentest-Vorlagen (Rad und Lauf) als intervals.icu-Workouts.
 
-Rad:  Start 100 W, alle 3 min +20 W (Stufen wechseln automatisch). Zum vorzeitigen Ende LAP so
+Rad:  Start 140 W, alle 4 min +20 W (12 Stufen bis 360 W) (Stufen wechseln automatisch). Zum vorzeitigen Ende LAP so
       oft drücken, bis "Ausfahren" erscheint. Alternativ modus="rampe": ein einziger Schritt,
       ein Lap-Druck startet das Ausfahren (weniger gut auswertbar).
 Lauf: Start 9 km/h, alle 3 min +1 km/h (Stufen wechseln automatisch). Zum vorzeitigen Ende
@@ -27,8 +27,9 @@ def _pace(kmh: float) -> str:
     return f"{int(sek // 60)}:{int(round(sek % 60)):02d}/km"
 
 
-def rad_stufentest(datum: date, start_w: int = 100, schritt_w: int = 20, stufen: int = 14,
-                   name: str = "Rad-Stufentest", modus: str = "stufen") -> Einheit:
+def rad_stufentest(datum: date, start_w: int = 140, schritt_w: int = 20, stufen: int = 12,
+                   stufe_min: int = 4, name: str = "Rad-Stufentest",
+                   modus: str = "stufen") -> Einheit:
     """modus="rampe": ein einziger Rampenschritt (+schritt_w alle 3 min, gleiche Steigung
     wie der Stufentest). Auf dem Wahoo ELEMNT springt die Lap-Taste in einem Workout zum
     nächsten Schritt -> Lap drücken beendet den Test und startet sofort das Ausfahren.
@@ -36,26 +37,26 @@ def rad_stufentest(datum: date, start_w: int = 100, schritt_w: int = 20, stufen:
     if modus == "rampe":
         ende_w = start_w + schritt_w * stufen
         zeilen = ["Warmup", f"- 10m ramp 60-{start_w}w", "",
-                  f"Test: Rampe {start_w} bis {ende_w} W, entspricht +{schritt_w} W alle {STUFE_MIN} min. "
+                  f"Test: Rampe {start_w} bis {ende_w} W, entspricht +{schritt_w} W alle {stufe_min} min. "
                   "Fahren bis zur Erschöpfung, dann LAP-Taste drücken: das Ausfahren startet sofort",
-                  f"- {STUFE_MIN * stufen}m ramp {start_w}-{ende_w}w", "",
+                  f"- {stufe_min * stufen}m ramp {start_w}-{ende_w}w", "",
                   "Ausfahren", "- 10m 90w", "",
                   "Hinweise: ERG-Modus auf der Rolle, Trittfrequenz konstant 85-95, Brustgurt "
                   "tragen. Beim Drücken der LAP-Taste die Zeit im Test notieren (Minute:Sekunde), "
                   "daraus ergibt sich die Maximalleistung. Ausgeruht starten, Vortag locker."]
     else:
         zeilen = ["Warmup", f"- 10m {start_w}w", "",
-                  f"Stufen (je {STUFE_MIN} min +{schritt_w} W) - fahren bis zur Erschöpfung"]
-        zeilen += [f"- {STUFE_MIN}m {start_w + i * schritt_w}w" for i in range(stufen)]
+                  f"Stufen (je {stufe_min} min +{schritt_w} W) - fahren bis zur Erschöpfung"]
+        zeilen += [f"- {stufe_min}m {start_w + i * schritt_w}w" for i in range(stufen)]
         zeilen += ["", "Ausfahren", "- Ausfahren 10m 90w", "",
-                   "Ablauf: Die Stufen wechseln automatisch alle 3 min. Wenn du eine Stufe nicht "
+                   f"Ablauf: Die Stufen wechseln automatisch alle {stufe_min} min. Wenn du eine Stufe nicht "
                    "mehr schaffst, hör auf zu treten oder fahr locker und drücke die LAP-Taste so "
                    "oft, bis der Schritt Ausfahren erscheint (jeder Druck springt eine Stufe "
                    "weiter, die Rolle stellt dabei kurz die Zielwatt der übersprungenen Stufen "
                    "ein). Notiere, in welcher Stufe und nach wie viel Sekunden du ausgestiegen bist.",
                    "Hinweise: ERG-Modus auf der Rolle, Trittfrequenz konstant 85-95, Brustgurt "
                    "tragen. Ausgeruht starten, Vortag locker."]
-    dauer = 20 + STUFE_MIN * stufen
+    dauer = 20 + stufe_min * stufen
     return Einheit(datum=datum, name=name, typ="Ride", dauer_min=dauer, load=75,
                    intensitaet="test", beschreibung="\n".join(zeilen), fix=True)
 
@@ -77,5 +78,6 @@ def lauf_stufentest(datum: date, start_kmh: float = 9.0, schritt_kmh: float = 1.
                    intensitaet="test", beschreibung="\n".join(zeilen), fix=True)
 
 
-def maximalwert(letzte_volle_stufe: float, sek_in_abbruchstufe: int, schritt: float) -> float:
-    return letzte_volle_stufe + min(sek_in_abbruchstufe, STUFE_MIN * 60) / (STUFE_MIN * 60) * schritt
+def maximalwert(letzte_volle_stufe: float, sek_in_abbruchstufe: int, schritt: float,
+                stufe_min: int = STUFE_MIN) -> float:
+    return letzte_volle_stufe + min(sek_in_abbruchstufe, stufe_min * 60) / (stufe_min * 60) * schritt
