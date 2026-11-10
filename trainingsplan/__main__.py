@@ -90,10 +90,54 @@ def _stufentest(client: IntervalsClient, a) -> int:
     return 0
 
 
+def _saison(client: IntervalsClient, a) -> int:
+    """Saisonplan (Wochenziele + Phasen-Notizen) in den intervals.icu-Kalender schreiben.
+    Bestehende Wochenziele werden aktualisiert; die alten Werte landen vorher in
+    plaene/backup_wochenziele_vorher.json."""
+    import json
+    from . import saison
+    von, bis = date(2026, 11, 16), date(2027, 5, 17)
+    bestehend = client.events(von, bis, category="TARGET,NOTE")
+    ziele = {(e["start_date_local"][:10], e.get("type")): e for e in bestehend
+             if e.get("category") == "TARGET"}
+    notizen = {e["start_date_local"][:10] for e in bestehend if e.get("category") == "NOTE"}
+    neu, aendern, backup = [], [], []
+    for ev in saison.ziel_events():
+        alt = ziele.get((ev["start_date_local"][:10], ev["type"]))
+        if alt and not str(alt.get("external_id") or "").startswith("saison-"):
+            backup.append({"id": alt["id"], "datum": alt["start_date_local"][:10],
+                           "sport": alt["type"], "load_target": alt.get("load_target")})
+            aendern.append((alt["id"], ev["load_target"]))
+        elif alt:
+            aendern.append((alt["id"], ev["load_target"]))
+        else:
+            neu.append(ev)
+    notiz = saison.notiz_events(notizen)
+    print("Woche      Soll-TSS  bisher")
+    for tag, tss, rec in saison.WOCHEN:
+        alt = sum((ziele.get((tag, sp)) or {}).get("load_target") or 0 for sp in saison.SPLIT)
+        print(f"{tag}  {tss:6d}{' E' if rec else '  '}  {alt or '-'}")
+    print(f"\n{len(aendern)} Wochenziele werden geändert, {len(neu)} neu angelegt, "
+          f"{len(notiz)} Notizen angelegt.")
+    if not a.apply:
+        print("Vorschau – mit --apply in intervals.icu schreiben.")
+        return 0
+    if backup:
+        pfad = Path("plaene/backup_wochenziele_vorher.json")
+        pfad.parent.mkdir(exist_ok=True)
+        if not pfad.exists():
+            pfad.write_text(json.dumps(backup, indent=1, ensure_ascii=False), encoding="utf-8")
+    for eid, load in aendern:
+        client.update_event(eid, {"load_target": load})
+    client.upsert_events(neu + notiz)
+    print("✔ Saisonplan eingetragen.")
+    return 0
+
+
 def main(argv: list[str] | None = None) -> int:
     p = argparse.ArgumentParser(prog="trainingsplan", description=__doc__,
                                 formatter_class=argparse.RawDescriptionHelpFormatter)
-    p.add_argument("befehl", choices=["analyse", "sync", "anpassen", "stufentest"])
+    p.add_argument("befehl", choices=["analyse", "sync", "anpassen", "stufentest", "saison"])
     p.add_argument("--basis-ab", type=date.fromisoformat,
                    help="Vergleichszeitraum ab Datum (z.B. 2026-08-01): Normalwochen statt 4 Wochen")
     p.add_argument("--rad", type=date.fromisoformat, help="stufentest: Datum Rad-Stufentest")
@@ -110,6 +154,8 @@ def main(argv: list[str] | None = None) -> int:
         client = IntervalsClient()
         if a.befehl == "stufentest":
             return _stufentest(client, a)
+        if a.befehl == "saison":
+            return _saison(client, a)
         wellness, akt = _daten(client, a.heute, a.basis_ab)
     except IntervalsError as exc:
         print(f"Fehler: {exc}", file=sys.stderr)

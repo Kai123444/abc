@@ -1,9 +1,9 @@
 """Stufentest-Vorlagen (Rad und Lauf) als intervals.icu-Workouts.
 
-Rad:  Start 140 W, alle 4 min +20 W (12 Stufen bis 360 W) (Stufen wechseln automatisch). Zum vorzeitigen Ende LAP so
+Rad:  Start 140 W, alle 4 min +20 W (14 Stufen bis 400 W) (Stufen wechseln automatisch). Zum vorzeitigen Ende LAP so
       oft drücken, bis "Ausfahren" erscheint. Alternativ modus="rampe": ein einziger Schritt,
       ein Lap-Druck startet das Ausfahren (weniger gut auswertbar).
-Lauf: Start 9 km/h, alle 4 min +1 km/h (Stufen wechseln automatisch). Zum vorzeitigen Ende
+Lauf: Start 9 km/h, alle 4 min +1 km/h (11 Stufen bis 19 km/h) (Stufen wechseln automatisch). Zum vorzeitigen Ende
       LAP so oft drücken, bis "Auslaufen" erscheint (Garmin-Lap springt nur einen Schritt weiter).
 
 Auswertung (ohne Laktat):
@@ -27,7 +27,7 @@ def _pace(kmh: float) -> str:
     return f"{int(sek // 60)}:{int(round(sek % 60)):02d}/km"
 
 
-def rad_stufentest(datum: date, start_w: int = 140, schritt_w: int = 20, stufen: int = 12,
+def rad_stufentest(datum: date, start_w: int = 140, schritt_w: int = 20, stufen: int = 14,
                    stufe_min: int = 4, name: str = "Rad-Stufentest",
                    modus: str = "stufen") -> Einheit:
     """modus="rampe": ein einziger Rampenschritt (+schritt_w alle 3 min, gleiche Steigung
@@ -62,7 +62,7 @@ def rad_stufentest(datum: date, start_w: int = 140, schritt_w: int = 20, stufen:
 
 
 def lauf_stufentest(datum: date, start_kmh: float = 9.0, schritt_kmh: float = 1.0,
-                    stufen: int = 9, stufe_min: int = 4,
+                    stufen: int = 11, stufe_min: int = 4,
                     name: str = "Lauf-Stufentest") -> Einheit:
     zeilen = ["Warmup", f"- 10m {_pace(start_kmh - 1)} Pace", "",
               f"Stufen (je {stufe_min} min +{schritt_kmh:g} km/h) – laufen bis zur Erschöpfung"]

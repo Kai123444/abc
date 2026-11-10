@@ -127,13 +127,30 @@ class TestAnpassen(unittest.TestCase):
         r = rad_stufentest(HEUTE)
         self.assertIn("- 4m 300w", r.beschreibung)
         self.assertIn("- Ausfahren 10m 90w", r.beschreibung)
-        self.assertEqual(r.dauer_min, 68)
-        self.assertIn("- 48m ramp 140-380w", rad_stufentest(HEUTE, modus="rampe").beschreibung)
+        self.assertEqual(r.dauer_min, 76)
+        self.assertIn("- 56m ramp 140-420w", rad_stufentest(HEUTE, modus="rampe").beschreibung)
         self.assertTrue(r.fix)
         l = lauf_stufentest(HEUTE)
         self.assertIn("- 4m 4:00/km Pace", l.beschreibung)
-        self.assertEqual(l.dauer_min, 56)
+        self.assertEqual(l.dauer_min, 64)
         self.assertEqual(maximalwert(300, 120, 20, 4), 310)
+
+    def test_saisonplan(self):
+        from trainingsplan import saison
+        ziele = saison.ziel_events()
+        self.assertEqual(len(ziele), len(saison.WOCHEN) * 4)
+        for tag, tss, _ in saison.WOCHEN:
+            self.assertEqual(sum(saison.verteilung(tss).values()), tss)
+            saison.montag(tag)  # wirft bei Nicht-Montag
+        # Erholungswoche alle 4 Wochen, danach wieder mehr Last
+        werte = [(t, tss, rec) for t, tss, rec in saison.WOCHEN]
+        for i, (_, tss, rec) in enumerate(werte):
+            if rec and i >= 1:
+                self.assertLess(tss, werte[i - 1][1] * 0.8)
+        # keine Steigerung über 8 % von Woche zu Woche (außer nach Erholungswoche)
+        for (_, a, ra), (_, b, rb) in zip(werte, werte[1:]):
+            if not ra and not rb:
+                self.assertLessEqual(b / a, 1.08)
 
     def test_event_format(self):
         ev = self.plan[0].to_event()
