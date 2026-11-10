@@ -155,12 +155,19 @@ class TestAnpassen(unittest.TestCase):
         # Lauf-Load wächst gegenüber der letzten Belastungswoche höchstens ~13 % pro Woche
         letzte = None
         for tag, tss, rec in werte:
-            if rec:
+            if rec or tag < "2026-11-30":  # Testwoche zählt nicht als Ausgangspunkt
                 continue
             lauf = saison.verteilung(tss, tag, rec)["Run"]
             if letzte:
                 self.assertLessEqual(lauf / letzte, 1.13, tag)
             letzte = lauf
+
+    def test_saison_stunden(self):
+        from trainingsplan import saison
+        h = {tag: saison.stunden(tss, tag, rec) for tag, tss, rec in saison.WOCHEN}
+        self.assertLessEqual(max(h.values()), 20)       # nie über deiner Obergrenze
+        self.assertGreaterEqual(max(h.values()), 17)    # Spitzenblöcke nutzen die Zeit
+        self.assertLessEqual(h["2026-11-30"], 11)       # Wiedereinstieg bleibt moderat
 
     def test_event_format(self):
         ev = self.plan[0].to_event()

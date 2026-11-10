@@ -111,7 +111,8 @@ def _saison(client: IntervalsClient, a) -> int:
     bestehend = [e for e in alle if von <= date.fromisoformat(e["start_date_local"][:10]) <= bis]
     ziele = {(e["start_date_local"][:10], e.get("type")): e for e in bestehend
              if e.get("category") == "TARGET"}
-    notizen = {e["start_date_local"][:10] for e in bestehend if e.get("category") == "NOTE"}
+    notizen = {e["start_date_local"][:10] for e in bestehend if e.get("category") == "NOTE"
+               and not str(e.get("external_id") or "").startswith("saison-note-")}  # fremde Notizen
     neu, aendern = [], []
     for ev in saison.ziel_events():
         alt = ziele.get((ev["start_date_local"][:10], ev["type"]))

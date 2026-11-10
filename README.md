@@ -86,3 +86,11 @@ Faustregeln, kein ärztlicher Rat.
 ```bash
 python -m unittest discover -s tests -t .
 ```
+
+## Saisonplan bis zur DM Kurzdistanz (08.08.2027)
+
+`python -m trainingsplan saison [--apply] [--alten-plan-loeschen]` schreibt Wochenziele pro Sportart
+und Notizen (Phasen, Wochenstruktur, Kontrollregeln, Tests, Taper) in den intervals.icu-Kalender.
+Das Rennen muss dort schon stehen. Der Plan steckt in `trainingsplan/saison.py`:
+Belastungsaufbau 3:1, CTL-Anstieg höchstens ~4 pro Woche, Lauf-Load nur ~10 % pro Woche, Schwimmen und
+Kraft als feste Größen, 17-18 h in den Spitzenwochen (bis 20 h bei grüner Ampel), zweiwöchiger Taper.
