@@ -8,7 +8,7 @@ Grundlagen (aus intervals.icu, Strava-Import ab 2020 und Angaben des Athleten):
   bis 22 h, CTL-Maximum 74 (Juli 2021). 2023-2025 fast Pause, 2026 Wiedereinstieg als Triathlet
   (CTL bis 40, jetzt ca. 26).
 * Verfügbar: bis zu 20 h pro Woche. Das ist die Obergrenze für Spitzenblöcke, kein Ziel: geplant
-  wird nach Anpassungsfähigkeit (CTL-Anstieg höchstens ~4 pro Woche), nicht nach freier Zeit.
+  wird nach Anpassungsfähigkeit (CTL-Anstieg höchstens ~4,5 pro Woche), nicht nach freier Zeit.
 * Engpässe: Laufen (bis 2026 kaum Läufe) und Schwimmen -> Lauf-Load steigt nur ~10 % pro Woche,
   Schwimmen ist durch das Vereinstraining (Di/Do je 70 min) fest vorgegeben und wächst in Stufen.
 * Hauptwettkampf: DM Kurzdistanz, 08.08.2027 (1,5 km / 40 km / 10 km; eine Kurzdistanz im Juni 2026 dauerte 2:19 h bei ca. 145 TSS, für die DM
@@ -26,20 +26,20 @@ WOCHEN: list[tuple[str, int, bool]] = [
     # der Wiedereinstieg ist kurz: Belastung steigt ab 23.11. (erster Block 4 Wochen, dann Erholungswoche 21.12.)
     ("2026-11-09", 411, False), ("2026-11-16", 311, False),
     # Phase 1 Grundlage I
-    ("2026-11-23", 380, False), ("2026-11-30", 405, False), ("2026-12-07", 430, False), ("2026-12-14", 455, False),
-    ("2026-12-21", 300, True),
-    ("2026-12-28", 470, False), ("2027-01-04", 495, False), ("2027-01-11", 515, False),
-    ("2027-01-18", 340, True),
+    ("2026-11-23", 400, False), ("2026-11-30", 425, False), ("2026-12-07", 450, False), ("2026-12-14", 475, False),
+    ("2026-12-21", 330, True),
+    ("2026-12-28", 495, False), ("2027-01-04", 525, False), ("2027-01-11", 550, False),
+    ("2027-01-18", 370, True),
     # Phase 2 Grundlage II / Aufbau
-    ("2027-01-25", 525, False), ("2027-02-01", 545, False), ("2027-02-08", 560, False),
-    ("2027-02-15", 370, True),
-    ("2027-02-22", 560, False), ("2027-03-01", 580, False), ("2027-03-08", 600, False),
-    ("2027-03-15", 400, True),
+    ("2027-01-25", 560, False), ("2027-02-01", 580, False), ("2027-02-08", 600, False),
+    ("2027-02-15", 400, True),
+    ("2027-02-22", 610, False), ("2027-03-01", 625, False), ("2027-03-08", 640, False),
+    ("2027-03-15", 430, True),
     # Phase 3 Aufbau intensiv
-    ("2027-03-22", 605, False), ("2027-03-29", 630, False), ("2027-04-05", 655, False),
-    ("2027-04-12", 430, True),
-    ("2027-04-19", 655, False), ("2027-04-26", 680, False), ("2027-05-03", 700, False),
-    ("2027-05-10", 460, True),
+    ("2027-03-22", 640, False), ("2027-03-29", 660, False), ("2027-04-05", 680, False),
+    ("2027-04-12", 450, True),
+    ("2027-04-19", 680, False), ("2027-04-26", 700, False), ("2027-05-03", 715, False),
+    ("2027-05-10", 470, True),
     # Phase 4 Wettkampfvorbereitung (zwei Spitzenblöcke, 18-19 h, Spitzenwochen bis ~21 h möglich)
     ("2027-05-17", 710, False), ("2027-05-24", 730, False), ("2027-05-31", 745, False),
     ("2027-06-07", 480, True),
@@ -57,15 +57,18 @@ TAPER_WOCHEN = {"2027-07-26", "2027-08-02", "2027-08-09", "2027-08-16", "2027-08
 
 # Schwimmen und Kraft sind feste Größen (Vereinstraining, Kraftraum Mo-Do), der Rest geht an Rad/Lauf.
 # Stufen: (gilt ab Datum, Belastungswoche); Erholungswochen = 70 % davon.
-_SCHWIMMEN = [("2026-11-16", 110), ("2027-01-01", 130), ("2027-03-01", 150), ("2027-05-01", 170)]
-_KRAFT = [("2026-11-16", 35), ("2027-03-22", 25), ("2027-05-17", 20)]  # Kraftraum: 2x, ab Frühjahr Erhalt
+_SCHWIMMEN = [("2026-11-16", 85), ("2027-01-01", 100), ("2027-03-01", 115), ("2027-05-01", 125)]  # 2 x Verein = ca. 2,3 h; später dritte Einheit
+_KRAFT = [("2026-11-16", 28), ("2027-03-22", 22), ("2027-05-17", 18)]  # Kraftraum: 2x, ab Frühjahr Erhalt
 _TAPER_SCHWIMMEN = {"2027-07-26": 130, "2027-08-02": 70, "2027-08-09": 30,  # Rennwoche inkl. Renn-Schwimmen
                     "2027-08-16": 100, "2027-08-23": 120, "2027-08-30": 90}
 _TAPER_KRAFT = {"2027-07-26": 20, "2027-08-02": 10, "2027-08-09": 0, "2027-08-16": 20, "2027-08-23": 30, "2027-08-30": 10}
 # Lauf-Anteil vom Rest (Rad + Lauf): Laufen ist der Engpass und wächst langsam
-_LAUF_ANTEIL = [("2026-11-16", 0.33), ("2027-03-01", 0.35), ("2027-05-01", 0.36)]
+_LAUF_ANTEIL = [("2026-11-16", 0.26), ("2027-02-01", 0.28), ("2027-03-01", 0.31), ("2027-04-01", 0.32),
+                ("2027-05-01", 0.34), ("2027-05-17", 0.36)]
 # geschätzte TSS pro Stunde (konservativ) für die Stundenschätzung
-TSS_PRO_STUNDE = {"Ride": 38, "Run": 52, "Swim": 48, "Other": 22}
+TSS_PRO_STUNDE = {"Ride": 34, "Run": 48, "Swim": 35, "Other": 14}  # aus deinen Aktivitäten seit August gemessen
+# Rad: TSS pro Stunde steigt mit dem Intensitätsanteil (Grundlage Z2 ca. 32, später Schwelle/VO2max/Renntempo)
+_RAD_TSS_H = [("2026-11-16", 32), ("2027-01-25", 35), ("2027-03-22", 38), ("2027-05-17", 40)]
 
 ERHOLUNG_TEXT = ("Fokus auf leichtere Belastungen, reduziertes Volumen und Anpassung des Körpers an "
                  "Trainingsstress (Radfahren, Laufen, Schwimmen, Andere). Intensität behalten, "
@@ -143,7 +146,7 @@ SAUNA = (
 
 KONTROLLE = (
     "Regeln, die der Plan überwacht:\n"
-    "- CTL-Anstieg höchstens ca. 4 pro Woche, Belastungsverhältnis (7 Tage zu Normalwoche) zwischen 0,8 und 1,3.\n"
+    "- CTL-Anstieg höchstens ca. 4,5 pro Woche, Belastungsverhältnis (7 Tage zu Normalwoche) zwischen 0,8 und 1,3.\n"
     "- Lauf-Load wächst höchstens ca. 10-12 % pro Woche; bei Schmerzen im Schienbein/Achilles/Knie "
     "sofort Lauf ersetzen (Rad/Aquajogging). Beinkraft ersetzt keine Laufprogression: den Laufumfang trotzdem bei "
     "höchstens +10 % pro Woche halten und nie zwei lange Läufe in einer Woche. Bergab laufen ist hohe "
@@ -186,9 +189,10 @@ PHASEN: list[tuple[str, str, str]] = [
      "2x20 min bei 88-93 % FTP. Lauf: 4 Läufe, So 60-75 min im Hügelgelände (bergauf kräftig, bergab "
      "traben oder gehen), Steigerungsläufe 6x20 s, Lauf-ABC, Mi Intervalle auf der Bahn (6-10x400 m, Verein). Schwimmen: Vereinstraining plus Technik. "
      "Kraftraum: Mo Beine schwer + Oberkörper, Mi Oberkörper/Core vor dem Lauf (siehe Notiz Krafttraining). "
-     "Load 380 -> 515, ca. 9,5 -> 13 h, erster Block 4 Wochen bis 14.12., danach Erholungswoche.\n"
+     "Load 400 -> 550, ca. 13 -> 17 h, davon Rad 7 -> 10 h (dein Radumfang aus 2021/22 und deine Spitzenwoche vom "
+     "07.09. mit 10,5 h Rad). Erster Block 4 Wochen bis 14.12., danach Erholungswoche.\n"
      "Deine Radbasis aus 2020-2022 kommt schnell zurück, Engpässe sind Laufen und Schwimmen.\n"
-     "Erwartung: CTL 31 -> ca. 55 (+3,5 pro Woche), Form -13 bis -18 in Belastungswochen, "
+     "Erwartung: CTL 31 -> ca. 58 (+3,5 bis 4 pro Woche), Form -16 bis -19 in Belastungswochen, "
      "-4 bis 0 in Erholungswochen. In der 3. Belastungswoche sind HRV 5-10 % unter Basis und "
      "Ruhepuls +1-3 bpm normal."),
     ("2026-11-23", "Wochenstruktur und Kontrolle", WOCHENSTRUKTUR + "\n\n" + KONTROLLE),
@@ -200,16 +204,16 @@ PHASEN: list[tuple[str, str, str]] = [
      "Flachstück: Schwelle 3x15 oder 2x20 min bergauf bei 95-100 % FTP, Kraftausdauer 5x8 min bei "
      "50-60 U/min, wöchentlich 6-8x10 s Bergsprint, Over-Unders 3x(2x6 min bei 95/105 %) am Do. "
      "Lauf: Mi Bahnintervalle (10-12x400 m, 3x800 m, 4-5x1000 m an der Schwellenpace), So Bergläufe 8x60 s bergauf. Schwimmen: CSS-Sätze 10x100 m. Kraftraum Mo Maximalkraft, Mi Oberkörper vor dem Lauf, ab März "
-     "Erhalt. Load 515 -> 600, ca. 13 -> 15 h.\n"
-     "Erwartung: CTL 55 -> ca. 70, Form -14 bis -17. Ruhepuls im Wochenmittel +1-2 bpm in "
+     "Erhalt. Load 560 -> 640, ca. 16 -> 18 h (Rad 9-10 h).\n"
+     "Erwartung: CTL 58 -> ca. 75, Form -14 bis -17. Ruhepuls im Wochenmittel +1-2 bpm in "
      "Belastungswochen."),
     ("2027-03-22", "Phase 3: Aufbau intensiv (22.03.-09.05.)",
      "VO2max: Rad 5x4-5 min bei 110-120 % FTP (Pause gleich lang) oder 30/30; Lauf 6x1 km bei "
      "3-5-km-Tempo; Schwimmen 8x200 m bei CSS. Einmal pro Woche Koppeltraining (60-90 min Rad "
      "Sweet Spot + 15-20 min Lauf im Renntempo), Samstag 4-5 h in den Bergen mit VO2max-Intervallen "
      "bergauf (5x4-5 min) oder 2x30 min Tempo am Anstieg, Bergsprints bleiben. "
-     "Load 605 -> 700, ca. 15 -> 17 h.\n"
-     "Erwartung: CTL 69 -> ca. 83, Form -10 bis -14. Mehr Intensität heißt stärkere Reaktion: "
+     "Load 640 -> 715, ca. 17 -> 19 h (Rad 9-10 h).\n"
+     "Erwartung: CTL 75 -> ca. 87, Form -10 bis -14. Mehr Intensität heißt stärkere Reaktion: "
      "nach harten Tagen HRV 10-15 % niedriger ist normal und sollte nach 48 h zurück sein. "
      "Ab hier die Ampel (Gelb/Rot) strikt befolgen."),
     ("2027-05-17", "Phase 4: Wettkampfvorbereitung (17.05.-25.07.)",
@@ -224,7 +228,7 @@ PHASEN: list[tuple[str, str, str]] = [
      "Zwei Spitzenblöcke zu 3 Wochen (710-760 TSS, ca. 18-19 h). Spitzenwochen dürfen 20-21 h "
      "erreichen, wenn der Mehrumfang locker ist (Z1-Z2, zusätzliches Rad/Schwimmen) und die Ampel grün "
      "bleibt. Erholungswochen am 07.06. und 05.07.; die Wochen 12. und 19.07. fallen leicht ab.\n"
-     "Erwartung: CTL 83 -> ca. 95 Ende Juni (dein bisheriges Maximum war 74 im Jahr 2021), Form -10 bis "
+     "Erwartung: CTL 87 -> ca. 96 Ende Juni (dein bisheriges Maximum war 74 im Jahr 2021), Form -10 bis "
      "-14 in Blöcken. Die Zahlen hängen an einer korrekten FTP-Einstellung."),
     ("2027-07-26", "Taper und Höchstform (26.07.-08.08.)",
      "Woche -2 (26.07.): Volumen ca. -20 % (600), Intensität unverändert. Rennwoche: ca. 345 TSS "
@@ -290,7 +294,8 @@ def verteilung(gesamt: int, tag: str = "2026-11-16", erholung: bool = False) -> 
 
 def stunden(gesamt: int, tag: str, erholung: bool = False) -> float:
     """Grobe Stundenschätzung der Woche aus den Sportart-Zielen."""
-    return sum(load / TSS_PRO_STUNDE[sport] for sport, load in verteilung(gesamt, tag, erholung).items())
+    rate = dict(TSS_PRO_STUNDE, Ride=_stufe(_RAD_TSS_H, tag))
+    return sum(load / rate[sport] for sport, load in verteilung(gesamt, tag, erholung).items())
 
 
 def montag(datum: str) -> date:
@@ -404,7 +409,7 @@ def simulation() -> dict[str, tuple[float, float]]:
 def uebersicht_markdown() -> str:
     sim = simulation()
     z = ["# Saisonübersicht bis zur DM Kurzdistanz (08.08.2027)", "",
-         "Wochenziele in TSS, Stunden grob geschätzt (Rad 38, Lauf 52, Schwimmen 48, Kraft 22 TSS/h). "
+         "Wochenziele in TSS, Stunden grob geschätzt (Rad 34, Lauf 48, Schwimmen 35, Kraft 14 TSS/h, aus deinen Daten). "
          "CTL/Form am Wochenende laut Simulation; sie stimmen nur bei korrekter FTP-Einstellung.", "",
          "## Phasen im Überblick", "",
          "| Phase | Zeitraum | Belastungsart | Intensitätsverteilung | Load/Woche (ohne Erholung) | Stunden | CTL am Ende |",
