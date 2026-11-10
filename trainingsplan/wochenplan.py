@@ -56,7 +56,7 @@ DIESE_WOCHE = [
 # (Tag, Typ, Name, Beschreibung, Minuten)
 NAECHSTE_WOCHE = [
     ("2026-11-16", "WeightTraining", "Kraft: Oberkörper und Core",
-     "Beine schonen nach dem Rad-Stufentest. Klimmzüge/Rudern 3x8, Liegestütze 3x12, Schulterdrücken 3x10, "
+     "Nur Oberkörper und Core, kein Beintraining. Klimmzüge/Rudern 3x8, Liegestütze 3x12, Schulterdrücken 3x10, "
      "Plank 3x45 s, Seitstütz 2x30 s je Seite, Rückenstrecker 2x12.", 40),
     ("2026-11-17", "Ride", "Rad locker",
      "Regeneration nach dem Test, Beine ausdrehen.\n- 10m ramp 45-52%\n- 30m 55%\n- 5m 50%", 45),

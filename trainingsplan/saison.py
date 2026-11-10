@@ -54,10 +54,10 @@ WOCHEN: list[tuple[str, int, bool]] = [
 RENNTAG = "2027-08-08"
 TAPER_WOCHEN = {"2027-07-26", "2027-08-02", "2027-08-09", "2027-08-16", "2027-08-23", "2027-08-30"}  # Sonderwochen
 
-# Schwimmen und Kraft sind feste Größen (Vereinstraining, Krafttraining), der Rest geht an Rad/Lauf.
+# Schwimmen und Kraft sind feste Größen (Vereinstraining, Kraft Oberkörper/Core ohne Beine), der Rest geht an Rad/Lauf.
 # Stufen: (gilt ab Datum, Belastungswoche); Erholungswochen = 70 % davon.
 _SCHWIMMEN = [("2026-11-16", 110), ("2027-01-01", 130), ("2027-03-01", 150), ("2027-05-01", 170)]
-_KRAFT = [("2026-11-16", 40), ("2027-04-01", 30)]
+_KRAFT = [("2026-11-16", 25), ("2027-04-01", 20)]  # nur Oberkörper/Core, wenig Last
 _TAPER_SCHWIMMEN = {"2027-07-26": 130, "2027-08-02": 70, "2027-08-09": 30,  # Rennwoche inkl. Renn-Schwimmen
                     "2027-08-16": 100, "2027-08-23": 120, "2027-08-30": 90}
 _TAPER_KRAFT = {"2027-07-26": 20, "2027-08-02": 10, "2027-08-09": 0, "2027-08-16": 20, "2027-08-23": 30, "2027-08-30": 10}
@@ -72,11 +72,11 @@ ERHOLUNG_TEXT = ("Fokus auf leichtere Belastungen, reduziertes Volumen und Anpas
 
 WOCHENSTRUKTUR = (
     "Vorschlag für die Standardwoche (3 Schlüsseleinheiten, Rest locker; Schwimmen Di/Do = Vereinstraining):\n"
-    "Mo: Rad locker 60-90 min (Z1-Z2), Kraft\n"
+    "Mo: Rad locker 60-90 min (Z1-Z2), Kraft Oberkörper/Core (ohne Beine)\n"
     "Di: Schwimmen (Verein) + SCHLÜSSEL Lauf (Tempo/Intervalle)\n"
     "Mi: SCHLÜSSEL Rad (Schwelle/VO2max) 90-120 min + Lauf locker 30-40 min abends\n"
     "Do: Schwimmen (Verein) + Rad Z2/Kadenz 60-90 min\n"
-    "Fr: Sportunterricht/Lauf locker, Kraft (ab Mai nur noch 1x pro Woche)\n"
+    "Fr: Sportunterricht/Lauf locker, Kraft Oberkörper/Core (ab Mai nur noch 1x pro Woche)\n"
     "Sa: SCHLÜSSEL langes Rad 3-5 h (ab März mit Koppellauf 20-30 min)\n"
     "So: langer Lauf 75-100 min, optional Schwimmen frei 45 min\n"
     "Ein voller Ruhetag oder maximal locker pro Woche. Nie zwei harte Tage hintereinander in derselben "
@@ -86,7 +86,8 @@ KONTROLLE = (
     "Regeln, die der Plan überwacht:\n"
     "- CTL-Anstieg höchstens ca. 4 pro Woche, Belastungsverhältnis (7 Tage zu Normalwoche) zwischen 0,8 und 1,3.\n"
     "- Lauf-Load wächst höchstens ca. 10-12 % pro Woche; bei Schmerzen im Schienbein/Achilles/Knie "
-    "sofort Lauf ersetzen (Rad/Aquajogging).\n"
+    "sofort Lauf ersetzen (Rad/Aquajogging). Ohne Beinkrafttraining den Laufumfang besonders konsequent "
+    "bei höchstens +10 % pro Woche halten und nie zwei lange Läufe in einer Woche.\n"
     "- Ampel (HRV, Ruhepuls, Schlaf, Form): Gelb = Umfang -15 %, Rot = Intensität streichen. HRV 7-Tage-Mittel "
     "unter ca. 78 oder Ruhepuls über ca. 51 sind deine Gelb-Schwellen.\n"
     "- Schlaf mindestens 8 h in Belastungswochen, Verpflegung (60-90 g Kohlenhydrate/h "
@@ -119,8 +120,10 @@ PHASEN: list[tuple[str, str, str]] = [
      "Intensitätsverteilung ca. 85 % Z1-Z2, 15 % darüber. Rad: lange Z2-Fahrt (Sa 3-4 h), eine "
      "Sweet-Spot-Einheit 2x20 min bei 88-93 % FTP, Kraftausdauer 4x8 min bei 50-60 U/min. "
      "Lauf: 4 Läufe, ein langer Lauf 60-75 min, Steigerungsläufe 6x20 s, Lauf-ABC. Schwimmen: "
-     "Vereinstraining plus Technik. Kraft 2x pro Woche (Beine/Core, schwer: Kniebeuge, "
-     "Kreuzheben, einbeinig). Load 380 -> 505, ca. 9 -> 13 h.\n"
+     "Vereinstraining plus Technik. Kraft 2x pro Woche nur Oberkörper und Core, kein Beintraining: "
+     "Beinkraft kommt über das Rad (Kraftausdauer, später Berge) und Läufe (Steigerungen, Bergläufe). "
+     "Optional 10 min Bodyweight nach dem Lauf (einbeinige Wadenheber, Step-ups, Glute Bridges) als "
+     "Verletzungsvorsorge. Load 380 -> 505, ca. 9 -> 13 h.\n"
      "Deine Radbasis aus 2020-2022 kommt schnell zurück, Engpässe sind Laufen und Schwimmen.\n"
      "Erwartung: CTL 31 -> ca. 52 (+3 pro Woche), Form -13 bis -18 in Belastungswochen, "
      "-4 bis 0 in Erholungswochen. In der 3. Belastungswoche sind HRV 5-10 % unter Basis und "
@@ -129,7 +132,7 @@ PHASEN: list[tuple[str, str, str]] = [
     ("2027-01-25", "Phase 2: Grundlage II / Aufbau (25.01.-21.03.)",
      "Intensität steigt (pyramidal ca. 80/15/5). Rad: Schwelle 3x15 oder 2x20 min bei 95-100 % "
      "FTP, Over-Unders 3x(2x6 min bei 95/105 %), Z2 lang. Lauf: Tempoläufe 2x15-20 min an der "
-     "Schwellenpace, Bergläufe 8x60 s. Schwimmen: CSS-Sätze 10x100 m. Kraft 2x, später "
+     "Schwellenpace, Bergläufe 8x60 s. Schwimmen: CSS-Sätze 10x100 m. Kraft Oberkörper/Core 2x, später "
      "Erhalt. Load 515 -> 600, ca. 13 -> 15 h.\n"
      "Erwartung: CTL 52 -> ca. 69, Form -14 bis -17. Ruhepuls im Wochenmittel +1-2 bpm in "
      "Belastungswochen."),
@@ -157,7 +160,7 @@ PHASEN: list[tuple[str, str, str]] = [
      "Woche -2 (26.07.): Volumen ca. -20 % (600), Intensität unverändert. Rennwoche: ca. 345 TSS "
      "Vorbereitung plus Rennen (ca. 150-180 TSS), Wochenziel 520 enthält das Rennen. Mo/Di "
      "je 1 Qualitätsreiz (3-5 Reize à 3-5 min im Renntempo), Mi/Do locker mit 3x30 s Öffnern, Fr "
-     "frei, Sa 20 min Öffnungsrunde. Letzte schwere Kraft 14 Tage vorher, nichts Neues "
+     "frei, Sa 20 min Öffnungsrunde. Letzte Kraft (Oberkörper/Core) 7 Tage vorher, nichts Neues "
      "ausprobieren, Schlaf 8-9 h, Kohlenhydrate ab 2 Tage vorher erhöhen.\n"
      "Erwartung: CTL sinkt von ca. 95 auf ca. 86, ATL fällt auf ca. 67, Form am Renntag ca. +20 "
      "(Ziel +15 bis +20), HRV über Basis (90 oder mehr), Ruhepuls an oder unter Basis (46-47). "
@@ -270,22 +273,22 @@ RENNTAG_TSS = 170
 # (von, bis, Phase, Belastungsart, Intensitätsverteilung, Rad, Lauf, Schwimmen/Kraft)
 PHASEN_UEBERSICHT = [
     ("2026-11-09", "2026-11-29", "0 Wiedereinstieg und Tests", "Reaktivierung, Leistungsdiagnostik",
-     "locker, Tests Sa 14.11./Di 17.11.", "Stufentest, Z2", "Stufentest, locker", "Verein, Kraft-Technik"),
+     "locker, Tests Sa 14.11./Di 17.11.", "Stufentest, Z2", "Stufentest, locker", "Verein, Kraft Oberkörper/Core"),
     ("2026-11-30", "2027-01-24", "1 Grundlage I", "Aerobes Volumen, Kraftausdauer, Technik",
      "ca. 85 % Z1-Z2 / 15 % darüber", "Z2 lang (Sa 3-4 h), Sweet Spot 2x20, Kraftausdauer 4x8 min",
-     "4 Läufe, langer Lauf 60-75 min, Steigerungen, Lauf-ABC", "Verein + Technik; Kraft 2x schwer"),
+     "4 Läufe, langer Lauf 60-75 min, Steigerungen, Lauf-ABC", "Verein + Technik; Oberkörper/Core 2x"),
     ("2027-01-25", "2027-03-21", "2 Grundlage II / Aufbau", "Schwelle, Tempo, aerobe Leistung",
      "ca. 80 / 15 / 5 (pyramidal)", "Schwelle 3x15 / 2x20, Over-Unders, Z2 lang",
-     "Tempoläufe 2x15-20 min, Berge 8x60 s", "CSS-Sätze 10x100; Kraft 2x, später Erhalt"),
+     "Tempoläufe 2x15-20 min, Berge 8x60 s", "CSS-Sätze 10x100; Oberkörper/Core 1-2x"),
     ("2027-03-22", "2027-05-16", "3 Aufbau intensiv", "VO2max, Koppeltraining, lange Ausdauer",
      "ca. 75 / 15 / 10", "VO2max 5x4-5 min, 30/30, Sa 4-5 h mit 2x30 Tempo, Koppel 1x/Woche",
-     "6x1 km (3-5-km-Tempo), Koppellauf 15-20 min", "8x200 bei CSS; Kraft 1x Erhalt"),
+     "6x1 km (3-5-km-Tempo), Koppellauf 15-20 min", "8x200 bei CSS; Oberkörper/Core 1x"),
     ("2027-05-17", "2027-07-25", "4 Wettkampfvorbereitung", "Renntempo, Spezifik, Spitzenvolumen",
      "ca. 75 / 15 / 10 mit Renntempo", "3x12 min bei 100-105 % FTP, Brick 40 min bei 85-90 % FTP + 10-km-Lauf",
-     "Langer Lauf bis 100 min, Brick-Lauf 10 km Renntempo", "Freiwasser mit Neopren, 1,5 km am Stück; Kraft 1x"),
+     "Langer Lauf bis 100 min, Brick-Lauf 10 km Renntempo", "Freiwasser mit Neopren, 1,5 km am Stück; Oberkörper/Core 1x"),
     ("2027-07-26", "2027-08-08", "Taper und Rennen", "Frische, Schärfe, Renntempo-Öffner",
      "locker + wenige scharfe Reize", "3-5 Reize à 3-5 min im Renntempo, Öffner", "kurze Tempoläufe, Öffner",
-     "locker, Technik; letzte schwere Kraft 14 Tage vorher"),
+     "locker, Technik; letzte Kraft 7 Tage vorher"),
     ("2027-08-09", "2027-09-05", "Spätsaison", "Regeneration, dann Hölle von Q",
      "locker, wenige scharfe Reize", "locker, 1-2 Renntempo-Blöcke", "locker, Brick vor Hölle von Q", "locker, Technik"),
 ]
