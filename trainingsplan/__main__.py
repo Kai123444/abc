@@ -91,22 +91,28 @@ def _stufentest(client: IntervalsClient, a) -> int:
 
 
 def _woche(client: IntervalsClient, a) -> int:
-    """Testwochen 09.-22.11.2026: Kollisionen mit dem Rad-Stufentest entfernen, Hinweise und die
-    Einheiten der nächsten Woche eintragen (idempotent über external_id)."""
+    """Testwochen 09.-22.11.2026 (24-h-Schwimmen am Fr/Sa): Einheiten verschieben/entfernen und die
+    Einheiten der Woche eintragen (idempotent über external_id und Namen)."""
     from . import wochenplan
-    evs = client.events(date(2026, 11, 9), date(2026, 11, 15))
-    weg = [(e, grund) for tag, name, grund in wochenplan.ENTFERNEN for e in evs
-           if e["start_date_local"][:10] == tag and e.get("name") == name]
-    neu = wochenplan.HINWEISE + wochenplan.naechste_woche_events()
+    evs = client.events(date(2026, 11, 9), date(2026, 11, 22))
+    finde = lambda tag, name: [e for e in evs if e["start_date_local"][:10] == tag and e.get("name") == name]
+    weg = [(e, grund) for tag, name, grund in wochenplan.ENTFERNEN for e in finde(tag, name)]
+    versch = [(e, neu, felder) for alt, name, neu, felder in wochenplan.VERSCHIEBEN for e in finde(alt, name)
+              if alt != neu or felder]
+    neu = wochenplan.DIESE_WOCHE + wochenplan.naechste_woche_events()
     for e, grund in weg:
-        print(f"Entfernen: {e['start_date_local'][:10]} {e['name']} – {grund}")
+        print(f"Entfernen:  {e['start_date_local'][:10]} {e['name']} – {grund}")
+    for e, nd, felder in versch:
+        print(f"Verschieben: {e['start_date_local'][:10]} -> {nd} {felder.get('name', e['name'])}")
     for e in neu:
-        print(f"Eintragen: {e['start_date_local'][:10]} {e['name']} ({e.get('type', e['category'])})")
+        print(f"Eintragen:  {e['start_date_local'][:10]} {e['name']} ({e.get('type', e['category'])})")
     if not a.apply:
         print("Vorschau – mit --apply in intervals.icu schreiben.")
         return 0
     for e, _ in weg:
         client.delete_event(e["id"])
+    for e, nd, felder in versch:
+        client.update_event(e["id"], {"start_date_local": f"{nd}T00:00:00", **felder})
     client.upsert_events(neu)
     print("✔ Wochen angepasst.")
     return 0

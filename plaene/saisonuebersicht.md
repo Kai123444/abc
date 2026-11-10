@@ -6,7 +6,7 @@ Wochenziele in TSS, Stunden grob geschätzt (Rad 38, Lauf 52, Schwimmen 48, Kraf
 
 | Phase | Zeitraum | Belastungsart | Intensitätsverteilung | Load/Woche (ohne Erholung) | Stunden | CTL am Ende |
 |---|---|---|---|---|---|---|
-| 0 Wiedereinstieg und Tests | 09.11.-29.11.2026 | Reaktivierung, Leistungsdiagnostik | locker, Tests Sa 14.11./Di 17.11. | 337-397 | 8-10 | 32 |
+| 0 Wiedereinstieg und Tests | 09.11.-29.11.2026 | Reaktivierung, Leistungsdiagnostik | locker, Tests Sa 14.11./Di 17.11. | 304-442 | 7-11 | 31 |
 | 1 Grundlage I | 30.11.-24.01.2027 | Aerobes Volumen, Kraftausdauer, Technik | ca. 85 % Z1-Z2 / 15 % darüber | 380-505 | 10-13 | 52 |
 | 2 Grundlage II / Aufbau | 25.01.-21.03.2027 | Schwelle, Tempo, aerobe Leistung | ca. 80 / 15 / 5 (pyramidal) | 515-600 | 13-15 | 67 |
 | 3 Aufbau intensiv | 22.03.-16.05.2027 | VO2max, Koppeltraining, lange Ausdauer | ca. 75 / 15 / 10 | 605-700 | 15-17 | 81 |
@@ -30,21 +30,21 @@ Wochenziele in TSS, Stunden grob geschätzt (Rad 38, Lauf 52, Schwimmen 48, Kraf
 
 | Woche ab | Phase | Art | TSS | Std. | Rad | Lauf | Schw. | Kraft | CTL | Form |
 |---|---|---|---|---|---|---|---|---|---|---|
-| 09.11. | 0 | Reaktivierung | 397 | 10 | 196 | 65 | 104 | 32 | - | - |
-| 16.11. | 0 | Reaktivierung | 337 | 8 | 90 | 125 | 102 | 20 | 31 | -15 |
-| 23.11. | 0 | Erholung | 240 | 6 | 96 | 47 | 77 | 20 | 32 | -7 |
-| 30.11. | 1 | Aerobes Volumen | 380 | 10 | 154 | 76 | 110 | 40 | 35 | -13 |
-| 07.12. | 1 | Aerobes Volumen | 405 | 10 | 171 | 84 | 110 | 40 | 39 | -16 |
+| 09.11. | 0 | Reaktivierung | 442 | 11 | 198 | 55 | 157 | 32 | - | - |
+| 16.11. | 0 | Reaktivierung | 304 | 7 | 87 | 100 | 102 | 15 | 30 | -13 |
+| 23.11. | 0 | Erholung | 240 | 6 | 96 | 47 | 77 | 20 | 31 | -7 |
+| 30.11. | 1 | Aerobes Volumen | 380 | 10 | 154 | 76 | 110 | 40 | 35 | -14 |
+| 07.12. | 1 | Aerobes Volumen | 405 | 10 | 171 | 84 | 110 | 40 | 38 | -16 |
 | 14.12. | 1 | Aerobes Volumen | 430 | 11 | 188 | 92 | 110 | 40 | 42 | -17 |
 | 21.12. | 1 | Erholung | 300 | 7 | 136 | 67 | 77 | 20 | 42 | -7 |
 | 28.12. | 1 | Aerobes Volumen | 445 | 11 | 198 | 97 | 110 | 40 | 45 | -13 |
-| 04.01. | 1 | Aerobes Volumen | 475 | 12 | 204 | 101 | 130 | 40 | 49 | -15 |
+| 04.01. | 1 | Aerobes Volumen | 475 | 12 | 204 | 101 | 130 | 40 | 49 | -16 |
 | 11.01. | 1 | Aerobes Volumen | 505 | 13 | 224 | 111 | 130 | 40 | 52 | -17 |
 | 18.01. | 1 | Erholung + Retest Sa 23.01. | 340 | 8 | 153 | 76 | 91 | 20 | 52 | -4 |
 | 25.01. | 2 | Schwelle | 515 | 13 | 231 | 114 | 130 | 40 | 55 | -12 |
 | 01.02. | 2 | Schwelle | 535 | 13 | 245 | 120 | 130 | 40 | 58 | -15 |
 | 08.02. | 2 | Schwelle | 555 | 14 | 258 | 127 | 130 | 40 | 62 | -15 |
-| 15.02. | 2 | Erholung | 370 | 9 | 174 | 85 | 91 | 20 | 60 | -1 |
+| 15.02. | 2 | Erholung | 370 | 9 | 174 | 85 | 91 | 20 | 60 | -2 |
 | 22.02. | 2 | Schwelle | 560 | 14 | 261 | 129 | 130 | 40 | 63 | -10 |
 | 01.03. | 2 | Schwelle | 580 | 14 | 254 | 136 | 150 | 40 | 66 | -13 |
 | 08.03. | 2 | Schwelle | 600 | 15 | 266 | 144 | 150 | 40 | 69 | -14 |

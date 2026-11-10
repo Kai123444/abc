@@ -23,7 +23,7 @@ from datetime import date, timedelta
 # (Montag, TSS gesamt pro Woche, Erholungs-/Taperwoche?)  – 3 Belastungswochen : 1 Erholungswoche
 WOCHEN: list[tuple[str, int, bool]] = [
     # Phase 0 Wiedereinstieg und Tests (Woche 09.11. mit Rad-Stufentest, Woche 16.11. mit Lauf-Stufentest)
-    ("2026-11-09", 397, False), ("2026-11-16", 337, False), ("2026-11-23", 240, True),
+    ("2026-11-09", 442, False), ("2026-11-16", 304, False), ("2026-11-23", 240, True),
     # Phase 1 Grundlage I
     ("2026-11-30", 380, False), ("2026-12-07", 405, False), ("2026-12-14", 430, False),
     ("2026-12-21", 300, True),
@@ -186,8 +186,8 @@ PHASEN: list[tuple[str, str, str]] = [
 
 # Testwochen: Verteilung nach den tatsächlich geplanten Einheiten (Stufentests, Vereinstraining, Sportunterricht)
 _SPORT_FEST = {
-    "2026-11-09": {"Ride": 196, "Run": 65, "Swim": 104, "Other": 32},
-    "2026-11-16": {"Ride": 90, "Run": 125, "Swim": 102, "Other": 20},
+    "2026-11-09": {"Ride": 198, "Run": 55, "Swim": 157, "Other": 32},  # 24-h-Schwimmen Fr/Sa, Rad-Test So
+    "2026-11-16": {"Ride": 87, "Run": 100, "Swim": 102, "Other": 15},  # Lauf-Stufentest Mi
 }
 
 
