@@ -6,9 +6,9 @@ bleiben unverändert):
 * gruen  – keine Änderung; wenn zusätzlich "frisch": lockere Einheiten +5 %.
 * gelb   – Umfang aller Einheiten -15 % (Ein-/Ausfahren kürzer, Intervall-
            blöcke mit weniger Wiederholungen statt kürzeren Intervallen),
-           harte Einheiten: Wiederholungen -25 %; Tests werden zu locker.
+           harte Einheiten: Wiederholungen -25 %; Tests bleiben.
 * feste Termine (Sportunterricht, Vereinstraining, Wettkampf) bleiben immer.
-* rot    – nächste 3 Tage: harte/mittlere Einheiten werden zu lockerer
+* rot    – Tests werden zu locker; nächste 3 Tage: harte/mittlere Einheiten werden zu lockerer
            Grundlage (Z2, 60 % der Dauer); danach Umfang -20 %.
 """
 
@@ -95,7 +95,10 @@ def passe_an(plan: list[Einheit], bewertung: Bewertung, heute: date,
             ergebnis.append(e)
             continue
         tag = (e.datum - heute).days
-        if e.intensitaet == "test" and bewertung.status != "gruen":
+        if e.intensitaet == "test" and bewertung.status == "gelb":
+            ergebnis.append(e)  # Tests bleiben bei Gelb (Stufentests begrenzen sich selbst)
+            continue
+        if e.intensitaet == "test" and bewertung.status == "rot":
             e = _locker(e, "Test verschoben – bei Ermüdung wäre das Ergebnis zu niedrig; "
                            "neu ansetzen, sobald der Status grün ist")
         elif bewertung.status == "rot":

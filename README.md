@@ -37,6 +37,19 @@ python -m trainingsplan anpassen                # bereits in intervals.icu gepla
 python -m trainingsplan anpassen --apply        # … und dort direkt ändern
 ```
 
+python -m trainingsplan anpassen --basis-ab 2026-08-01   # Vergleich mit Normalwochen seit August
+python -m trainingsplan stufentest --rad 2026-11-14 --lauf 2026-11-17 [--apply]
+```
+
+`--basis-ab`: Normalbelastung = Schnitt deiner Trainingswochen seit dem Datum
+(Pausen-/Krankheitswochen < 50 % des Medians werden ignoriert). Liegt die
+aktuelle Woche im gewohnten Rahmen und sind die Körperwerte normal, wird eine
+stark negative Form als Wiedereinstieg gewertet statt als Überlastung.
+
+`stufentest`: Rad 100 W +20 W / 3 min, Lauf 9 km/h +1 km/h / 3 min, jeweils bis
+zur Erschöpfung. Ein vorhandener Test am selben Tag (z.B. FTP-Test) wird ersetzt.
+
+```
 `anpassen` arbeitet mit dem Kalender in intervals.icu selbst. Feste Termine
 (Sportunterricht, Vereinstraining, Wettkampf) werden nie verändert. Tests
 (FTP-Test, Ramp-Test …) werden bei Gelb/Rot durch eine lockere Einheit ersetzt.

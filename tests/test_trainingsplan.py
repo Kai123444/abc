@@ -100,10 +100,36 @@ class TestAnpassen(unittest.TestCase):
         self.assertEqual(ftp.intensitaet, "test")
         self.assertEqual(ftp.external_id, "icu-2")
         b = bewerte(wellness(ctl=26, atl=40), aktivitaeten(pro_tag=7, letzte_woche=47), HEUTE)
+        self.assertEqual(b.status, "gelb")
         neu = passe_an([sport, ftp], b, HEUTE)
         self.assertFalse(neu[0].angepasst)
-        self.assertEqual(neu[1].intensitaet, "locker")
-        self.assertEqual(neu[1].event_id, 2)
+        self.assertEqual(neu[1].intensitaet, "test")  # bei Gelb bleibt der Test
+        rot = bewerte(wellness(hrv_jetzt=45, rhr_jetzt=58, schlaf_h=5.5), aktivitaeten(), HEUTE)
+        neu = passe_an([ftp], rot, HEUTE)
+        self.assertEqual(neu[0].intensitaet, "locker")
+        self.assertEqual(neu[0].event_id, 2)
+
+    def test_basis_ab_wiedereinstieg(self):
+        # 6 Normalwochen à 350, dann 3 Wochen Pause, jetzt wieder 330
+        akt = []
+        for i in range(1, 64):
+            tag = HEUTE - timedelta(days=i)
+            load = 47 if i <= 7 else (0 if i <= 28 else 50)
+            akt.append({"start_date_local": tag.isoformat() + "T08:00:00", "icu_training_load": load})
+        ohne = bewerte(wellness(ctl=26, atl=40), akt, HEUTE)
+        mit = bewerte(wellness(ctl=26, atl=40), akt, HEUTE, basis_ab=HEUTE - timedelta(days=63))
+        self.assertNotEqual(ohne.status, "gruen")
+        self.assertEqual(mit.status, "gruen")
+        self.assertEqual(mit.kennzahlen["pausewochen"], 3)
+
+    def test_stufentests(self):
+        from trainingsplan.stufentest import lauf_stufentest, maximalwert, rad_stufentest
+        r = rad_stufentest(HEUTE)
+        self.assertIn("- 3m 300w", r.beschreibung)
+        self.assertTrue(r.fix)
+        l = lauf_stufentest(HEUTE)
+        self.assertIn("- 3m 4:00/km Pace", l.beschreibung)
+        self.assertEqual(maximalwert(300, 90, 20), 310)
 
     def test_event_format(self):
         ev = self.plan[0].to_event()

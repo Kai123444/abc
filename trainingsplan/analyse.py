@@ -54,12 +54,19 @@ def _mittel(xs: list[float]) -> float | None:
     return statistics.fmean(xs) if xs else None
 
 
-def bewerte(wellness: list[dict], aktivitaeten: list[dict], heute: date) -> Bewertung:
+def bewerte(wellness: list[dict], aktivitaeten: list[dict], heute: date,
+            basis_ab: date | None = None) -> Bewertung:
+    """basis_ab: Beginn des Vergleichszeitraums (z.B. ab wann alle Einheiten
+    eingetragen sind). Dann gilt als Normalbelastung der Schnitt deiner
+    Trainingswochen seit diesem Datum (Pausen-/Krankheitswochen mit weniger
+    als 50 % des Medians werden ausgeklammert), und HRV/Ruhepuls werden mit
+    diesem Zeitraum verglichen. Ohne basis_ab: letzte 4 Wochen bzw. 60 Tage."""
     signale: list[Signal] = []
     k: dict = {}
     gestern = heute - timedelta(days=1)
     w7_von = heute - timedelta(days=7)
-    basis_von, basis_bis = heute - timedelta(days=60), heute - timedelta(days=8)
+    basis_von = basis_ab or heute - timedelta(days=60)
+    basis_bis = heute - timedelta(days=8)
 
     # --- Fitness / Ermüdung / Form -------------------------------------
     mit_ctl = sorted((w for w in wellness if w.get("ctl") is not None and w.get("atl") is not None),
@@ -144,21 +151,46 @@ def bewerte(wellness: list[dict], aktivitaeten: list[dict], heute: date) -> Bewe
         return s
 
     akut = load_im(w7_von, gestern)
-    chronisch = load_im(heute - timedelta(days=35), w7_von - timedelta(days=1)) / 4
-    k.update(load_7d=round(akut), load_wochenschnitt_4w=round(chronisch))
+    k["load_7d"] = round(akut)
+    bezug = "4-Wochen-Schnitt"
+    chronisch = 0.0
+    if basis_ab:
+        montag = basis_ab + timedelta(days=(7 - basis_ab.weekday()) % 7)
+        wochen = []
+        while montag + timedelta(days=6) < w7_von:
+            wochen.append(load_im(montag, montag + timedelta(days=6)))
+            montag += timedelta(days=7)
+        if wochen:
+            median = statistics.median(wochen)
+            normal = [w for w in wochen if w >= 0.5 * median]
+            chronisch = statistics.fmean(normal)
+            bezug = "deinem Normalwochen-Schnitt"
+            k.update(load_normalwoche=round(chronisch), normalwochen=len(normal),
+                     pausewochen=len(wochen) - len(normal))
+    if not chronisch:
+        chronisch = load_im(heute - timedelta(days=35), w7_von - timedelta(days=1)) / 4
+        k["load_wochenschnitt_4w"] = round(chronisch)
     if chronisch > 0:
         acwr = akut / chronisch
         k["acwr"] = round(acwr, 2)
         if acwr > 1.5:
-            signale.append(Signal("Belastungssprung", 2, f"Wochenload {acwr:.1f}× über 4-Wochen-Schnitt"))
+            signale.append(Signal("Belastungssprung", 2, f"Wochenload {acwr:.1f}× über {bezug}"))
         elif acwr > 1.3:
-            signale.append(Signal("Belastungssprung", 1, f"Wochenload {acwr:.1f}× über 4-Wochen-Schnitt"))
+            signale.append(Signal("Belastungssprung", 1, f"Wochenload {acwr:.1f}× über {bezug}"))
 
-    punkte = sum(s.punkte for s in signale)
     koerper = {"HRV", "Ruhepuls", "Schlaf", "Müdigkeit", "Muskelkater", "Stress",
                "Verletzung/Krankheit"}
     koerper_ok = (all(x in k for x in ("hrv_7d", "ruhepuls_7d", "schlaf_h_7d"))
                   and not any(s.name in koerper for s in signale))
+    if basis_ab and koerper_ok and k.get("acwr", 9) <= 1.1:
+        # Wiedereinstieg nach Pause: CTL ist gesunken, daher wirkt die Form
+        # stark negativ, obwohl die Wochenbelastung im gewohnten Rahmen liegt.
+        for i, sig in enumerate(signale):
+            if sig.name == "Form" and sig.punkte == 2:
+                signale[i] = Signal("Form", 1, sig.text.split(" – ")[0]
+                                    + f" – Wiedereinstieg: Wochenload bei {k['acwr']:.0%} deiner"
+                                    " Normalwochen, Körperwerte normal")
+    punkte = sum(s.punkte for s in signale)
     harte_signale = any(s.punkte == 2 for s in signale)
     if punkte >= 4 or (harte_signale and punkte >= 3):
         status = "rot"

@@ -3,6 +3,8 @@
   analyse  – Trainings-/Gesundheitsdaten aus intervals.icu auswerten
   sync     – Plan aus Datei (angepasst) nach intervals.icu übertragen
   anpassen – bereits in intervals.icu geplante Einheiten anpassen
+  stufentest – Rad-/Lauf-Stufentest einplanen (--rad DATUM, --lauf DATUM);
+             ein vorhandener Test am selben Tag (z.B. FTP-Test) wird ersetzt
   (sync/anpassen ohne --apply: nur Vorschau, nichts wird geschrieben)
 """
 
@@ -17,14 +19,16 @@ from .analyse import Bewertung, bewerte
 from .anpassen import passe_an
 from .intervals_icu import IntervalsClient, IntervalsError
 from .plan import Einheit, einheit_aus_event, lade_plan
+from .stufentest import lauf_stufentest, rad_stufentest
 
 AMPEL = {"gruen": "🟢 GRÜN – Plan wie geplant",
          "gelb": "🟡 GELB – Umfang/Intensität reduziert",
          "rot": "🔴 ROT – Erholung priorisiert"}
 
 
-def _daten(client: IntervalsClient, heute: date) -> tuple[list[dict], list[dict]]:
-    von = heute - timedelta(days=60)
+def _daten(client: IntervalsClient, heute: date,
+           basis_ab: date | None = None) -> tuple[list[dict], list[dict]]:
+    von = min(heute - timedelta(days=60), basis_ab or heute)
     return client.wellness(von, heute), client.activities(von, heute)
 
 
@@ -36,7 +40,8 @@ def bericht(b: Bewertung, vorher: list[Einheit], nachher: list[Einheit], heute: 
              "hrv_basis": "HRV Basis", "hrv_z": "HRV z-Wert", "ruhepuls_7d": "Ruhepuls 7 Tage",
              "ruhepuls_basis": "Ruhepuls Basis", "schlaf_h_7d": "Schlaf Ø h (7 T.)",
              "load_7d": "Load letzte 7 Tage", "load_wochenschnitt_4w": "Load Ø/Woche (4 W.)",
-             "acwr": "Akut:Chronisch", "fatigue_3d": "Müdigkeit (3 T.)",
+             "acwr": "Akut:Chronisch", "load_normalwoche": "Load Ø Normalwoche",
+             "normalwochen": "Normalwochen im Vergleich", "pausewochen": "Pausenwochen (ignoriert)", "fatigue_3d": "Müdigkeit (3 T.)",
              "soreness_3d": "Muskelkater (3 T.)", "stress_3d": "Stress (3 T.)"}
     z += ["| Kennzahl | Wert |", "|---|---|"]
     z += [f"| {namen.get(k, k)} | {v} |" for k, v in b.kennzahlen.items() if k != "hinweis"]
@@ -57,10 +62,42 @@ def bericht(b: Bewertung, vorher: list[Einheit], nachher: list[Einheit], heute: 
     return "\n".join(z)
 
 
+def _stufentest(client: IntervalsClient, a) -> int:
+    tests = []
+    if a.rad:
+        tests.append(rad_stufentest(a.rad))
+    if a.lauf:
+        tests.append(lauf_stufentest(a.lauf))
+    if not tests:
+        print("Fehler: --rad und/oder --lauf mit Datum angeben", file=sys.stderr)
+        return 2
+    for t in tests:
+        vorhanden = [einheit_aus_event(e) for e in client.events(t.datum, t.datum)
+                     if e.get("category") == "WORKOUT"]
+        sport = {"Ride": ("Ride", "VirtualRide"), "Run": ("Run", "VirtualRun")}[t.typ]
+        alt = next((e for e in vorhanden if e.typ in sport and e.intensitaet == "test"), None)
+        ev = t.to_event()
+        aktion = f"ersetzt '{alt.name}'" if alt else "neu angelegt"
+        print(f"--- {t.datum:%a %d.%m.} {t.name} ({t.dauer_min:.0f} min) – {aktion}\n{t.beschreibung}\n")
+        if not a.apply:
+            continue
+        if alt:
+            client.update_event(alt.event_id, {k: ev[k] for k in
+                                ("name", "description", "moving_time", "icu_training_load")})
+        else:
+            client.upsert_events([ev])
+    print("✔ übernommen." if a.apply else "Vorschau – mit --apply übernehmen.")
+    return 0
+
+
 def main(argv: list[str] | None = None) -> int:
     p = argparse.ArgumentParser(prog="trainingsplan", description=__doc__,
                                 formatter_class=argparse.RawDescriptionHelpFormatter)
-    p.add_argument("befehl", choices=["analyse", "sync", "anpassen"])
+    p.add_argument("befehl", choices=["analyse", "sync", "anpassen", "stufentest"])
+    p.add_argument("--basis-ab", type=date.fromisoformat,
+                   help="Vergleichszeitraum ab Datum (z.B. 2026-08-01): Normalwochen statt 4 Wochen")
+    p.add_argument("--rad", type=date.fromisoformat, help="stufentest: Datum Rad-Stufentest")
+    p.add_argument("--lauf", type=date.fromisoformat, help="stufentest: Datum Lauf-Stufentest")
     p.add_argument("--plan", default="plaene/trainingsplan.json", help="Plan als .json oder .csv")
     p.add_argument("--heute", type=date.fromisoformat, default=date.today())
     p.add_argument("--horizont", type=int, default=7, help="Tage, die angepasst werden")
@@ -71,11 +108,13 @@ def main(argv: list[str] | None = None) -> int:
 
     try:
         client = IntervalsClient()
-        wellness, akt = _daten(client, a.heute)
+        if a.befehl == "stufentest":
+            return _stufentest(client, a)
+        wellness, akt = _daten(client, a.heute, a.basis_ab)
     except IntervalsError as exc:
         print(f"Fehler: {exc}", file=sys.stderr)
         return 2
-    b = bewerte(wellness, akt, a.heute)
+    b = bewerte(wellness, akt, a.heute, a.basis_ab)
 
     if a.befehl == "anpassen":
         try:
