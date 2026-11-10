@@ -2,7 +2,8 @@
 
 Rad:  Rampe ab 100 W, +20 W pro 3 min (6,7 W/min) bis zur Erschöpfung; Lap-Taste beendet den
       Test und startet das Ausfahren. Alternativ modus="stufen" mit einzelnen 3-min-Stufen.
-Lauf: Start 9 km/h, alle 3 min +1 km/h bis zur Erschöpfung.
+Lauf: Start 9 km/h, alle 3 min +1 km/h (Stufen wechseln automatisch). Zum vorzeitigen Ende
+      LAP so oft drücken, bis "Ausfahren" erscheint (Garmin-Lap springt nur einen Schritt weiter).
 
 Auswertung (ohne Laktat):
   Leistung/Geschwindigkeit max = letzte volle Stufe
@@ -59,10 +60,13 @@ def lauf_stufentest(datum: date, start_kmh: float = 9.0, schritt_kmh: float = 1.
     zeilen = ["Warmup", f"- 10m {_pace(start_kmh - 1)} Pace", "",
               f"Stufen (je {STUFE_MIN} min +{schritt_kmh:g} km/h) – laufen bis zur Erschöpfung"]
     zeilen += [f"- {STUFE_MIN}m {_pace(start_kmh + i * schritt_kmh)} Pace" for i in range(stufen)]
-    zeilen += ["", "Cooldown", f"- 10m {_pace(start_kmh - 1.5)} Pace", "",
+    zeilen += ["", "Ausfahren", f"- Ausfahren 10m {_pace(start_kmh - 1.5)} Pace", "",
+               "Ablauf: Die Stufen wechseln automatisch alle 3 min. Wenn du die Pace nicht mehr "
+               "halten kannst, hör auf zu beschleunigen, laufe locker und drücke die LAP-Taste so "
+               "oft, bis der Schritt Ausfahren erscheint (jeder Druck springt eine Stufe weiter). "
+               "Notiere, in welcher Stufe und nach wie viel Sekunden du ausgestiegen bist.",
                "Hinweise: Laufband (1 % Steigung) oder 400-m-Bahn, Pace exakt halten, "
-               "Brustgurt tragen. Abbruch, wenn die Pace nicht mehr gehalten wird – Sekunden in "
-               "der letzten Stufe notieren. Nicht am Tag nach einem harten Rad-Test."]
+               "Brustgurt tragen. Nicht am Tag nach einem harten Rad-Test."]
     dauer = 20 + STUFE_MIN * stufen
     return Einheit(datum=datum, name=name, typ="Run", dauer_min=dauer, load=60,
                    intensitaet="test", beschreibung="\n".join(zeilen), fix=True)
