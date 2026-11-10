@@ -18,10 +18,10 @@ Wochenziele in TSS, Stunden grob geschätzt (Rad 38, Lauf 52, Schwimmen 48, Kraf
 
 | Phase | Rad | Lauf | Schwimmen / Kraft |
 |---|---|---|---|
-| 0 Wiedereinstieg und Tests | Stufentest, Z2 | Stufentest, locker | Verein, Kraft Mo Oberkörper + Beine leicht (ab 16.11.) |
-| 1 Grundlage I | Sa 3-4 h in den Bergen: Z2 mit Kraftausdauer am Anstieg 4-5x6-8 min, Bergsprints, Sweet Spot 2x20 | Mi Bahn 6-10x400, 4 Läufe, So Hügellauf 60-75 min, Steigerungen | Verein + Technik; Kraftraum Mo Beine + Oberkörper, RIR 2-3 |
-| 2 Grundlage II / Aufbau | Berg-Schwelle 3x15 / 2x20 bergauf, Kraftausdauer 5x8, Over-Unders, Bergsprints | Mi Bahn 10-12x400 / 3x800 / 4-5x1000, So Bergläufe 8x60 s | CSS-Sätze 10x100; Kraftraum Mo Maximalkraft (4-6 Wdh.) |
-| 3 Aufbau intensiv | Sa 4-5 h Berge: VO2max 5x4-5 min bergauf, 2x30 Tempo am Anstieg, Koppel 1x/Woche | 6x1 km (3-5-km-Tempo), Koppellauf 15-20 min | 8x200 bei CSS; Kraftraum Mo 35-40 min Erhalt/Explosiv |
+| 0 Wiedereinstieg und Tests | Stufentest, Z2 | Stufentest, locker | Verein, Kraft Mo Oberkörper + Beine leicht (ab 16.11.), Mi vor dem Lauf |
+| 1 Grundlage I | Sa 3-4 h in den Bergen: Z2 mit Kraftausdauer am Anstieg 4-5x6-8 min, Bergsprints, Sweet Spot 2x20 | Mi Bahn 6-10x400, 4 Läufe, So Hügellauf 60-75 min, Steigerungen | Verein + Technik; Kraftraum Mo Beine + Oberkörper, Mi Oberkörper/Core, RIR 2-3 |
+| 2 Grundlage II / Aufbau | Berg-Schwelle 3x15 / 2x20 bergauf, Kraftausdauer 5x8, Over-Unders, Bergsprints | Mi Bahn 10-12x400 / 3x800 / 4-5x1000, So Bergläufe 8x60 s | CSS-Sätze 10x100; Kraftraum Mo Maximalkraft (4-6 Wdh.), Mi Oberkörper + Sprünge |
+| 3 Aufbau intensiv | Sa 4-5 h Berge: VO2max 5x4-5 min bergauf, 2x30 Tempo am Anstieg, Koppel 1x/Woche | 6x1 km (3-5-km-Tempo), Koppellauf 15-20 min | 8x200 bei CSS; Kraftraum Mo 35-40 min Erhalt, Mi 20 min Core |
 | 4 Wettkampfvorbereitung | Berge jede 2. Woche, dazwischen 3x12 min bei 100-105 % FTP, Brick 40 min bei 85-90 % FTP + 10-km-Lauf | Langer Lauf bis 100 min, Brick-Lauf 10 km Renntempo | Freiwasser mit Neopren, 1,5 km am Stück; Kraftraum Mo 35 min Erhalt bis 14 Tage vor DM; Sauna-Block 05.-25.07. |
 | Taper und Rennen | 3-5 Reize à 3-5 min im Renntempo, Öffner | kurze Tempoläufe, Öffner | locker, Technik; letzte Beinkraft 14 Tage, Oberkörper 7 Tage vorher |
 | Spätsaison | locker, 1-2 Renntempo-Blöcke | locker, Brick vor Hölle von Q | locker, Technik |
