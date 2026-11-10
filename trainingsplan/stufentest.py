@@ -1,6 +1,7 @@
 """Stufentest-Vorlagen (Rad und Lauf) als intervals.icu-Workouts.
 
-Rad:  Start 100 W, alle 3 min +20 W bis zur Erschöpfung.
+Rad:  Rampe ab 100 W, +20 W pro 3 min (6,7 W/min) bis zur Erschöpfung; Lap-Taste beendet den
+      Test und startet das Ausfahren. Alternativ modus="stufen" mit einzelnen 3-min-Stufen.
 Lauf: Start 9 km/h, alle 3 min +1 km/h bis zur Erschöpfung.
 
 Auswertung (ohne Laktat):
@@ -25,14 +26,29 @@ def _pace(kmh: float) -> str:
 
 
 def rad_stufentest(datum: date, start_w: int = 100, schritt_w: int = 20, stufen: int = 14,
-                   name: str = "Rad-Stufentest") -> Einheit:
-    zeilen = ["Warmup", f"- 10m {start_w}w", "",
-              f"Stufen (je {STUFE_MIN} min +{schritt_w} W) – fahren bis zur Erschöpfung"]
-    zeilen += [f"- {STUFE_MIN}m {start_w + i * schritt_w}w" for i in range(stufen)]
-    zeilen += ["", "Cooldown", "- 10m 90w", "",
-               "Hinweise: ERG-Modus (Rolle) oder gleichmäßige flache Strecke, Trittfrequenz "
-               "konstant 85–95, Brustgurt tragen. Abbruch, wenn die Leistung nicht mehr gehalten "
-               "wird – Sekunden in der letzten Stufe notieren. Ausgeruht starten, Vortag locker."]
+                   name: str = "Rad-Stufentest", modus: str = "rampe") -> Einheit:
+    """modus="rampe": ein einziger Rampenschritt (+schritt_w alle 3 min, gleiche Steigung
+    wie der Stufentest). Auf dem Wahoo ELEMNT springt die Lap-Taste in einem Workout zum
+    nächsten Schritt -> Lap drücken beendet den Test und startet sofort das Ausfahren.
+    modus="stufen": einzelne 3-min-Stufen (Lap springt dann nur zur nächsten Stufe)."""
+    if modus == "rampe":
+        ende_w = start_w + schritt_w * stufen
+        zeilen = ["Warmup", f"- 10m ramp 60-{start_w}w", "",
+                  f"Test: Rampe {start_w} bis {ende_w} W, entspricht +{schritt_w} W alle {STUFE_MIN} min. "
+                  "Fahren bis zur Erschöpfung, dann LAP-Taste drücken: das Ausfahren startet sofort",
+                  f"- {STUFE_MIN * stufen}m ramp {start_w}-{ende_w}w", "",
+                  "Ausfahren", "- 10m 90w", "",
+                  "Hinweise: ERG-Modus auf der Rolle, Trittfrequenz konstant 85-95, Brustgurt "
+                  "tragen. Beim Drücken der LAP-Taste die Zeit im Test notieren (Minute:Sekunde), "
+                  "daraus ergibt sich die Maximalleistung. Ausgeruht starten, Vortag locker."]
+    else:
+        zeilen = ["Warmup", f"- 10m {start_w}w", "",
+                  f"Stufen (je {STUFE_MIN} min +{schritt_w} W) - fahren bis zur Erschöpfung"]
+        zeilen += [f"- {STUFE_MIN}m {start_w + i * schritt_w}w" for i in range(stufen)]
+        zeilen += ["", "Cooldown", "- 10m 90w", "",
+                   "Hinweise: ERG-Modus (Rolle) oder gleichmäßige flache Strecke, Trittfrequenz "
+                   "konstant 85-95, Brustgurt tragen. Abbruch, wenn die Leistung nicht mehr gehalten "
+                   "wird - Sekunden in der letzten Stufe notieren. Ausgeruht starten, Vortag locker."]
     dauer = 20 + STUFE_MIN * stufen
     return Einheit(datum=datum, name=name, typ="Ride", dauer_min=dauer, load=75,
                    intensitaet="test", beschreibung="\n".join(zeilen), fix=True)
