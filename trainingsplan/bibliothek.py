@@ -76,6 +76,7 @@ def _liste() -> list[tuple[str, str, str, str, list[str], int]]:
 
     # ---------------- 01 Rad Grundlage ----------------
     add(0, "Erholung 45 min", "Ride", "Nur Beine ausdrehen, Puls unter 130.\n" + _z2(45, 10, 5, 50), ["Rad", "Z2", "Erholung"], 45)
+    add(0, "Rad Hitze-Anpassung 60 min", "Ride", "Hitzetraining für die DM: Rolle im warmen Raum (28-32 Grad), ohne Ventilator oder mit langer Kleidung. Gewicht vor und nach wiegen, Verlust höchstens 2 %, Wasser mit 500-1000 mg Natrium pro Stunde. Puls steigt, Leistung nicht erhöhen.\n" + _z2(60, 10, 10, 57), ["Rad", "Z2", "Hitze"], 60)
     add(0, "Z2 60 min", "Ride", _z2(60, 10, 10, 57), ["Rad", "Z2", "Gelände egal"], 60)
     add(0, "Z2 90 min", "Ride", _z2(90, 10, 10, 57), ["Rad", "Z2", "Gelände egal"], 90)
     add(0, "Z2 120 min", "Ride", _z2(120, 15, 10, 58), ["Rad", "Z2", "Gelände egal"], 120)

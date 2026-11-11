@@ -205,6 +205,37 @@ SAUNA = (
     "Die Auswertung erkennt Sauna und Eisbad im Kommentar, lässt die Morgenwerte des Folgetags aus HRV- und Ruhepuls-Mittel "
     "heraus und schreibt dazu eine Einordnung (Beispiel 11.11.: Ruhepuls 52 statt 48, HRV 79 statt 93).")
 
+HITZE = (
+    "Hitzetraining (Hitzeanpassung) für die DM So 08.08.2027, Start 11:30 an der Nordsee. Sinnvoll, weil Sommerhitze und "
+    "Mittagssonne möglich sind und die Anpassung Plasmavolumen, Schweißrate und Pulsökonomie verbessert (Nutzen bei "
+    "kühlem Wetter kleiner, bei Hitze deutlich größer; Kosten gering, weil es die lockeren Einheiten nutzt). Block "
+    "05.07. bis 25.07. (3 Wochen, endet 14 Tage vor dem Rennen; Anpassung hält ca. 2-3 Wochen), danach nur Auffrischung. "
+    "Ab 01.07. sind Sommerferien und Schule vorbei, die Wochentage sind frei.\n"
+    "BAUSTEINE\n"
+    "1) Heat-Ride (Rad, Di und Fr, 45 -> 60 min): Rolle im geschlossenen warmen Raum (28-32 Grad) ohne Ventilator oder "
+    "mit langer Kleidung, Leistung 55-60 % FTP, der Puls steigt 10-15 Schläge über das normale Z2. Nicht die Leistung "
+    "erhöhen, der Reiz ist die Wärme. Workout in der Bibliothek: 'Rad Hitze-Anpassung 60 min'.\n"
+    "2) Sauna oder heißes Bad nach lockeren Einheiten (2x pro Woche, 20 -> 30 min, Sauna 80-90 Grad oder Wanne "
+    "40 Grad bis Schulterhöhe): nur nach lockeren Tagen, nicht nach Intervallen, Kraft Beine oder dem langen Samstag.\n"
+    "3) Natürliche Hitze: Sommertage nutzen, lockere Läufe und Fahrten mittags bei Wärme, dabei wie im Rennen trinken.\n"
+    "DOSIS\n"
+    "- Woche 1 (05.07.): 1 Heat-Ride 45 min + 2 Sauna oder Bad 20 min\n"
+    "- Woche 2 (12.07.): 2 Heat-Rides 60 min + 2 Sauna oder Bad 25 min (Generalprobe So 18.07. ohne Hitzeeinheit davor)\n"
+    "- Woche 3 (19.07.): 2 Heat-Rides 60 min + 2 Sauna oder Bad 30 min\n"
+    "- Taper 26.07.-03.08.: 2 kurze Gänge Sauna 15-20 min (z. B. Mo, Do), nach Mi 04.08. nichts mehr; am Renntag nichts davor.\n"
+    "SICHERHEIT UND KONTROLLE\n"
+    "- Gewicht vor und nach wiegen: Verlust höchstens 2 % (bei 67 kg ca. 1,3 kg), Verlust durch Trinken ausgleichen: "
+    "pro 1 kg 1,2-1,5 l, dazu 500-1000 mg Natrium pro Stunde. Die Schweißrate aus dem ersten Heat-Ride ist dein "
+    "Natriumwert für die DM.\n"
+    "- Nicht bei Krankheit, Fieber, Schwindel oder Übelkeit. Abbrechen bei Schwindel, Kopfschmerz, Herzrasen.\n"
+    "- HRV am Morgen nach Heat-Ride oder Sauna kann 5-10 % niedriger sein und der Ruhepuls +2-4: das ist normal, wenn es "
+    "nach 48 h zurück ist. Bleibt es länger (Ampel Gelb), Hitzeeinheit streichen und Umfang um 15 % senken.\n"
+    "- Die Hitzeeinheiten ersetzen die lockeren Rad-Einheiten; Intervalle, Brick und lange Fahrt bleiben normal.\n"
+    "- Neopren: Entscheidung der Kampfrichter am Wettkampftag nach DTU-Temperaturtabelle; bei Hitze kann das Wasser warm sein, "
+    "dann ohne Neopren: mit Hitze und Salzwasser vorher 1-2 Freiwasser-Einheiten üben.\n"
+    "ERFOLGSKONTROLLE: Puls bei gleicher Leistung (Heat-Ride 1 vs 6), Schweißrate steigt, Ruhepuls sinkt oder bleibt, "
+    "Gefühl bei Mittagshitze. Wenn wenig Effekt, Block nicht verlängern.")
+
 KONTROLLE = (
     "Regeln, die der Plan überwacht:\n"
     "- CTL-Anstieg höchstens ca. 4,5 pro Woche, Belastungsverhältnis (7 Tage zu Normalwoche) zwischen 0,8 und 1,3.\n"
@@ -265,6 +296,11 @@ PHASEN: list[tuple[str, str, str]] = [
     ("2026-11-23", "Koppeltraining: Plan", KOPPEL),
     ("2026-11-23", "Mittwochs-Intervalle Lauf", LAUFINTERVALLE),
     ("2027-07-05", "Sauna: Erholung und Hitzeanpassung", SAUNA),
+    ("2027-06-28", "Hitzetraining: Plan für die DM", HITZE),
+    ("2027-07-05", "Hitzetraining Woche 1: 1 Heat-Ride 45 min + 2x Sauna/Bad 20 min", "Di Heat-Ride 45 min (Rolle, warm, 55-60 % FTP), Fr freier Tag oder lockere Fahrt, Mo und Do Sauna/Bad 20 min nach lockeren Einheiten. Gewicht vor/nach wiegen, Schweißrate notieren. Siehe Notiz Hitzetraining: Plan für die DM."),
+    ("2027-07-12", "Hitzetraining Woche 2: 2 Heat-Rides 60 min + 2x Sauna/Bad 25 min", "Di und Fr Heat-Ride 60 min, Mo und Do Sauna/Bad 25 min. Vor der Generalprobe So 18.07. keine Hitzeeinheit am Sa. Morgenwerte beobachten (HRV, Ruhepuls)."),
+    ("2027-07-19", "Hitzetraining Woche 3: 2 Heat-Rides 60 min + 2x Sauna/Bad 30 min", "Di und Fr Heat-Ride 60 min, Mo und Do Sauna/Bad 30 min. Letzte Hitzewoche. Ab Mo 26.07. nur Auffrischung (2 kurze Gänge 15-20 min)."),
+    ("2027-07-26", "Hitzetraining: Auffrischung im Taper", "Mo 26.07. und Do 29.07. Sauna 15-20 min nach lockerer Einheit, in der Rennwoche bis Mi 04.08. höchstens 1 kurzer Gang, ab Do 05.08. nichts mehr. Kein Heat-Ride mehr, auch keine Hitze am Renntag davor."),
     ("2027-01-25", "Phase 2: Grundlage II / Aufbau (25.01.-21.03.)",
      "Intensität steigt (pyramidal ca. 80/15/5). Rad-Intervalle, wo sie am besten passen: Do Schwelle "
      "2x20 min bei 95-100 % FTP (später 3x15, 2x25), Sa in der langen Fahrt ein Block (2x20 min Sweet Spot oder 3x15 min "
