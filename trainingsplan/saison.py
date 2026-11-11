@@ -277,6 +277,20 @@ RETESTS = [
 ]
 
 # (Montag, Name, Beschreibung)
+def _hitze_tage(von: str, bis: str, wochentag: int = 1) -> list[str]:
+    """Hitzetage (Standard Dienstag) von Montag `von` bis `bis`; Erholungs- und Testwochen entfallen."""
+    skip = {t for t, _, r in WOCHEN if r}
+    for d, _, _ in RETESTS:
+        dd = date.fromisoformat(d)
+        skip.add((dd - timedelta(days=dd.weekday())).isoformat())
+    tage, m = [], date.fromisoformat(von)
+    while m <= date.fromisoformat(bis):
+        if m.isoformat() not in skip:
+            tage.append(f"{m + timedelta(days=wochentag):%d.%m.}")
+        m += timedelta(days=7)
+    return tage
+
+
 PHASEN: list[tuple[str, str, str]] = [
     ("2026-11-16", "Phase 0: Tests (bis 22.11.)",
      "Ziel: nach Krankheit/Off-Season wieder Normalbetrieb, Schwellenwerte ermitteln "
@@ -304,6 +318,34 @@ PHASEN: list[tuple[str, str, str]] = [
     ("2026-11-23", "Mittwochs-Intervalle Lauf", LAUFINTERVALLE),
     ("2027-07-05", "Sauna: Erholung und Hitzeanpassung", SAUNA),
     ("2027-06-28", "Hitzetraining: Plan für die DM", HITZE),
+    ("2026-11-23", "Hitzetraining Jahresplan: wöchentlicher Heat-Ride (Rolle)",
+     "Hitzetraining läuft das ganze Jahr, sportspezifisch auf der Rolle (Rolle ist verfügbar) und im Sommer beim Laufen. "
+     "Idee: Grundstock von 1 Heat-Ride pro Woche ab Dezember (hält die Anpassung), Mini-Block vor Cottbus (24.05.-06.06.), "
+     "Haupt-Block vor der DM (05.-25.07., siehe Notiz Hitzetraining: Plan für die DM), im Spätsommer 1 Heat-Ride pro Woche. "
+     "Erholungs- und Testwochen entfallen, Heat-Ride ersetzt immer eine lockere Rad-Einheit (kein Zusatzumfang). "
+     "Winter: Raum so warm wie möglich (24-30 Grad), lange Kleidung, kein Ventilator, 55-60 % FTP, Puls 10-15 über normal. "
+     "Abbruch bei Schwindel, Kopfschmerz, Krankheit. Ampel Gelb (HRV unter ca. 78 oder Ruhepuls über ca. 51): kein Heat-Ride. "
+     "Nicht in den 3 Tagen vor Tests, Cottbus und DM künstlich überhitzen. Gewicht vor/nach wiegen, höchstens 2 % Verlust, 500-1000 mg Natrium pro Stunde. "
+     "Workout in der Bibliothek: 'Rad Hitze-Anpassung 60 min' (45 min: Dauer verkürzen)."),
+    ("2026-11-30", "Hitzetraining Phase 1: 1x pro Woche Heat-Ride (Di)",
+     "Grundlage I, 1 Heat-Ride pro Woche, Di, erste Woche 45 min, danach 60 min. Termine: " + ", ".join(_hitze_tage("2026-11-30", "2027-01-24")) +
+     ". Erholungswochen (21.12.) entfallen. Raum warm, lange Kleidung, 55-60 % FTP; Ziel ist die Gewöhnung, kein Leistungsdruck."),
+    ("2027-01-25", "Hitzetraining Phase 2: 1x pro Woche Heat-Ride (Di)",
+     "Grundlage II: 1 Heat-Ride pro Woche, Di, 60 min. Termine: " + ", ".join(_hitze_tage("2027-01-25", "2027-03-21")) +
+     ". Erholungs- und Retest-Wochen (15.03.) entfallen. Bei Schlüsseleinheit am Do darauf achten, dass der Di-Heat-Ride nicht die Ermüdung erhöht (Ampel prüfen)."),
+    ("2027-03-22", "Hitzetraining Phase 3: 1x pro Woche Heat-Ride (Di)",
+     "Aufbau intensiv und Abitur-Phase: 1 Heat-Ride pro Woche, Di, 45-60 min. Termine: " + ", ".join(_hitze_tage("2027-03-22", "2027-05-16")) +
+     ". In Prüfungswochen (siehe Abitur-Notizen) streichen, wenn der Schlaf leidet; Erholungswoche 12.04. und 10.05. entfallen."),
+    ("2027-05-24", "Hitzetraining Mini-Block vor Cottbus (24.05.-06.06.)",
+     "2 Wochen: 3 Heat-Rides pro Woche (Di 60 min, Sa nachmittags 60 min, So Heat-Koppel: 60 min Rad warm + Lauf mittags) und 1 Heat-Lauf Mo 30 min (Sommerwärme, wenn vorhanden). "
+     "Termine: Mo 24.05. (Lauf), Di 25.05., Sa 29.05., So 30.05., Mo 31.05. (Lauf), Di 01.06., Sa 05.06., So 06.06. Cottbus Sa 12.06. liegt 6 Tage nach dem Block. Reiz ersetzt lockere Einheiten; "
+     "Brick am 06.06. (Renn-Brick 2) bleibt wie geplant, aber in warmer Umgebung. Fr bleibt frei."),
+    ("2027-06-14", "Hitzetraining Erhalt bis zum Hauptblock",
+     "1 Heat-Ride pro Woche (Di 45-60 min): " + ", ".join(_hitze_tage("2027-06-14", "2027-06-28")) +
+     ". Dazu natürliche Sommerhitze nutzen. Danach beginnt der Haupt-Block 05.07.-25.07. (Notiz Hitzetraining: Plan für die DM)."),
+    ("2027-08-16", "Hitzetraining Spätsaison (Hölle von Q)",
+     "Optional für das B-Rennen Hölle von Q (So 05.09., Harz, 90 km Rad): 1 Heat-Ride pro Woche Di 45-60 min am 17.08. und 24.08. "
+     "(Schlüsselwoche 23.08.: nur wenn die Ampel grün ist), Rennwoche 30.08. nichts Künstliches. Jahres-Ende: Heat-Ride im Herbst bei Bedarf fortsetzen."),
     ("2027-07-05", "Hitzetraining Woche 1: 2 Heat-Rides, 1 Heat-Lauf", "Di Heat-Ride 45 min (Rolle warm, 55-60 % FTP), Fr Heat-Lauf 30 min (mittags im Sommer, 6:50-7:10/km), Sa nachmittags Heat-Ride 45 min. Gewicht vor/nach wiegen, Schweißrate notieren, HRV und Ruhepuls beobachten. Siehe Notiz Hitzetraining: Plan für die DM."),
     ("2027-07-12", "Hitzetraining Woche 2: 2 Heat-Rides, 2 Heat-Läufe, Heat-Koppel", "Mo Heat-Lauf 30 min, Di Heat-Ride 60 min, Fr Heat-Lauf 40 min, Sa Heat-Ride 60 min nachmittags, So 11.07. Heat-Koppel (60 min Rad warm + Lauf mittags). Generalprobe So 18.07.: vorher nichts künstlich Heißes am Sa."),
     ("2027-07-19", "Hitzetraining Woche 3: 3 Heat-Rides, 2 Heat-Läufe, Heat-Koppel", "Di, Do (locker, kein Schlüssel) und Sa Heat-Ride 60 min, Mo und Fr Heat-Lauf 40 min, So 25.07. Heat-Koppel. Letzte Hitzewoche, Sauna optional 20-30 min nach lockeren Tagen."),
