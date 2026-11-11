@@ -11,6 +11,7 @@ medizinische Diagnose.
 
 from __future__ import annotations
 
+import re
 import statistics
 from dataclasses import dataclass, field
 from datetime import date, timedelta
@@ -40,14 +41,51 @@ def _datum(eintrag: dict, *keys: str) -> date | None:
     return None
 
 
-def _werte(wellness: list[dict], key: str, von: date, bis: date) -> list[float]:
+def _werte(wellness: list[dict], key: str, von: date, bis: date,
+           ausschluss: set[date] | None = None) -> list[float]:
     out = []
     for w in wellness:
         d = _datum(w, "id", "date")
         v = w.get(key)
+        if ausschluss and d in ausschluss:
+            continue
         if d and von <= d <= bis and isinstance(v, (int, float)) and v > 0:
             out.append(float(v))
     return out
+
+
+_SAUNA = re.compile(r"sauna|dampfbad", re.I)
+_KALT = re.compile(r"eistonne|eisbad|eisbecken|kaltbad|kältebad|kaltwasser|kalt duschen|cold plunge", re.I)
+
+
+def expositionen(wellness: list[dict]) -> dict[date, set[str]]:
+    """Sauna/Kälte aus den Kommentaren der Wellness-Einträge (z. B. 'Sauna 2x15 min, Eistonne 1 min')."""
+    out: dict[date, set[str]] = {}
+    for w in wellness:
+        d = _datum(w, "id", "date")
+        text = w.get("comments") or ""
+        if not d or not text:
+            continue
+        arten = set()
+        if _SAUNA.search(text):
+            arten.add("sauna")
+        if _KALT.search(text):
+            arten.add("kalt")
+        if arten:
+            out[d] = arten
+    return out
+
+
+def _werte_sauber(wellness: list[dict], key: str, von: date, bis: date,
+                  nach: set[date]) -> tuple[list[float], int]:
+    """Wie _werte, lässt aber die Morgenwerte nach Sauna/Eisbad aus (HRV sinkt, Ruhepuls steigt dann kurz).
+    Nur wenn danach noch mindestens 3 Werte übrig bleiben und höchstens die Hälfte ausgelassen wird."""
+    alle = _werte(wellness, key, von, bis)
+    sauber = _werte(wellness, key, von, bis, ausschluss=nach)
+    weg = len(alle) - len(sauber)
+    if weg and (len(sauber) < 3 or weg > len(alle) / 2):
+        return alle, 0
+    return sauber, weg
 
 
 def _mittel(xs: list[float]) -> float | None:
@@ -67,6 +105,9 @@ def bewerte(wellness: list[dict], aktivitaeten: list[dict], heute: date,
     w7_von = heute - timedelta(days=7)
     basis_von = basis_ab or heute - timedelta(days=60)
     basis_bis = heute - timedelta(days=8)
+    expo = expositionen(wellness)
+    nach = {d + timedelta(days=1) for d in expo}  # Morgenwerte nach Sauna/Eisbad
+    ausgelassen = 0
 
     # --- Fitness / Ermüdung / Form -------------------------------------
     mit_ctl = sorted((w for w in wellness if w.get("ctl") is not None and w.get("atl") is not None),
@@ -91,7 +132,8 @@ def bewerte(wellness: list[dict], aktivitaeten: list[dict], heute: date,
 
     # --- HRV ------------------------------------------------------------
     hrv_key = "hrv" if _werte(wellness, "hrv", basis_von, gestern) else "hrvSDNN"
-    hrv7 = _werte(wellness, hrv_key, w7_von, heute)
+    hrv7, weg = _werte_sauber(wellness, hrv_key, w7_von, heute, nach)
+    ausgelassen = max(ausgelassen, weg)
     hrv_basis = _werte(wellness, hrv_key, basis_von, basis_bis)
     if len(hrv7) >= 3 and len(hrv_basis) >= 14:
         m7, mb, sd = statistics.fmean(hrv7), statistics.fmean(hrv_basis), statistics.pstdev(hrv_basis)
@@ -105,7 +147,8 @@ def bewerte(wellness: list[dict], aktivitaeten: list[dict], heute: date,
                 signale.append(Signal("HRV", 1, f"HRV 7 Tage Ø {m7:.0f} vs. Basis {mb:.0f} – unter Normalbereich"))
 
     # --- Ruhepuls -------------------------------------------------------
-    rhr7 = _werte(wellness, "restingHR", w7_von, heute)
+    rhr7, weg = _werte_sauber(wellness, "restingHR", w7_von, heute, nach)
+    ausgelassen = max(ausgelassen, weg)
     rhr_basis = _werte(wellness, "restingHR", basis_von, basis_bis)
     if len(rhr7) >= 3 and len(rhr_basis) >= 14:
         m7, mb = statistics.fmean(rhr7), statistics.fmean(rhr_basis)
@@ -115,6 +158,22 @@ def bewerte(wellness: list[dict], aktivitaeten: list[dict], heute: date,
             signale.append(Signal("Ruhepuls", 2, f"Ruhepuls +{diff:.0f} bpm über Basis"))
         elif diff >= 4:
             signale.append(Signal("Ruhepuls", 1, f"Ruhepuls +{diff:.0f} bpm über Basis"))
+
+    # --- Einordnung: Sauna/Eisbad am Vortag ------------------------------
+    if expo:
+        k["tage_nach_sauna_kalt"] = ausgelassen
+    if heute in nach:
+        heute_w = next((w for w in wellness if _datum(w, "id", "date") == heute), {})
+        arten = " und ".join({"sauna": "Sauna", "kalt": "Eisbad"}[a] for a in sorted(expo[heute - timedelta(days=1)]))
+        teile = []
+        h_heute, r_heute = heute_w.get(hrv_key), heute_w.get("restingHR")
+        if isinstance(h_heute, (int, float)) and k.get("hrv_7d") and hrv7:
+            teile.append(f"HRV heute {h_heute:.0f} vs. Ø {statistics.fmean(hrv7):.0f}")
+        if isinstance(r_heute, (int, float)) and rhr7:
+            teile.append(f"Ruhepuls heute {r_heute:.0f} vs. Ø {statistics.fmean(rhr7):.0f}")
+        signale.append(Signal("Sauna/Eisbad", 0, f"{arten} gestern: Morgenwerte nicht überbewerten"
+                              + (f" ({', '.join(teile)})" if teile else "")
+                              + ". Einordnung erst morgen, wenn die Werte nach 24-48 h zurück sind."))
 
     # --- Schlaf ---------------------------------------------------------
     schlaf = _werte(wellness, "sleepSecs", w7_von, heute)

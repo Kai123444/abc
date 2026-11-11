@@ -40,7 +40,7 @@ def bericht(b: Bewertung, vorher: list[Einheit], nachher: list[Einheit], heute: 
              "hrv_basis": "HRV Basis", "hrv_z": "HRV z-Wert", "ruhepuls_7d": "Ruhepuls 7 Tage",
              "ruhepuls_basis": "Ruhepuls Basis", "schlaf_h_7d": "Schlaf Ø h (7 T.)",
              "load_7d": "Load letzte 7 Tage", "load_wochenschnitt_4w": "Load Ø/Woche (4 W.)",
-             "acwr": "Akut:Chronisch", "load_normalwoche": "Load Ø Normalwoche",
+             "tage_nach_sauna_kalt": "Morgenwerte nach Sauna/Eisbad (ausgelassen)", "acwr": "Akut:Chronisch", "load_normalwoche": "Load Ø Normalwoche",
              "normalwochen": "Normalwochen im Vergleich", "pausewochen": "Pausenwochen (ignoriert)", "fatigue_3d": "Müdigkeit (3 T.)",
              "soreness_3d": "Muskelkater (3 T.)", "stress_3d": "Stress (3 T.)"}
     z += ["| Kennzahl | Wert |", "|---|---|"]
@@ -87,6 +87,29 @@ def _stufentest(client: IntervalsClient, a) -> int:
         else:
             client.upsert_events([ev])
     print("✔ übernommen." if a.apply else "Vorschau – mit --apply übernehmen.")
+    return 0
+
+
+def _log(client: IntervalsClient, a) -> int:
+    """Eintrag ins Wellness-Kommentarfeld des Tages und als Kalendernotiz. Die Auswertung erkennt Sauna und
+    Eisbad im Kommentar und ordnet die Morgenwerte des Folgetags entsprechend ein."""
+    import hashlib
+    if not a.text:
+        print("Fehler: --text angeben", file=sys.stderr)
+        return 2
+    tag = a.tag or (date.today() - timedelta(days=1))
+    alt = next((w for w in client.wellness(tag, tag) if (w.get("id") or "")[:10] == tag.isoformat()), {})
+    vorher = (alt.get("comments") or "").strip()
+    neu = a.text if a.text in vorher else (f"{vorher} | {a.text}" if vorher else a.text)
+    print(f"{tag}: Kommentar -> {neu}\nNotiz: {a.log_name}")
+    if not a.apply:
+        print("Vorschau – mit --apply eintragen.")
+        return 0
+    client.set_wellness(tag, {"comments": neu})
+    client.upsert_events([{"category": "NOTE", "name": a.log_name, "description": a.text,
+                           "start_date_local": f"{tag.isoformat()}T00:00:00",
+                           "external_id": f"log-{tag.isoformat()}-{hashlib.sha1(a.text.encode()).hexdigest()[:8]}"}])
+    print("✔ eingetragen.")
     return 0
 
 
@@ -175,11 +198,14 @@ def _saison(client: IntervalsClient, a) -> int:
 def main(argv: list[str] | None = None) -> int:
     p = argparse.ArgumentParser(prog="trainingsplan", description=__doc__,
                                 formatter_class=argparse.RawDescriptionHelpFormatter)
-    p.add_argument("befehl", choices=["analyse", "sync", "anpassen", "stufentest", "saison", "woche"])
+    p.add_argument("befehl", choices=["analyse", "sync", "anpassen", "stufentest", "saison", "woche", "log"])
     p.add_argument("--basis-ab", type=date.fromisoformat,
                    help="Vergleichszeitraum ab Datum (z.B. 2026-08-01): Normalwochen statt 4 Wochen")
     p.add_argument("--alten-plan-loeschen", action="store_true",
                    help="saison: Einträge einer angewendeten Plan-Vorlage vorher löschen")
+    p.add_argument("--tag", type=date.fromisoformat, help="log: Datum des Eintrags (Standard: gestern)")
+    p.add_argument("--text", help="log: Text, z. B. 'Sauna 2x15 min bei 90 Grad, Eistonne 1 min'")
+    p.add_argument("--log-name", default="Sauna / Kälte", help="log: Titel der Kalendernotiz")
     p.add_argument("--uebersicht", action="store_true",
                    help="saison: Übersicht nach plaene/saisonuebersicht.md schreiben (ohne Kalenderzugriff)")
     p.add_argument("--rad", type=date.fromisoformat, help="stufentest: Datum Rad-Stufentest")
@@ -208,6 +234,8 @@ def main(argv: list[str] | None = None) -> int:
             return _saison(client, a)
         if a.befehl == "woche":
             return _woche(client, a)
+        if a.befehl == "log":
+            return _log(client, a)
         wellness, akt = _daten(client, a.heute, a.basis_ab)
     except IntervalsError as exc:
         print(f"Fehler: {exc}", file=sys.stderr)

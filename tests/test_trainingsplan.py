@@ -169,6 +169,22 @@ class TestAnpassen(unittest.TestCase):
         self.assertGreaterEqual(max(h.values()), 17)    # Spitzenblöcke nutzen die Zeit
         self.assertLessEqual(h["2026-11-30"], 15)       # Wiedereinstieg bleibt moderat
 
+    def test_sauna_eisbad_wird_eingeordnet(self):
+        from trainingsplan.analyse import expositionen
+        w = wellness()
+        # Sauna und Eisbad am Vortag: Morgenwerte von HEUTE sind schlecht, dürfen die Ampel nicht kippen
+        w[-2]["comments"] = "Sauna 2x15 min bei 90 Grad, danach Eistonne 1 min"
+        w[-1]["hrv"], w[-1]["restingHR"] = 45, 60
+        e = expositionen(w)
+        self.assertEqual(e[HEUTE - timedelta(days=1)], {"sauna", "kalt"})
+        mit = bewerte(w, aktivitaeten(), HEUTE)
+        self.assertEqual(mit.kennzahlen["tage_nach_sauna_kalt"], 1)
+        self.assertTrue(any(s.name == "Sauna/Eisbad" and s.punkte == 0 for s in mit.signale))
+        ohne = [dict(x, comments=None) for x in w]
+        schlecht = bewerte(ohne, aktivitaeten(), HEUTE)
+        self.assertLess(mit.punkte, schlecht.punkte + 1)  # Einordnung kostet keine Punkte
+        self.assertLessEqual(mit.kennzahlen.get("ruhepuls_7d", 0), schlecht.kennzahlen.get("ruhepuls_7d", 99))
+
     def test_event_format(self):
         ev = self.plan[0].to_event()
         self.assertEqual(ev["category"], "WORKOUT")

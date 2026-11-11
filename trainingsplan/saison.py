@@ -142,7 +142,13 @@ SAUNA = (
     "Puls bei Hitze. Pro Woche 1-2 Saunagänge mehr als bisher steigern. In der Rennwoche nur noch 1-2 kurze Gänge "
     "bis 3 Tage vor dem Rennen, am Renntag davor und danach nicht.\n"
     "Viel trinken (500 ml pro Gang plus Salz), Gewicht vor und nach wiegen (Verlust höchstens 1 %). HRV am Morgen "
-    "nach der Sauna kann niedriger sein, das ist normal und kein Gelb-Signal, solange es nach 48 h zurück ist.")
+    "nach der Sauna kann niedriger sein, das ist normal und kein Gelb-Signal, solange es nach 48 h zurück ist.\n"
+    "Eisbad/Kaltwasser (1-3 min): gut nach Schwimmen, Wettkämpfen und in Erholungswochen, höchstens 1-2x pro Woche. "
+    "Nicht direkt nach Krafttraining (Mo, Mi) und nicht nach den Schlüsseleinheiten im Aufbau, weil Kälte die Anpassung "
+    "dämpfen kann. Nicht in den 3 Tagen vor einem Test oder Rennen.\n"
+    "Eintragen: python -m trainingsplan log --tag JJJJ-MM-TT --text 'Sauna 2x15 min bei 90 Grad, Eistonne 1 min' --apply. "
+    "Die Auswertung erkennt Sauna und Eisbad im Kommentar, lässt die Morgenwerte des Folgetags aus HRV- und Ruhepuls-Mittel "
+    "heraus und schreibt dazu eine Einordnung (Beispiel 11.11.: Ruhepuls 52 statt 48, HRV 79 statt 93).")
 
 KONTROLLE = (
     "Regeln, die der Plan überwacht:\n"

@@ -98,6 +98,10 @@ class IntervalsClient:
                               "category": category}) or []
 
     # -- Schreiben --------------------------------------------------------
+    def set_wellness(self, tag: date, felder: dict) -> dict:
+        """Wellness-Eintrag eines Tages anlegen/aktualisieren (z. B. comments)."""
+        return self._request("PUT", self._athlete(f"/wellness/{tag.isoformat()}"), body={"id": tag.isoformat(), **felder})
+
     def update_event(self, event_id: int, felder: dict) -> dict:
         return self._request("PUT", self._athlete(f"/events/{event_id}"), body=felder)
 

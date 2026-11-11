@@ -33,8 +33,11 @@ VERSCHIEBEN = [
     ("2026-11-15", "Ruhiger Dauerlauf (Run)", "2026-11-14",
      {"name": "Lauf locker (optional)", "moving_time": 1800,
       "description": "Nach dem Schlafen, nur wenn du dich frisch fühlst, sonst frei.\n- 30m 6:50/km Pace"}),
+    # Mi 11.11.: Ruhepuls 52 (Basis 48) und HRV 79 nach langem Dienstag mit Sauna und Eisbad -> nur Beine ausdrehen
     ("2026-11-11", "Ride", "2026-11-11",
-     {"moving_time": 2700, "description": "Grundlage, locker, Trittfrequenz 85-95\n- 45m 57%"}),
+     {"name": "Rad locker (Erholung)", "moving_time": 2700,
+      "description": "Nur Beine ausdrehen nach Dienstag (MTB 81 min, Schwimmen, Sauna, Eisbad). Puls unter ca. 130, "
+                     "Trittfrequenz 85-95. Wenn du dich schwer fühlst: 30 min oder frei.\n- 45m 50%"}),
     ("2026-11-17", "Lauf-Stufentest", "2026-11-18", {}),
     # Heute (Di 10.11.): MTB statt Kadenz-Grundlage, gleiche Dauer
     ("2026-11-10", "Kadenz-Grundlage", "2026-11-10",
@@ -53,7 +56,8 @@ DIESE_WOCHE = [
                     "Sonntag mit einem freien Samstag davor. Sportunterricht am Fr ruhig laufen, kein "
                     "Zeitlauf. Sa locker, früh schlafen, abends kohlenhydratreich essen. So 2-3 h vor "
                     "dem Test frühstücken. Ausweichtermin Mo 16.11., falls der Schlaf unter 7 h war oder "
-                    "HRV/Ruhepuls auffällig sind (HRV unter ca. 78, Ruhepuls über ca. 51).",
+                    "HRV/Ruhepuls auffällig sind (HRV unter ca. 78, Ruhepuls über ca. 51). Bis zum Test: kein Eisbad mehr, "
+                    "Sauna höchstens Do kurz (10 min), am Sa keine Sauna und kein Eisbad.",
      "external_id": "woche-2026-11-13-testhinweis"},
     {"category": "WORKOUT", "type": "Swim", "name": "Schulevent: 4 km locker schwimmen",
      "start_date_local": "2026-11-13T00:00:00", "moving_time": 5400,
