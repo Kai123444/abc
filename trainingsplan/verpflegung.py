@@ -79,7 +79,7 @@ GUT: list[tuple[str, str, int, str]] = [
 ]
 GUT_NACH_TAG = {t: (sport, rate, extra) for t, sport, rate, extra in GUT}
 
-_BLOCK = re.compile(r"\n*Verpflegung[:\n].*\Z", re.S)
+_BLOCK = re.compile(r"(?m)\n*^Verpflegung:\n.*\Z", re.S)  # nur ein Block, der eine eigene Zeile beginnt
 
 
 SUPPLEMENTE = {

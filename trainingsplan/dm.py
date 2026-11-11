@@ -20,7 +20,7 @@ STRECKEN = (
     "LAUFEN 10 km: 2 Runden, flache Wendepunktstrecke: Pumpwerk, Jadeallee, Kreisel hinter der Banter Ruine, Grodendamm, "
     "Deich an der Nordsee bis zum Wendepunkt beim Fischerdorf, zurück über den Grodendamm zum Kreisel, links in die "
     "Emsstraße (2. Runde), Ziel auf der Jadeallee. Oberkörperbekleidung ist Pflicht, Begleitung verboten, Wind von der "
-    "Nordsee. Verpflegung: Wasser, Cola, IsoDrink, Obst, Müsliriegel.\n"
+    "Nordsee. Streckenverpflegung: Wasser, Cola, IsoDrink, Obst, Müsliriegel.\n"
     "ZEITPLAN: Sa 07.08. Startunterlagen 17-19 Uhr, Pasta-Party 18 Uhr im Pumpwerk (bei der Anmeldung buchen, 15 EUR). "
     "So 08.08. Startunterlagen 7:30-9:30, Rad-Check-In 9:30-11:00, Wettkampfbesprechung 11:00 (Pflicht), Start 11:30, "
     "Rad-Check-Out 15:30-16:30, Siegerehrung ca. 16:00. Startpass oder Tageslizenz (15 EUR) mitbringen.\n"

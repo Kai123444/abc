@@ -241,6 +241,11 @@ class TestAnpassen(unittest.TestCase):
         b = vp.block_fuer_event({"category": "RACE_A", "name": "dm kurzdistanz"})
         self.assertIn("Start 11:30", b)
         self.assertIn("nur eine Verpflegungsstelle", b)
+        # Der Verpflegungsblock ersetzt nur sich selbst, nie die Strecken-Beschreibung davor
+        d1 = vp.mit_block(dm.STRECKEN, b)
+        self.assertEqual(vp.mit_block(d1, b), d1)
+        self.assertIn("ANMELDUNG", d1)
+        self.assertIn("ZEITPLAN", d1)
 
     def test_event_format(self):
         ev = self.plan[0].to_event()
