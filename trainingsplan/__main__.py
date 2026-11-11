@@ -112,6 +112,11 @@ def _verpflegung(client: IntervalsClient, a) -> int:
         return 0
     for e, neu in aenderungen:
         client.update_event(e["id"], {"description": neu})
+    gewollt = {n["external_id"] for n in vp.gut_training_events()}
+    for e in client.events(date(2026, 11, 1), date(2027, 12, 31), category="NOTE"):
+        eid = str(e.get("external_id") or "")
+        if eid.startswith(("verpflegung-gut-", "verpflegung-rennfenster-")) and eid not in gewollt:
+            client.delete_event(e["id"])
     client.upsert_events([{"category": "NOTE", "name": "Verpflegung: Grundregeln", "description": vp.GRUNDREGELN,
                            "start_date_local": "2026-11-11T00:00:00", "external_id": "verpflegung-grundregeln"}]
                          + vp.gut_training_events())

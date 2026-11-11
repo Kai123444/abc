@@ -34,12 +34,17 @@ def rate_text(rate: int) -> str:
 
 def beispiel_pro_stunde(rate: int) -> str:
     bidon = int(round(0.65 * rate / 5) * 5)
-    return (f"z. B. pro Stunde ein Bidon (600-750 ml) mit {bidon} g Kohlenhydraten plus {rate - bidon} g aus Gels oder "
+    fluessig = "750-1000 ml" if rate >= 110 else "600-750 ml"
+    text = (f"z. B. pro Stunde ein Bidon ({fluessig}) mit {bidon} g Kohlenhydraten plus {rate - bidon} g aus Gels oder "
             f"Riegeln, alle 15 min etwa {int(round(rate / 4 / 5) * 5)} g")
+    if rate >= 120:
+        text += (". Bei dieser Menge Lösung höchstens ca. 9 % (90 g auf 1 l), den Rest über Gels, Hydrogel-Gels (Alginat) "
+                 "sind magenfreundlicher; mindestens 800-1000 ml Flüssigkeit pro Stunde")
+    return text
 
 
 # Renn-Zielraten (g/h) auf dem Rad / beim Laufen. Du verträgst über 100 g/h; vor dem Rennen mindestens 3x so geübt.
-RENNRATEN = {"race_olympisch": (100, 50), "race_kurz": (105, 60), "race_mitteldistanz": (115, 70)}
+RENNRATEN = {"race_olympisch": (125, 90), "race_kurz": (130, 100), "race_mitteldistanz": (115, 80)}
 
 # Darmtraining: (Datum, Sport, Rate g/h, Zusatz). Rate steigt über die Saison, jeweils bei einem langen Tag.
 GUT: list[tuple[str, str, int, str]] = [
@@ -48,22 +53,27 @@ GUT: list[tuple[str, str, int, str]] = [
     ("2027-01-09", "Rad", 80, ""),
     ("2027-01-30", "Rad", 85, ""),
     ("2027-02-13", "Rad", 90, ""),
-    ("2027-02-14", "Lauf", 50, "Langer Hügellauf, kleine Portionen alle 20 min, Gel in Wasser verdünnen."),
+    ("2027-02-14", "Lauf", 50, "Langer Hügellauf, kleine Portionen alle 15-20 min, Gel in Wasser verdünnen."),
     ("2027-02-27", "Rad", 95, "Erste Einheit mit Verhältnis 1:0,8."),
     ("2027-03-13", "Rad", 100, ""),
-    ("2027-03-27", "Rad", 100, "Dazu Nitrat-Test (siehe Supplement-Plan)."),
+    ("2027-03-27", "Rad", 105, "RADRENNEN-FENSTER 1: ein Rennen (1,5-2 h) statt der Bergfahrt. Dazu Nitrat-Test (siehe Supplement-Plan)."),
     ("2027-03-28", "Lauf", 60, ""),
-    ("2027-04-10", "Rad", 105, ""),
-    ("2027-04-24", "Rad", 105, ""),
-    ("2027-05-08", "Rad", 110, "Dazu Koffein-Test 3 mg/kg (200 mg) 45-60 min vor Start."),
-    ("2027-05-09", "Lauf", 65, ""),
-    ("2027-05-22", "Rad", 110, "Dazu Koffein-Test 4 mg/kg (270 mg) und Natrium 800 mg pro Stunde."),
-    ("2027-06-05", "Rad", 115, "Rennsimulation Mitteldistanz-Teil: Koffein als Split-Dosis testen (siehe Supplement-Plan)."),
-    ("2027-06-06", "Lauf", 70, "Brick-Lauf mit Renn-Gel-Plan."),
-    ("2027-06-19", "Rad", 110, "Nach Cottbus: Plan überprüfen, Magen-Notizen auswerten."),
-    ("2027-07-03", "Rad", 120, "Höchste Rate der Saison, Rennsimulation mit Brick-Lauf, Hitzeprotokoll (Sauna-Block läuft)."),
-    ("2027-07-17", "Rad", 115, "Generalprobe DM: exakt der Renn-Plan inklusive Koffein und Natrium."),
-    ("2027-07-18", "Lauf", 70, ""),
+    ("2027-04-10", "Rad", 110, ""),
+    ("2027-04-24", "Rad", 115, "RADRENNEN-FENSTER 2: ein Rennen (2-2,5 h) statt der Bergfahrt."),
+    ("2027-04-25", "Lauf", 70, "Lauf nach dem Rennwochenende, nur locker, Gel in kleinen Portionen."),
+    ("2027-05-08", "Rad", 120, "Dazu Koffein-Test 3 mg/kg (200 mg) 45-60 min vor Start."),
+    ("2027-05-09", "Lauf", 75, ""),
+    ("2027-05-22", "Rad", 120, "RADRENNEN-FENSTER 3: ein Rennen (2-3 h) statt der Bergfahrt, dazu Koffein 4 mg/kg (270 mg) und Natrium 800 mg pro Stunde. "
+                              "PRÜFPUNKT: zweimal 120 g/h mit Magen höchstens 3/10, sonst bleibt die Rate bei 115 g/h."),
+    ("2027-06-05", "Rad", 125, "Rennsimulation: Koffein als Split-Dosis testen (siehe Supplement-Plan)."),
+    ("2027-06-06", "Lauf", 85, "Brick-Lauf mit Renn-Gel-Plan: 25-30 g alle 15 min."),
+    ("2027-06-19", "Rad", 125, "RADRENNEN-FENSTER 4: ein Rennen (2-3 h) statt der Bergfahrt, nach Cottbus Plan überprüfen, Magen-Notizen auswerten."),
+    ("2027-06-20", "Lauf", 90, "Brick: 40 min Rad im Renntempo, dann Lauf mit 90 g/h."),
+    ("2027-07-03", "Rad", 130, "RADRENNEN-FENSTER 5 (nur bei grüner Ampel): ein Rennen (2-3 h) statt der Bergfahrt, höchste Rate der Saison, "
+                              "Hitzeprotokoll (Sauna-Block läuft). PRÜFPUNKT: 125 g/h zweimal gut, sonst bleibt die DM-Rate bei 120 g/h."),
+    ("2027-07-04", "Lauf", 95, "Brick: 40 min Rad im Renntempo, dann Lauf mit 95 g/h."),
+    ("2027-07-17", "Rad", 130, "Generalprobe DM: exakt der Renn-Plan inklusive Koffein und Natrium."),
+    ("2027-07-18", "Lauf", 100, "Generalprobe DM: Brick, Lauf mit 100 g/h exakt wie im Rennen."),
     ("2027-08-28", "Rad", 115, "Generalprobe Hölle von Q: 90-100 km Brick, exakt der Renn-Plan."),
 ]
 GUT_NACH_TAG = {t: (sport, rate, extra) for t, sport, rate, extra in GUT}
@@ -112,16 +122,30 @@ SUPPLEMENT_REGELN = (
     "Sport und keine Stimulanzien.")
 
 GUT_REGELN = (
-    "Darmtraining für hohe Kohlenhydratmengen im Rennen: Der Darm lässt sich trainieren. Ziel sind 100-120 g pro Stunde. "
-    "Dafür brauchst du mehrere Transportwege: Glukose/Maltodextrin und Fructose.\n"
+    "Darmtraining für hohe Kohlenhydratmengen im Rennen: Der Darm lässt sich trainieren. Ziel für die DM: Rad 130 g/h, "
+    "Lauf 100 g/h; Cottbus Rad 125 g/h, Lauf 90 g/h; Hölle von Q Rad 115 g/h, Lauf 80 g/h. Das liegt am oberen Ende dessen, "
+    "was auch Profis trainieren, deshalb gibt es Prüfpunkte.\n"
     "Verhältnis Maltodextrin/Glukose : Fructose: bis 90 g/h 2:1, über 90 g/h 1:0,8. Beispiele pro Stunde: 60 g = 40:20, "
-    "70 g = 47:23, 80 g = 53:27, 90 g = 60:30, 100 g = 56:44, 110 g = 61:49, 120 g = 67:53.\n"
-    "Aufbau im Training (jeweils bei einer langen Einheit am Wochenende): 70 g/h im Dezember, 80 g/h im Januar, 90-95 g/h "
-    "im Februar, 100 g/h im März, 105-110 g/h im April/Mai, 115-120 g/h im Juni/Juli. Gesamtplan mit allen Terminen siehe "
-    "die Kalendernotizen 'Darmtraining'.\n"
-    "Regeln: Rate nur steigern, wenn die vorige zweimal gut lief; Magen nach jeder Stunde auf 0-10 notieren; Gels mit "
-    "reichlich Wasser (Gel ohne Wasser ist eine Hauptursache für Probleme); die Rennrate musst du vor dem Rennen mindestens "
-    "dreimal gefahren sein. Zwischen den Darmtrainings ganz normal essen, nicht im Alltag auf Gels umstellen.")
+    "70 g = 47:23, 80 g = 53:27, 90 g = 60:30, 100 g = 56:44, 110 g = 61:49, 120 g = 67:53, 125 g = 69:56, 130 g = 72:58.\n"
+    "Aufbau im Training (jeweils bei einer langen Einheit am Wochenende): Rad 70 g/h im Dezember, 80 g/h im Januar, 90-95 g/h "
+    "im Februar, 100-105 g/h im März, 110-115 g/h im April, 120 g/h im Mai, 125 g/h im Juni, 130 g/h im Juli. Lauf: 50 g/h im "
+    "Februar, 60-70 g/h im Frühjahr, 75-85 g/h im Mai/Juni, 90-100 g/h im Juni/Juli. Alle Termine siehe Kalendernotizen "
+    "'Darmtraining'.\n"
+    "Wichtig für die Aufnahme bei Rennbelastung: Im Wettkampftempo fließt weniger Blut in den Darm, deshalb zählt nur, was "
+    "du bei Renntempo geschafft hast. Darum die Radrennen-Fenster.\n"
+    "Regeln: Rate nur steigern, wenn die vorige zweimal gut lief; Magen nach jeder Stunde auf 0-10 notieren (bis 3 gut, "
+    "4-5 nicht steigern, ab 6 um 10 g/h senken); Gels immer mit Wasser; Lösung höchstens ca. 9-10 %; Rennrate muss "
+    "mindestens dreimal in Renn-Intensität gefahren sein. Entscheidungsregel für die DM: Rennrate = die höchste Rate, die du "
+    "zweimal in Renn-Intensität mit Magen höchstens 3/10 geschafft hast, minus 5 g/h. Prüfpunkte: 22.05. (120 g/h) und "
+    "03.07. (125-130 g/h), Lauf 20.06. (90 g/h). Zwischen den Darmtrainings ganz normal essen.")
+
+RADRENNEN = [
+    ("2027-03-27", "2027-03-28", 105, "1,5-2 h", "Saisonstart, erster Test der Aufnahme im Renntempo"),
+    ("2027-04-24", "2027-04-25", 115, "2-2,5 h", "Zweiter Test, nach der Erholungswoche 12.04. frisch"),
+    ("2027-05-22", "2027-05-23", 120, "2-3 h", "PRÜFPUNKT 1, erster Block der Wettkampfphase, dazu Koffein-Test"),
+    ("2027-06-19", "2027-06-20", 125, "2-3 h", "Eine Woche nach Cottbus, Plan auswerten"),
+    ("2027-07-03", "2027-07-04", 130, "2-3 h", "PRÜFPUNKT 2, höchste Rate, nur bei grüner Ampel, danach Erholungswoche 05.07."),
+]
 
 GUT_TERMINE = GUT
 
@@ -263,10 +287,11 @@ def _rennen_teile(kind: str) -> dict[str, str]:
         rad_zeit = "ca. 65-75 min"
     rad = (f"Rad ({rad_zeit}): {rad_rate} g Kohlenhydrate pro Stunde = {rm} g Maltodextrin/Glukose + {rf} g Fructose "
            f"(Verhältnis {rv}), insgesamt ca. {int(round(dauer_rad * rad_rate / 5) * 5)} g; {beispiel_pro_stunde(rad_rate)}. "
-           "Von der ersten Minute an alle 15 min, 700 ml Flüssigkeit und 600-800 mg Natrium pro Stunde (bei Hitze bis 1000 mg); "
+           f"Von der ersten Minute an alle 15 min, {'800-1000' if rad_rate >= 110 else '700'} ml Flüssigkeit und 600-800 mg Natrium pro Stunde (bei Hitze bis 1000 mg); "
            "in den letzten 10 min vor dem Wechsel nur noch Wasser.")
     lauf = (f"Lauf (ca. {lauf_min} min): {lauf_rate} g Kohlenhydrate pro Stunde = {lm} g Maltodextrin/Glukose + {lf} g Fructose "
-            f"(Verhältnis {lv}), ein Gel mit 25-30 g alle 25-30 min, Wasser an jeder Verpflegungsstelle, bei Hitze Cola und "
+            f"(Verhältnis {lv}), insgesamt ca. {int(round(lauf_min * lauf_rate / 60 / 5) * 5)} g: ein Gel (25 g) alle "
+            f"{int(round(60 * 25 / lauf_rate))} min, jeweils mit Wasser aus der Verpflegungsstelle, bei Hitze Cola und "
             "Schwamm zum Kühlen. Magen ruhig halten: ab km 5 zuerst Cola/Wasser.")
     pre = (f"Renntag, 3 h vorher: {g(2.5, 3.0)} Kohlenhydrate (Weißbrot mit Honig, Haferbrei, Reis) und 500 ml; "
            "60 min vorher 500 ml mit 500 mg Natrium; 15 min vor dem Start ein Gel (25 g).")
@@ -384,8 +409,9 @@ GRUNDREGELN = (
     "Bei 12-20 h Training nicht zu wenig essen: Energiemangel kostet Leistung, Schlaf und HRV. Vor Schlüsseleinheiten nie "
     "nüchtern, 'Train low' höchstens bei lockeren Einheiten bis 60 min und nicht an Kraft- oder Intervalltagen.\n"
     "Verhältnis Maltodextrin/Glukose : Fructose: bis 90 g/h 2:1 (60 g = 40:20, 80 g = 53:27, 90 g = 60:30), über 90 g/h "
-    "1:0,8 (100 g = 56:44, 110 g = 61:49, 120 g = 67:53).\n"
-    "Rennziele: Cottbus Rad 100 g/h, Lauf 50 g/h. DM Rad 105 g/h, Lauf 60 g/h. Hölle von Q Rad 115 g/h, Lauf 70 g/h.\n"
+    "1:0,8 (100 g = 56:44, 110 g = 61:49, 120 g = 67:53, 130 g = 72:58).\n"
+    "Rennziele: Cottbus Rad 125 g/h, Lauf 90 g/h. DM Rad 130 g/h, Lauf 100 g/h. Hölle von Q Rad 115 g/h, Lauf 80 g/h "
+    "(Rennrate immer erst nach den Prüfpunkten fixieren, siehe Darmtraining).\n"
     "Jede Einheit im Kalender hat unten einen Block 'Verpflegung' mit den passenden Mengen.")
 
 
@@ -398,6 +424,20 @@ def gut_training_events() -> list[dict]:
                 f"Für 3 h: ca. {3 * rate} g, für 4 h: ca. {4 * rate} g. {extra}".strip())
         out.append({"category": "NOTE", "name": f"Darmtraining {sport}: {rate} g/h ({v})", "description": text,
                     "start_date_local": f"{tag}T00:00:00", "external_id": f"verpflegung-gut-{tag}"})
+    for n, (sa, so, rate, dauer, grund) in enumerate(RADRENNEN, 1):
+        m, f, v = verhaeltnis(rate)
+        text = (f"Radrennen-Fenster {n}: Sa {sa[8:10]}.{sa[5:7]}. oder So {so[8:10]}.{so[5:7]}. {grund}.\n"
+                f"Gesucht: Straßenrennen, Kriterium (mindestens 60 min), Jedermann-/Marathonrennen oder MTB-Marathon mit "
+                f"{dauer}, echtes Renntempo (nicht Gruppenausfahrt). Termine z. B. über rad-net.de (Terminkalender des BDR). "
+                f"Sobald du ein Rennen hast: in intervals.icu als Rennen (C) eintragen, dann plane ich die Woche darum.\n"
+                f"Verpflegungsziel im Rennen: {rate_text(rate)}. {beispiel_pro_stunde(rate)}.\n"
+                f"Ersetzt die lange Bergfahrt am Samstag. Do Rad-Schlüssel wie geplant, Fr locker 45 min. Sonntag nach einem "
+                f"Samstagsrennen nur Lauf locker 45 min; bei Sonntagsrennen am Samstag 60-90 min locker. Montag danach nur "
+                f"leichte Beine. Kein Rennen in einer Erholungswoche oder in den 2 Wochen vor Cottbus und der DM. Danach "
+                f"Magen-Notizen (0-10 pro Stunde) und Zielrate in den Wellness-Kommentar schreiben.")
+        out.append({"category": "NOTE", "name": f"Radrennen-Fenster {n}: {sa[8:10]}.{sa[5:7]}./{so[8:10]}.{so[5:7]}. ({rate} g/h)",
+                    "description": text, "start_date_local": f"{sa}T00:00:00",
+                    "external_id": f"verpflegung-rennfenster-{n}"})
     out.append({"category": "NOTE", "name": "Darmtraining: Plan und Regeln", "description": GUT_REGELN,
                 "start_date_local": "2026-11-11T00:00:00", "external_id": "verpflegung-gut-regeln"})
     out.append({"category": "NOTE", "name": "Supplements: Plan und Regeln", "description": SUPPLEMENT_REGELN,
