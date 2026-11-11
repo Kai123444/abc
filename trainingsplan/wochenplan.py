@@ -26,6 +26,8 @@ ENTFERNEN = [
     ("2026-11-23", "Kraft: Oberkörper und Core", "Mo: Ganzkörper mit Beinen"),
     ("2026-11-25", "Kraft: Beine Technik", "Mi: Beine jetzt am Montag"),
     ("2026-11-19", "Lauf locker", "Do: nach dem Lauftest kein Lauf"),
+    ("2026-11-16", "Kraft: Oberkörper und Beine (Einstieg)", "Mo: du hast schon Kraft gemacht, kein Einstieg"),
+    ("2026-11-23", "Kraft: Beine und Oberkörper (Technik)", "Mo: Aufbau statt Technik-Einstieg"),
     ("2026-11-21", "Rad Grundlage lang", "Sa: jetzt als lange Fahrt mit Sweet-Spot-Block"),
     ("2026-11-13", "Rad Grundlage (Freitag, Sondertraining)",
      "Fr: gestrichen, Sportunterricht und Schulevent reichen vor dem Rad-Stufentest am So"),
@@ -78,11 +80,11 @@ DIESE_WOCHE = [
 # Nächste Woche (16.-22.11.): Lauf-Stufentest am Mi (verschoben, Id 154094124)
 # (Tag, Typ, Name, Beschreibung, Minuten)
 NAECHSTE_WOCHE = [
-    ("2026-11-16", "WeightTraining", "Kraft: Oberkörper und Beine (Einstieg)",
-     "Wie gewohnt montags, jetzt mit Beinen. Gewichte finden, 3-4 Wiederholungen in Reserve: Goblet-Kniebeuge 2x8, "
-     "Rumänisches Kreuzheben 2x8, Split Squat 2x6 je Seite, Wadenheben 2x12, dann Klimmzüge oder Latzug 3x8, "
-     "Rudern 3x10, Liegestütze 3x12, Plank 3x45 s. Nach dem Rad-Stufentest vom Sonntag nicht bis zur Erschöpfung; "
-     "Lauf-Stufentest ist am Mittwoch, deshalb bleiben die Beine leicht.", 50),
+    ("2026-11-16", "WeightTraining", "Kraft: Oberkörper voll, Beine leicht",
+     "Du hast schon Kraft gemacht (02.11.: 6,2 t in 60 min, 09.11.: 17,1 t in 115 min), das ist kein Einstieg mehr. Nimm deine letzten "
+     "Arbeitsgewichte, RIR 2-3. Oberkörper voll: Klimmzüge oder Latzug 4x6-8, Rudern 4x8, Bankdrücken 3x8, Schulterdrücken 3x8, "
+     "Face Pulls 2x15, Plank 3x45 s. Beine nur leicht: Goblet-Kniebeuge 2x8 mit 50-60 % deines Arbeitsgewichts, Glute Bridge 2x12, "
+     "Wadenheben 2x12. Grund: Lauf-Stufentest am Mittwoch, der Beinteil kommt am Donnerstag. Ziel ca. 5-6 t in 50-55 min.", 55),
     ("2026-11-17", "Ride", "Rad locker",
      "Regeneration nach dem Test, Beine ausdrehen.\n- 10m ramp 45-52%\n- 30m 55%\n- 5m 50%", 45),
     ("2026-11-17", "Swim", "Vereinstraining",
@@ -93,10 +95,10 @@ NAECHSTE_WOCHE = [
      "Fenster Do 14:00-16:30, danach Schwimmen im Verein (17:30). Wenn die FTP noch nicht gesetzt ist, vorläufig 280 W.\n"
      "Warmup\n- 15m ramp 50-75%\n\nSweet Spot 3x\n- 12m 90%\n- 4m 55%\n\nCooldown\n- 10m 50%", 73),
     ("2026-11-19", "WeightTraining", "Kraft: Beine (nach dem Rad)",
-     "Nach dem Lauf-Stufentest und dem Sweet Spot. Die Montagseinheit hatte leichte Beine, deshalb heute der Beinteil, "
-     "40 min im Kraftraum nach dem Rad, RIR 3: Goblet-Kniebeuge 3x8, Rumänisches Kreuzheben 3x8, Split Squat 3x6 je Seite, "
-     "Hip Thrust 3x10, Wadenheben 3x12, Plank 3x45 s. Nicht bis zum Versagen, damit die Beine am Samstag frisch sind. "
-     "Danach Schwimmen im Verein (17:30).", 40),
+     "Nach dem Lauf-Stufentest und dem Sweet Spot. Die Montagseinheit hatte nur leichte Beine, deshalb heute der Beinteil "
+     "mit deinen letzten Arbeitsgewichten, 40 min im Kraftraum nach dem Rad, RIR 2-3: Kniebeuge (Front oder Goblet) 3x8, Rumänisches "
+     "Kreuzheben 3x8, Split Squat 3x6 je Seite, Hip Thrust 3x10, Wadenheben 3x12, Plank 3x45 s. Ziel ca. 6-7 t. Nicht bis zum "
+     "Versagen, damit die Beine am Samstag frisch sind. Danach Schwimmen im Verein (17:30).", 40),
     ("2026-11-20", "WeightTraining", "Stabi und Fußkraft Stufe 1 (Freitagabend)",
      "Abends, 30 min, RIR 2-3. Fuß: Wadenheben einbeinig auf der Stufe 3x12 (3 s ab) und 3x12 mit gebeugtem Knie, Tibialis-Raises 3x15, "
      "Short Foot 2x10. Hüfte: Single-Leg Glute Bridge 3x10, Lateral Band Walk 3x12 je Seite, Copenhagen Plank kurz 3x20 s, Seitstütz "
@@ -108,10 +110,10 @@ NAECHSTE_WOCHE = [
      "Im Gelände wie du es hast (Harz oder flach), gleiche Zonen wie im Flachen: nach Leistung fahren. Der Block ist die zweite "
      "Intensität der Woche. Essen und trinken (60 g Kohlenhydrate/h).\n"
      "Warmup\n- 10m ramp 45-57%\n\nGrundlage\n- 40m 58%\n\nSweet Spot 2x\n- 15m 90%\n- 5m 55%\n\nGrundlage\n- 35m 58%\n\nCooldown\n- 10m 50%", 135),
-    ("2026-11-23", "WeightTraining", "Kraft: Beine und Oberkörper (Technik)",
-     "Erste Aufbauwoche, Technik und Gewichte finden (RIR 3): Front- oder Goblet-Kniebeuge 3x8, Rumänisches "
-     "Kreuzheben 3x8, Bulgarian Split Squat 3x6 je Seite, Hip Thrust 3x10, Wadenheben 3x12, danach Klimmzüge "
-     "3x8, Rudern 3x10, Bankdrücken 3x8, Plank 3x45 s. Danach +2,5 kg pro Fortschritt.", 55),
+    ("2026-11-23", "WeightTraining", "Kraft: Beine und Oberkörper (Aufbau)",
+     "Erste Aufbauwoche, du steigst bei deinen letzten Arbeitsgewichten ein (RIR 2-3), kein Technik-Einstieg: Front- oder "
+     "Goblet-Kniebeuge 3x8, Rumänisches Kreuzheben 3x8, Bulgarian Split Squat 3x6 je Seite, Hip Thrust 3x10, Wadenheben 3x12, danach "
+     "Klimmzüge 3x8, Rudern 3x10, Bankdrücken 3x8, Plank 3x45 s. Ziel ca. 8-10 t in 55-60 min. Danach +2,5 kg, wenn alle Sätze sauber sind.", 60),
     ("2026-11-25", "WeightTraining", "Kraft: Oberkörper und Core (vor dem Lauf)",
      "35 min vor den Bahnintervallen, RIR 3: Bankdrücken 3x8, Klimmzüge oder Latzug 3x8, Face Pulls "
      "2x15, Plank 3x45 s, Pallof Press 2x10 je Seite. Aktivierung: Glute Bridge 2x10, Wadenheben 2x12, 2x5 leichte "
