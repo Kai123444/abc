@@ -20,6 +20,7 @@ WO STEHT WAS (alles in intervals.icu)
 - Erholung: 'Sauna: Erholung und Hitzeanpassung' (05.07.), Sauna und Eis stehen im Wellness-Kommentar des Tages und als Notiz 'Sauna / Kälte'.
 - Tests und Bricks: Retest-Notizen (23.01., 20.03., Zeitfahrtest 13.05., Generalprobe 10.07.), 'Koppel: Renn-Brick 1-4' und 'Koppel: Generalprobe DM'.
 - Bibliothek (Workouts): 15 Ordner 01-07 Rad, 10-12 Lauf, 20 Koppel und Brick, 30 Schwimmen, 40 Kraft, 50 Rennen mit allen Einheiten des Plans.
+- Hitzetraining: Notizen 'Hitzetraining Jahresplan', Phase 1-3, 'Mini-Block vor Cottbus', 'Plan für die DM' (05.-25.07.) und Wochen-Notizen; Heat-Ride auf der Rolle (Di), im Sommer Heat-Lauf. Abitur: Notizen 'Ferien und Abitur' und 'Abitur: geplante Plananpassung (noch nicht umgesetzt)'.
 - Verfügbarkeit: Notiz 'Verfügbarkeit pro Wochentag (Schulzeit)' (Zeitfenster Mo-Do, Vereinstermine) und 'Ferien Brandenburg 2026/27' plus Ferien-Spannen im Kalender. Einheiten müssen in diese Fenster passen.
 - Aktivitäten und Wellness (HRV, Ruhepuls, Schlaf) kommen automatisch von Garmin/Wahoo.
 
