@@ -167,6 +167,7 @@ def _liste() -> list[tuple[str, str, str, str, list[str], int]]:
     # ---------------- 11 Lauf locker, Hügel, lang ----------------
     for m_, n_ in ((30, "Lauf locker 30 min"), (45, "Lauf locker 45 min"), (60, "Lauf locker 60 min")):
         add(8, n_, "Run", f"Locker, Puls niedrig.\n- {m_}m 6:50/km Pace", ["Lauf", "locker"], m_)
+    add(8, "Lauf Hitze-Anpassung 40 min", "Run", "Hitzetraining für die DM: lockerer Lauf mittags bei Sommerwärme oder mit langer Kleidung und Mütze. Tempo nicht erhöhen, Puls steigt. Gewicht vor/nach wiegen, Trinkflasche mitnehmen, Verlust höchstens 2 %.\n- 40m 6:55/km Pace", ["Lauf", "locker", "Hitze"], 40)
     add(8, "Hügellauf locker 55 min", "Run", "Hügelgelände, bergauf kräftig, bergab traben oder gehen.\n- 55m 6:50/km Pace",
         ["Lauf", "Hügel", "Sonntag"], 55)
     for m_ in (75, 90, 100):
