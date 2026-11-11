@@ -81,7 +81,7 @@ WOCHENSTRUKTUR = (
     "Di: Rad locker/Kadenz 60-90 min (Beine ausdrehen nach Montag), ab Phase 3 alle 2 Wochen Intervalle statt locker, "
     "Schwimmen (Verein)\n"
     "Mi: KRAFT Oberkörper, Core und kurze Beinaktivierung (35-40 min), danach SCHLÜSSEL Lauf = Bahnintervalle "
-    "(Einlaufen 3-4 km, 400-1000 m Wiederholungen, Auslaufen; eigene Einheit, bis das Vereinstraining startet)\n"
+    "(Einlaufen 3-4 km, 400-1000 m Wiederholungen, Auslaufen; eigene Einheit, bis das Vereinstraining am 09.12.2026 startet)\n"
     "Do: SCHLÜSSEL Rad-Intervalle (Sweet Spot/Schwelle/VO2max/Renntempo) 75-105 min, ab Phase 3 mit Koppellauf 10-15 min (Phase 4: 15-20 min), Schwimmen (Verein), Sauna\n"
     "Do danach: KRAFT Ergänzung Beine/Hüfte/Rumpf 30-35 min nach dem Rad (Phase 1-2; Phase 3 20 min, Phase 4 entfällt), moderat, RIR 3\n"
     "Fr: trainingsfrei (Schule, Sportunterricht zählt nicht als Einheit)\n"
@@ -156,7 +156,7 @@ LAUFINTERVALLE = (
     "(ca. 4:10-4:15/km) oder 6x1 km bei 3-5-km-Tempo. Nicht schneller als die Zielpace in den ersten Wiederholungen: "
     "bei der Hälfte der Serien sinkt die Qualität (z. B. 26.08. von 3:43 auf 5:35). Paces nach dem Lauf-Stufentest "
     "am 18.11. anpassen. Pro Woche nur eine harte Laufeinheit, dazu der lange Lauf am Sonntag. Solange das Vereinstraining "
-    "noch nicht startet (Termin offen), läufst du dieselbe Einheit allein auf der Bahn am Mittwoch, nach dem Kraftraum.")
+    "noch nicht startet (erster Termin Mi 09.12.2026; am 18.11. und 02.12. kein Verein, 25.11. voraussichtlich auch nicht), läufst du dieselbe Einheit allein auf der Bahn am Mittwoch, nach dem Kraftraum.")
 
 RAD_INTERVALLE = (
     "Rad-Intervalle: Du fährst sie dort, wo sie am besten in die Woche passen, unter der Woche und am Wochenende, Berge oder "

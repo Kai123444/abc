@@ -129,6 +129,21 @@ def _appdaten(client: IntervalsClient, a) -> int:
     return 0
 
 
+def _verein(client: IntervalsClient, a) -> int:
+    """Vereinstermine (Schwimmen Di/Do, Lauf Mi ab 09.12.2026) als Einträge in den Kalender."""
+    from . import vereinstermine
+    evs = vereinstermine.events()
+    print(f"{len(evs)} Vereinseinheiten, 1 Notiz")
+    if not a.apply:
+        print("Vorschau – mit --apply eintragen.")
+        return 0
+    for i in range(0, len(evs), 50):
+        client.upsert_events(evs[i:i + 50])
+    client.upsert_events(vereinstermine.notiz_events())
+    print("✔ eingetragen.")
+    return 0
+
+
 def _dm(client: IntervalsClient, a) -> int:
     """Strecken, Zeitplan und Trainingsabgleich der DM Kurzdistanz (NordseeMan Wilhelmshaven) in den Kalender."""
     from . import dm
@@ -293,7 +308,7 @@ def _saison(client: IntervalsClient, a) -> int:
 def main(argv: list[str] | None = None) -> int:
     p = argparse.ArgumentParser(prog="trainingsplan", description=__doc__,
                                 formatter_class=argparse.RawDescriptionHelpFormatter)
-    p.add_argument("befehl", choices=["analyse", "sync", "anpassen", "stufentest", "saison", "woche", "log", "verpflegung", "dm", "bibliothek", "kontext", "appdaten"])
+    p.add_argument("befehl", choices=["analyse", "sync", "anpassen", "stufentest", "saison", "woche", "log", "verpflegung", "dm", "bibliothek", "kontext", "appdaten", "verein"])
     p.add_argument("--basis-ab", type=date.fromisoformat,
                    help="Vergleichszeitraum ab Datum (z.B. 2026-08-01): Normalwochen statt 4 Wochen")
     p.add_argument("--alten-plan-loeschen", action="store_true",
@@ -337,6 +352,8 @@ def main(argv: list[str] | None = None) -> int:
             return _dm(client, a)
         if a.befehl == "bibliothek":
             return _bibliothek(client, a)
+        if a.befehl == "verein":
+            return _verein(client, a)
         if a.befehl == "appdaten":
             return _appdaten(client, a)
         if a.befehl == "kontext":
