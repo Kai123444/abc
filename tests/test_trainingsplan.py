@@ -230,6 +230,18 @@ class TestAnpassen(unittest.TestCase):
         self.assertIn("100 g Kohlenhydrate pro Stunde", dm)
         self.assertIn("Koffein", dm)
 
+    def test_dm_strecke(self):
+        from trainingsplan import dm
+        self.assertIn("NordseeMan", dm.STRECKEN)
+        self.assertIn("Wilhelmshaven", dm.STRECKEN)
+        self.assertIn("WINDSCHATTENFAHREN VERBOTEN", dm.STRECKEN)
+        self.assertIn("11:30", dm.STRECKEN)
+        self.assertEqual(len(dm.notiz_events()), 3)
+        from trainingsplan import verpflegung as vp
+        b = vp.block_fuer_event({"category": "RACE_A", "name": "dm kurzdistanz"})
+        self.assertIn("Start 11:30", b)
+        self.assertIn("nur eine Verpflegungsstelle", b)
+
     def test_event_format(self):
         ev = self.plan[0].to_event()
         self.assertEqual(ev["category"], "WORKOUT")

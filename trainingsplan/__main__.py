@@ -90,6 +90,28 @@ def _stufentest(client: IntervalsClient, a) -> int:
     return 0
 
 
+def _dm(client: IntervalsClient, a) -> int:
+    """Strecken, Zeitplan und Trainingsabgleich der DM Kurzdistanz (NordseeMan Wilhelmshaven) in den Kalender."""
+    from . import dm
+    from . import verpflegung as vp
+    rennen = [e for e in client.events(date(2027, 8, 8), date(2027, 8, 8), category="RACE_A")
+              if "dm kurzdistanz" in (e.get("name") or "").lower()]
+    if not rennen:
+        print("Fehler: Rennen 'dm kurzdistanz' am 08.08.2027 nicht im Kalender", file=sys.stderr)
+        return 2
+    ev = rennen[0]
+    block = vp.block_fuer_event(ev)
+    beschr = dm.STRECKEN + (f"\n\n{block}" if block else "")
+    print(f"Rennbeschreibung ({len(beschr)} Zeichen), {len(dm.notiz_events())} Notizen")
+    if not a.apply:
+        print("Vorschau – mit --apply eintragen.")
+        return 0
+    client.update_event(ev["id"], {"description": beschr})
+    client.upsert_events(dm.notiz_events())
+    print("✔ eingetragen.")
+    return 0
+
+
 def _verpflegung(client: IntervalsClient, a) -> int:
     """Verpflegungsblock (Menge vorher/während/nachher) an alle geplanten Einheiten und Rennen anhängen."""
     from . import verpflegung as vp
@@ -232,7 +254,7 @@ def _saison(client: IntervalsClient, a) -> int:
 def main(argv: list[str] | None = None) -> int:
     p = argparse.ArgumentParser(prog="trainingsplan", description=__doc__,
                                 formatter_class=argparse.RawDescriptionHelpFormatter)
-    p.add_argument("befehl", choices=["analyse", "sync", "anpassen", "stufentest", "saison", "woche", "log", "verpflegung"])
+    p.add_argument("befehl", choices=["analyse", "sync", "anpassen", "stufentest", "saison", "woche", "log", "verpflegung", "dm"])
     p.add_argument("--basis-ab", type=date.fromisoformat,
                    help="Vergleichszeitraum ab Datum (z.B. 2026-08-01): Normalwochen statt 4 Wochen")
     p.add_argument("--alten-plan-loeschen", action="store_true",
@@ -272,6 +294,8 @@ def main(argv: list[str] | None = None) -> int:
             return _log(client, a)
         if a.befehl == "verpflegung":
             return _verpflegung(client, a)
+        if a.befehl == "dm":
+            return _dm(client, a)
         wellness, akt = _daten(client, a.heute, a.basis_ab)
     except IntervalsError as exc:
         print(f"Fehler: {exc}", file=sys.stderr)

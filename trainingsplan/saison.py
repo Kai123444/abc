@@ -83,7 +83,7 @@ WOCHENSTRUKTUR = (
     "(Einlaufen 3-4 km, 400-1000 m Wiederholungen, Auslaufen; eigene Einheit, bis das Vereinstraining startet)\n"
     "Do: SCHLÜSSEL Rad (Sweet Spot/Schwelle/VO2max) 75-105 min, Schwimmen (Verein), Sauna\n"
     "Fr: Sportunterricht/Lauf locker 30-40 min oder frei\n"
-    "Sa: SCHLÜSSEL langes Rad 3-5 h in den Bergen (Kraftausdauer und Bergintervalle am Anstieg, "
+    "Sa: SCHLÜSSEL langes Rad 3-5 h in den Bergen (Kraftausdauer und Bergintervalle am Anstieg; ab Mai überwiegend flach in Aeroposition), "
     "ab März mit Koppellauf 20-30 min)\n"
     "So: langer Lauf 75-100 min im Hügelgelände (bergauf kräftig, bergab kontrolliert); in Berge-Blöcken mit "
     "sehr langem Samstag stattdessen Rad Z2 2-3 h und der Lauf wandert auf den Freitag\n"
@@ -174,8 +174,12 @@ RETESTS = [
     ("2027-03-20", "Retest Stufentests",
      "Zweiter Retest: Rad-Stufentest, Lauf-Stufentest, CSS-Test. Vergleich mit November und "
      "Januar zeigt, ob Aufbau und Zonen passen."),
+    ("2027-05-15", "Zeitfahrtest 40 km",
+     "In der Erholungswoche: 40 km solo auf flacher Strecke in Aeroposition, so schnell wie möglich und gleichmäßig "
+     "(Windschatten verboten wie bei der DM). Daraus Renn-Leistung und Aero-Position bewerten: bei der DM ca. 88-92 % deiner "
+     "40-km-Leistung, weil danach noch 10 km laufen. Dabei Verpflegung mit 130 g/h testen."),
     ("2027-07-10", "Generalprobe Kurzdistanz",
-     "In der Erholungswoche: Koppel 30 km Rad im Renntempo + 5 km Lauf im Renntempo, "
+     "In der Erholungswoche: Koppel 30 km Rad im Renntempo (flach, Aeroposition) + 5 km Lauf im Renntempo, "
      "Verpflegung und Wechsel üben, 1,5 km Freiwasser mit Neopren."),
 ]
 
@@ -192,7 +196,7 @@ PHASEN: list[tuple[str, str, str]] = [
      "Studio. Rad: Sa 3-4 h in den Bergen, Z2 mit Kraftausdauer am Anstieg: Dezember 4x6 min, Januar "
      "5x8 min bei 50-60 U/min und 70-78 % FTP (Pause 4 min locker), ab Mitte Dezember 1x pro Woche "
      "6x10 s Bergsprint (steil, volle Pause 2-3 min). Dazu eine Sweet-Spot-Einheit am Do "
-     "2x20 min bei 88-93 % FTP. Lauf: 4 Läufe, So 60-75 min im Hügelgelände (bergauf kräftig, bergab "
+     "2x20 min bei 88-93 % FTP. Ab Dezember mindestens 20 min davon in Aeroposition, weil die DM-Radstrecke flach und windschattenfrei ist (Notiz DM-Strecke). Lauf: 4 Läufe, So 60-75 min im Hügelgelände (bergauf kräftig, bergab "
      "traben oder gehen), Steigerungsläufe 6x20 s, Lauf-ABC, Mi Intervalle auf der Bahn (6-10x400 m, Verein). Schwimmen: Vereinstraining plus Technik. "
      "Kraftraum: Mo Beine schwer + Oberkörper, Mi Oberkörper/Core vor dem Lauf (siehe Notiz Krafttraining). "
      "Load 400 -> 550, ca. 13 -> 17 h, davon Rad 7 -> 10 h (dein Radumfang aus 2021/22 und deine Spitzenwoche vom "
@@ -208,7 +212,7 @@ PHASEN: list[tuple[str, str, str]] = [
     ("2027-01-25", "Phase 2: Grundlage II / Aufbau (25.01.-21.03.)",
      "Intensität steigt (pyramidal ca. 80/15/5). Rad: Sa in den Bergen mit Bergintervallen statt "
      "Flachstück: Schwelle 3x15 oder 2x20 min bergauf bei 95-100 % FTP, Kraftausdauer 5x8 min bei "
-     "50-60 U/min, wöchentlich 6-8x10 s Bergsprint, Over-Unders 3x(2x6 min bei 95/105 %) am Do. "
+     "50-60 U/min, wöchentlich 6-8x10 s Bergsprint, Over-Unders 3x(2x6 min bei 95/105 %) am Do, ab Februar in Aeroposition. "
      "Lauf: Mi Bahnintervalle (10-12x400 m, 3x800 m, 4-5x1000 m an der Schwellenpace), So Bergläufe 8x60 s bergauf. Schwimmen: CSS-Sätze 10x100 m. Kraftraum Mo Maximalkraft, Mi Oberkörper vor dem Lauf, ab März "
      "Erhalt. Load 560 -> 640, ca. 16 -> 18 h (Rad 9-10 h).\n"
      "Erwartung: CTL 58 -> ca. 75, Form -14 bis -17. Ruhepuls im Wochenmittel +1-2 bpm in "
@@ -217,7 +221,9 @@ PHASEN: list[tuple[str, str, str]] = [
      "VO2max: Rad 5x4-5 min bei 110-120 % FTP (Pause gleich lang) oder 30/30; Lauf 6x1 km bei "
      "3-5-km-Tempo; Schwimmen 8x200 m bei CSS. Einmal pro Woche Koppeltraining (60-90 min Rad "
      "Sweet Spot + 15-20 min Lauf im Renntempo), Samstag 4-5 h in den Bergen mit VO2max-Intervallen "
-     "bergauf (5x4-5 min) oder 2x30 min Tempo am Anstieg, Bergsprints bleiben. "
+     "bergauf (5x4-5 min) oder 2x30 min Tempo am Anstieg, Bergsprints bleiben. Ab März Do-Schlüssel und Koppel in "
+     "Aeroposition auf flacher Strecke, Samstag abwechselnd Berge (Kraft) und flaches Zeitfahren 2x20 min bei 90-95 % FTP "
+     "in Aeroposition. "
      "Load 640 -> 715, ca. 17 -> 19 h (Rad 9-10 h).\n"
      "Erwartung: CTL 75 -> ca. 87, Form -10 bis -14. Mehr Intensität heißt stärkere Reaktion: "
      "nach harten Tagen HRV 10-15 % niedriger ist normal und sollte nach 48 h zurück sein. "
@@ -226,8 +232,9 @@ PHASEN: list[tuple[str, str, str]] = [
      "Kurzdistanz-spezifisch (1,5 km / 40 km / 10 km, ca. 2:30 h): Renntempo-Blöcke Rad 3x12 min "
      "bei 100-105 % FTP, Brick Rad 40 min bei 85-90 % FTP + Lauf 10 km im Renntempo (alle 2 Wochen), "
      "Freiwasser mit Neopren ab Mai, 1,5 km am Stück, lange Radfahrt bis 4-5 h, langer Lauf bis 100 min. "
-     "Berge bleiben die Beinkraft, aber nur noch jede zweite Woche; dazwischen Renntempo auf dem "
-     "Profil der Strecke (flach oder wellig wie bei der DM), in der Rennwoche keine Bergintervalle. "
+     "Die DM-Strecke ist flach und windschattenfrei (siehe Notiz DM-Strecke): Berge nur noch jede dritte Woche, sonst "
+     "flach in Aeroposition: 3x12 oder 2x20 min bei 95-100 % FTP, 40-km-Blöcke im Renntempo, Wenden üben, bei Wind "
+     "fahren; Läufe ab Mai flach im Renntempo; in der Rennwoche keine Bergintervalle. Zeitfahrtest 40 km solo am Sa 15.05. "
      "Sa 12.06. Cottbus (Olympische Distanz = B-Rennen und Generalprobe für die DM, Mini-Taper Mi-Fr, "
      "ersetzt den Formcheck). Weitere Rennen vor der DM nach Termin: Supersprint/Sprint ersetzt die "
      "Samstags-Brick-Einheit. "
@@ -365,8 +372,8 @@ PHASEN_UEBERSICHT = [
      "ca. 75 / 15 / 10", "Sa 4-5 h Berge: VO2max 5x4-5 min bergauf, 2x30 Tempo am Anstieg, Koppel 1x/Woche",
      "6x1 km (3-5-km-Tempo), Koppellauf 15-20 min", "8x200 bei CSS; Kraftraum Mo 35-40 min Erhalt, Mi 20 min Core"),
     ("2027-05-17", "2027-07-25", "4 Wettkampfvorbereitung", "Renntempo, Spezifik, Spitzenvolumen",
-     "ca. 75 / 15 / 10 mit Renntempo", "Berge jede 2. Woche, dazwischen 3x12 min bei 100-105 % FTP, Brick 40 min bei 85-90 % FTP + 10-km-Lauf",
-     "Langer Lauf bis 100 min, Brick-Lauf 10 km Renntempo", "Freiwasser mit Neopren, 1,5 km am Stück; Kraftraum Mo 35 min Erhalt bis 14 Tage vor DM; Sauna-Block 05.-25.07."),
+     "ca. 75 / 15 / 10 mit Renntempo", "überwiegend flach in Aeroposition: 3x12 / 2x20 min bei 95-100 % FTP, 40-km-Blöcke, Brick 40 min bei 85-90 % FTP + 10-km-Lauf; Berge nur jede 3. Woche",
+     "Langer Lauf bis 100 min flach, Brick-Lauf 10 km Renntempo flach", "Freiwasser mit und ohne Neopren, Wellen, Bojenwenden, Pulk; 1,5 km am Stück; Kraftraum Mo 35 min Erhalt bis 14 Tage vor DM; Sauna-Block 05.-25.07."),
     ("2027-07-26", "2027-08-08", "Taper und Rennen", "Frische, Schärfe, Renntempo-Öffner",
      "locker + wenige scharfe Reize", "3-5 Reize à 3-5 min im Renntempo, Öffner", "kurze Tempoläufe, Öffner",
      "locker, Technik; letzte Beinkraft 14 Tage, Oberkörper 7 Tage vorher"),

@@ -300,6 +300,13 @@ def _rennen_teile(kind: str) -> dict[str, str]:
            "60 min vorher 500 ml mit 500 mg Natrium; 15 min vor dem Start ein Gel (25 g).")
     if kind == "olympisch":
         pre += " Cottbus ist die Generalprobe: genau so üben, wie du es bei der DM machst, auch die hohe Rate."
+    if kind == "kurz":
+        pre = (f"Renntag (Start 11:30, bei Rolling-Start je nach Gruppe später): Frühstück ca. 8:00 mit {g(2.5, 3.0)} Kohlenhydraten "
+               "(Weißbrot mit Honig, Haferbrei) und 500 ml; 10:00 Snack 30-40 g (Banane, Riegel); 10:30 500 ml mit 500 mg Natrium; "
+               "10:45 Koffein 3-4 mg/kg (nur wenn getestet); 11:15 Gel 25 g nach der Wettkampfbesprechung um 11:00.")
+        rad += (" Auf der Strecke gibt es nur eine Verpflegungsstelle (Nordwende), deshalb alles Wichtige selbst mitführen "
+                "(Aero-Bidon oder Rahmen-Bidons plus Gels im Anzug).")
+        lauf += " Auf der Laufstrecke gibt es Wasser, Cola, IsoDrink, Obst und Riegel; die Gels trägst du selbst."
     post = f"Danach sofort: {g(1.2)} Kohlenhydrate und 25 g Eiweiß, in den nächsten Stunden weiter essen und trinken."
     return {"vortage": vortage, "pre": pre, "swim": "Schwimmen: nichts mehr, vorher das Gel wie oben.",
             "rad": rad, "lauf": lauf, "post": post, "supp": SUPPLEMENTE[kind]}
