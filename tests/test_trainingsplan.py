@@ -236,7 +236,7 @@ class TestAnpassen(unittest.TestCase):
         self.assertIn("Wilhelmshaven", dm.STRECKEN)
         self.assertIn("WINDSCHATTENFAHREN VERBOTEN", dm.STRECKEN)
         self.assertIn("11:30", dm.STRECKEN)
-        self.assertEqual(len(dm.notiz_events()), 3)
+        self.assertEqual(len(dm.notiz_events()), 4)
         from trainingsplan import verpflegung as vp
         b = vp.block_fuer_event({"category": "RACE_A", "name": "dm kurzdistanz"})
         self.assertIn("Start 11:30", b)

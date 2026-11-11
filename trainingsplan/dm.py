@@ -45,14 +45,17 @@ VORTAG = (
 
 ABGLEICH = (
     "Abgleich Training und DM-Strecke (nach Ausschreibung 2027):\n"
-    "RAD: flach, windschattenfrei, Wenden, Nordseewind. Das verlangt Zeitfahren: gleichmäßige Leistung in Aeroposition, "
-    "keine Gruppenfahrt. Der Plan war bergbetont; Berge bleiben die Beinkraft im Aufbau, ab Phase 4 aber überwiegend "
-    "flach. Änderungen: (1) Do-Schlüssel ab Dezember mindestens 20 min in Aeroposition, ab März 2 Einheiten pro Woche "
-    "in Aeroposition; (2) Zeitfahrtest 40 km solo, flach, Sa 15.05. (Erholungswoche), daraus die Renn-Leistung "
-    "ableiten (Richtwert 88-92 % FTP, weil danach noch 10 km laufen); (3) ab Phase 4 Samstag nur jede dritte Woche Berge, "
-    "sonst flach: 3x12 min oder 2x20 min bei 95-100 % FTP und 40-km-Blöcke im Renntempo in Aeroposition; (4) Wenden üben "
-    "(U-Turns und Antritte, 6-8 pro Einheit); (5) bei Wind trainieren, Gegenwind-Intervalle einplanen. Lausitz und "
-    "Cottbus sind flach, das passt zum Training.\n"
+    "RAD: flach, windschattenfrei, Wenden, Nordseewind. Das verlangt Zeitfahren: gleichmäßige Leistung in Rennposition, "
+    "keine Gruppenfahrt. Unter der Woche hast du keine Berge, am Wochenende fährst du sie, wenn du kannst. Deshalb: "
+    "(1) die flachen Renntempo-Einheiten liegen unter der Woche (Do-Schlüssel, ab Phase 4 auch Di), der Samstag bleibt "
+    "Berg-Tag und liefert Kraft und Ausdauer; (2) bis du das Zeitfahrrad hast, fährst du den Do-Schlüssel in tiefer "
+    "Position am Unterlenker, danach mindestens 20 min in Aeroposition, ab März zwei Einheiten pro Woche; (3) "
+    "Zeitfahrtest 40 km solo, flach, Do 13.05. (Erholungswoche), daraus die Renn-Leistung ableiten (Richtwert "
+    "88-92 % FTP, weil danach noch 10 km laufen); (4) Wenden üben (U-Turns und Antritte, 6-8 pro Einheit); (5) bei "
+    "Wind trainieren, Gegenwind-Intervalle einplanen. Lausitz und Cottbus sind flach, das passt zum Training.\n"
+    "ZEITFAHRRAD: Sag mir Bescheid, sobald du es hast. Je früher, desto besser: Position, Sitzbein und Rücken brauchen "
+    "8-12 Wochen Gewöhnung (Aero 20 min, dann 40 min, dann 60 min am Stück). Empfehlung: bis 01.03.2027 besorgen und "
+    "ein Bikefit machen, spätestens bis 15.04. (16 Wochen vor der DM). Notlösung: Aufleger am Rennrad.\n"
     "LAUFEN: flach, Wendepunkte, Wind. Hügelläufe sind im Aufbau gut, ab Mai laufen die Brick- und Renntempoläufe flach, "
     "Wenden sind kein Problem. Mittwochs-Bahnintervalle bleiben.\n"
     "SCHWIMMEN: Hafenbecken mit Salzwasser, Wellen, Wendekurs 750 m, Rolling-Start, Schwimmen im Pulk (Windschatten im "
@@ -74,6 +77,12 @@ def notiz_events() -> list[dict]:
     return [
         {"category": "NOTE", "name": "DM-Strecke: Training abgleichen", "description": ABGLEICH,
          "start_date_local": "2026-11-11T00:00:00", "external_id": "dm-abgleich"},
+        {"category": "NOTE", "name": "Zeitfahrrad: Termin und Gewöhnung",
+         "description": "Sobald das Zeitfahrrad da ist, sag Bescheid. Empfehlung: bis 01.03.2027 besorgen und Bikefit "
+                        "machen, spätestens bis 15.04. (16 Wochen vor der DM). Gewöhnung 8-12 Wochen: zuerst 20 min "
+                        "Aeroposition im Do-Schlüssel, dann 40 min, dann 60 min am Stück; Rücken, Hüfte und Nacken "
+                        "brauchen die Zeit. Bis dahin: Unterlenker-Position am Rennrad, Aufleger als Notlösung.",
+         "start_date_local": "2027-03-01T00:00:00", "external_id": "dm-zeitfahrrad"},
         {"category": "NOTE", "name": "DM Vortag: Anreise und Strecke", "description": VORTAG,
          "start_date_local": "2027-08-07T00:00:00", "external_id": "dm-vortag"},
         {"category": "NOTE", "name": "DM Renntag: Zeitplan", "description": RENNTAG,
