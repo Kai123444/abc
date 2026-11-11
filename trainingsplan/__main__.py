@@ -90,6 +90,19 @@ def _stufentest(client: IntervalsClient, a) -> int:
     return 0
 
 
+def _bibliothek(client: IntervalsClient, a) -> int:
+    """Alle Einheiten des Plans (und die im Kalender geplanten) in die Workout-Bibliothek schreiben."""
+    from . import bibliothek
+    kalender = client.events(date(2026, 9, 1), date(2027, 1, 31), category="WORKOUT")
+    stat = bibliothek.anwenden(client, a.apply, kalender)
+    print(f"Ordner neu: {stat['ordner_neu']}, Workouts neu: {stat['neu']}, aktualisiert: {stat['aktualisiert']}")
+    for n, soll, ist in stat["warnungen"]:
+        print(f"WARNUNG Dauer: {n}: erwartet {soll} min, intervals.icu rechnet {ist} min")
+    if not a.apply:
+        print("Vorschau – mit --apply eintragen.")
+    return 0
+
+
 def _dm(client: IntervalsClient, a) -> int:
     """Strecken, Zeitplan und Trainingsabgleich der DM Kurzdistanz (NordseeMan Wilhelmshaven) in den Kalender."""
     from . import dm
@@ -254,7 +267,7 @@ def _saison(client: IntervalsClient, a) -> int:
 def main(argv: list[str] | None = None) -> int:
     p = argparse.ArgumentParser(prog="trainingsplan", description=__doc__,
                                 formatter_class=argparse.RawDescriptionHelpFormatter)
-    p.add_argument("befehl", choices=["analyse", "sync", "anpassen", "stufentest", "saison", "woche", "log", "verpflegung", "dm"])
+    p.add_argument("befehl", choices=["analyse", "sync", "anpassen", "stufentest", "saison", "woche", "log", "verpflegung", "dm", "bibliothek"])
     p.add_argument("--basis-ab", type=date.fromisoformat,
                    help="Vergleichszeitraum ab Datum (z.B. 2026-08-01): Normalwochen statt 4 Wochen")
     p.add_argument("--alten-plan-loeschen", action="store_true",
@@ -296,6 +309,8 @@ def main(argv: list[str] | None = None) -> int:
             return _verpflegung(client, a)
         if a.befehl == "dm":
             return _dm(client, a)
+        if a.befehl == "bibliothek":
+            return _bibliothek(client, a)
         wellness, akt = _daten(client, a.heute, a.basis_ab)
     except IntervalsError as exc:
         print(f"Fehler: {exc}", file=sys.stderr)

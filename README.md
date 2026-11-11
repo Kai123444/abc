@@ -94,3 +94,9 @@ und Notizen (Phasen, Wochenstruktur, Kontrollregeln, Tests, Taper) in den interv
 Das Rennen muss dort schon stehen. Der Plan steckt in `trainingsplan/saison.py`:
 Belastungsaufbau 3:1, CTL-Anstieg höchstens ~4 pro Woche, Lauf-Load nur ~10 % pro Woche, Schwimmen und
 Kraft als feste Größen, 17-18 h in den Spitzenwochen (bis 20 h bei grüner Ampel), zweiwöchiger Taper.
+
+## Workout-Bibliothek
+
+`python -m trainingsplan bibliothek [--apply]` legt die Ordner und Workouts des Plans in der Bibliothek von intervals.icu an
+(Ordner 01-07 Rad, 10-12 Lauf, 20 Koppel und Brick, 30 Schwimmen, 40 Kraft, 50 Rennen). Bestehende Einträge werden
+aktualisiert, im Kalender geplante Einheiten, die noch fehlen, werden einsortiert.
