@@ -26,9 +26,9 @@ WOCHEN: list[tuple[str, int, bool]] = [
     # der Wiedereinstieg ist kurz: Belastung steigt ab 23.11. (erster Block 4 Wochen, dann Erholungswoche 21.12.)
     ("2026-11-09", 411, False), ("2026-11-16", 311, False),
     # Phase 1 Grundlage I
-    ("2026-11-23", 400, False), ("2026-11-30", 425, False), ("2026-12-07", 450, False), ("2026-12-14", 475, False),
+    ("2026-11-23", 440, False), ("2026-11-30", 460, False), ("2026-12-07", 480, False), ("2026-12-14", 500, False),
     ("2026-12-21", 330, True),
-    ("2026-12-28", 495, False), ("2027-01-04", 525, False), ("2027-01-11", 550, False),
+    ("2026-12-28", 515, False), ("2027-01-04", 535, False), ("2027-01-11", 550, False),
     ("2027-01-18", 370, True),
     # Phase 2 Grundlage II / Aufbau
     ("2027-01-25", 560, False), ("2027-02-01", 580, False), ("2027-02-08", 600, False),
@@ -199,10 +199,10 @@ PHASEN: list[tuple[str, str, str]] = [
      "2x20 min bei 88-93 % FTP. Der Do-Schlüssel liegt unter der Woche und damit flach; die DM-Radstrecke ist flach und windschattenfrei (Notiz DM-Strecke). Bis das Zeitfahrrad da ist, fährst du ihn in tiefer Position am Unterlenker, danach mindestens 20 min davon in Aeroposition. Lauf: 4 Läufe, So 60-75 min im Hügelgelände (bergauf kräftig, bergab "
      "traben oder gehen), Steigerungsläufe 6x20 s, Lauf-ABC, Mi Intervalle auf der Bahn (6-10x400 m, Verein). Schwimmen: Vereinstraining plus Technik. "
      "Kraftraum: Mo Beine schwer + Oberkörper, Mi Oberkörper/Core vor dem Lauf (siehe Notiz Krafttraining). "
-     "Load 400 -> 550, ca. 13 -> 17 h, davon Rad 7 -> 10 h (dein Radumfang aus 2021/22 und deine Spitzenwoche vom "
+     "Load 440 -> 550, ca. 13 -> 17 h (KW 48 bereits ca. 13 h), davon Rad 7 -> 10 h (dein Radumfang aus 2021/22 und deine Spitzenwoche vom "
      "07.09. mit 10,5 h Rad). Erster Block 4 Wochen bis 14.12., danach Erholungswoche.\n"
      "Deine Radbasis aus 2020-2022 kommt schnell zurück, Engpässe sind Laufen und Schwimmen.\n"
-     "Erwartung: CTL 31 -> ca. 58 (+3,5 bis 4 pro Woche), Form -16 bis -19 in Belastungswochen, "
+     "Erwartung: CTL 31 -> ca. 59 (erste Aufbauwoche einmalig +5, danach +3,5 bis 4,5 pro Woche), Form -17 bis -21 in Belastungswochen, "
      "-4 bis 0 in Erholungswochen. In der 3. Belastungswoche sind HRV 5-10 % unter Basis und "
      "Ruhepuls +1-3 bpm normal."),
     ("2026-11-23", "Wochenstruktur und Kontrolle", WOCHENSTRUKTUR + "\n\n" + KONTROLLE),

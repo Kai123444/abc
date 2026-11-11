@@ -97,6 +97,8 @@ NAECHSTE_WOCHE = [
      "Erste Bahneinheit nach dem Lauf-Stufentest. Paces nach dem Test anpassen, vorläufig "
      "4:15/km. Qualität vor Menge, die 5. Runde so schnell wie die erste.\n"
      "Warmup\n- 15m 6:50/km Pace\n\nIntervalle 5x\n- 400mtr 4:15/km Pace\n- 200mtr 7:15/km Pace\n\nCooldown\n- 8m 7:00/km Pace", 50),
+    ("2026-11-23", "Ride", "Rad locker (Montag)",
+     "Nach oder vor dem Kraftraum, nur Beine ausdrehen, Trittfrequenz 85-95.\n- 10m ramp 45-55%\n- 40m 55%\n- 10m 50%", 60),
     ("2026-11-24", "Ride", "Rad locker",
      "Beine ausdrehen nach dem Montag, Trittfrequenz 85-95.\n- 10m ramp 45-55%\n- 70m 57%\n- 10m 50%", 90),
     ("2026-11-24", "Swim", "Vereinstraining", "Wie geplant im Verein.", 70),
@@ -106,7 +108,7 @@ NAECHSTE_WOCHE = [
     ("2026-11-26", "Swim", "Vereinstraining", "Wie geplant im Verein.", 70),
     ("2026-11-28", "Ride", "Rad in den Bergen",
      "Im Harz, Anstiege im eigenen Tempo, nicht über 75 % FTP, Essen und Trinken üben. Erste Bergfahrt "
-     "ohne Intervalle.\nWarmup\n- 15m ramp 45-57%\n\nGrundlage\n- 175m 58%\n\nCooldown\n- 10m 50%", 200),
+     "ohne Intervalle.\nWarmup\n- 15m ramp 45-57%\n\nGrundlage\n- 200m 58%\n\nCooldown\n- 10m 50%", 225),
     ("2026-11-29", "Run", "Hügellauf locker",
      "Hügelgelände, bergauf kräftig, bergab traben oder gehen, Puls niedrig halten.\n- 55m 6:50/km Pace", 55),
     ("2026-11-22", "Run", "Lauf locker lang",
