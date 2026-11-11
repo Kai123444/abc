@@ -228,6 +228,22 @@ def _liste() -> list[tuple[str, str, str, str, list[str], int]]:
     add(12, "Kraft Mi: Oberkörper, Core, Aktivierung (vor dem Lauf)", "WeightTraining",
         "Bankdrücken 3x8, Klimmzüge oder Latzug 3x8, Schulterdrücken 3x10, Face Pulls 2x15, Pallof Press 2x10, Seitstütz 2x30 s. "
         "Aktivierung: Glute Bridge 2x10, Wadenheben 2x12, 2x5 leichte Hocksprünge. Keine schweren Beine.", ["Kraft", "Mi", "Phase 1"], 38)
+    add(12, "Stabi und Fußkraft Stufe 1 (30 min)", "WeightTraining",
+        "Freitagabend, RIR 2-3. Fuß: Wadenheben einbeinig auf der Stufe 3x12 (3 s ab, Knie gestreckt) und 3x12 mit gebeugtem Knie, "
+        "Tibialis-Raises 3x15, Short Foot 2x10 (8 s halten). Hüfte: Single-Leg Glute Bridge 3x10, Lateral Band Walk 3x12 je Seite, "
+        "Copenhagen Plank kurz 3x20 s, Seitstütz mit Abduktion 3x10. Core: Dead Bug mit Band 3x8, Pallof Press 3x10, Hollow Hold 3x20 s, "
+        "Einbeinstand auf instabiler Unterlage 3x30 s.", ["Kraft", "Stabi", "Fuß", "Phase 1"], 30)
+    add(12, "Stabi und Fußkraft Stufe 2 (35 min)", "WeightTraining",
+        "Wadenheben einbeinig mit 15-20 kg 3x10 (3 s ab, 1 s oben), Single-Leg RDL mit Kurzhantel 3x8, seitliche Step-downs 3x8, "
+        "Copenhagen Plank voll 3x20 s, Reverse Nordic 2x8, Pogo-Sprünge 3x20 (aufwärmen), Pallof Press mit Rotation 3x10, "
+        "Hollow Rock 3x12, Bird Dog mit Gewicht 3x8.", ["Kraft", "Stabi", "Fuß", "Phase 2"], 35)
+    add(12, "Stabi und Fußkraft Stufe 3 (Erhalt, 20 min)", "WeightTraining",
+        "Pogo-Sprünge 3x15, Einbeinsprünge 3x6, Wadenheben einbeinig 3x8 schwer, Copenhagen 2x20 s, Anti-Rotation Core 2x10, "
+        "Lauf-ABC Skippings 3x20 m. Nicht in den 7 Tagen vor Rennen.", ["Kraft", "Stabi", "Fuß", "Phase 3", "Phase 4"], 20)
+    add(12, "Mobilisation und Stabi leicht (25 min)", "WeightTraining",
+        "Für Ruhe- und Erholungstage: Hüftbeuger-Dehnung 2x45 s je Seite, Waden 2x45 s, Gesäß/Piriformis 2x45 s, BWS-Rotation 2x8, "
+        "Brust offen 2x45 s. Dann Core leicht: Dead Bug 2x8, Seitstütz 2x25 s, Glute Bridge 2x12. Fuß: Short Foot 2x10.",
+        ["Kraft", "Mobilisation", "Erholung"], 25)
     add(12, "Core 20 min", "WeightTraining", "Plank 3x45 s, Seitstütz 2x30 s je Seite, Pallof Press 2x10 je Seite, Rückenstrecker 2x12.", ["Kraft", "Core"], 20)
 
     # ---------------- 50 Rennen und Generalproben ----------------

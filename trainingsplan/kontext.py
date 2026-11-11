@@ -13,7 +13,7 @@ START_NOTIZ = """00 START HIER (Stand 11.11.2026). Wer den Athleten coacht, lies
 
 WO STEHT WAS (alles in intervals.icu)
 - Profil 1-5 (11.11.): Kennwerte, Historie, Verfügbarkeit, Ausrüstung, Ziele, Ernährung, Supplements, Erholung, Offene Punkte.
-- Phasen als Zeitspannen im Kalender: Phase 0 bis 4, Taper und Höchstform, Spätsaison. Dazu am 23.11.: Wochenstruktur und Kontrolle, Krafttraining Kraftraum, Rad-Intervalle, Koppeltraining, Mittwochs-Intervalle Lauf.
+- Phasen als Zeitspannen im Kalender: Phase 0 bis 4, Taper und Höchstform, Spätsaison. Dazu am 23.11.: Wochenstruktur und Kontrolle, Krafttraining Kraftraum, Stabi und Fußkraft (Fr abend, Stufen 1-3), Rad-Intervalle, Koppeltraining, Mittwochs-Intervalle Lauf.
 - Wochenziele: TARGET-Einträge pro Sportart (Rad, Lauf, Schwimmen, Sonstiges) für jede Woche bis 06.09.2027. Übersicht Woche für Woche: Notiz 'Saisonübersicht: Woche für Woche'.
 - Rennen: RACE-Einträge (DM Kurzdistanz 08.08.2027 mit Strecken, Zeitplan, Verpflegung und Supplements; Cottbus 12.06.2027; Hölle von Q 05.09.2027). Notizen DM-Strecke: Training abgleichen, DM Vortag, DM Renntag, Zeitfahrrad.
 - Verpflegung: Notizen 'Verpflegung: Grundregeln', 'Darmtraining: Plan und Regeln' (plus Termine), 'Supplements: Plan und Regeln', 'Radrennen-Fenster 1-5'; jede Einheit mit Dauer ab 60 min hat unten einen Block 'Verpflegung'.

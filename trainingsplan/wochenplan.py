@@ -42,6 +42,11 @@ VERSCHIEBEN = [
      {"name": "Rad locker (Erholung)", "moving_time": 2700,
       "description": "Nur Beine ausdrehen nach Dienstag (MTB 81 min, Schwimmen, Sauna, Eisbad). Puls unter ca. 130, "
                      "Trittfrequenz 85-95. Wenn du dich schwer fühlst: 30 min oder frei.\n- 45m 50%"}),
+    # Mi 11.11.: statt Rad Mobilisation und Stabi (Nutzerwunsch, Sauna/Eisbad gestern)
+    ("2026-11-11", "Rad locker (Erholung)", "2026-11-11",
+     {"type": "WeightTraining", "name": "Mobilisation und Stabi leicht (statt Rad)", "moving_time": 1500,
+      "description": "Heute kein Rad. Hüftbeuger-Dehnung 2x45 s je Seite, Waden 2x45 s, Gesäß 2x45 s, BWS-Rotation 2x8, Brust offen "
+                     "2x45 s. Dann Core leicht: Dead Bug 2x8, Seitstütz 2x25 s, Glute Bridge 2x12, Short Foot 2x10. Nichts erzwingen."}),
     ("2026-11-17", "Lauf-Stufentest", "2026-11-18", {}),
     # Heute (Di 10.11.): MTB statt Kadenz-Grundlage, gleiche Dauer
     ("2026-11-10", "Kadenz-Grundlage", "2026-11-10",
@@ -91,6 +96,11 @@ NAECHSTE_WOCHE = [
      "40 min im Kraftraum nach dem Rad, RIR 3: Goblet-Kniebeuge 3x8, Rumänisches Kreuzheben 3x8, Split Squat 3x6 je Seite, "
      "Hip Thrust 3x10, Wadenheben 3x12, Plank 3x45 s. Nicht bis zum Versagen, damit die Beine am Samstag frisch sind. "
      "Danach Schwimmen im Verein (17:30).", 40),
+    ("2026-11-20", "WeightTraining", "Stabi und Fußkraft Stufe 1 (Freitagabend)",
+     "Abends, 30 min, RIR 2-3. Fuß: Wadenheben einbeinig auf der Stufe 3x12 (3 s ab) und 3x12 mit gebeugtem Knie, Tibialis-Raises 3x15, "
+     "Short Foot 2x10. Hüfte: Single-Leg Glute Bridge 3x10, Lateral Band Walk 3x12 je Seite, Copenhagen Plank kurz 3x20 s, Seitstütz "
+     "mit Abduktion 3x10. Core: Dead Bug mit Band 3x8, Pallof Press 3x10, Hollow Hold 3x20 s, Einbeinstand instabil 3x30 s. "
+     "Morgen lange Radeinheit: nicht bis zum Muskelkater.", 30),
     ("2026-11-20", "NOTE", "Ruhetag",
      "Freitag ist trainingsfrei. Morgen lange Radeinheit mit Sweet-Spot-Block, vorher gut essen und schlafen.", 0),
     ("2026-11-21", "Ride", "Rad lang mit Sweet-Spot-Block",
@@ -119,6 +129,9 @@ NAECHSTE_WOCHE = [
      "Erste Intensität nach den Tests, Prozente beziehen sich auf die neue FTP.\nWarmup\n- 15m ramp 50-75%\n\n"
      "Sweet Spot 2x\n- 15m 88%\n- 5m 55%\n\nCooldown\n- 10m 50%", 65),
     ("2026-11-26", "Swim", "Vereinstraining", "Wie geplant im Verein.", 70),
+    ("2026-11-27", "WeightTraining", "Stabi und Fußkraft Stufe 1 (Freitagabend)",
+     "Abends, 30 min, gleiche Übungen wie am 20.11. mit etwas mehr Kontrolle (Wadenheben 3 s ab, 1 s Pause oben). Tibialis-Raises "
+     "und Copenhagen Plank um 5 s steigern, wenn sauber.", 30),
     ("2026-11-26", "WeightTraining", "Kraft: Ergänzung Beine nach dem Rad",
      "Nach dem Sweet Spot, 30-35 min, RIR 3: Single-Leg RDL 3x8 je Seite, Step-ups 3x8 je Seite, Hip Thrust 3x10, "
      "Nordic Hamstring 2x5, Wadenheben 3x12, Dead Bug 3x10, Seitstütz 2x30 s. Kein Muskelkater für den Samstag.", 35),

@@ -121,6 +121,24 @@ KRAFTPLAN = (
     "Wichtig: Schwere Beine nur Mo, am Do nur moderate Ergänzung. Beinkraft nie am Dienstag (Tag vor den Intervallen), nie am Tag vor einem Test oder Rennen und nie "
     "mit Muskelkater über 48 h. HRV/Ruhepuls auffällig: Einheit leichter machen, nicht ausfallen lassen.")
 
+STABI = (
+    "Stabi und Fußkraft auf Leistungsniveau (Läufer-Prävention und Kraftübertragung): 1 feste Einheit pro Woche Freitagabend "
+    "(Fr ist trainingsfrei, vor der langen Samstagsfahrt belastet das nicht), 30 min, dazu täglich 5 min Fuß-Routine "
+    "(Short Foot 2x10 mit 8 s Halten, Zehen spreizen, einbeiniges Balancieren). Bibliothek Ordner 40 Kraft.\n"
+    "STUFE 1 (bis 24.01.), 'Stabi und Fußkraft Stufe 1': einbeiniges Wadenheben auf der Stufe 3x12 (3 s ab, Knie gestreckt) und "
+    "3x12 mit gebeugtem Knie (Soleus), Tibialis-Raises 3x15, Single-Leg Glute Bridge 3x10, Lateral Band Walk 3x12 je Seite, "
+    "Copenhagen Plank kurz 3x20 s, Seitstütz mit Abduktion 3x10, Dead Bug mit Band 3x8, Pallof Press 3x10, Hollow Hold 3x20 s, "
+    "Einbeinstand auf instabiler Unterlage 3x30 s.\n"
+    "STUFE 2 (25.01.-21.03.), 'Stabi und Fußkraft Stufe 2': Wadenheben einbeinig mit 15-20 kg 3x10 (3 s ab, 1 s oben), "
+    "Single-Leg RDL mit Kurzhantel 3x8, Step-downs seitlich 3x8, Copenhagen Plank voll 3x20 s, Reverse Nordic 2x8, Pogo-Sprünge "
+    "3x20, Pallof Press mit Rotation 3x10, Hollow Rock 3x12, Bird Dog mit Gewicht 3x8.\n"
+    "STUFE 3 (ab 22.03., Erhalt 20 min), 'Stabi und Fußkraft Stufe 3 (Erhalt)': Pogo-Sprünge 3x15, Einbeinsprünge 3x6, Wadenheben "
+    "einbeinig 3x8 schwer, Copenhagen 2x20 s, Anti-Rotation Core 2x10, Lauf-ABC-Skippings 3x20 m.\n"
+    "REGELN: Last mit RIR 2-3, kein Muskelkater über 48 h. Vor Sprüngen (Pogos, Einbeinsprünge) gut aufwärmen und nie in den 7 Tagen "
+    "vor Cottbus (12.06.) und der DM. In Erholungswochen nur die Fuß-Routine plus Mobilisation. Fr vor einem Samstagsrennen entfällt die "
+    "Einheit, der Samstagabend nach dem Rennen ist frei. Bei Schmerzen in Achillessehne, Schienbein oder Knie: Einheit streichen und "
+    "Lauf prüfen (Laufumfang höchstens +10 % pro Woche).")
+
 LAUFINTERVALLE = (
     "Auswertung deiner Mittwochsläufe in Cottbus (22 Läufe, Juni bis September 2026): Ablauf immer gleich. Gegen "
     "17:00 Einlaufen 3,5-4,9 km locker (6:15-6:50/km, Puls 136-152), ab ca. 17:50 Intervalle auf der Bahn.\n"
@@ -315,6 +333,7 @@ PHASEN: list[tuple[str, str, str]] = [
      "Ruhepuls +1-3 bpm normal."),
     ("2026-11-23", "Wochenstruktur und Kontrolle", WOCHENSTRUKTUR + "\n\n" + KONTROLLE),
     ("2026-11-23", "Krafttraining Kraftraum", KRAFTPLAN),
+    ("2026-11-23", "Stabi und Fußkraft: Plan und Progression", STABI),
     ("2026-11-23", "Rad-Intervalle: Plan nach Möglichkeiten und Zielen", RAD_INTERVALLE),
     ("2026-11-23", "Koppeltraining: Plan", KOPPEL),
     ("2026-11-23", "Mittwochs-Intervalle Lauf", LAUFINTERVALLE),
