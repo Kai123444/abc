@@ -65,8 +65,9 @@ DIESE_WOCHE = [
                     "Sonntag mit einem freien Samstag davor. Sportunterricht am Fr ruhig laufen, kein "
                     "Zeitlauf. Sa locker, früh schlafen, abends kohlenhydratreich essen. So 2-3 h vor "
                     "dem Test frühstücken. Ausweichtermin Mo 16.11., falls der Schlaf unter 7 h war oder "
-                    "HRV/Ruhepuls auffällig sind (HRV unter ca. 78, Ruhepuls über ca. 51). Bis zum Test: kein Eisbad mehr, "
-                    "Sauna höchstens Do kurz (10 min), am Sa keine Sauna und kein Eisbad.",
+                    "HRV/Ruhepuls auffällig sind (HRV unter ca. 78, Ruhepuls über ca. 51). Sauna und Eistonne: Do 12.11. nach dem Schwimmen "
+                    "2 Gänge à 10 min und Eistonne höchstens 1 min, nur bei grünen Morgenwerten (HRV ab ca. 78, Ruhepuls bis ca. 51); "
+                    "am Sa 14.11. keine Sauna und kein Eisbad. Sind die Werte am Sa nicht zurück, Test auf Mo 16.11. verschieben.",
      "external_id": "woche-2026-11-13-testhinweis"},
     {"category": "WORKOUT", "type": "Swim", "name": "Schulevent: 4 km locker schwimmen",
      "start_date_local": "2026-11-13T00:00:00", "moving_time": 5400,
