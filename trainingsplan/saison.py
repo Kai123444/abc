@@ -82,14 +82,14 @@ WOCHENSTRUKTUR = (
     "Schwimmen (Verein)\n"
     "Mi: KRAFT Oberkörper, Core und kurze Beinaktivierung (35-40 min), danach SCHLÜSSEL Lauf = Bahnintervalle "
     "(Einlaufen 3-4 km, 400-1000 m Wiederholungen, Auslaufen; eigene Einheit, bis das Vereinstraining startet)\n"
-    "Do: SCHLÜSSEL Rad-Intervalle (Sweet Spot/Schwelle/VO2max/Renntempo) 75-105 min, Schwimmen (Verein), Sauna\n"
+    "Do: SCHLÜSSEL Rad-Intervalle (Sweet Spot/Schwelle/VO2max/Renntempo) 75-105 min, ab Phase 3 mit Koppellauf 10-15 min (Phase 4: 15-20 min), Schwimmen (Verein), Sauna\n"
     "Fr: Sportunterricht/Lauf locker 30-40 min oder frei (der leichteste Tag vor dem Wochenende)\n"
     "Sa vormittags: SCHLÜSSEL langes Rad 3-5 h in Z2 mit einem Intervallblock in der Mitte (siehe Rad-Intervalle), in den "
-    "Bergen oder flach, ab März mit Koppellauf 20-30 min\n"
-    "Sa nachmittags: locker, Lauf 30-45 min, Schwimmen frei 45 min (ab Mai Freiwasser) oder Core 20 min\n"
-    "So vormittags: langer Lauf 75-100 min im Hügelgelände (bergauf kräftig, bergab kontrolliert); in Phase 4 alle 2 Wochen "
-    "Brick statt langem Lauf\n"
-    "So nachmittags: Rad locker 60-90 min (Beine ausdrehen) oder Schwimmen frei\n"
+    "Bergen oder flach, danach kein Lauf (der Sonntag ist der Lauftag)\n"
+    "Sa nachmittags: locker, Schwimmen frei 45 min (ab Mai Freiwasser) oder Core 20 min; in Phase 1-2 optional Lauf 30-45 min\n"
+    "So vormittags: KOPPEL: erst 60 min Rad locker (Z1-Z2), direkt danach der lange Lauf 60-100 min im Hügelgelände (bergauf "
+    "kräftig, bergab kontrolliert). In Phase 3-4 alle 2 Wochen Renn-Brick statt des lockeren Koppels (siehe Notiz Koppeltraining)\n"
+    "So nachmittags: frei oder Schwimmen frei 45 min\n"
     "Ein voller Ruhetag oder maximal locker pro Woche (meist Fr). Schwere Beine nur Mo (48 h vor den Mittwochs-Intervallen, "
     "Radsport-Erfahrung trägt das nach dem Wochenende); Mi vor dem Laufen keine schweren Beine. Keine Rad-Intervalle an "
     "zwei Tagen hintereinander (Do und Sa haben den Freitag dazwischen).")
@@ -162,6 +162,32 @@ RAD_INTERVALLE = (
     "Renntempo-Einheit 6-8 mal; bei Gelb Umfang um ein Intervall kürzen, bei Rot streichen; nie Rad-Intervalle an zwei Tagen "
     "hintereinander.")
 
+KOPPEL = (
+    "Koppeltraining (Rad -> Lauf) für T2 und die Laufbeine nach dem Rad. Drei Arten:\n"
+    "A) Sonntags-Koppel, jede Woche: erst 60 min Rad locker (Z1-Z2, 50-60 % FTP, Trittfrequenz 85-95), direkt danach der lange "
+    "Lauf der Woche (60-100 min, locker bis steady). Wechsel zügig unter 3 min, Laufschuhe bereitgelegt. Das ist ab sofort "
+    "sinnvoll: der Rad-Teil ist leicht (ca. 28 TSS), der Lauf bleibt locker, du übst den Übergang früh und sparst Zeit. In "
+    "Erholungswochen 45 min Rad plus 40 min Lauf.\n"
+    "B) Kurz-Koppel nach dem Do-Rad-Schlüssel, ab Phase 3: Lauf 10-15 min (Phase 4: 15-20 min) direkt nach den Intervallen. Die "
+    "ersten 5 min kontrolliert (Beine finden), danach Renn-Gefühl.\n"
+    "C) Renn-Brick, alle 2 Wochen in Phase 3-4 statt A: 40 min Rad bei 85-90 % FTP in Rennposition (flach) plus 10 km Lauf im "
+    "Renntempo (erste 2 km kontrolliert), Verpflegung exakt nach Renn-Plan (siehe Darmtraining). Termine: 09.05., 06.06., 20.06., "
+    "04.07., Generalprobe 18.07. (Start 11:30). Hölle von Q: Sa 28.08. Brick 100 km Rad bei 70-78 % FTP plus 10-14 km Lauf.\n"
+    "Pflicht nach Phase: Phase 1-2 nur A; ab 22.03. (Phase 3) mindestens 2 Koppelläufe pro Woche (So und Do); ab 17.05. "
+    "zusätzlich alle 2 Wochen ein Renn-Brick; die letzte Koppel vor der DM ist der Renn-Brick am 18.07., danach nur kurze "
+    "Koppel im Taper. Nicht koppeln: nach der langen Samstagsfahrt, in Erholungswochen kein Renn-Brick, in der Rennwoche gar "
+    "nicht.\n"
+    "Steuerung: Der Koppel-Lauf zählt voll zum Laufumfang (höchstens +10 % pro Woche). Bei Gelb den Rad-Teil auf 45 min kürzen "
+    "und den Lauf locker halten, bei Rot streichen.")
+
+KOPPEL_BRICKS = [
+    ("2027-05-09", "Koppel: Renn-Brick 1", "Erster Renn-Brick am Ende von Phase 3. 40 min Rad bei 85-90 % FTP flach in Rennposition, direkt 10 km Lauf im Renntempo (erste 2 km kontrolliert). Wechsel stoppen, Ziel unter 1:00. Verpflegung wie im Renn-Plan."),
+    ("2027-06-06", "Koppel: Renn-Brick 2", "Eine Woche vor Cottbus. 40 min Rad bei 85-90 % FTP flach, 10 km Lauf im Renntempo, Brick-Lauf mit 85 g/h (Darmtraining). Danach Mini-Taper für Cottbus."),
+    ("2027-06-20", "Koppel: Renn-Brick 3", "Nach Cottbus Plan überprüfen. 40 min Rad bei 85-90 % FTP flach, 10 km Lauf im Renntempo mit 90 g/h."),
+    ("2027-07-04", "Koppel: Renn-Brick 4", "40 min Rad bei 85-90 % FTP flach in Rennposition, 10 km Lauf im Renntempo mit 95 g/h, Hitzeprotokoll (Sauna-Block läuft). Letzte Bestätigung vor der Generalprobe."),
+    ("2027-07-18", "Koppel: Generalprobe DM", "Exakt der Renn-Plan, Start um 11:30: 40 min Rad im Renntempo flach in Rennposition mit 130 g/h, 10 km Lauf im Renntempo mit 100 g/h, Koffein und Natrium wie geplant. Wechsel stoppen."),
+]
+
 SAUNA = (
     "Sauna steht dir zur Verfügung. Zwei Nutzungen:\n"
     "1) Erholung (ganzjährig, 1-2x pro Woche, z. B. Do nach Schwimmen und Fr abends): 10-15 min bei 80-90 Grad, "
@@ -224,7 +250,7 @@ PHASEN: list[tuple[str, str, str]] = [
      "Intensitätsverteilung ca. 85 % Z1-Z2, 15 % darüber. Beinkraft kommt aus dem Kraftraum. "
      "Rad: Sa 3-4 h in deinen gewohnten Zonen (Z2), am Wochenende in den Bergen, wenn du kannst, sonst flach; das Training ist "
      "dasselbe wie im Flachen, nach Leistung gefahren. Dazu eine Sweet-Spot-Einheit am Do "
-     "2x20 min bei 88-93 % FTP. Der Do-Schlüssel liegt unter der Woche und damit flach; die DM-Radstrecke ist flach und windschattenfrei (Notiz DM-Strecke). Bis das Zeitfahrrad da ist, fährst du ihn in tiefer Position am Unterlenker, danach mindestens 20 min davon in Aeroposition. Lauf: 4 Läufe, So 60-75 min im Hügelgelände (bergauf kräftig, bergab "
+     "2x20 min bei 88-93 % FTP. Der Do-Schlüssel liegt unter der Woche und damit flach; die DM-Radstrecke ist flach und windschattenfrei (Notiz DM-Strecke). Bis das Zeitfahrrad da ist, fährst du ihn in tiefer Position am Unterlenker, danach mindestens 20 min davon in Aeroposition. Lauf: 4 Läufe, So nach 60 min lockerem Rad (Koppel) 60-75 min im Hügelgelände (bergauf kräftig, bergab "
      "traben oder gehen), Steigerungsläufe 6x20 s, Lauf-ABC, Mi Intervalle auf der Bahn (6-10x400 m, Verein). Schwimmen: Vereinstraining plus Technik. "
      "Kraftraum: Mo Beine schwer + Oberkörper, Mi Oberkörper/Core vor dem Lauf (siehe Notiz Krafttraining). "
      "Load 440 -> 550, ca. 13 -> 17 h (KW 48 bereits ca. 13 h), davon Rad 7 -> 10 h (dein Radumfang aus 2021/22 und deine Spitzenwoche vom "
@@ -236,6 +262,7 @@ PHASEN: list[tuple[str, str, str]] = [
     ("2026-11-23", "Wochenstruktur und Kontrolle", WOCHENSTRUKTUR + "\n\n" + KONTROLLE),
     ("2026-11-23", "Krafttraining Kraftraum", KRAFTPLAN),
     ("2026-11-23", "Rad-Intervalle: Plan nach Möglichkeiten und Zielen", RAD_INTERVALLE),
+    ("2026-11-23", "Koppeltraining: Plan", KOPPEL),
     ("2026-11-23", "Mittwochs-Intervalle Lauf", LAUFINTERVALLE),
     ("2027-07-05", "Sauna: Erholung und Hitzeanpassung", SAUNA),
     ("2027-01-25", "Phase 2: Grundlage II / Aufbau (25.01.-21.03.)",
@@ -246,10 +273,10 @@ PHASEN: list[tuple[str, str, str]] = [
      "Erhalt. Load 560 -> 640, ca. 16 -> 18 h (Rad 9-10 h).\n"
      "Erwartung: CTL 58 -> ca. 75, Form -14 bis -17. Ruhepuls im Wochenmittel +1-2 bpm in "
      "Belastungswochen."),
-    ("2027-03-22", "Phase 3: Aufbau intensiv (22.03.-09.05.)",
+    ("2027-03-22", "Phase 3: Aufbau intensiv (22.03.-16.05.)",
      "VO2max: Rad 5x4-5 min bei 110-120 % FTP (Pause gleich lang) oder 30/30; Lauf 6x1 km bei "
-     "3-5-km-Tempo; Schwimmen 8x200 m bei CSS. Einmal pro Woche Koppeltraining (60-90 min Rad "
-     "Sweet Spot + 15-20 min Lauf im Renntempo), Rad-Intervalle: Do VO2max "
+     "3-5-km-Tempo; Schwimmen 8x200 m bei CSS. Koppeltraining: jeden Sonntag 60 min Rad locker plus Lauf, Do nach den Intervallen "
+     "Koppellauf 10-15 min, alle 2 Wochen Renn-Brick (siehe Notiz Koppeltraining), Rad-Intervalle: Do VO2max "
      "5x4-5 min bei 110-120 % FTP plus Koppellauf 10-15 min, Sa in 4-5 h Fahrt ein Block 2x30 min bei 88-93 % oder 3x15 min "
      "bei 95-100 % FTP (Berge oder flach), Di alle 2 Wochen Sweet Spot/Tempo 2x25-30 min. "
      "Load 640 -> 715, ca. 17 -> 19 h (Rad 9-10 h).\n"
@@ -361,23 +388,38 @@ def ziel_events() -> list[dict]:
     return out
 
 
+# Phasen-Notizen als Zeitspanne (letzter Tag der Phase), damit sie im Kalender als Balken über die Phase stehen
+PHASEN_ENDE = {"Phase 0": "2026-11-22", "Phase 1": "2027-01-24", "Phase 2": "2027-03-21", "Phase 3": "2027-05-16",
+               "Phase 4": "2027-07-25", "Taper und Höchstform": "2027-08-08", "Nach dem Wettkampf": "2027-09-05"}
+
+
+def _phasen_ende(name: str) -> date | None:
+    for k, v in PHASEN_ENDE.items():
+        if name.startswith(k):
+            return date.fromisoformat(v)
+    return None
+
+
 def notiz_events(vorhandene_notizen: set[str]) -> list[dict]:
-    """Phasen-, Erholungswochen- und Test-Notizen; Erholungswochen an Tagen mit Notiz entfallen."""
+    """Phasen- (als Zeitspanne), Erholungswochen-, Test- und Koppel-Notizen; Erholungswochen an Tagen mit Notiz entfallen."""
     out = []
     for tag, name, text in PHASEN:
-        out.append((montag(tag), name, text))
+        out.append((montag(tag), name, text, _phasen_ende(name)))
     for tag, _, erholung in WOCHEN:
         if erholung and tag not in TAPER_WOCHEN:
-            out.append((montag(tag), "Erholungswoche", ERHOLUNG_TEXT))
+            out.append((montag(tag), "Erholungswoche", ERHOLUNG_TEXT, None))
     for tag, name, text in RETESTS:
-        out.append((date.fromisoformat(tag), name, text))
+        out.append((date.fromisoformat(tag), name, text, None))
+    for tag, name, text in KOPPEL_BRICKS:
+        out.append((date.fromisoformat(tag), name, text, None))
     events = []
-    for d, name, text in out:
+    for d, name, text, ende in out:
         if name == "Erholungswoche" and d.isoformat() in vorhandene_notizen:
             continue
+        letzter = ende or d
         events.append({"category": "NOTE", "name": name, "description": text,
                        "start_date_local": f"{d.isoformat()}T00:00:00",
-                       "end_date_local": f"{(d + timedelta(days=1)).isoformat()}T00:00:00",
+                       "end_date_local": f"{(letzter + timedelta(days=1)).isoformat()}T00:00:00",
                        "external_id": f"saison-note-{d.isoformat()}-{name[:7].lower().strip(':')}"})
     return events
 
@@ -394,16 +436,16 @@ PHASEN_UEBERSICHT = [
      "locker, Tests Sa 14.11./Di 17.11.", "Stufentest, Z2", "Stufentest, locker", "Verein, Kraft Mo Oberkörper + Beine leicht (ab 16.11.), Mi vor dem Lauf"),
     ("2026-11-23", "2027-01-24", "1 Grundlage I", "Aerobes Volumen, Technik, Maximalkraft im Kraftraum",
      "ca. 85 % Z1-Z2 / 15 % darüber", "Do Sweet Spot 2x20-3x20, Sa 3-4 h Z2 (ab Jan. 1x30 min Sweet Spot im Block), So PM Rad locker",
-     "Mi Bahn 6-10x400, 4 Läufe, So Hügellauf 60-75 min, Steigerungen", "Verein + Technik; Kraftraum Mo Beine + Oberkörper, Mi Oberkörper/Core, RIR 2-3"),
+     "Mi Bahn 6-10x400, So Koppel: 60 min Rad locker + Hügellauf 60-75 min, Steigerungen", "Verein + Technik; Kraftraum Mo Beine + Oberkörper, Mi Oberkörper/Core, RIR 2-3"),
     ("2027-01-25", "2027-03-21", "2 Grundlage II / Aufbau", "Schwelle, Tempo, aerobe Leistung",
      "ca. 80 / 15 / 5 (pyramidal)", "Do Schwelle 2x20 / 3x15 bei 95-100 %, Sa Block 2x20 Sweet Spot / 3x15 Schwelle in 3-4 h, Di (alle 2 Wo.) Over-Unders",
-     "Mi Bahn 10-12x400 / 3x800 / 4-5x1000, So Bergläufe 8x60 s", "CSS-Sätze 10x100; Kraftraum Mo Maximalkraft (4-6 Wdh.), Mi Oberkörper + Sprünge"),
+     "Mi Bahn 10-12x400 / 3x800 / 4-5x1000, So Koppel 60 min Rad + Lauf mit Bergläufen 8x60 s", "CSS-Sätze 10x100; Kraftraum Mo Maximalkraft (4-6 Wdh.), Mi Oberkörper + Sprünge"),
     ("2027-03-22", "2027-05-16", "3 Aufbau intensiv", "VO2max, Koppeltraining, lange Ausdauer",
      "ca. 75 / 15 / 10", "Do VO2max 5x4-5 min + Koppellauf, Sa Block 2x30 Tempo / 3x15 Schwelle in 4-5 h, Di (alle 2 Wo.) Sweet Spot 2x25-30",
-     "6x1 km (3-5-km-Tempo), Koppellauf 15-20 min", "8x200 bei CSS; Kraftraum Mo 35-40 min Erhalt, Mi 20 min Core"),
+     "Mi Bahn 6x1 km (3-5-km-Tempo), So Koppel (60 min Rad + Lauf), Do Koppellauf 10-15 min, alle 2 Wo. Renn-Brick", "8x200 bei CSS; Kraftraum Mo 35-40 min Erhalt, Mi 20 min Core"),
     ("2027-05-17", "2027-07-25", "4 Wettkampfvorbereitung", "Renntempo, Spezifik, Spitzenvolumen",
      "ca. 75 / 15 / 10 mit Renntempo", "Do Renntempo-Block 2x20 / 3x15 / 40 km flach (Aero sobald Zeitfahrrad da) + Koppellauf, Sa Renntempo-Block in 3-4 h, Di alle 2 Wo. Schwelle, So alle 2 Wo. Brick 40 min + 10-km-Lauf",
-     "Langer Lauf bis 100 min flach, Brick-Lauf 10 km Renntempo flach", "Freiwasser mit und ohne Neopren, Wellen, Bojenwenden, Pulk; 1,5 km am Stück; Kraftraum Mo 35 min Erhalt bis 14 Tage vor DM; Sauna-Block 05.-25.07."),
+     "So Koppel (60 min Rad + Lauf bis 100 min) im Wechsel mit Renn-Brick (40 min Rad + 10 km Renntempo flach), Do Koppellauf 15-20 min", "Freiwasser mit und ohne Neopren, Wellen, Bojenwenden, Pulk; 1,5 km am Stück; Kraftraum Mo 35 min Erhalt bis 14 Tage vor DM; Sauna-Block 05.-25.07."),
     ("2027-07-26", "2027-08-08", "Taper und Rennen", "Frische, Schärfe, Renntempo-Öffner",
      "locker + wenige scharfe Reize", "3-5 Reize à 3-5 min im Renntempo, Öffner", "kurze Tempoläufe, Öffner",
      "locker, Technik; letzte Beinkraft 14 Tage, Oberkörper 7 Tage vorher"),

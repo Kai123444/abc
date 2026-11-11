@@ -20,6 +20,8 @@ ENTFERNEN = [
     ("2026-11-16", "Kraft: Beine und Core", "Mo: Kraft ohne Beine nach dem Rad-Stufentest"),
     ("2026-11-18", "Rad Grundlage", "Mi: Lauf-Stufentest, Rad am Di"),
     ("2026-11-23", "Rad locker (Montag)", "Mo: Beine nach dem Kraftraum frei, die Fahrt wandert auf den Sonntagnachmittag"),
+    ("2026-11-29", "Rad locker (Sonntag Nachmittag)", "So: Rad und Lauf jetzt als Koppel am Vormittag"),
+    ("2026-11-29", "Hügellauf locker", "So: Lauf jetzt als Koppel 2 nach dem Rad"),
     ("2026-11-19", "Kraft: Einstieg Beine (leicht)", "Do: Beine jetzt am Montag"),
     ("2026-11-23", "Kraft: Oberkörper und Core", "Mo: Ganzkörper mit Beinen"),
     ("2026-11-25", "Kraft: Beine Technik", "Mi: Beine jetzt am Montag"),
@@ -97,9 +99,9 @@ NAECHSTE_WOCHE = [
      "Erste Bahneinheit nach dem Lauf-Stufentest. Paces nach dem Test anpassen, vorläufig "
      "4:15/km. Qualität vor Menge, die 5. Runde so schnell wie die erste.\n"
      "Warmup\n- 15m 6:50/km Pace\n\nIntervalle 5x\n- 400mtr 4:15/km Pace\n- 200mtr 7:15/km Pace\n\nCooldown\n- 8m 7:00/km Pace", 50),
-    ("2026-11-29", "Ride", "Rad locker (Sonntag Nachmittag)",
-     "Zweite Einheit am Sonntag, nach dem Hügellauf am Vormittag: nur Beine ausdrehen, Trittfrequenz 85-95.\n"
-     "- 10m ramp 45-55%\n- 40m 55%\n- 10m 50%", 60),
+    ("2026-11-29", "Ride", "Koppel 1: Rad locker 60 min",
+     "Sonntags-Koppel Teil 1: nur Beine ausdrehen, Z1-Z2, Trittfrequenz 85-95. Danach direkt der Hügellauf (Koppel 2), "
+     "Laufschuhe bereitlegen, Wechsel unter 3 min.\n- 10m ramp 45-55%\n- 40m 55%\n- 10m 50%", 60),
     ("2026-11-24", "Ride", "Rad locker",
      "Beine ausdrehen nach dem Montag, Trittfrequenz 85-95.\n- 10m ramp 45-55%\n- 70m 57%\n- 10m 50%", 90),
     ("2026-11-24", "Swim", "Vereinstraining", "Wie geplant im Verein.", 70),
@@ -109,8 +111,9 @@ NAECHSTE_WOCHE = [
     ("2026-11-26", "Swim", "Vereinstraining", "Wie geplant im Verein.", 70),
     ("2026-11-28", "Ride", "Rad in den Bergen",
      "Im Harz oder flach, nach Leistung (Z2, nicht über 75 % FTP), Essen und Trinken üben.\nWarmup\n- 15m ramp 45-57%\n\nGrundlage\n- 200m 58%\n\nCooldown\n- 10m 50%", 225),
-    ("2026-11-29", "Run", "Hügellauf locker",
-     "Hügelgelände, bergauf kräftig, bergab traben oder gehen, Puls niedrig halten.\n- 55m 6:50/km Pace", 55),
+    ("2026-11-29", "Run", "Koppel 2: Hügellauf locker",
+     "Sonntags-Koppel Teil 2, direkt nach dem Rad (60 min locker): die ersten 5 min bewusst ruhig, Beine finden. Hügelgelände, "
+     "bergauf kräftig, bergab traben oder gehen, Puls niedrig halten.\n- 55m 6:50/km Pace", 55),
     ("2026-11-22", "Run", "Lauf locker lang",
      "Der längste Lauf der Woche, ruhig, gern im Hügelgelände (bergauf locker, bergab traben oder gehen). "
      "Danach Dehnen/Mobilisation.\n- 45m 6:50/km Pace", 45),
