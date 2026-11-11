@@ -113,7 +113,8 @@ def _verpflegung(client: IntervalsClient, a) -> int:
     for e, neu in aenderungen:
         client.update_event(e["id"], {"description": neu})
     client.upsert_events([{"category": "NOTE", "name": "Verpflegung: Grundregeln", "description": vp.GRUNDREGELN,
-                           "start_date_local": f"{heute.isoformat()}T00:00:00", "external_id": "verpflegung-grundregeln"}])
+                           "start_date_local": "2026-11-11T00:00:00", "external_id": "verpflegung-grundregeln"}]
+                         + vp.gut_training_events())
     print("✔ eingetragen.")
     return 0
 

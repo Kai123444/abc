@@ -201,6 +201,27 @@ class TestAnpassen(unittest.TestCase):
         self.assertEqual(d1.count("Verpflegung:"), 1)
         self.assertTrue(d1.startswith("- 60m 60%"))
 
+    def test_darmtraining_und_verhaeltnis(self):
+        from datetime import date as d
+        from trainingsplan import verpflegung as vp
+        self.assertEqual(vp.verhaeltnis(90), (60, 30, "2:1"))
+        self.assertEqual(vp.verhaeltnis(100), (56, 44, "1:0,8"))
+        self.assertEqual(vp.verhaeltnis(120), (67, 53, "1:0,8"))
+        for tag, sport, rate, _ in vp.GUT:
+            self.assertEqual(d.fromisoformat(tag).weekday(), 5 if sport == "Rad" else 6, tag)  # Sa Rad, So Lauf
+        rad = [r for _, s_, r, _ in vp.GUT if s_ == "Rad"]
+        self.assertEqual(rad[0], 70)
+        self.assertGreaterEqual(max(rad), 115)
+        self.assertLessEqual(max(rad), 120)
+        # Rate steigt höchstens um 10 g/h von Einheit zu Einheit
+        self.assertTrue(all(b - a_ <= 10 for a_, b in zip(rad, rad[1:])))
+        lang = {"category": "WORKOUT", "type": "Ride", "name": "Rad in den Bergen", "moving_time": 200 * 60,
+                "start_date_local": "2026-11-28T00:00:00"}
+        self.assertIn("DARMTRAINING", vp.block_fuer_event(lang))
+        dm = vp.block_fuer_event({"category": "RACE_A", "name": "dm kurzdistanz"})
+        self.assertIn("105 g Kohlenhydrate pro Stunde", dm)
+        self.assertIn("Koffein", dm)
+
     def test_event_format(self):
         ev = self.plan[0].to_event()
         self.assertEqual(ev["category"], "WORKOUT")

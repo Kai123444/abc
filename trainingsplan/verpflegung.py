@@ -16,7 +16,114 @@ import re
 GEWICHT = 67.0
 MARKER = "Verpflegung"
 
+
+def verhaeltnis(rate: int) -> tuple[int, int, str]:
+    """Aufteilung der Kohlenhydrate (g/h) in Maltodextrin/Glukose und Fructose.
+    Bis 90 g/h 2:1, darüber 1:0,8 (mehr Fructose, weil Glukose-Transporter bei ca. 60 g/h sättigen)."""
+    if rate <= 90:
+        malto = int(round(rate * 2 / 3))
+        return malto, rate - malto, "2:1"
+    malto = int(round(rate / 1.8))
+    return malto, rate - malto, "1:0,8"
+
+
+def rate_text(rate: int) -> str:
+    m, f, v = verhaeltnis(rate)
+    return f"{rate} g/h = {m} g Maltodextrin/Glukose + {f} g Fructose (Verhältnis {v})"
+
+
+def beispiel_pro_stunde(rate: int) -> str:
+    bidon = int(round(0.65 * rate / 5) * 5)
+    return (f"z. B. pro Stunde ein Bidon (600-750 ml) mit {bidon} g Kohlenhydraten plus {rate - bidon} g aus Gels oder "
+            f"Riegeln, alle 15 min etwa {int(round(rate / 4 / 5) * 5)} g")
+
+
+# Renn-Zielraten (g/h) auf dem Rad / beim Laufen. Du verträgst über 100 g/h; vor dem Rennen mindestens 3x so geübt.
+RENNRATEN = {"race_olympisch": (100, 50), "race_kurz": (105, 60), "race_mitteldistanz": (115, 70)}
+
+# Darmtraining: (Datum, Sport, Rate g/h, Zusatz). Rate steigt über die Saison, jeweils bei einem langen Tag.
+GUT: list[tuple[str, str, int, str]] = [
+    ("2026-11-28", "Rad", 70, ""),
+    ("2026-12-12", "Rad", 75, ""),
+    ("2027-01-09", "Rad", 80, ""),
+    ("2027-01-30", "Rad", 85, ""),
+    ("2027-02-13", "Rad", 90, ""),
+    ("2027-02-14", "Lauf", 50, "Langer Hügellauf, kleine Portionen alle 20 min, Gel in Wasser verdünnen."),
+    ("2027-02-27", "Rad", 95, "Erste Einheit mit Verhältnis 1:0,8."),
+    ("2027-03-13", "Rad", 100, ""),
+    ("2027-03-27", "Rad", 100, "Dazu Nitrat-Test (siehe Supplement-Plan)."),
+    ("2027-03-28", "Lauf", 60, ""),
+    ("2027-04-10", "Rad", 105, ""),
+    ("2027-04-24", "Rad", 105, ""),
+    ("2027-05-08", "Rad", 110, "Dazu Koffein-Test 3 mg/kg (200 mg) 45-60 min vor Start."),
+    ("2027-05-09", "Lauf", 65, ""),
+    ("2027-05-22", "Rad", 110, "Dazu Koffein-Test 4 mg/kg (270 mg) und Natrium 800 mg pro Stunde."),
+    ("2027-06-05", "Rad", 115, "Rennsimulation Mitteldistanz-Teil: Koffein als Split-Dosis testen (siehe Supplement-Plan)."),
+    ("2027-06-06", "Lauf", 70, "Brick-Lauf mit Renn-Gel-Plan."),
+    ("2027-06-19", "Rad", 110, "Nach Cottbus: Plan überprüfen, Magen-Notizen auswerten."),
+    ("2027-07-03", "Rad", 120, "Höchste Rate der Saison, Rennsimulation mit Brick-Lauf, Hitzeprotokoll (Sauna-Block läuft)."),
+    ("2027-07-17", "Rad", 115, "Generalprobe DM: exakt der Renn-Plan inklusive Koffein und Natrium."),
+    ("2027-07-18", "Lauf", 70, ""),
+    ("2027-08-28", "Rad", 115, "Generalprobe Hölle von Q: 90-100 km Brick, exakt der Renn-Plan."),
+]
+GUT_NACH_TAG = {t: (sport, rate, extra) for t, sport, rate, extra in GUT}
+
 _BLOCK = re.compile(r"\n*Verpflegung[:\n].*\Z", re.S)
+
+
+SUPPLEMENTE = {
+    "olympisch": (
+        "Supplements (Generalprobe für die DM, alles muss vorher im Training getestet sein): Koffein 3 mg/kg = ca. 200 mg 45-60 min "
+        "vor dem Start (z. B. Koffein-Gel 75 mg plus Tablette 125 mg, Kaffee zählt mit), Gesamtmenge heute höchstens 4 mg/kg "
+        "(270 mg). Natrium 600-800 mg pro Stunde im Getränk. Nitrat nur, wenn getestet: 70 ml Rote-Bete-Konzentrat (ca. 6-8 mmol "
+        "Nitrat) 2-3 h vor dem Start. Kein Natriumbikarbonat. Bei Hitze: Eis-Slush 500 ml 30 min vor dem Start."),
+    "kurz": (
+        "Supplements (nur Getestetes): Koffein 3-4 mg/kg = 200-270 mg 45-60 min vor dem Start (Gel 75 mg plus Tablette 125-200 mg), "
+        "zusätzlich 1 mg/kg (65 mg, ein Koffein-Gel) im Wechsel zum Lauf. Gesamt inkl. Kaffee höchstens 5-6 mg/kg (330-400 mg). "
+        "Natrium 600-800 mg pro Stunde, bei über 25 Grad bis 1000 mg. Nitrat optional: 70 ml Konzentrat (6-8 mmol) 2-3 h vorher, "
+        "wenn du es in zwei Einheiten vertragen hast. Hitze: Eis-Slush 500 ml 30 min vor dem Start, Eiswürfel im Anzug, kaltes "
+        "Wasser über Kopf. Kein Natriumbikarbonat. DM: Dopingkontrollen möglich, nur Produkte mit Kölner-Liste oder Informed "
+        "Sport, keine Pre-Workout-Mischungen."),
+    "mittel": (
+        "Supplements (nur Getestetes): Koffein niedrig und verteilt: 2 mg/kg = 130 mg 60 min vor dem Start (oder ganz ohne), "
+        "dann alle 60-90 min 1 mg/kg (65 mg) ab der Rad-Hälfte, letzte Gabe vor dem Lauf, Gesamt 4-5 mg/kg (270-335 mg). "
+        "Natrium 800-1000 mg pro Stunde (Kapseln zusätzlich), bei Hitze Wasser über den Kopf. Nitrat optional wie bei der DM. "
+        "Kein Natriumbikarbonat (zu langer Wettkampf, Magenrisiko). Cola ab Lauf-km 5 als Koffeinquelle."),
+}
+
+SUPPLEMENT_REGELN = (
+    "Supplement-Plan (67 kg, kein ärztlicher Rat). Grundregel: im Wettkampf nur Dinge, die du in mindestens zwei Einheiten "
+    "getestet hast. Zuerst Basis prüfen: Blutbild im Winter (Ferritin, Vitamin D, B12, bei Bedarf mit dem Arzt ergänzen), "
+    "bei 12-20 h Training lohnt sich das mehr als jedes Supplement.\n"
+    "Koffein (wirksam): 3 mg/kg = 200 mg 45-60 min vor dem Start, in langen Rennen zusätzlich kleine Dosen von 1 mg/kg "
+    "(65 mg) in der zweiten Hälfte. Maximal 6 mg/kg = 400 mg, nichts nach 15 Uhr in Trainingswochen. Wer täglich viel "
+    "Kaffee trinkt, reduziert in den Wochen vor den Rennen, damit die Wirkung bleibt. Test: Schlüsseleinheiten "
+    "08.05. (3 mg/kg), 22.05. (4 mg/kg), 05.06. (Split-Dosis), 17.07. (DM-Plan), 28.08. (Hölle-von-Q-Plan).\n"
+    "Natrium (wirksam bei Dauer und Hitze): 500-800 mg pro Stunde, bei Hitze bis 1000 mg, als Getränk 500-1000 mg pro Liter "
+    "oder Kapseln.\n"
+    "Rote-Bete-Nitrat (mäßig, individuell): 6-8 mmol Nitrat, das sind 70 ml Konzentrat oder 500 ml Saft, 2-3 h vorher; "
+    "bei gut Trainierten ist der Effekt klein, Test am 27.03. und 05.06., Urin und Stuhl färben sich rot.\n"
+    "Beta-Alanin (optional): 3,2-6,4 g am Tag in 4 Dosen über 4-8 Wochen, hilft bei 1-4 min Belastung (Schwimmstart, "
+    "Zielsprint, steile Anstiege), für die Gesamtleistung eher gering; Kribbeln ist normal. Wenn überhaupt: ab 07.06. bis zur DM.\n"
+    "Natriumbikarbonat: nicht empfohlen (Magen-Darm-Probleme überwiegen bei diesen Distanzen).\n"
+    "Kreatin, BCAA, Pre-Workout-Mischungen: nicht nötig, teils riskant (Dopingkontaminationen).\n"
+    "Hitze: Sauna-Block 05.-25.07. (siehe Notiz), im Rennen Eis-Slush vor dem Start, Eiswürfel im Anzug, Schwamm.\n"
+    "Anti-Doping: Koffein ist erlaubt. Bei der DM sind Kontrollen möglich, deshalb nur Produkte mit Kölner-Liste oder Informed "
+    "Sport und keine Stimulanzien.")
+
+GUT_REGELN = (
+    "Darmtraining für hohe Kohlenhydratmengen im Rennen: Der Darm lässt sich trainieren. Ziel sind 100-120 g pro Stunde. "
+    "Dafür brauchst du mehrere Transportwege: Glukose/Maltodextrin und Fructose.\n"
+    "Verhältnis Maltodextrin/Glukose : Fructose: bis 90 g/h 2:1, über 90 g/h 1:0,8. Beispiele pro Stunde: 60 g = 40:20, "
+    "70 g = 47:23, 80 g = 53:27, 90 g = 60:30, 100 g = 56:44, 110 g = 61:49, 120 g = 67:53.\n"
+    "Aufbau im Training (jeweils bei einer langen Einheit am Wochenende): 70 g/h im Dezember, 80 g/h im Januar, 90-95 g/h "
+    "im Februar, 100 g/h im März, 105-110 g/h im April/Mai, 115-120 g/h im Juni/Juli. Gesamtplan mit allen Terminen siehe "
+    "die Kalendernotizen 'Darmtraining'.\n"
+    "Regeln: Rate nur steigern, wenn die vorige zweimal gut lief; Magen nach jeder Stunde auf 0-10 notieren; Gels mit "
+    "reichlich Wasser (Gel ohne Wasser ist eine Hauptursache für Probleme); die Rennrate musst du vor dem Rennen mindestens "
+    "dreimal gefahren sein. Zwischen den Darmtrainings ganz normal essen, nicht im Alltag auf Gels umstellen.")
+
+GUT_TERMINE = GUT
 
 
 def g(lo: float, hi: float | None = None) -> str:
@@ -36,6 +143,23 @@ NACH_HART = (f"Danach innerhalb von 60 min: {g(1.0, 1.2)} Kohlenhydrate (Reis, K
              f"und 20-25 g Eiweiß (Quark, Joghurt, Eier, Shake).")
 NACH_LEICHT = "Danach normale Mahlzeit mit 20-25 g Eiweiß, keine Sonderverpflegung nötig."
 HITZE = ("Nach der Sauna 500 ml Wasser mit einer Prise Salz zusätzlich.")
+
+
+def _gut_block(minuten: float, sport: str, rate: int, extra: str) -> str:
+    m, f, v = verhaeltnis(rate)
+    pro = f"{rate} g/h = {m} g Maltodextrin/Glukose + {f} g Fructose (Verhältnis {v})"
+    h = minuten / 60
+    zeilen = [f"DARMTRAINING: heutiges Ziel {pro}. Insgesamt für diese Einheit ca. {int(round(h * rate / 5) * 5)} g "
+              f"({int(round(h * m / 5) * 5)} g Maltodextrin + {int(round(h * f / 5) * 5)} g Fructose).",
+              f"Umsetzung: {beispiel_pro_stunde(rate)}; 600-750 ml Flüssigkeit und 500-800 mg Natrium pro Stunde.",
+              "Vorher: " + (f"{g(2.0)} Kohlenhydrate 2-3 h vorher, 30 min vorher ein Gel (25 g)." if sport == "Rad"
+                            else f"{g(1.5)} Kohlenhydrate 2-3 h vorher."),
+              "Magen nach jeder Stunde auf einer Skala 0-10 notieren (0 = ruhig). Ab 4 Rate in der nächsten Einheit nicht "
+              "erhöhen, ab 6 um 10 g/h senken. Die Rate wird erst gesteigert, wenn die vorige zweimal gut lief."]
+    if extra:
+        zeilen.append(extra)
+    zeilen.append(NACH_HART)
+    return "\n".join(zeilen)
 
 
 def _rad(minuten: float, hart: bool) -> str:
@@ -125,41 +249,44 @@ def _event_schwimmen() -> str:
 
 
 def _rennen_teile(kind: str) -> dict[str, str]:
+    key = {"kurz": "race_kurz", "olympisch": "race_olympisch", "mittel": "race_mitteldistanz"}[kind]
+    rad_rate, lauf_rate = RENNRATEN[key]
+    rm, rf, rv = verhaeltnis(rad_rate)
+    lm, lf, lv = verhaeltnis(lauf_rate)
     if kind == "mittel":
+        dauer_rad, dauer_lauf, lauf_min = 2.75, 0.8, 50
         vortage = f"Zwei Tage vorher bis Vortag: {g(8, 10)} Kohlenhydrate pro Tag, ab Vortag abends ballaststoffarm, 3 l trinken."
-        rad = ("Rad (ca. 2:40-2:50 h): 80-100 g Kohlenhydrate pro Stunde (gesamt 220-270 g), von Beginn an alle 15-20 min, "
-               "Mischung aus Bidon (500 ml mit 60 g), Gels und Riegel; 700 ml Flüssigkeit und 600-800 mg Natrium pro Stunde; "
-               "in den letzten 15 min vor dem Wechsel nichts Festes mehr.")
-        lauf = ("Lauf (ca. 50 min): 40-60 g Kohlenhydrate pro Stunde, ein Gel (25 g) alle 25-30 min, Wasser und Cola an den "
-                "Verpflegungsstellen, bei Hitze Salz.")
-        pre = (f"Renntag, 3 h vorher: {g(2.5, 3.0)} Kohlenhydrate (Weißbrot mit Honig, Haferbrei, Reis) und 500 ml; "
-               "60 min vorher 500 ml mit 500 mg Natrium; 15 min vor dem Start ein Gel (25 g). Koffein 3 mg/kg "
-               "(ca. 200 mg) 45-60 min vorher, nur wenn getestet.")
+        rad_zeit = "ca. 2:40-2:50 h"
     else:
+        dauer_rad, dauer_lauf, lauf_min = 1.2, 0.75, 45
         vortage = f"Zwei Tage vorher bis Vortag: {g(7, 8)} Kohlenhydrate pro Tag, ab Vortag abends ballaststoffarm, 2-3 l trinken."
-        rad = ("Rad (ca. 65-75 min): 60-90 g Kohlenhydrate pro Stunde, z. B. zwei Bidons mit je 500 ml und 40-45 g plus ein "
-               "Gel (25 g) nach 40 min; 500-700 mg Natrium pro Stunde (Elektrolytgetränk).")
-        lauf = ("Lauf (ca. 40-45 min): ein Gel (25 g) vor km 1 oder bei km 3 und Wasser an den Verpflegungsstellen; "
-                "Magen nicht überladen.")
-        pre = (f"Renntag, 3 h vorher: {g(2.0, 3.0)} Kohlenhydrate (Weißbrot mit Honig, Haferbrei, Reis) und 500 ml; "
-               "60 min vorher 500 ml mit 500 mg Natrium; 15 min vor dem Start ein Gel (25 g). Koffein 3 mg/kg (ca. 200 mg) "
-               "45-60 min vorher, nur wenn getestet.")
-        if kind == "olympisch":
-            pre += " Cottbus ist die Generalprobe: genau so üben, wie du es bei der DM machst."
+        rad_zeit = "ca. 65-75 min"
+    rad = (f"Rad ({rad_zeit}): {rad_rate} g Kohlenhydrate pro Stunde = {rm} g Maltodextrin/Glukose + {rf} g Fructose "
+           f"(Verhältnis {rv}), insgesamt ca. {int(round(dauer_rad * rad_rate / 5) * 5)} g; {beispiel_pro_stunde(rad_rate)}. "
+           "Von der ersten Minute an alle 15 min, 700 ml Flüssigkeit und 600-800 mg Natrium pro Stunde (bei Hitze bis 1000 mg); "
+           "in den letzten 10 min vor dem Wechsel nur noch Wasser.")
+    lauf = (f"Lauf (ca. {lauf_min} min): {lauf_rate} g Kohlenhydrate pro Stunde = {lm} g Maltodextrin/Glukose + {lf} g Fructose "
+            f"(Verhältnis {lv}), ein Gel mit 25-30 g alle 25-30 min, Wasser an jeder Verpflegungsstelle, bei Hitze Cola und "
+            "Schwamm zum Kühlen. Magen ruhig halten: ab km 5 zuerst Cola/Wasser.")
+    pre = (f"Renntag, 3 h vorher: {g(2.5, 3.0)} Kohlenhydrate (Weißbrot mit Honig, Haferbrei, Reis) und 500 ml; "
+           "60 min vorher 500 ml mit 500 mg Natrium; 15 min vor dem Start ein Gel (25 g).")
+    if kind == "olympisch":
+        pre += " Cottbus ist die Generalprobe: genau so üben, wie du es bei der DM machst, auch die hohe Rate."
     post = f"Danach sofort: {g(1.2)} Kohlenhydrate und 25 g Eiweiß, in den nächsten Stunden weiter essen und trinken."
     return {"vortage": vortage, "pre": pre, "swim": "Schwimmen: nichts mehr, vorher das Gel wie oben.",
-            "rad": rad, "lauf": lauf, "post": post}
+            "rad": rad, "lauf": lauf, "post": post, "supp": SUPPLEMENTE[kind]}
 
 
 def _rennen(kind: str, teil: str | None = None) -> str:
     t = _rennen_teile(kind)
     if teil == "swim":
-        return "\n".join([t["vortage"], t["pre"], t["swim"]])
+        return "\n".join([t["vortage"], t["pre"], t["swim"], t["supp"]])
     if teil == "rad":
-        return t["rad"] + "\nWechsel auf den Lauf: Gel erst nach 5-10 min, Magen beruhigen lassen."
+        return (t["rad"] + "\nWechsel auf den Lauf: Gel erst nach 5-10 min, Magen beruhigen lassen."
+                + ("\n" + t["supp"] if kind == "mittel" else ""))
     if teil == "lauf":
         return "\n".join([t["lauf"], t["post"]])
-    return "\n".join([t["vortage"], t["pre"], t["swim"], t["rad"], t["lauf"], t["post"]])
+    return "\n".join([t["vortage"], t["pre"], t["swim"], t["rad"], t["lauf"], t["supp"], t["post"]])
 
 
 def klasse(ev: dict) -> str | None:
@@ -203,6 +330,11 @@ def block_fuer_event(ev: dict) -> str | None:
     if not k:
         return None
     minuten = (ev.get("moving_time") or 0) / 60
+    tag = (ev.get("start_date_local") or "")[:10]
+    if tag in GUT_NACH_TAG and k in ("rad", "rad_hart", "lauf_locker") and minuten >= 90:
+        sport, rate, extra = GUT_NACH_TAG[tag]
+        if (sport == "Rad" and k.startswith("rad")) or (sport == "Lauf" and k == "lauf_locker"):
+            return f"{MARKER}:\n{_gut_block(minuten, sport, rate, extra)}\n(Richtwerte für {GEWICHT:.0f} kg, im Training üben.)"
     if k == "kraft":
         text = _kraft(minuten)
     elif k == "schwimmen":
@@ -251,4 +383,23 @@ GRUNDREGELN = (
     "Natrium bei Einheiten über 60 min und bei Hitze zusätzlich.\n"
     "Bei 12-20 h Training nicht zu wenig essen: Energiemangel kostet Leistung, Schlaf und HRV. Vor Schlüsseleinheiten nie "
     "nüchtern, 'Train low' höchstens bei lockeren Einheiten bis 60 min und nicht an Kraft- oder Intervalltagen.\n"
+    "Verhältnis Maltodextrin/Glukose : Fructose: bis 90 g/h 2:1 (60 g = 40:20, 80 g = 53:27, 90 g = 60:30), über 90 g/h "
+    "1:0,8 (100 g = 56:44, 110 g = 61:49, 120 g = 67:53).\n"
+    "Rennziele: Cottbus Rad 100 g/h, Lauf 50 g/h. DM Rad 105 g/h, Lauf 60 g/h. Hölle von Q Rad 115 g/h, Lauf 70 g/h.\n"
     "Jede Einheit im Kalender hat unten einen Block 'Verpflegung' mit den passenden Mengen.")
+
+
+def gut_training_events() -> list[dict]:
+    """Kalendernotizen für die Darmtraining-Termine (NOTE) plus Regeln und Supplement-Plan."""
+    out = []
+    for tag, sport, rate, extra in GUT:
+        m, f, v = verhaeltnis(rate)
+        text = (f"Heute Darmtraining {sport}: {rate_text(rate)}. {beispiel_pro_stunde(rate)}. "
+                f"Für 3 h: ca. {3 * rate} g, für 4 h: ca. {4 * rate} g. {extra}".strip())
+        out.append({"category": "NOTE", "name": f"Darmtraining {sport}: {rate} g/h ({v})", "description": text,
+                    "start_date_local": f"{tag}T00:00:00", "external_id": f"verpflegung-gut-{tag}"})
+    out.append({"category": "NOTE", "name": "Darmtraining: Plan und Regeln", "description": GUT_REGELN,
+                "start_date_local": "2026-11-11T00:00:00", "external_id": "verpflegung-gut-regeln"})
+    out.append({"category": "NOTE", "name": "Supplements: Plan und Regeln", "description": SUPPLEMENT_REGELN,
+                "start_date_local": "2026-11-11T00:00:00", "external_id": "verpflegung-supplements"})
+    return out
