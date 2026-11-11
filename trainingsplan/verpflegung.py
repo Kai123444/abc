@@ -56,21 +56,21 @@ GUT: list[tuple[str, str, int, str]] = [
     ("2027-02-14", "Lauf", 60, "Langer Hügellauf, kleine Portionen alle 15 min, Gel in Wasser verdünnen. Laufen verträgt der Magen schlechter als Radfahren."),
     ("2027-02-27", "Rad", 120, ""),
     ("2027-03-13", "Rad", 120, ""),
-    ("2027-03-27", "Rad", 125, "RADRENNEN-FENSTER 1: ein Rennen (1,5-2 h) statt der Bergfahrt. Dazu Nitrat-Test (siehe Supplement-Plan)."),
+    ("2027-03-27", "Rad", 125, "RADRENNEN-FENSTER 1: ein Rennen (1,5-2 h) statt der langen Ausfahrt. Dazu Nitrat-Test (siehe Supplement-Plan)."),
     ("2027-03-28", "Lauf", 70, ""),
     ("2027-04-10", "Rad", 125, ""),
-    ("2027-04-24", "Rad", 130, "RADRENNEN-FENSTER 2: ein Rennen (2-2,5 h) statt der Bergfahrt. PRÜFPUNKT 1: 130 g/h erstmals im Renntempo, "
+    ("2027-04-24", "Rad", 130, "RADRENNEN-FENSTER 2: ein Rennen (2-2,5 h) statt der langen Ausfahrt. PRÜFPUNKT 1: 130 g/h erstmals im Renntempo, "
                               "Magen höchstens 3/10."),
     ("2027-04-25", "Lauf", 80, "Lauf nach dem Rennwochenende, nur locker, Gel in kleinen Portionen."),
     ("2027-05-08", "Rad", 130, "Dazu Koffein-Test 3 mg/kg (200 mg) 45-60 min vor Start."),
     ("2027-05-09", "Lauf", 85, ""),
-    ("2027-05-22", "Rad", 130, "RADRENNEN-FENSTER 3: ein Rennen (2-3 h) statt der Bergfahrt, dazu Koffein 4 mg/kg (270 mg) und Natrium 800 mg pro Stunde. "
+    ("2027-05-22", "Rad", 130, "RADRENNEN-FENSTER 3: ein Rennen (2-3 h) statt der langen Ausfahrt, dazu Koffein 4 mg/kg (270 mg) und Natrium 800 mg pro Stunde. "
                               "PRÜFPUNKT 2: 130 g/h zum zweiten Mal im Renntempo, sonst bleibt die DM-Rate bei 120 g/h."),
     ("2027-06-05", "Rad", 130, "Rennsimulation: Koffein als Split-Dosis testen (siehe Supplement-Plan)."),
     ("2027-06-06", "Lauf", 90, "Brick-Lauf mit Renn-Gel-Plan: 25 g alle 15 min."),
-    ("2027-06-19", "Rad", 130, "RADRENNEN-FENSTER 4: ein Rennen (2-3 h) statt der Bergfahrt, nach Cottbus Plan überprüfen, Magen-Notizen auswerten."),
+    ("2027-06-19", "Rad", 130, "RADRENNEN-FENSTER 4: ein Rennen (2-3 h) statt der langen Ausfahrt, nach Cottbus Plan überprüfen, Magen-Notizen auswerten."),
     ("2027-06-20", "Lauf", 95, "Brick: 40 min Rad im Renntempo, dann Lauf mit 95 g/h. PRÜFPUNKT Lauf: Magen höchstens 3/10, sonst DM-Rate 90 g/h."),
-    ("2027-07-03", "Rad", 130, "RADRENNEN-FENSTER 5 (nur bei grüner Ampel): ein Rennen (2-3 h) statt der Bergfahrt, Hitzeprotokoll "
+    ("2027-07-03", "Rad", 130, "RADRENNEN-FENSTER 5 (nur bei grüner Ampel): ein Rennen (2-3 h) statt der langen Ausfahrt, Hitzeprotokoll "
                               "(Sauna-Block läuft). Letzte Bestätigung der DM-Rate."),
     ("2027-07-04", "Lauf", 100, "Brick: 40 min Rad im Renntempo, dann Lauf mit 100 g/h exakt wie im Rennen."),
     ("2027-07-17", "Rad", 130, "Generalprobe DM: exakt der Renn-Plan inklusive Koffein und Natrium."),
@@ -441,7 +441,7 @@ def gut_training_events() -> list[dict]:
                 f"{dauer}, echtes Renntempo (nicht Gruppenausfahrt). Termine z. B. über rad-net.de (Terminkalender des BDR). "
                 f"Sobald du ein Rennen hast: in intervals.icu als Rennen (C) eintragen, dann plane ich die Woche darum.\n"
                 f"Verpflegungsziel im Rennen: {rate_text(rate)}. {beispiel_pro_stunde(rate)}.\n"
-                f"Ersetzt die lange Bergfahrt am Samstag. Do Rad-Schlüssel wie geplant, Fr locker 45 min. Sonntag nach einem "
+                f"Ersetzt die lange Ausfahrt am Samstag. Do Rad-Schlüssel wie geplant, Fr locker 45 min. Sonntag nach einem "
                 f"Samstagsrennen nur Lauf locker 45 min; bei Sonntagsrennen am Samstag 60-90 min locker. Montag danach nur "
                 f"leichte Beine. Kein Rennen in einer Erholungswoche oder in den 2 Wochen vor Cottbus und der DM. Danach "
                 f"Magen-Notizen (0-10 pro Stunde) und Zielrate in den Wellness-Kommentar schreiben.")

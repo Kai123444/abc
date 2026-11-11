@@ -81,8 +81,7 @@ NAECHSTE_WOCHE = [
     ("2026-11-20", "NOTE", "Ruhetag",
      "Frei oder 20 min Mobilisation. Morgen lange Radeinheit, vorher gut essen und schlafen.", 0),
     ("2026-11-21", "Ride", "Rad Grundlage lang",
-     "In den Bergen fahren (Harz), Anstiege im eigenen Tempo, nicht über 75 % FTP. Der Berg ist deine "
-     "Beinkraft, noch ohne Intervalle (die kommen ab Dezember).\n"
+     "Im Gelände wie du es hast (Harz oder flach), gleiche Zonen wie im Flachen: nach Leistung fahren, nicht über 75 % FTP.\n"
      "Warmup\n- 10m ramp 45-57%\n\nGrundlage, Trittfrequenz 85-95, essen und trinken (60 g Kohlenhydrate/h)\n"
      "- 100m 58%\n\nCooldown\n- 10m 50%", 120),
     ("2026-11-23", "WeightTraining", "Kraft: Beine und Oberkörper (Technik)",
@@ -107,8 +106,7 @@ NAECHSTE_WOCHE = [
      "Sweet Spot 2x\n- 15m 88%\n- 5m 55%\n\nCooldown\n- 10m 50%", 65),
     ("2026-11-26", "Swim", "Vereinstraining", "Wie geplant im Verein.", 70),
     ("2026-11-28", "Ride", "Rad in den Bergen",
-     "Im Harz, Anstiege im eigenen Tempo, nicht über 75 % FTP, Essen und Trinken üben. Erste Bergfahrt "
-     "ohne Intervalle.\nWarmup\n- 15m ramp 45-57%\n\nGrundlage\n- 200m 58%\n\nCooldown\n- 10m 50%", 225),
+     "Im Harz oder flach, nach Leistung (Z2, nicht über 75 % FTP), Essen und Trinken üben.\nWarmup\n- 15m ramp 45-57%\n\nGrundlage\n- 200m 58%\n\nCooldown\n- 10m 50%", 225),
     ("2026-11-29", "Run", "Hügellauf locker",
      "Hügelgelände, bergauf kräftig, bergab traben oder gehen, Puls niedrig halten.\n- 55m 6:50/km Pace", 55),
     ("2026-11-22", "Run", "Lauf locker lang",
