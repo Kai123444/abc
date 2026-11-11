@@ -46,9 +46,9 @@ VORTAG = (
 ABGLEICH = (
     "Abgleich Training und DM-Strecke (nach Ausschreibung 2027):\n"
     "RAD: flach, windschattenfrei, Wenden, Nordseewind. Das verlangt Zeitfahren: gleichmäßige Leistung in Rennposition, "
-    "keine Gruppenfahrt. Unter der Woche hast du keine Berge, am Wochenende fährst du sie, wenn du kannst. Deshalb: "
-    "(1) die flachen Renntempo-Einheiten liegen unter der Woche (Do-Schlüssel, ab Phase 4 auch Di), der Samstag ist die "
-    "lange Z2-Ausfahrt ohne Intervalle, in den Bergen wenn möglich (Intervalle fährst du flach, siehe Notiz Rad-Intervalle); (2) bis du das Zeitfahrrad hast, fährst du den Do-Schlüssel in tiefer "
+    "keine Gruppenfahrt. Intervalle fährst du dort, wo sie am besten in die Woche passen. Deshalb: "
+    "(1) Schlüssel 1 ist der Do, Schlüssel 2 ein Block in der langen Samstagsfahrt (vormittags Intervall, nachmittags "
+    "locker), siehe Notiz Rad-Intervalle; die DM-spezifischen Renntempo-Blöcke fährst du bevorzugt flach; (2) bis du das Zeitfahrrad hast, fährst du den Do-Schlüssel in tiefer "
     "Position am Unterlenker, danach mindestens 20 min in Aeroposition, ab März zwei Einheiten pro Woche; (3) "
     "Zeitfahrtest 40 km solo, flach, Do 13.05. (Erholungswoche), daraus die Renn-Leistung ableiten (Richtwert "
     "88-92 % FTP, weil danach noch 10 km laufen); (4) Wenden üben (U-Turns und Antritte, 6-8 pro Einheit); (5) bei "

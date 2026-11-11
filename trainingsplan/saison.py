@@ -75,21 +75,24 @@ ERHOLUNG_TEXT = ("Fokus auf leichtere Belastungen, reduziertes Volumen und Anpas
                  "Umfang -35 %: je eine kurze Qualitätseinheit pro Sportart, kein langer Tag.")
 
 WOCHENSTRUKTUR = (
-    "Vorschlag für die Standardwoche (3 Schlüsseleinheiten, Rest locker; Schwimmen Di/Do = Vereinstraining; "
-    "Kraftraum Mo und Mi):\n"
-    "Mo: KRAFT Beine schwer + Oberkörper (55-60 min), Rad locker 45-60 min optional\n"
-    "Di: Rad locker/Kadenz 60-75 min (Beine ausdrehen nach Montag), ab Phase 3 flache Intervalle (siehe Rad-Intervalle), Schwimmen (Verein)\n"
+    "Vorschlag für die Standardwoche (Schwimmen Di/Do = Vereinstraining; Kraftraum Mo und Mi; am Wochenende kannst du "
+    "vormittags und nachmittags trainieren; Intervalle legst du dorthin, wo sie am besten passen):\n"
+    "Mo: KRAFT Beine schwer + Oberkörper (55-60 min), Rad nur locker nach Lust\n"
+    "Di: Rad locker/Kadenz 60-90 min (Beine ausdrehen nach Montag), ab Phase 3 alle 2 Wochen Intervalle statt locker, "
+    "Schwimmen (Verein)\n"
     "Mi: KRAFT Oberkörper, Core und kurze Beinaktivierung (35-40 min), danach SCHLÜSSEL Lauf = Bahnintervalle "
     "(Einlaufen 3-4 km, 400-1000 m Wiederholungen, Auslaufen; eigene Einheit, bis das Vereinstraining startet)\n"
-    "Do: SCHLÜSSEL Rad-Intervalle flach (Sweet Spot/Schwelle/VO2max/Renntempo) 75-105 min, Schwimmen (Verein), Sauna\n"
-    "Fr: Sportunterricht/Lauf locker 30-40 min oder frei\n"
-    "Sa: langes Rad 3-5 h in Z2, am Wochenende in den Bergen, wenn du kannst, sonst flach; hier gibt es KEINE Intervalle, "
-    "nach Leistung gefahren, ab März mit Koppellauf 20-30 min. Intervalle fährst du flach unter der Woche\n"
-    "So: langer Lauf 75-100 min im Hügelgelände (bergauf kräftig, bergab kontrolliert); in Berge-Blöcken mit "
-    "sehr langem Samstag stattdessen Rad Z2 2-3 h und der Lauf wandert auf den Freitag\n"
-    "Ein voller Ruhetag oder maximal locker pro Woche. Schwere Beine nur Mo (48 h vor den Mittwochs-Intervallen, "
-    "Radsport-Erfahrung trägt das nach dem Wochenende); Di nur locker; Mi vor dem Laufen keine schweren Beine. "
-    "Nie zwei harte Tage hintereinander in derselben Sportart.")
+    "Do: SCHLÜSSEL Rad-Intervalle (Sweet Spot/Schwelle/VO2max/Renntempo) 75-105 min, Schwimmen (Verein), Sauna\n"
+    "Fr: Sportunterricht/Lauf locker 30-40 min oder frei (der leichteste Tag vor dem Wochenende)\n"
+    "Sa vormittags: SCHLÜSSEL langes Rad 3-5 h in Z2 mit einem Intervallblock in der Mitte (siehe Rad-Intervalle), in den "
+    "Bergen oder flach, ab März mit Koppellauf 20-30 min\n"
+    "Sa nachmittags: locker, Lauf 30-45 min, Schwimmen frei 45 min (ab Mai Freiwasser) oder Core 20 min\n"
+    "So vormittags: langer Lauf 75-100 min im Hügelgelände (bergauf kräftig, bergab kontrolliert); in Phase 4 alle 2 Wochen "
+    "Brick statt langem Lauf\n"
+    "So nachmittags: Rad locker 60-90 min (Beine ausdrehen) oder Schwimmen frei\n"
+    "Ein voller Ruhetag oder maximal locker pro Woche (meist Fr). Schwere Beine nur Mo (48 h vor den Mittwochs-Intervallen, "
+    "Radsport-Erfahrung trägt das nach dem Wochenende); Mi vor dem Laufen keine schweren Beine. Keine Rad-Intervalle an "
+    "zwei Tagen hintereinander (Do und Sa haben den Freitag dazwischen).")
 
 KRAFTPLAN = (
     "Kraftraum Mo und Mi, orientiert an deinen letzten Einheiten (meist montags, 45-60 min). Mo = Ganzkörper mit "
@@ -134,26 +137,30 @@ LAUFINTERVALLE = (
     "noch nicht startet (Termin offen), läufst du dieselbe Einheit allein auf der Bahn am Mittwoch, nach dem Kraftraum.")
 
 RAD_INTERVALLE = (
-    "Rad-Intervalle: geplant nach deinen Möglichkeiten (Intervalle fährst du flach, das geht unter der Woche) und deinen "
-    "Zielen (Cottbus 12.06. und DM 08.08. flach und windschattenfrei, Hölle von Q im Harz). Lockeres Training ist "
-    "geländeunabhängig, deshalb gilt: Samstag = lange Z2-Ausfahrt (Berge wenn möglich) ohne Intervalle, Intervalle nur Di und Do.\n"
-    "Phase 1 (23.11.-24.01.), 1 Einheit pro Woche, Do flach: Sweet Spot 2x20 min bei 88-93 % FTP (Pause 5 min), im Verlauf "
-    "2x25, 3x15, 3x20 min. Sobald das Zeitfahrrad da ist, mindestens 20 min davon in Aeroposition.\n"
-    "Phase 2 (25.01.-21.03.), 1-2 Einheiten pro Woche: Do Schwelle 2x20 min bei 95-100 % FTP (Pause 5 min), im Verlauf "
-    "3x15, 2x25, 4x12 min. Di (jede zweite Woche, ab Februar) Over-Unders 3x(2x6 min bei 95/105 %) oder Sweet Spot 60 min "
-    "am Stück. Beides flach in Rennposition.\n"
-    "Phase 3 (22.03.-16.05.), 2 Einheiten pro Woche: Do VO2max 5x4 min, 5x5 min, 6x4 min bei 110-120 % FTP (Pause gleich lang), "
-    "danach Koppellauf 10-15 min; Di Sweet Spot/Tempo 2x25-30 min bei 88-93 % FTP in Rennposition. Erholungswoche 10.05.: "
-    "Zeitfahrtest 40 km am Do 13.05.\n"
-    "Phase 4 (17.05.-25.07.), 2 Einheiten pro Woche: Do Renntempo-Block 2x20 min oder 3x15 min bei 95-100 % FTP, später 40 km "
-    "bei 88-92 % FTP (Wert aus dem Zeitfahrtest) plus Koppellauf 15-20 min; Di alle 2 Wochen Schwelle 3x12 min bei 100 % oder "
-    "VO2max 4x4 min zur Frische; So alle 2 Wochen Brick (40 min Rad bei 85-90 % FTP, dann 10 km Lauf im Renntempo) statt "
-    "des langen Laufs. Samstag Z2 lang, außer in den Radrennen-Fenstern.\n"
-    "Rennwoche DM (02.08.): nur kurze Öffner, keine Intervalle über 5 min. Spätsaison: Hölle von Q liegt im Harz, "
-    "deshalb fährst du den Brick am Sa 28.08. auf hügeligem Harz-Profil und die Renntempo-Blöcke in der Woche davor am "
-    "Anstieg, sobald das Streckenprofil feststeht.\n"
-    "Regeln: Intervalle immer nach Leistung (% FTP), nicht nach Gefühl; Wind als Teil des Trainings; Wenden (U-Turns) in "
-    "jeder Renntempo-Einheit 6-8 mal; bei Gelb Umfang um ein Intervall kürzen, bei Rot streichen.")
+    "Rad-Intervalle: Du fährst sie dort, wo sie am besten in die Woche passen, unter der Woche und am Wochenende, Berge oder "
+    "flach, immer nach Leistung (% FTP). Plan: Schlüssel 1 = Do, Schlüssel 2 = Sa vormittags als Block in der langen Fahrt, "
+    "Schlüssel 3 = Di alle 2 Wochen ab Phase 3. Die DM-spezifischen Renntempo-Blöcke ab Mai fährst du bevorzugt flach, weil "
+    "Cottbus und die DM flach und windschattenfrei sind; das geht Do oder Sa auf flacher Strecke. Am Wochenende hast du "
+    "zwei Einheiten pro Tag: Intervall oder lange Fahrt morgens, nachmittags nur locker (Lauf, Schwimmen, Core).\n"
+    "Phase 1 (23.11.-24.01.): Do Sweet Spot 2x20 min bei 88-93 % FTP (Pause 5 min), im Verlauf 2x25, 3x15, 3x20 min. "
+    "Sa ab Januar im Mittelteil der Ausfahrt 1x30 min Sweet Spot, sonst Z2. Sobald das Zeitfahrrad da ist, mindestens "
+    "20 min im Do-Block in Aeroposition.\n"
+    "Phase 2 (25.01.-21.03.): Do Schwelle 2x20 min bei 95-100 % FTP, im Verlauf 3x15, 2x25, 4x12 min. Sa in der 3-4 h Fahrt "
+    "ein Block 2x20 min Sweet Spot oder 3x15 min Schwelle. Di alle 2 Wochen (ab Februar) Over-Unders 3x(2x6 min bei 95/105 %).\n"
+    "Phase 3 (22.03.-16.05.): Do VO2max 5x4, 5x5, 6x4 min bei 110-120 % FTP (Pause gleich lang) plus Koppellauf 10-15 min. "
+    "Sa in 4-5 h Fahrt ein Block 2x30 min bei 88-93 % oder 3x15 min bei 95-100 % im Wechsel. Di alle 2 Wochen Sweet Spot/Tempo "
+    "2x25-30 min. Erholungswoche 10.05.: Zeitfahrtest 40 km am Do 13.05.\n"
+    "Phase 4 (17.05.-25.07.): Do Renntempo-Block 2x20 oder 3x15 min bei 95-100 % FTP, später 40 km bei 88-92 % FTP (Wert aus dem "
+    "Zeitfahrtest) plus Koppellauf 15-20 min. Sa Renntempo-Block flach in der 3-4 h Fahrt (40 km bei 88-92 %) im Wechsel mit "
+    "Schwelle 3x12 min. Di alle 2 Wochen Schwelle 3x12 min bei 100 % oder VO2max 4x4 min zur Frische. So alle 2 Wochen Brick (40 "
+    "min Rad bei 85-90 % FTP, dann 10 km Lauf im Renntempo) statt des langen Laufs. In den Radrennen-Fenstern ersetzt das "
+    "Rennen den Samstagsblock.\n"
+    "Rennwoche DM (02.08.): nur kurze Öffner, keine Intervalle über 5 min. Spätsaison: Hölle von Q liegt im Harz, deshalb fährst "
+    "du den Brick am Sa 28.08. auf hügeligem Harz-Profil und die Renntempo-Blöcke davor am Anstieg, sobald das Streckenprofil "
+    "feststeht.\n"
+    "Regeln: Intervalle immer nach Leistung, nicht nach Gefühl; Wind ist Teil des Trainings; Wenden (U-Turns) in jeder "
+    "Renntempo-Einheit 6-8 mal; bei Gelb Umfang um ein Intervall kürzen, bei Rot streichen; nie Rad-Intervalle an zwei Tagen "
+    "hintereinander.")
 
 SAUNA = (
     "Sauna steht dir zur Verfügung. Zwei Nutzungen:\n"
@@ -232,9 +239,9 @@ PHASEN: list[tuple[str, str, str]] = [
     ("2026-11-23", "Mittwochs-Intervalle Lauf", LAUFINTERVALLE),
     ("2027-07-05", "Sauna: Erholung und Hitzeanpassung", SAUNA),
     ("2027-01-25", "Phase 2: Grundlage II / Aufbau (25.01.-21.03.)",
-     "Intensität steigt (pyramidal ca. 80/15/5). Rad-Intervalle immer flach unter der Woche: Do Schwelle "
-     "2x20 min bei 95-100 % FTP (später 3x15, 2x25), Di alle 2 Wochen Over-Unders; der Samstag ist lange Z2-Fahrt ohne Intervalle "
-     "(Berge, wenn du kannst). "
+     "Intensität steigt (pyramidal ca. 80/15/5). Rad-Intervalle, wo sie am besten passen: Do Schwelle "
+     "2x20 min bei 95-100 % FTP (später 3x15, 2x25), Sa in der langen Fahrt ein Block (2x20 min Sweet Spot oder 3x15 min "
+     "Schwelle), Di alle 2 Wochen Over-Unders; Berge oder flach, gleiche Zonen. "
      "Lauf: Mi Bahnintervalle (10-12x400 m, 3x800 m, 4-5x1000 m an der Schwellenpace), So Bergläufe 8x60 s bergauf. Schwimmen: CSS-Sätze 10x100 m. Kraftraum Mo Maximalkraft, Mi Oberkörper vor dem Lauf, ab März "
      "Erhalt. Load 560 -> 640, ca. 16 -> 18 h (Rad 9-10 h).\n"
      "Erwartung: CTL 58 -> ca. 75, Form -14 bis -17. Ruhepuls im Wochenmittel +1-2 bpm in "
@@ -242,9 +249,9 @@ PHASEN: list[tuple[str, str, str]] = [
     ("2027-03-22", "Phase 3: Aufbau intensiv (22.03.-09.05.)",
      "VO2max: Rad 5x4-5 min bei 110-120 % FTP (Pause gleich lang) oder 30/30; Lauf 6x1 km bei "
      "3-5-km-Tempo; Schwimmen 8x200 m bei CSS. Einmal pro Woche Koppeltraining (60-90 min Rad "
-     "Sweet Spot + 15-20 min Lauf im Renntempo), Rad-Intervalle flach unter der Woche: Do VO2max "
-     "5x4-5 min bei 110-120 % FTP plus Koppellauf 10-15 min, Di Sweet Spot/Tempo 2x25-30 min bei 88-93 % FTP in Rennposition; "
-     "Samstag 4-5 h Z2 ohne Intervalle (Berge, wenn du kannst). "
+     "Sweet Spot + 15-20 min Lauf im Renntempo), Rad-Intervalle: Do VO2max "
+     "5x4-5 min bei 110-120 % FTP plus Koppellauf 10-15 min, Sa in 4-5 h Fahrt ein Block 2x30 min bei 88-93 % oder 3x15 min "
+     "bei 95-100 % FTP (Berge oder flach), Di alle 2 Wochen Sweet Spot/Tempo 2x25-30 min. "
      "Load 640 -> 715, ca. 17 -> 19 h (Rad 9-10 h).\n"
      "Erwartung: CTL 75 -> ca. 87, Form -10 bis -14. Mehr Intensität heißt stärkere Reaktion: "
      "nach harten Tagen HRV 10-15 % niedriger ist normal und sollte nach 48 h zurück sein. "
@@ -253,10 +260,10 @@ PHASEN: list[tuple[str, str, str]] = [
      "Kurzdistanz-spezifisch (1,5 km / 40 km / 10 km, ca. 2:30 h): Renntempo-Blöcke Rad 3x12 min "
      "bei 100-105 % FTP, Brick Rad 40 min bei 85-90 % FTP + Lauf 10 km im Renntempo (alle 2 Wochen), "
      "Freiwasser mit Neopren ab Mai, 1,5 km am Stück, lange Radfahrt bis 4-5 h, langer Lauf bis 100 min. "
-     "Die DM-Strecke ist flach und windschattenfrei (siehe Notiz DM-Strecke). Unter der Woche hast du keine Berge, "
-     "deshalb liegen die flachen Renntempo-Blöcke dort (Do, bei Bedarf Di): 3x12 oder 2x20 min bei 95-100 % FTP und "
-     "40-km-Blöcke in Rennposition (Aeroposition, sobald das Zeitfahrrad da ist), Wenden üben, bei Wind fahren. Der "
-     "Samstag: lange Z2-Ausfahrt ohne Intervalle (Berge, wenn du kannst), Intervalle nur Di und Do. Läufe ab "
+     "Die DM-Strecke ist flach und windschattenfrei (siehe Notiz DM-Strecke). Die Renntempo-Blöcke fährst du bevorzugt flach "
+     "(Do, Sa auf flacher Strecke): 3x12 oder 2x20 min bei 95-100 % FTP und 40-km-Blöcke in Rennposition (Aeroposition, sobald "
+     "das Zeitfahrrad da ist), Wenden üben, bei Wind fahren. Sa lange Fahrt mit Renntempo-Block, am Wochenende vormittags "
+     "Intervall, nachmittags locker. Läufe ab "
      "Mai flach im Renntempo; in der Rennwoche keine Intervalle am Samstag. Zeitfahrtest 40 km solo am Do 13.05. "
      "Sa 12.06. Cottbus (Olympische Distanz = B-Rennen und Generalprobe für die DM, Mini-Taper Mi-Fr, "
      "ersetzt den Formcheck). Weitere Rennen vor der DM nach Termin: Supersprint/Sprint ersetzt die "
@@ -386,16 +393,16 @@ PHASEN_UEBERSICHT = [
     ("2026-11-09", "2026-11-22", "0 Tests", "Reaktivierung, Leistungsdiagnostik",
      "locker, Tests Sa 14.11./Di 17.11.", "Stufentest, Z2", "Stufentest, locker", "Verein, Kraft Mo Oberkörper + Beine leicht (ab 16.11.), Mi vor dem Lauf"),
     ("2026-11-23", "2027-01-24", "1 Grundlage I", "Aerobes Volumen, Technik, Maximalkraft im Kraftraum",
-     "ca. 85 % Z1-Z2 / 15 % darüber", "Sa 3-4 h Z2 (Berge, wenn möglich), Do flach Sweet Spot 2x20-3x20",
+     "ca. 85 % Z1-Z2 / 15 % darüber", "Do Sweet Spot 2x20-3x20, Sa 3-4 h Z2 (ab Jan. 1x30 min Sweet Spot im Block), So PM Rad locker",
      "Mi Bahn 6-10x400, 4 Läufe, So Hügellauf 60-75 min, Steigerungen", "Verein + Technik; Kraftraum Mo Beine + Oberkörper, Mi Oberkörper/Core, RIR 2-3"),
     ("2027-01-25", "2027-03-21", "2 Grundlage II / Aufbau", "Schwelle, Tempo, aerobe Leistung",
-     "ca. 80 / 15 / 5 (pyramidal)", "Do flach Schwelle 2x20 / 3x15 bei 95-100 %, Di (alle 2 Wo.) Over-Unders, Sa Z2 lang",
+     "ca. 80 / 15 / 5 (pyramidal)", "Do Schwelle 2x20 / 3x15 bei 95-100 %, Sa Block 2x20 Sweet Spot / 3x15 Schwelle in 3-4 h, Di (alle 2 Wo.) Over-Unders",
      "Mi Bahn 10-12x400 / 3x800 / 4-5x1000, So Bergläufe 8x60 s", "CSS-Sätze 10x100; Kraftraum Mo Maximalkraft (4-6 Wdh.), Mi Oberkörper + Sprünge"),
     ("2027-03-22", "2027-05-16", "3 Aufbau intensiv", "VO2max, Koppeltraining, lange Ausdauer",
-     "ca. 75 / 15 / 10", "Do flach VO2max 5x4-5 min + Koppellauf, Di flach Sweet Spot 2x25-30 min, Sa 4-5 h Z2 (Berge wenn möglich)",
+     "ca. 75 / 15 / 10", "Do VO2max 5x4-5 min + Koppellauf, Sa Block 2x30 Tempo / 3x15 Schwelle in 4-5 h, Di (alle 2 Wo.) Sweet Spot 2x25-30",
      "6x1 km (3-5-km-Tempo), Koppellauf 15-20 min", "8x200 bei CSS; Kraftraum Mo 35-40 min Erhalt, Mi 20 min Core"),
     ("2027-05-17", "2027-07-25", "4 Wettkampfvorbereitung", "Renntempo, Spezifik, Spitzenvolumen",
-     "ca. 75 / 15 / 10 mit Renntempo", "Do flach Renntempo-Block 2x20 / 3x15 / 40 km (Aero sobald Zeitfahrrad da) + Koppellauf, Di alle 2 Wo. Schwelle, So alle 2 Wo. Brick 40 min + 10-km-Lauf; Sa Z2 lang, Berge wenn möglich",
+     "ca. 75 / 15 / 10 mit Renntempo", "Do Renntempo-Block 2x20 / 3x15 / 40 km flach (Aero sobald Zeitfahrrad da) + Koppellauf, Sa Renntempo-Block in 3-4 h, Di alle 2 Wo. Schwelle, So alle 2 Wo. Brick 40 min + 10-km-Lauf",
      "Langer Lauf bis 100 min flach, Brick-Lauf 10 km Renntempo flach", "Freiwasser mit und ohne Neopren, Wellen, Bojenwenden, Pulk; 1,5 km am Stück; Kraftraum Mo 35 min Erhalt bis 14 Tage vor DM; Sauna-Block 05.-25.07."),
     ("2027-07-26", "2027-08-08", "Taper und Rennen", "Frische, Schärfe, Renntempo-Öffner",
      "locker + wenige scharfe Reize", "3-5 Reize à 3-5 min im Renntempo, Öffner", "kurze Tempoläufe, Öffner",

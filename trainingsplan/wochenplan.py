@@ -19,6 +19,7 @@ ENTFERNEN = [
     # frühere Fassung der nächsten Woche (Lauftest lag am Di, Kraft für Beine am Mo)
     ("2026-11-16", "Kraft: Beine und Core", "Mo: Kraft ohne Beine nach dem Rad-Stufentest"),
     ("2026-11-18", "Rad Grundlage", "Mi: Lauf-Stufentest, Rad am Di"),
+    ("2026-11-23", "Rad locker (Montag)", "Mo: Beine nach dem Kraftraum frei, die Fahrt wandert auf den Sonntagnachmittag"),
     ("2026-11-19", "Kraft: Einstieg Beine (leicht)", "Do: Beine jetzt am Montag"),
     ("2026-11-23", "Kraft: Oberkörper und Core", "Mo: Ganzkörper mit Beinen"),
     ("2026-11-25", "Kraft: Beine Technik", "Mi: Beine jetzt am Montag"),
@@ -98,6 +99,9 @@ NAECHSTE_WOCHE = [
      "Warmup\n- 15m 6:50/km Pace\n\nIntervalle 5x\n- 400mtr 4:15/km Pace\n- 200mtr 7:15/km Pace\n\nCooldown\n- 8m 7:00/km Pace", 50),
     ("2026-11-23", "Ride", "Rad locker (Montag)",
      "Nach oder vor dem Kraftraum, nur Beine ausdrehen, Trittfrequenz 85-95.\n- 10m ramp 45-55%\n- 40m 55%\n- 10m 50%", 60),
+    ("2026-11-29", "Ride", "Rad locker (Sonntag Nachmittag)",
+     "Zweite Einheit am Sonntag, nach dem Hügellauf am Vormittag: nur Beine ausdrehen, Trittfrequenz 85-95.\n"
+     "- 10m ramp 45-55%\n- 40m 55%\n- 10m 50%", 60),
     ("2026-11-24", "Ride", "Rad locker",
      "Beine ausdrehen nach dem Montag, Trittfrequenz 85-95.\n- 10m ramp 45-55%\n- 70m 57%\n- 10m 50%", 90),
     ("2026-11-24", "Swim", "Vereinstraining", "Wie geplant im Verein.", 70),
