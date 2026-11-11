@@ -19,10 +19,10 @@ Wochenziele in TSS, Stunden grob geschätzt (Rad 34, Lauf 48, Schwimmen 35, Kraf
 | Phase | Rad | Lauf | Schwimmen / Kraft |
 |---|---|---|---|
 | 0 Tests | Stufentest, Z2 | Stufentest, locker | Verein, Kraft Mo Oberkörper + Beine leicht (ab 16.11.), Mi vor dem Lauf |
-| 1 Grundlage I | Sa 3-4 h Z2 (Berge, wenn möglich, gleiche Zonen), Do Sweet Spot 2x20 | Mi Bahn 6-10x400, 4 Läufe, So Hügellauf 60-75 min, Steigerungen | Verein + Technik; Kraftraum Mo Beine + Oberkörper, Mi Oberkörper/Core, RIR 2-3 |
-| 2 Grundlage II / Aufbau | Schwelle 3x15 / 2x20 bei 95-100 % FTP, Over-Unders, Z2 lang | Mi Bahn 10-12x400 / 3x800 / 4-5x1000, So Bergläufe 8x60 s | CSS-Sätze 10x100; Kraftraum Mo Maximalkraft (4-6 Wdh.), Mi Oberkörper + Sprünge |
-| 3 Aufbau intensiv | Sa 4-5 h: VO2max 5x4-5 min, 2x30 Tempo, Koppel 1x/Woche (gleiche Zonen, Berge wenn möglich) | 6x1 km (3-5-km-Tempo), Koppellauf 15-20 min | 8x200 bei CSS; Kraftraum Mo 35-40 min Erhalt, Mi 20 min Core |
-| 4 Wettkampfvorbereitung | Do flach in Rennposition (Aero sobald Zeitfahrrad da): 3x12 / 2x20 min bei 95-100 % FTP, 40-km-Blöcke, Brick 40 min bei 85-90 % FTP + 10-km-Lauf; Sa lange Ausfahrt, Berge wenn möglich | Langer Lauf bis 100 min flach, Brick-Lauf 10 km Renntempo flach | Freiwasser mit und ohne Neopren, Wellen, Bojenwenden, Pulk; 1,5 km am Stück; Kraftraum Mo 35 min Erhalt bis 14 Tage vor DM; Sauna-Block 05.-25.07. |
+| 1 Grundlage I | Sa 3-4 h Z2 (Berge, wenn möglich), Do flach Sweet Spot 2x20-3x20 | Mi Bahn 6-10x400, 4 Läufe, So Hügellauf 60-75 min, Steigerungen | Verein + Technik; Kraftraum Mo Beine + Oberkörper, Mi Oberkörper/Core, RIR 2-3 |
+| 2 Grundlage II / Aufbau | Do flach Schwelle 2x20 / 3x15 bei 95-100 %, Di (alle 2 Wo.) Over-Unders, Sa Z2 lang | Mi Bahn 10-12x400 / 3x800 / 4-5x1000, So Bergläufe 8x60 s | CSS-Sätze 10x100; Kraftraum Mo Maximalkraft (4-6 Wdh.), Mi Oberkörper + Sprünge |
+| 3 Aufbau intensiv | Do flach VO2max 5x4-5 min + Koppellauf, Di flach Sweet Spot 2x25-30 min, Sa 4-5 h Z2 (Berge wenn möglich) | 6x1 km (3-5-km-Tempo), Koppellauf 15-20 min | 8x200 bei CSS; Kraftraum Mo 35-40 min Erhalt, Mi 20 min Core |
+| 4 Wettkampfvorbereitung | Do flach Renntempo-Block 2x20 / 3x15 / 40 km (Aero sobald Zeitfahrrad da) + Koppellauf, Di alle 2 Wo. Schwelle, So alle 2 Wo. Brick 40 min + 10-km-Lauf; Sa Z2 lang, Berge wenn möglich | Langer Lauf bis 100 min flach, Brick-Lauf 10 km Renntempo flach | Freiwasser mit und ohne Neopren, Wellen, Bojenwenden, Pulk; 1,5 km am Stück; Kraftraum Mo 35 min Erhalt bis 14 Tage vor DM; Sauna-Block 05.-25.07. |
 | Taper und Rennen | 3-5 Reize à 3-5 min im Renntempo, Öffner | kurze Tempoläufe, Öffner | locker, Technik; letzte Beinkraft 14 Tage, Oberkörper 7 Tage vorher |
 | Spätsaison | locker, 1-2 Renntempo-Blöcke | locker, Brick vor Hölle von Q | locker, Technik |
 
