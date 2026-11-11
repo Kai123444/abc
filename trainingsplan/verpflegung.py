@@ -44,34 +44,35 @@ def beispiel_pro_stunde(rate: int) -> str:
 
 
 # Renn-Zielraten (g/h) auf dem Rad / beim Laufen. Du verträgst über 100 g/h; vor dem Rennen mindestens 3x so geübt.
-RENNRATEN = {"race_olympisch": (125, 90), "race_kurz": (130, 100), "race_mitteldistanz": (115, 80)}
+RENNRATEN = {"race_olympisch": (130, 95), "race_kurz": (130, 100), "race_mitteldistanz": (115, 80)}
 
 # Darmtraining: (Datum, Sport, Rate g/h, Zusatz). Rate steigt über die Saison, jeweils bei einem langen Tag.
 GUT: list[tuple[str, str, int, str]] = [
-    ("2026-11-28", "Rad", 70, ""),
-    ("2026-12-12", "Rad", 75, ""),
-    ("2027-01-09", "Rad", 80, ""),
-    ("2027-01-30", "Rad", 85, ""),
-    ("2027-02-13", "Rad", 90, ""),
-    ("2027-02-14", "Lauf", 50, "Langer Hügellauf, kleine Portionen alle 15-20 min, Gel in Wasser verdünnen."),
-    ("2027-02-27", "Rad", 95, "Erste Einheit mit Verhältnis 1:0,8."),
-    ("2027-03-13", "Rad", 100, ""),
-    ("2027-03-27", "Rad", 105, "RADRENNEN-FENSTER 1: ein Rennen (1,5-2 h) statt der Bergfahrt. Dazu Nitrat-Test (siehe Supplement-Plan)."),
-    ("2027-03-28", "Lauf", 60, ""),
-    ("2027-04-10", "Rad", 110, ""),
-    ("2027-04-24", "Rad", 115, "RADRENNEN-FENSTER 2: ein Rennen (2-2,5 h) statt der Bergfahrt."),
-    ("2027-04-25", "Lauf", 70, "Lauf nach dem Rennwochenende, nur locker, Gel in kleinen Portionen."),
-    ("2027-05-08", "Rad", 120, "Dazu Koffein-Test 3 mg/kg (200 mg) 45-60 min vor Start."),
-    ("2027-05-09", "Lauf", 75, ""),
-    ("2027-05-22", "Rad", 120, "RADRENNEN-FENSTER 3: ein Rennen (2-3 h) statt der Bergfahrt, dazu Koffein 4 mg/kg (270 mg) und Natrium 800 mg pro Stunde. "
-                              "PRÜFPUNKT: zweimal 120 g/h mit Magen höchstens 3/10, sonst bleibt die Rate bei 115 g/h."),
-    ("2027-06-05", "Rad", 125, "Rennsimulation: Koffein als Split-Dosis testen (siehe Supplement-Plan)."),
-    ("2027-06-06", "Lauf", 85, "Brick-Lauf mit Renn-Gel-Plan: 25-30 g alle 15 min."),
-    ("2027-06-19", "Rad", 125, "RADRENNEN-FENSTER 4: ein Rennen (2-3 h) statt der Bergfahrt, nach Cottbus Plan überprüfen, Magen-Notizen auswerten."),
-    ("2027-06-20", "Lauf", 90, "Brick: 40 min Rad im Renntempo, dann Lauf mit 90 g/h."),
-    ("2027-07-03", "Rad", 130, "RADRENNEN-FENSTER 5 (nur bei grüner Ampel): ein Rennen (2-3 h) statt der Bergfahrt, höchste Rate der Saison, "
-                              "Hitzeprotokoll (Sauna-Block läuft). PRÜFPUNKT: 125 g/h zweimal gut, sonst bleibt die DM-Rate bei 120 g/h."),
-    ("2027-07-04", "Lauf", 95, "Brick: 40 min Rad im Renntempo, dann Lauf mit 95 g/h."),
+    ("2026-11-28", "Rad", 85, "Darm nach der Pause neu wecken: du hast als Profi schon über 100 g/h genommen, deshalb startet der Aufbau hoch."),
+    ("2026-12-12", "Rad", 95, "Ab hier Verhältnis 1:0,8."),
+    ("2027-01-09", "Rad", 105, ""),
+    ("2027-01-30", "Rad", 110, ""),
+    ("2027-02-13", "Rad", 115, ""),
+    ("2027-02-14", "Lauf", 60, "Langer Hügellauf, kleine Portionen alle 15 min, Gel in Wasser verdünnen. Laufen verträgt der Magen schlechter als Radfahren."),
+    ("2027-02-27", "Rad", 120, ""),
+    ("2027-03-13", "Rad", 120, ""),
+    ("2027-03-27", "Rad", 125, "RADRENNEN-FENSTER 1: ein Rennen (1,5-2 h) statt der Bergfahrt. Dazu Nitrat-Test (siehe Supplement-Plan)."),
+    ("2027-03-28", "Lauf", 70, ""),
+    ("2027-04-10", "Rad", 125, ""),
+    ("2027-04-24", "Rad", 130, "RADRENNEN-FENSTER 2: ein Rennen (2-2,5 h) statt der Bergfahrt. PRÜFPUNKT 1: 130 g/h erstmals im Renntempo, "
+                              "Magen höchstens 3/10."),
+    ("2027-04-25", "Lauf", 80, "Lauf nach dem Rennwochenende, nur locker, Gel in kleinen Portionen."),
+    ("2027-05-08", "Rad", 130, "Dazu Koffein-Test 3 mg/kg (200 mg) 45-60 min vor Start."),
+    ("2027-05-09", "Lauf", 85, ""),
+    ("2027-05-22", "Rad", 130, "RADRENNEN-FENSTER 3: ein Rennen (2-3 h) statt der Bergfahrt, dazu Koffein 4 mg/kg (270 mg) und Natrium 800 mg pro Stunde. "
+                              "PRÜFPUNKT 2: 130 g/h zum zweiten Mal im Renntempo, sonst bleibt die DM-Rate bei 120 g/h."),
+    ("2027-06-05", "Rad", 130, "Rennsimulation: Koffein als Split-Dosis testen (siehe Supplement-Plan)."),
+    ("2027-06-06", "Lauf", 90, "Brick-Lauf mit Renn-Gel-Plan: 25 g alle 15 min."),
+    ("2027-06-19", "Rad", 130, "RADRENNEN-FENSTER 4: ein Rennen (2-3 h) statt der Bergfahrt, nach Cottbus Plan überprüfen, Magen-Notizen auswerten."),
+    ("2027-06-20", "Lauf", 95, "Brick: 40 min Rad im Renntempo, dann Lauf mit 95 g/h. PRÜFPUNKT Lauf: Magen höchstens 3/10, sonst DM-Rate 90 g/h."),
+    ("2027-07-03", "Rad", 130, "RADRENNEN-FENSTER 5 (nur bei grüner Ampel): ein Rennen (2-3 h) statt der Bergfahrt, Hitzeprotokoll "
+                              "(Sauna-Block läuft). Letzte Bestätigung der DM-Rate."),
+    ("2027-07-04", "Lauf", 100, "Brick: 40 min Rad im Renntempo, dann Lauf mit 100 g/h exakt wie im Rennen."),
     ("2027-07-17", "Rad", 130, "Generalprobe DM: exakt der Renn-Plan inklusive Koffein und Natrium."),
     ("2027-07-18", "Lauf", 100, "Generalprobe DM: Brick, Lauf mit 100 g/h exakt wie im Rennen."),
     ("2027-08-28", "Rad", 115, "Generalprobe Hölle von Q: 90-100 km Brick, exakt der Renn-Plan."),
@@ -122,29 +123,31 @@ SUPPLEMENT_REGELN = (
     "Sport und keine Stimulanzien.")
 
 GUT_REGELN = (
-    "Darmtraining für hohe Kohlenhydratmengen im Rennen: Der Darm lässt sich trainieren. Ziel für die DM: Rad 130 g/h, "
-    "Lauf 100 g/h; Cottbus Rad 125 g/h, Lauf 90 g/h; Hölle von Q Rad 115 g/h, Lauf 80 g/h. Das liegt am oberen Ende dessen, "
-    "was auch Profis trainieren, deshalb gibt es Prüfpunkte.\n"
+    "Darmtraining für hohe Kohlenhydratmengen im Rennen. Ziel für die DM: Rad 130 g/h, Lauf 100 g/h; Cottbus Rad 130 g/h, "
+    "Lauf 95 g/h; Hölle von Q Rad 115 g/h, Lauf 80 g/h. Weil du als Profi schon über 100 g/h aufgenommen hast, startet der "
+    "Aufbau auf dem Rad hoch und erreicht 130 g/h bereits im April. Der Darm verliert nach der Pause etwas Leistung, kommt "
+    "mit regelmäßigen Reizen aber schnell zurück. Beim Laufen bleibt der Aufbau vorsichtiger, weil Radroutine nicht auf den "
+    "Magen beim Laufen übertragbar ist.\n"
     "Verhältnis Maltodextrin/Glukose : Fructose: bis 90 g/h 2:1, über 90 g/h 1:0,8. Beispiele pro Stunde: 60 g = 40:20, "
     "70 g = 47:23, 80 g = 53:27, 90 g = 60:30, 100 g = 56:44, 110 g = 61:49, 120 g = 67:53, 125 g = 69:56, 130 g = 72:58.\n"
-    "Aufbau im Training (jeweils bei einer langen Einheit am Wochenende): Rad 70 g/h im Dezember, 80 g/h im Januar, 90-95 g/h "
-    "im Februar, 100-105 g/h im März, 110-115 g/h im April, 120 g/h im Mai, 125 g/h im Juni, 130 g/h im Juli. Lauf: 50 g/h im "
-    "Februar, 60-70 g/h im Frühjahr, 75-85 g/h im Mai/Juni, 90-100 g/h im Juni/Juli. Alle Termine siehe Kalendernotizen "
+    "Aufbau im Training (jeweils bei einer langen Einheit am Wochenende): Rad 85 g/h Ende November, 95 g/h im Dezember, 105-115 "
+    "g/h im Januar/Februar, 120 g/h im Februar/März, 125 g/h im März/April, 130 g/h ab 24.04. bis zur DM. Lauf: 60 g/h im "
+    "Februar, 70-80 g/h im Frühjahr, 85-90 g/h im Mai/Juni, 95-100 g/h im Juni/Juli. Alle Termine siehe Kalendernotizen "
     "'Darmtraining'.\n"
     "Wichtig für die Aufnahme bei Rennbelastung: Im Wettkampftempo fließt weniger Blut in den Darm, deshalb zählt nur, was "
     "du bei Renntempo geschafft hast. Darum die Radrennen-Fenster.\n"
-    "Regeln: Rate nur steigern, wenn die vorige zweimal gut lief; Magen nach jeder Stunde auf 0-10 notieren (bis 3 gut, "
-    "4-5 nicht steigern, ab 6 um 10 g/h senken); Gels immer mit Wasser; Lösung höchstens ca. 9-10 %; Rennrate muss "
-    "mindestens dreimal in Renn-Intensität gefahren sein. Entscheidungsregel für die DM: Rennrate = die höchste Rate, die du "
-    "zweimal in Renn-Intensität mit Magen höchstens 3/10 geschafft hast, minus 5 g/h. Prüfpunkte: 22.05. (120 g/h) und "
-    "03.07. (125-130 g/h), Lauf 20.06. (90 g/h). Zwischen den Darmtrainings ganz normal essen.")
+    "Regeln: Magen nach jeder Stunde auf 0-10 notieren (bis 3 gut, 4-5 nicht steigern, ab 6 um 10 g/h senken); Gels immer mit "
+    "Wasser; Lösung höchstens ca. 9-10 %; Rate pro Einheit höchstens um 10 g/h steigern. Entscheidungsregel für die DM: "
+    "Rennrate = die höchste Rate, die du zweimal in Renn-Intensität mit Magen höchstens 3/10 geschafft hast, minus 5 g/h. "
+    "Prüfpunkte Rad: 24.04. und 22.05. (je 130 g/h im Renntempo), Lauf: 20.06. (95 g/h) und 04.07. (100 g/h). Zwischen den "
+    "Darmtrainings ganz normal essen.")
 
 RADRENNEN = [
-    ("2027-03-27", "2027-03-28", 105, "1,5-2 h", "Saisonstart, erster Test der Aufnahme im Renntempo"),
-    ("2027-04-24", "2027-04-25", 115, "2-2,5 h", "Zweiter Test, nach der Erholungswoche 12.04. frisch"),
-    ("2027-05-22", "2027-05-23", 120, "2-3 h", "PRÜFPUNKT 1, erster Block der Wettkampfphase, dazu Koffein-Test"),
-    ("2027-06-19", "2027-06-20", 125, "2-3 h", "Eine Woche nach Cottbus, Plan auswerten"),
-    ("2027-07-03", "2027-07-04", 130, "2-3 h", "PRÜFPUNKT 2, höchste Rate, nur bei grüner Ampel, danach Erholungswoche 05.07."),
+    ("2027-03-27", "2027-03-28", 125, "1,5-2 h", "Saisonstart, erster Test der Aufnahme im Renntempo"),
+    ("2027-04-24", "2027-04-25", 130, "2-2,5 h", "PRÜFPUNKT 1, nach der Erholungswoche 12.04. frisch"),
+    ("2027-05-22", "2027-05-23", 130, "2-3 h", "PRÜFPUNKT 2, erster Block der Wettkampfphase, dazu Koffein-Test"),
+    ("2027-06-19", "2027-06-20", 130, "2-3 h", "Eine Woche nach Cottbus, Plan auswerten"),
+    ("2027-07-03", "2027-07-04", 130, "2-3 h", "Letzte Bestätigung, nur bei grüner Ampel, danach Erholungswoche 05.07."),
 ]
 
 GUT_TERMINE = GUT
@@ -410,7 +413,7 @@ GRUNDREGELN = (
     "nüchtern, 'Train low' höchstens bei lockeren Einheiten bis 60 min und nicht an Kraft- oder Intervalltagen.\n"
     "Verhältnis Maltodextrin/Glukose : Fructose: bis 90 g/h 2:1 (60 g = 40:20, 80 g = 53:27, 90 g = 60:30), über 90 g/h "
     "1:0,8 (100 g = 56:44, 110 g = 61:49, 120 g = 67:53, 130 g = 72:58).\n"
-    "Rennziele: Cottbus Rad 125 g/h, Lauf 90 g/h. DM Rad 130 g/h, Lauf 100 g/h. Hölle von Q Rad 115 g/h, Lauf 80 g/h "
+    "Rennziele: Cottbus Rad 130 g/h, Lauf 95 g/h. DM Rad 130 g/h, Lauf 100 g/h. Hölle von Q Rad 115 g/h, Lauf 80 g/h "
     "(Rennrate immer erst nach den Prüfpunkten fixieren, siehe Darmtraining).\n"
     "Jede Einheit im Kalender hat unten einen Block 'Verpflegung' mit den passenden Mengen.")
 

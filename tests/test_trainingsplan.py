@@ -210,7 +210,7 @@ class TestAnpassen(unittest.TestCase):
         for tag, sport, rate, _ in vp.GUT:
             self.assertEqual(d.fromisoformat(tag).weekday(), 5 if sport == "Rad" else 6, tag)  # Sa Rad, So Lauf
         rad = [r for _, s_, r, _ in vp.GUT if s_ == "Rad"]
-        self.assertEqual(rad[0], 70)
+        self.assertEqual(rad[0], 85)
         self.assertEqual(max(rad), 130)
         lauf = [r for _, s_, r, _ in vp.GUT if s_ == "Lauf"]
         self.assertEqual(max(lauf), 100)
