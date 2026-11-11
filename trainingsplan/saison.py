@@ -75,7 +75,7 @@ ERHOLUNG_TEXT = ("Fokus auf leichtere Belastungen, reduziertes Volumen und Anpas
                  "Umfang -35 %: je eine kurze Qualitätseinheit pro Sportart, kein langer Tag.")
 
 WOCHENSTRUKTUR = (
-    "Vorschlag für die Standardwoche (Schwimmen Di/Do = Vereinstraining; Kraftraum Mo und Mi; am Wochenende kannst du "
+    "Vorschlag für die Standardwoche (Schwimmen Di/Do = Vereinstraining; Kraftraum Mo, Mi und Do; am Wochenende kannst du "
     "vormittags und nachmittags trainieren; Intervalle legst du dorthin, wo sie am besten passen):\n"
     "Mo: KRAFT Beine schwer + Oberkörper (55-60 min), Rad nur locker nach Lust\n"
     "Di: Rad locker/Kadenz 60-90 min (Beine ausdrehen nach Montag), ab Phase 3 alle 2 Wochen Intervalle statt locker, "
@@ -83,7 +83,8 @@ WOCHENSTRUKTUR = (
     "Mi: KRAFT Oberkörper, Core und kurze Beinaktivierung (35-40 min), danach SCHLÜSSEL Lauf = Bahnintervalle "
     "(Einlaufen 3-4 km, 400-1000 m Wiederholungen, Auslaufen; eigene Einheit, bis das Vereinstraining startet)\n"
     "Do: SCHLÜSSEL Rad-Intervalle (Sweet Spot/Schwelle/VO2max/Renntempo) 75-105 min, ab Phase 3 mit Koppellauf 10-15 min (Phase 4: 15-20 min), Schwimmen (Verein), Sauna\n"
-    "Fr: Sportunterricht/Lauf locker 30-40 min oder frei (der leichteste Tag vor dem Wochenende)\n"
+    "Do danach: KRAFT Ergänzung Beine/Hüfte/Rumpf 30-35 min nach dem Rad (Phase 1-2; Phase 3 20 min, Phase 4 entfällt), moderat, RIR 3\n"
+    "Fr: trainingsfrei (Schule, Sportunterricht zählt nicht als Einheit)\n"
     "Sa vormittags: SCHLÜSSEL langes Rad 3-5 h in Z2 mit einem Intervallblock in der Mitte (siehe Rad-Intervalle), in den "
     "Bergen oder flach, danach kein Lauf (der Sonntag ist der Lauftag)\n"
     "Sa nachmittags: locker, Schwimmen frei 45 min (ab Mai Freiwasser) oder Core 20 min; in Phase 1-2 optional Lauf 30-45 min\n"
@@ -95,9 +96,9 @@ WOCHENSTRUKTUR = (
     "zwei Tagen hintereinander (Do und Sa haben den Freitag dazwischen).")
 
 KRAFTPLAN = (
-    "Kraftraum Mo und Mi, orientiert an deinen letzten Einheiten (meist montags, 45-60 min). Mo = Ganzkörper mit "
+    "Kraftraum Mo, Mi und Do, orientiert an deinen letzten Einheiten (meist montags, 45-60 min). Mo = Ganzkörper mit "
     "schweren Beinen (dein gewohnter Tag). Mi = vor dem Lauftraining nur Oberkörper, Core und eine kurze, nicht "
-    "ermüdende Beinaktivierung (35-40 min): so leidet die Qualität der Intervalle nicht. Do entfällt. Last nach "
+    "ermüdende Beinaktivierung (35-40 min): so leidet die Qualität der Intervalle nicht. Do = Ergänzung nach dem Rad-Schlüssel (30-35 min, moderat), damit auch bei leichtem oder ausgefallenem Montag genug Krafteinheiten bleiben. Last nach "
     "Wiederholungen in Reserve (RIR) steuern, nicht nach Gewicht: in den ersten 2 Wochen Gewichte finden "
     "(RIR 3-4), danach +2,5 kg, wenn alle Sätze sauber sind.\n"
     "Phase 1 (23.11.-24.01.) Aufbau, 3x8-10, RIR 2-3:\n"
@@ -106,17 +107,18 @@ KRAFTPLAN = (
     "Danach Oberkörper: Klimmzüge oder Latzug 3x8, Rudern 3x10, Plank 3x45 s.\n"
     "- Mi vor dem Lauf: Bankdrücken oder Kurzhantel 3x8, Schulterdrücken 3x10, Face Pulls 2x15, Pallof Press "
     "2x10 je Seite, Seitstütz 2x30 s, Aktivierung: Glute Bridge 2x10, Wadenheben 2x12, 2x5 leichte Hocksprünge.\n"
+    "- Do Ergänzung nach dem Rad (30-35 min, RIR 3): Einbeinige Übungen und Rückseite: Single-Leg RDL 3x8 je Seite, Step-ups 3x8 je Seite, Hip Thrust 3x10, Nordic Hamstring 2x5, Wadenheben 3x12, Core: Dead Bug 3x10, Seitstütz 2x30 s. Nicht bis zum Versagen, kein Muskelkater für den Samstag.\n"
     "Phase 2 (25.01.-21.03.) Maximalkraft, 3-4x4-6 bei 80-87 % 1RM, RIR 1-2:\n"
     "- Mo Beine: Kniebeuge, Trap-Bar- oder Kreuzheben (nie bis zum Versagen), Step-ups schwer 3x6 je Seite, "
     "Nordic Hamstring 2x5, Wadenheben schwer 4x8. Oberkörper kurz (Klimmzüge/Rudern 3x5).\n"
     "- Mi vor dem Lauf: Bankdrücken/Schulterdrücken 3x5, Core, Aktivierung mit Hocksprüngen oder Boxjumps 3x4 "
     "(kurz, volle Pausen, ermüdet nicht und bereitet die Intervalle vor).\n"
-    "Phase 3 (22.03.-16.05.) Erhalt und Explosivkraft: Mo 35-40 min (Beine 2-3x3-5 bei 85 %, Sprünge 3x5, "
+    "Phase 3 (22.03.-16.05.) Erhalt und Explosivkraft: Do 20 min Hamstring, Waden und Core nach dem Rad; Mo 35-40 min (Beine 2-3x3-5 bei 85 %, Sprünge 3x5, "
     "Oberkörper kurz), Mi nur 20 min Core und Aktivierung. Die lange Ausfahrt am Samstag läuft in deinen gewohnten Zonen.\n"
-    "Phase 4 (17.05.-25.07.): Mo 35 min (Beine 2x4 bei 85 %, Zug/Rumpf), Mi entfällt oder 15 min Core. In "
+    "Phase 4 (17.05.-25.07.): Do entfällt; Mo 35 min (Beine 2x4 bei 85 %, Zug/Rumpf), Mi entfällt oder 15 min Core. In "
     "Erholungswochen aussetzen oder ganz leicht. Letzte Beineinheit 14 Tage vor der DM (25.07.), letzte "
     "Oberkörper/Core-Einheit 7 Tage vorher (01.08.). In der Woche von Cottbus (12.06.) keine schweren Beine.\n"
-    "Wichtig: Beinkraft nie am Dienstag (Tag vor den Intervallen), nie am Tag vor einem Test oder Rennen und nie "
+    "Wichtig: Schwere Beine nur Mo, am Do nur moderate Ergänzung. Beinkraft nie am Dienstag (Tag vor den Intervallen), nie am Tag vor einem Test oder Rennen und nie "
     "mit Muskelkater über 48 h. HRV/Ruhepuls auffällig: Einheit leichter machen, nicht ausfallen lassen.")
 
 LAUFINTERVALLE = (

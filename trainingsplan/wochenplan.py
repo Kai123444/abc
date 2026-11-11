@@ -86,6 +86,11 @@ NAECHSTE_WOCHE = [
      "Nach den Stufentests wieder Intensität. Prozente beziehen sich auf die neue FTP aus dem Rad-Stufentest vom 15.11.; "
      "Fenster Do 14:00-16:30, danach Schwimmen im Verein (17:30). Wenn die FTP noch nicht gesetzt ist, vorläufig 280 W.\n"
      "Warmup\n- 15m ramp 50-75%\n\nSweet Spot 3x\n- 12m 90%\n- 4m 55%\n\nCooldown\n- 10m 50%", 73),
+    ("2026-11-19", "WeightTraining", "Kraft: Beine (nach dem Rad)",
+     "Nach dem Lauf-Stufentest und dem Sweet Spot. Die Montagseinheit hatte leichte Beine, deshalb heute der Beinteil, "
+     "40 min im Kraftraum nach dem Rad, RIR 3: Goblet-Kniebeuge 3x8, Rumänisches Kreuzheben 3x8, Split Squat 3x6 je Seite, "
+     "Hip Thrust 3x10, Wadenheben 3x12, Plank 3x45 s. Nicht bis zum Versagen, damit die Beine am Samstag frisch sind. "
+     "Danach Schwimmen im Verein (17:30).", 40),
     ("2026-11-20", "NOTE", "Ruhetag",
      "Freitag ist trainingsfrei. Morgen lange Radeinheit mit Sweet-Spot-Block, vorher gut essen und schlafen.", 0),
     ("2026-11-21", "Ride", "Rad lang mit Sweet-Spot-Block",
@@ -114,6 +119,9 @@ NAECHSTE_WOCHE = [
      "Erste Intensität nach den Tests, Prozente beziehen sich auf die neue FTP.\nWarmup\n- 15m ramp 50-75%\n\n"
      "Sweet Spot 2x\n- 15m 88%\n- 5m 55%\n\nCooldown\n- 10m 50%", 65),
     ("2026-11-26", "Swim", "Vereinstraining", "Wie geplant im Verein.", 70),
+    ("2026-11-26", "WeightTraining", "Kraft: Ergänzung Beine nach dem Rad",
+     "Nach dem Sweet Spot, 30-35 min, RIR 3: Single-Leg RDL 3x8 je Seite, Step-ups 3x8 je Seite, Hip Thrust 3x10, "
+     "Nordic Hamstring 2x5, Wadenheben 3x12, Dead Bug 3x10, Seitstütz 2x30 s. Kein Muskelkater für den Samstag.", 35),
     ("2026-11-28", "Ride", "Rad in den Bergen",
      "Im Harz oder flach, nach Leistung (Z2, nicht über 75 % FTP), Essen und Trinken üben.\nWarmup\n- 15m ramp 45-57%\n\nGrundlage\n- 200m 58%\n\nCooldown\n- 10m 50%", 225),
     ("2026-11-29", "Run", "Koppel 2: Hügellauf locker",
