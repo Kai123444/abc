@@ -122,6 +122,10 @@ NAECHSTE_WOCHE = [
     ("2026-11-26", "WeightTraining", "Kraft: Ergänzung Beine nach dem Rad",
      "Nach dem Sweet Spot, 30-35 min, RIR 3: Single-Leg RDL 3x8 je Seite, Step-ups 3x8 je Seite, Hip Thrust 3x10, "
      "Nordic Hamstring 2x5, Wadenheben 3x12, Dead Bug 3x10, Seitstütz 2x30 s. Kein Muskelkater für den Samstag.", 35),
+    ("2026-11-28", "Swim", "Schwimmen frei (Samstag)",
+     "Zusätzliche freie Einheit am Samstagnachmittag, 45 min, weil Schwimmen ein Engpass ist und im Verein nur 2x70 min "
+     "stehen. Technik und lockere Ausdauer: 10 min einschwimmen, 6x(50 m Technik + 50 m locker), 400 m durchgehend ruhig, "
+     "4x100 m locker mit 20 s Pause, 5 min ausschwimmen. Wasserlage und Atmung vor Tempo.", 45),
     ("2026-11-28", "Ride", "Rad in den Bergen",
      "Im Harz oder flach, nach Leistung (Z2, nicht über 75 % FTP), Essen und Trinken üben.\nWarmup\n- 15m ramp 45-57%\n\nGrundlage\n- 200m 58%\n\nCooldown\n- 10m 50%", 225),
     ("2026-11-29", "Run", "Koppel 2: Hügellauf locker",

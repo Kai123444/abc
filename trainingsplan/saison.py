@@ -87,7 +87,7 @@ WOCHENSTRUKTUR = (
     "Fr: trainingsfrei (Schule, Sportunterricht zählt nicht als Einheit)\n"
     "Sa vormittags: SCHLÜSSEL langes Rad 3-5 h in Z2 mit einem Intervallblock in der Mitte (siehe Rad-Intervalle), in den "
     "Bergen oder flach, danach kein Lauf (der Sonntag ist der Lauftag)\n"
-    "Sa nachmittags: locker, Schwimmen frei 45 min (ab Mai Freiwasser) oder Core 20 min; in Phase 1-2 optional Lauf 30-45 min\n"
+    "Sa nachmittags: locker, Schwimmen frei 45 min (ab Mai Freiwasser; nicht Sa 21.11.) oder Core 20 min; in Phase 1-2 optional Lauf 30-45 min\n"
     "So vormittags: KOPPEL: erst 60 min Rad locker (Z1-Z2), direkt danach der lange Lauf 60-100 min im Hügelgelände (bergauf "
     "kräftig, bergab kontrolliert). In Phase 3-4 alle 2 Wochen Renn-Brick statt des lockeren Koppels (siehe Notiz Koppeltraining)\n"
     "So nachmittags: frei oder Schwimmen frei 45 min\n"
