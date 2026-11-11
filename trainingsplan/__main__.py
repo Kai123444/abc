@@ -113,6 +113,22 @@ def _kontext(client: IntervalsClient, a) -> int:
     return 0
 
 
+def _appdaten(client: IntervalsClient, a) -> int:
+    """Geplante Einheiten der nächsten Tage als Schreibliste für den Trainingskalender (Sammlung 'plan') ausgeben."""
+    import json
+    from collections import defaultdict
+    von = a.heute
+    tage = defaultdict(list)
+    for e in sorted(client.events(von, von + timedelta(days=max(a.horizont, 28)), category="WORKOUT"),
+                    key=lambda e: e["start_date_local"]):
+        tage[e["start_date_local"][:10]].append({"sport": e.get("type"), "name": e["name"],
+                                                 "min": round((e.get("moving_time") or 0) / 60),
+                                                 "verein": "verein" in e["name"].lower()})
+    writes = [{"op": "set", "collection": "plan", "doc_id": t, "data": {"items": v}} for t, v in tage.items()]
+    print(json.dumps(writes, ensure_ascii=False, separators=(",", ":")))
+    return 0
+
+
 def _dm(client: IntervalsClient, a) -> int:
     """Strecken, Zeitplan und Trainingsabgleich der DM Kurzdistanz (NordseeMan Wilhelmshaven) in den Kalender."""
     from . import dm
@@ -277,7 +293,7 @@ def _saison(client: IntervalsClient, a) -> int:
 def main(argv: list[str] | None = None) -> int:
     p = argparse.ArgumentParser(prog="trainingsplan", description=__doc__,
                                 formatter_class=argparse.RawDescriptionHelpFormatter)
-    p.add_argument("befehl", choices=["analyse", "sync", "anpassen", "stufentest", "saison", "woche", "log", "verpflegung", "dm", "bibliothek", "kontext"])
+    p.add_argument("befehl", choices=["analyse", "sync", "anpassen", "stufentest", "saison", "woche", "log", "verpflegung", "dm", "bibliothek", "kontext", "appdaten"])
     p.add_argument("--basis-ab", type=date.fromisoformat,
                    help="Vergleichszeitraum ab Datum (z.B. 2026-08-01): Normalwochen statt 4 Wochen")
     p.add_argument("--alten-plan-loeschen", action="store_true",
@@ -321,6 +337,8 @@ def main(argv: list[str] | None = None) -> int:
             return _dm(client, a)
         if a.befehl == "bibliothek":
             return _bibliothek(client, a)
+        if a.befehl == "appdaten":
+            return _appdaten(client, a)
         if a.befehl == "kontext":
             return _kontext(client, a)
         wellness, akt = _daten(client, a.heute, a.basis_ab)
