@@ -441,7 +441,7 @@ def gut_training_events() -> list[dict]:
                 f"{dauer}, echtes Renntempo (nicht Gruppenausfahrt). Termine z. B. über rad-net.de (Terminkalender des BDR). "
                 f"Sobald du ein Rennen hast: in intervals.icu als Rennen (C) eintragen, dann plane ich die Woche darum.\n"
                 f"Verpflegungsziel im Rennen: {rate_text(rate)}. {beispiel_pro_stunde(rate)}.\n"
-                f"Ersetzt die lange Ausfahrt am Samstag. Do Rad-Schlüssel wie geplant, Fr locker 45 min. Sonntag nach einem "
+                f"Ersetzt die lange Ausfahrt am Samstag. Do Rad-Schlüssel wie geplant, Fr frei. Sonntag nach einem "
                 f"Samstagsrennen nur Lauf locker 45 min; bei Sonntagsrennen am Samstag 60-90 min locker. Montag danach nur "
                 f"leichte Beine. Kein Rennen in einer Erholungswoche oder in den 2 Wochen vor Cottbus und der DM. Danach "
                 f"Magen-Notizen (0-10 pro Stunde) und Zielrate in den Wellness-Kommentar schreiben.")

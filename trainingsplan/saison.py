@@ -561,7 +561,7 @@ RENNEN: list[tuple[str, str, str, str, str, int, str]] = [
      "Schwimmen 1,5 km / Rad 40 km / Lauf 10 km (Vergleich: Kurzdistanz im Juni 2026 in 2:19 h)", 150,
      "B-Rennen und Generalprobe für die DM, 8 Wochen vorher. Mini-Taper Mi-Fr (-40 %): Mo 60 min locker, "
      "Di Schwimmen (Verein) + 5x1 min Renntempo Lauf, Mi 45 min Rad mit 3x5 min Renntempo, Do Schwimmen "
-     "Technik, Fr 30 min locker mit 3x30 s Öffnern. Pacing, Wechsel und Verpflegung wie bei der DM üben. "
+     "Technik, Fr frei (kein Training möglich), Sa Rennen. Pacing, Wechsel und Verpflegung wie bei der DM üben. "
      "So locker 60 min oder frei, Mo locker, ab Di wieder Belastung. Ersetzt den Formcheck."),
 ]
 
