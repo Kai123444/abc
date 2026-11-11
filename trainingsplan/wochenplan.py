@@ -26,6 +26,7 @@ ENTFERNEN = [
     ("2026-11-23", "Kraft: Oberkörper und Core", "Mo: Ganzkörper mit Beinen"),
     ("2026-11-25", "Kraft: Beine Technik", "Mi: Beine jetzt am Montag"),
     ("2026-11-19", "Lauf locker", "Do: nach dem Lauftest kein Lauf"),
+    ("2026-11-21", "Rad Grundlage lang", "Sa: jetzt als lange Fahrt mit Sweet-Spot-Block"),
     ("2026-11-13", "Rad Grundlage (Freitag, Sondertraining)",
      "Fr: gestrichen, Sportunterricht und Schulevent reichen vor dem Rad-Stufentest am So"),
 ]
@@ -81,12 +82,16 @@ NAECHSTE_WOCHE = [
     ("2026-11-17", "Swim", "Vereinstraining",
      "Locker und mit Technikfokus. Morgen Lauf-Stufentest, deshalb keine Intensität.", 70),
     ("2026-11-19", "Swim", "Vereinstraining", "Wie geplant im Verein.", 70),
+    ("2026-11-19", "Ride", "Rad Schlüssel: Sweet Spot (nach dem Test)",
+     "Nach den Stufentests wieder Intensität. Prozente beziehen sich auf die neue FTP aus dem Rad-Stufentest vom 15.11.; "
+     "Fenster Do 14:00-16:30, danach Schwimmen im Verein (17:30). Wenn die FTP noch nicht gesetzt ist, vorläufig 280 W.\n"
+     "Warmup\n- 15m ramp 50-75%\n\nSweet Spot 3x\n- 12m 90%\n- 4m 55%\n\nCooldown\n- 10m 50%", 73),
     ("2026-11-20", "NOTE", "Ruhetag",
-     "Frei oder 20 min Mobilisation. Morgen lange Radeinheit, vorher gut essen und schlafen.", 0),
-    ("2026-11-21", "Ride", "Rad Grundlage lang",
-     "Im Gelände wie du es hast (Harz oder flach), gleiche Zonen wie im Flachen: nach Leistung fahren, nicht über 75 % FTP.\n"
-     "Warmup\n- 10m ramp 45-57%\n\nGrundlage, Trittfrequenz 85-95, essen und trinken (60 g Kohlenhydrate/h)\n"
-     "- 100m 58%\n\nCooldown\n- 10m 50%", 120),
+     "Freitag ist trainingsfrei. Morgen lange Radeinheit mit Sweet-Spot-Block, vorher gut essen und schlafen.", 0),
+    ("2026-11-21", "Ride", "Rad lang mit Sweet-Spot-Block",
+     "Im Gelände wie du es hast (Harz oder flach), gleiche Zonen wie im Flachen: nach Leistung fahren. Der Block ist die zweite "
+     "Intensität der Woche. Essen und trinken (60 g Kohlenhydrate/h).\n"
+     "Warmup\n- 10m ramp 45-57%\n\nGrundlage\n- 40m 58%\n\nSweet Spot 2x\n- 15m 90%\n- 5m 55%\n\nGrundlage\n- 35m 58%\n\nCooldown\n- 10m 50%", 135),
     ("2026-11-23", "WeightTraining", "Kraft: Beine und Oberkörper (Technik)",
      "Erste Aufbauwoche, Technik und Gewichte finden (RIR 3): Front- oder Goblet-Kniebeuge 3x8, Rumänisches "
      "Kreuzheben 3x8, Bulgarian Split Squat 3x6 je Seite, Hip Thrust 3x10, Wadenheben 3x12, danach Klimmzüge "
@@ -115,8 +120,9 @@ NAECHSTE_WOCHE = [
      "Sonntags-Koppel Teil 2, direkt nach dem Rad (60 min locker): die ersten 5 min bewusst ruhig, Beine finden. Hügelgelände, "
      "bergauf kräftig, bergab traben oder gehen, Puls niedrig halten.\n- 55m 6:50/km Pace", 55),
     ("2026-11-22", "Run", "Lauf locker lang",
-     "Der längste Lauf der Woche, ruhig, gern im Hügelgelände (bergauf locker, bergab traben oder gehen). "
-     "Danach Dehnen/Mobilisation.\n- 45m 6:50/km Pace", 45),
+     "Locker, 35 min: nach Lauf-Stufentest und Rad-Block bleibt der Laufumfang bei höchstens +10 % gegenüber den Läufen "
+     "der Vorwochen (ohne den Test). Gern im Hügelgelände (bergauf locker, bergab traben oder gehen). "
+     "Danach Dehnen/Mobilisation.\n- 35m 6:50/km Pace", 35),
 ]
 
 
