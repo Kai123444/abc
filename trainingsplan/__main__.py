@@ -103,6 +103,16 @@ def _bibliothek(client: IntervalsClient, a) -> int:
     return 0
 
 
+def _kontext(client: IntervalsClient, a) -> int:
+    """Kontext nur aus intervals.icu ausgeben; mit --apply Einstiegs- und Wochenübersicht-Notiz (neu) eintragen."""
+    from . import kontext
+    if a.apply:
+        client.upsert_events([kontext.start_event(), kontext.wochen_event()])
+        print("✔ Einstiegsnotiz und Wochenübersicht eingetragen.")
+    print(kontext.kontext_text(client, a.heute))
+    return 0
+
+
 def _dm(client: IntervalsClient, a) -> int:
     """Strecken, Zeitplan und Trainingsabgleich der DM Kurzdistanz (NordseeMan Wilhelmshaven) in den Kalender."""
     from . import dm
@@ -267,7 +277,7 @@ def _saison(client: IntervalsClient, a) -> int:
 def main(argv: list[str] | None = None) -> int:
     p = argparse.ArgumentParser(prog="trainingsplan", description=__doc__,
                                 formatter_class=argparse.RawDescriptionHelpFormatter)
-    p.add_argument("befehl", choices=["analyse", "sync", "anpassen", "stufentest", "saison", "woche", "log", "verpflegung", "dm", "bibliothek"])
+    p.add_argument("befehl", choices=["analyse", "sync", "anpassen", "stufentest", "saison", "woche", "log", "verpflegung", "dm", "bibliothek", "kontext"])
     p.add_argument("--basis-ab", type=date.fromisoformat,
                    help="Vergleichszeitraum ab Datum (z.B. 2026-08-01): Normalwochen statt 4 Wochen")
     p.add_argument("--alten-plan-loeschen", action="store_true",
@@ -311,6 +321,8 @@ def main(argv: list[str] | None = None) -> int:
             return _dm(client, a)
         if a.befehl == "bibliothek":
             return _bibliothek(client, a)
+        if a.befehl == "kontext":
+            return _kontext(client, a)
         wellness, akt = _daten(client, a.heute, a.basis_ab)
     except IntervalsError as exc:
         print(f"Fehler: {exc}", file=sys.stderr)

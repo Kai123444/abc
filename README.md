@@ -100,3 +100,9 @@ Kraft als feste Größen, 17-18 h in den Spitzenwochen (bis 20 h bei grüner Amp
 `python -m trainingsplan bibliothek [--apply]` legt die Ordner und Workouts des Plans in der Bibliothek von intervals.icu an
 (Ordner 01-07 Rad, 10-12 Lauf, 20 Koppel und Brick, 30 Schwimmen, 40 Kraft, 50 Rennen). Bestehende Einträge werden
 aktualisiert, im Kalender geplante Einheiten, die noch fehlen, werden einsortiert.
+
+## Kontext ohne Chat-Verlauf
+
+`python -m trainingsplan kontext` liest alles Wissen über den Athleten aus intervals.icu (Einstiegsnotiz "00 START HIER",
+Profil-Notizen, aktuelle Phase, Woche, Rennen, Bibliothek, Wellness). Mit `--apply` werden Einstiegsnotiz und
+"Saisonübersicht: Woche für Woche" (neu) eingetragen. Persönliche Daten stehen nur in intervals.icu, nicht im Repository.
