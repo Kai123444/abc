@@ -90,6 +90,34 @@ def _stufentest(client: IntervalsClient, a) -> int:
     return 0
 
 
+def _verpflegung(client: IntervalsClient, a) -> int:
+    """Verpflegungsblock (Menge vorher/während/nachher) an alle geplanten Einheiten und Rennen anhängen."""
+    from . import verpflegung as vp
+    heute = a.heute
+    evs = client.events(heute, heute + timedelta(days=a.horizont), category="WORKOUT")
+    evs += client.events(heute, date(2027, 9, 30), category="RACE_A,RACE_B,RACE_C")
+    aenderungen = []
+    for e in evs:
+        block = vp.block_fuer_event(e)
+        if not block:
+            continue
+        neu = vp.mit_block(e.get("description"), block)
+        if neu != (e.get("description") or ""):
+            aenderungen.append((e, neu))
+    for e, _ in aenderungen:
+        print(f"{e['start_date_local'][:10]} {e.get('category', '')[:6]:6} {e['name'][:44]}")
+    print(f"{len(aenderungen)} Einheiten bekommen einen Verpflegungsblock.")
+    if not a.apply:
+        print("Vorschau – mit --apply eintragen.")
+        return 0
+    for e, neu in aenderungen:
+        client.update_event(e["id"], {"description": neu})
+    client.upsert_events([{"category": "NOTE", "name": "Verpflegung: Grundregeln", "description": vp.GRUNDREGELN,
+                           "start_date_local": f"{heute.isoformat()}T00:00:00", "external_id": "verpflegung-grundregeln"}])
+    print("✔ eingetragen.")
+    return 0
+
+
 def _log(client: IntervalsClient, a) -> int:
     """Eintrag ins Wellness-Kommentarfeld des Tages und als Kalendernotiz. Die Auswertung erkennt Sauna und
     Eisbad im Kommentar und ordnet die Morgenwerte des Folgetags entsprechend ein."""
@@ -198,7 +226,7 @@ def _saison(client: IntervalsClient, a) -> int:
 def main(argv: list[str] | None = None) -> int:
     p = argparse.ArgumentParser(prog="trainingsplan", description=__doc__,
                                 formatter_class=argparse.RawDescriptionHelpFormatter)
-    p.add_argument("befehl", choices=["analyse", "sync", "anpassen", "stufentest", "saison", "woche", "log"])
+    p.add_argument("befehl", choices=["analyse", "sync", "anpassen", "stufentest", "saison", "woche", "log", "verpflegung"])
     p.add_argument("--basis-ab", type=date.fromisoformat,
                    help="Vergleichszeitraum ab Datum (z.B. 2026-08-01): Normalwochen statt 4 Wochen")
     p.add_argument("--alten-plan-loeschen", action="store_true",
@@ -236,6 +264,8 @@ def main(argv: list[str] | None = None) -> int:
             return _woche(client, a)
         if a.befehl == "log":
             return _log(client, a)
+        if a.befehl == "verpflegung":
+            return _verpflegung(client, a)
         wellness, akt = _daten(client, a.heute, a.basis_ab)
     except IntervalsError as exc:
         print(f"Fehler: {exc}", file=sys.stderr)

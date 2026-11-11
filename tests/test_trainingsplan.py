@@ -185,6 +185,22 @@ class TestAnpassen(unittest.TestCase):
         self.assertLess(mit.punkte, schlecht.punkte + 1)  # Einordnung kostet keine Punkte
         self.assertLessEqual(mit.kennzahlen.get("ruhepuls_7d", 0), schlecht.kennzahlen.get("ruhepuls_7d", 99))
 
+    def test_verpflegung(self):
+        from trainingsplan.verpflegung import block_fuer_event, klasse, mit_block
+        lang = {"category": "WORKOUT", "type": "Ride", "name": "Rad in den Bergen", "moving_time": 200 * 60}
+        b = block_fuer_event(lang)
+        self.assertIn("60-80 g Kohlenhydrate pro Stunde", b)
+        self.assertIn("insgesamt ca. 200-265 g", b)
+        locker = {"category": "WORKOUT", "type": "Ride", "name": "Rad locker", "moving_time": 45 * 60}
+        self.assertIn("keine Kohlenhydrate nötig", block_fuer_event(locker))
+        self.assertEqual(klasse({"category": "WORKOUT", "type": "Run", "name": "Lauf-Stufentest"}), "test_lauf")
+        self.assertEqual(klasse({"category": "RACE_A", "name": "dm kurzdistanz"}), "race_kurz")
+        # idempotent: Block wird ersetzt, nicht verdoppelt
+        d1 = mit_block("- 60m 60%", b)
+        self.assertEqual(mit_block(d1, b), d1)
+        self.assertEqual(d1.count("Verpflegung:"), 1)
+        self.assertTrue(d1.startswith("- 60m 60%"))
+
     def test_event_format(self):
         ev = self.plan[0].to_event()
         self.assertEqual(ev["category"], "WORKOUT")

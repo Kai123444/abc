@@ -116,6 +116,7 @@ NAECHSTE_WOCHE = [
 
 
 def naechste_woche_events() -> list[dict]:
+    from . import verpflegung
     out = []
     for tag, typ, name, text, minuten in NAECHSTE_WOCHE:
         ev = {"start_date_local": f"{tag}T00:00:00", "name": name, "description": text,
@@ -124,5 +125,8 @@ def naechste_woche_events() -> list[dict]:
             ev["category"] = "NOTE"
         else:
             ev.update(category="WORKOUT", type=typ, moving_time=minuten * 60)
+            block = verpflegung.block_fuer_event(ev)
+            if block:
+                ev["description"] = verpflegung.mit_block(ev["description"], block)
         out.append(ev)
     return out
