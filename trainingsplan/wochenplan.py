@@ -72,6 +72,12 @@ DIESE_WOCHE = [
                     "2 Gänge à 10 min und Eistonne höchstens 1 min, nur bei grünen Morgenwerten (HRV ab ca. 78, Ruhepuls bis ca. 51); "
                     "am Sa 14.11. keine Sauna und kein Eisbad. Sind die Werte am Sa nicht zurück, Test auf Mo 16.11. verschieben.",
      "external_id": "woche-2026-11-13-testhinweis"},
+    {"category": "WORKOUT", "type": "Run", "name": "Lauf locker 25 min (optional, nur bei grünen Werten)",
+     "start_date_local": "2026-11-14T00:00:00", "moving_time": 1500,
+     "description": "Nur wenn Sa früh HRV mindestens ca. 78, Ruhepuls höchstens ca. 51 und die Beine nicht schwer sind. Flach, Puls unter ca. 150, "
+                    "6:50/km oder langsamer, keine Steigerungen, kein Tempo. Am Freitag lief der 3000-m-Lauf mit Puls 187. "
+                    "Morgen Rad-Stufentest: wenn du dir unsicher bist, frei lassen.\n- 25m 6:50/km Pace",
+     "external_id": "woche-2026-11-14-lauf-optional"},
     {"category": "WORKOUT", "type": "Swim", "name": "Schulevent: 4 km locker schwimmen",
      "start_date_local": "2026-11-13T00:00:00", "moving_time": 5400,
      "description": "4 km locker, kein Tempo, mehr nicht. Technik sauber, Schultern schonen.",
