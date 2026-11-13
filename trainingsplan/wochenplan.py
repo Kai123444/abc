@@ -28,6 +28,7 @@ ENTFERNEN = [
     ("2026-11-19", "Lauf locker", "Do: nach dem Lauftest kein Lauf"),
     ("2026-11-16", "Kraft: Oberkörper und Beine (Einstieg)", "Mo: du hast schon Kraft gemacht, kein Einstieg"),
     ("2026-11-23", "Kraft: Beine und Oberkörper (Technik)", "Mo: Aufbau statt Technik-Einstieg"),
+    ("2026-11-14", "Lauf locker (optional)", "Sa: nach 3000 m mit Puls 187 und 24-h-Schwimmen kein Lauf vor dem Rad-Stufentest"),
     ("2026-11-21", "Rad Grundlage lang", "Sa: jetzt als lange Fahrt mit Sweet-Spot-Block"),
     ("2026-11-13", "Rad Grundlage (Freitag, Sondertraining)",
      "Fr: gestrichen, Sportunterricht und Schulevent reichen vor dem Rad-Stufentest am So"),
