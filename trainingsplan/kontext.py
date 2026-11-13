@@ -9,10 +9,10 @@ from __future__ import annotations
 
 from datetime import date, timedelta
 
-START_NOTIZ = """00 START HIER (Stand 11.11.2026). Wer den Athleten coacht, liest zuerst diese Notiz, dann Profil 1 bis 5, dann die aktuelle Phase und die Woche.
+START_NOTIZ = """00 START HIER (Stand 11.11.2026). Wer den Athleten coacht, liest zuerst diese Notiz, dann Profil 1 bis 6, dann die aktuelle Phase und die Woche.
 
 WO STEHT WAS (alles in intervals.icu)
-- Profil 1-5 (11.11.): Kennwerte, Historie, Verfügbarkeit, Ausrüstung, Ziele, Ernährung, Supplements, Erholung, Offene Punkte.
+- Profil 1-6 (11.-13.11.): Kennwerte, Historie, Verfügbarkeit, Ausrüstung, Ziele, Ernährung, Supplements, Erholung, Offene Punkte, Verlauf, Entscheidungen, Pace-Zonen, Werkzeuge.
 - Phasen als Zeitspannen im Kalender: Phase 0 bis 4, Taper und Höchstform, Spätsaison. Dazu am 23.11.: Wochenstruktur und Kontrolle, Krafttraining Kraftraum, Stabi und Fußkraft (Fr abend, Stufen 1-3), Rad-Intervalle, Koppeltraining, Mittwochs-Intervalle Lauf.
 - Wochenziele: TARGET-Einträge pro Sportart (Rad, Lauf, Schwimmen, Sonstiges) für jede Woche bis 06.09.2027. Übersicht Woche für Woche: Notiz 'Saisonübersicht: Woche für Woche'.
 - Rennen: RACE-Einträge (DM Kurzdistanz 08.08.2027 mit Strecken, Zeitplan, Verpflegung und Supplements; Cottbus 12.06.2027; Hölle von Q 05.09.2027). Notizen DM-Strecke: Training abgleichen, DM Vortag, DM Renntag, Zeitfahrrad.
