@@ -109,7 +109,7 @@ def _kontext(client: IntervalsClient, a) -> int:
     if a.apply:
         client.upsert_events([kontext.start_event(), kontext.wochen_event()])
         print("✔ Einstiegsnotiz und Wochenübersicht eingetragen.")
-    print(kontext.kontext_text(client, a.heute))
+    print(kontext.kontext_text(client, a.heute, alles=a.alles, profil=a.profil))
     return 0
 
 
@@ -318,6 +318,8 @@ def main(argv: list[str] | None = None) -> int:
     p.add_argument("--log-name", default="Sauna / Kälte", help="log: Titel der Kalendernotiz")
     p.add_argument("--uebersicht", action="store_true",
                    help="saison: Übersicht nach plaene/saisonuebersicht.md schreiben (ohne Kalenderzugriff)")
+    p.add_argument("--profil", type=int, help="kontext: nur dieses Profil (1-6) ausgeben")
+    p.add_argument("--alles", action="store_true", help="kontext: alle Profile und die Bibliothek ausgeben")
     p.add_argument("--rad", type=date.fromisoformat, help="stufentest: Datum Rad-Stufentest")
     p.add_argument("--lauf", type=date.fromisoformat, help="stufentest: Datum Lauf-Stufentest")
     p.add_argument("--plan", default="plaene/trainingsplan.json", help="Plan als .json oder .csv")

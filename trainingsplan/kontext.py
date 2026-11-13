@@ -26,7 +26,7 @@ WO STEHT WAS (alles in intervals.icu)
 
 ZUSAMMENARBEIT UND WERKZEUGE
 - Antworten und Plan auf Deutsch. Vor jedem Schreiben erst die Vorschau (ohne --apply) zeigen, dann eintragen.
-- Werkzeug: Python-Paket im GitHub-Repository kai123444/abc, Branch claude/trainingsplan-interval-icu-j2qi2i. Aufruf: python -m trainingsplan <befehl>. Befehle: kontext (diese Zusammenfassung), analyse (Ampel aus HRV, Ruhepuls, Schlaf, Form, Last), anpassen, saison, woche, verpflegung, dm, bibliothek, stufentest, log.
+- Werkzeug: Python-Paket im GitHub-Repository kai123444/abc, Branch claude/trainingsplan-interval-icu-j2qi2i. Aufruf: python -m trainingsplan <befehl>. Befehle: kontext (kompakter Einstieg, rund 9.000 Zeichen; kontext --profil N für ein Profil, kontext --alles für alles), analyse (Ampel aus HRV, Ruhepuls, Schlaf, Form, Last), anpassen, saison, woche, verpflegung, dm, bibliothek, stufentest, log.
 - Zugang: Der intervals.icu-API-Key liegt als Network Secret (Basic Auth, Benutzer API_KEY) in der Cloud-Umgebung 'abc' mit erlaubtem Host intervals.icu; im Code INTERVALS_API_KEY=proxy-injected setzen. Der Key kommt nie in Chat oder Repository.
 - Datenschutz: Das Profil steht nur in intervals.icu, nicht ins Repository (es wirkt öffentlich). Keine E-Mail-Adressen oder Gesundheitsdaten in Commits.
 
@@ -37,24 +37,33 @@ REGELN
 - Neue Einheiten immer mit Verpflegungsblock, Intervalle nach Leistung (% FTP), 'm' = Minuten und 'mtr' = Meter in der Workout-Syntax von intervals.icu."""
 
 
-def kontext_text(client, heute: date) -> str:
+def kontext_text(client, heute: date, alles: bool = False, profil: int | None = None) -> str:
+    """Kompakter Einstieg (Standard): Einstiegsnotiz, Profil 6 (Verlauf), Phase, Woche, Rennen, Wellness.
+    `profil=N` gibt nur Profil N aus, `alles=True` alle Profile und die Bibliothek."""
+    noten = client.events(date(2026, 1, 1), date(2027, 12, 31), category="NOTE")
+    profile = {int(n["external_id"].split("-")[1]): n for n in noten
+               if (n.get("external_id") or "").startswith("profil-") and n["external_id"].split("-")[1].isdigit()}
+    if profil is not None:
+        n = profile.get(profil)
+        return f"## {n['name']}\n{n.get('description') or ''}" if n else f"Profil {profil} nicht gefunden (vorhanden: {sorted(profile)})"
     a = client.athlete()
     z: list[str] = ["# Kontext aus intervals.icu", ""]
     z.append(f"Athlet: {a.get('name')}, {a.get('city')}, {a.get('icu_weight')} kg")
-    for s in a.get("sportSettings", []):
-        z.append(f"- {', '.join(s.get('types', [])[:2])}: FTP {s.get('ftp')}, LTHR {s.get('lthr')}, Max-HF {s.get('max_hr')}, "
-                 f"Schwellen-Pace {s.get('threshold_pace')}")
-    noten = client.events(date(2026, 1, 1), date(2027, 12, 31), category="NOTE")
-    start = [n for n in noten if (n.get("name") or "").startswith("00 START")]
-    profil = sorted((n for n in noten if (n.get("external_id") or "").startswith("profil-")), key=lambda n: n.get("external_id"))
-    if start:
-        z += ["", "## " + start[0]["name"], start[0]["description"]]
-    for n in profil:
-        z += ["", "## " + n["name"], n.get("description") or ""]
+    for st in a.get("sportSettings", []):
+        z.append(f"- {', '.join(st.get('types', [])[:1])}: FTP {st.get('ftp')}, LTHR {st.get('lthr')}, Max-HF {st.get('max_hr')}, "
+                 f"Schwellen-Pace {st.get('threshold_pace')}")
+    if 0 in profile:
+        z += ["", "## " + profile[0]["name"], profile[0].get("description") or ""]
+    for k in sorted(profile):
+        if k == 0 or not (alles or k == 6):
+            continue
+        z += ["", "## " + profile[k]["name"], profile[k].get("description") or ""]
+    if not alles:
+        z += ["", "Weitere Details: python -m trainingsplan kontext --profil N (Profil 1 Kennwerte und Historie, 2 Verfügbarkeit, "
+              "3 Ziele und Plan, 4 Ernährung und Supplements, 5 Offene Punkte) oder --alles."]
     phase = [n for n in noten if (n.get("name") or "").startswith(("Phase", "Taper", "Nach dem"))
              and n["start_date_local"][:10] <= heute.isoformat() < (n.get("end_date_local") or "9999")[:10]]
-    z += ["", "## Aktuelle Phase"]
-    z.append((phase[0]["name"] + "\n" + (phase[0].get("description") or "")) if phase else "keine Phase im Kalender")
+    z += ["", "## Aktuelle Phase", (phase[0]["name"] + ("\n" + (phase[0].get("description") or "") if alles else "")) if phase else "keine Phase im Kalender"]
     mo = heute - timedelta(days=heute.weekday())
     woche = client.events(mo, mo + timedelta(days=6), category="WORKOUT,TARGET")
     ziele = {e["type"]: e.get("load_target") for e in woche if e["category"] == "TARGET"}
@@ -64,10 +73,11 @@ def kontext_text(client, heute: date) -> str:
     rennen = client.events(heute, heute + timedelta(days=400), category="RACE_A,RACE_B,RACE_C")
     z += ["", "## Kommende Rennen"]
     z += [f"- {r['start_date_local'][:10]} {r['category']}: {r['name']}" for r in sorted(rennen, key=lambda r: r["start_date_local"])]
-    ordner = [f for f in client._request("GET", client._athlete("/folders")) if f["name"] != "Workouts"]
-    w = client._request("GET", client._athlete("/workouts")) or []
-    z += ["", f"## Bibliothek: {len(w)} Workouts in {len(ordner)} Ordnern"]
-    z += [f"- {f['name']}" for f in sorted(ordner, key=lambda f: f["name"])]
+    if alles:
+        ordner = [f for f in client._request("GET", client._athlete("/folders")) if f["name"] != "Workouts"]
+        w = client._request("GET", client._athlete("/workouts")) or []
+        z += ["", f"## Bibliothek: {len(w)} Workouts in {len(ordner)} Ordnern"]
+        z += [f"- {f['name']}" for f in sorted(ordner, key=lambda f: f["name"])]
     well = client.wellness(heute - timedelta(days=7), heute)
     z += ["", "## Wellness letzte 7 Tage"]
     for x in well:
