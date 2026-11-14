@@ -226,7 +226,7 @@ SAUNA = (
     "dämpfen kann. Nicht in den 3 Tagen vor einem Test oder Rennen.\n"
     "Eintragen: python -m trainingsplan log --tag JJJJ-MM-TT --text 'Sauna 2x15 min bei 90 Grad, Eistonne 1 min' --apply. "
     "Die Auswertung erkennt Sauna und Eisbad im Kommentar, lässt die Morgenwerte des Folgetags aus HRV- und Ruhepuls-Mittel "
-    "heraus und schreibt dazu eine Einordnung (Beispiel 11.11.: Ruhepuls 52 statt 48, HRV 79 statt 93).")
+    "heraus und schreibt dazu eine Einordnung (z. B. Ruhepuls einige Schläge höher und HRV niedriger am Morgen danach).")
 
 HITZE = (
     "Sportspezifisches Hitzetraining für die DM So 08.08.2027 (Start 11:30, Nordsee, Mittagshitze möglich): Die "
@@ -330,7 +330,7 @@ def _hitze_tage(von: str, bis: str, wochentag: int = 1) -> list[str]:
 
 PHASEN: list[tuple[str, str, str]] = [
     ("2026-11-16", "Phase 0: Tests (bis 22.11.)",
-     "Ziel: nach Krankheit/Off-Season wieder Normalbetrieb, Schwellenwerte ermitteln "
+     "Ziel: nach der Off-Season wieder Normalbetrieb, Schwellenwerte ermitteln "
      "(Rad-Stufentest 14.11., Lauf-Stufentest 17.11.). Load 310-410 pro Woche inkl. beider Tests. Der Wiedereinstieg ist kurz: du bist\n"
      "seit Wochen wieder bei Normalwochen, HRV und Ruhepuls sind auf Basis, deshalb kein Deload danach.\n"
      "Erwartung: CTL 26 -> ca. 31, Form -7 bis -15. HRV (~90) und Ruhepuls (~47) bleiben auf "
