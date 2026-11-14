@@ -9,12 +9,13 @@ from __future__ import annotations
 
 from datetime import date, timedelta
 
-START_NOTIZ = """00 START HIER (Stand 11.11.2026). Wer den Athleten coacht, liest zuerst diese Notiz, dann Profil 1 bis 6, dann die aktuelle Phase und die Woche.
+START_NOTIZ = """00 START HIER (Stand 14.11.2026). Wer den Athleten coacht, liest zuerst diese Notiz, dann Profil 1 bis 6, dann die aktuelle Phase und die Woche.
 
 WO STEHT WAS (alles in intervals.icu)
 - Profil 1-6 (11.-13.11.): Kennwerte, Historie, Verfügbarkeit, Ausrüstung, Ziele, Ernährung, Supplements, Erholung, Offene Punkte, Verlauf, Entscheidungen, Pace-Zonen, Werkzeuge.
 - Phasen als Zeitspannen im Kalender: Phase 0 bis 4, Taper und Höchstform, Spätsaison. Dazu am 23.11.: Wochenstruktur und Kontrolle, Krafttraining Kraftraum, Stabi und Fußkraft (Fr abend, Stufen 1-3), Rad-Intervalle, Koppeltraining, Mittwochs-Intervalle Lauf.
 - Wochenziele: TARGET-Einträge pro Sportart (Rad, Lauf, Schwimmen, Sonstiges) für jede Woche bis 06.09.2027. Übersicht Woche für Woche: Notiz 'Saisonübersicht: Woche für Woche'.
+- Ziele und Stand der Analyse: Notiz 'DM-Zeitziele und Zwischenziele' (08.08.2027) mit Zeitzielen 25/60/40 min und Zwischenzielen; Profil 6 Abschnitt ANALYSE 13./14.11. mit den Planbefunden.
 - Rennen: RACE-Einträge (DM Kurzdistanz 08.08.2027 mit Strecken, Zeitplan, Verpflegung und Supplements; Cottbus 12.06.2027; Hölle von Q 05.09.2027). Notizen DM-Strecke: Training abgleichen, DM Vortag, DM Renntag, Zeitfahrrad.
 - Verpflegung: Notizen 'Verpflegung: Grundregeln', 'Darmtraining: Plan und Regeln' (plus Termine), 'Supplements: Plan und Regeln', 'Radrennen-Fenster 1-5'; jede Einheit mit Dauer ab 60 min hat unten einen Block 'Verpflegung'.
 - Erholung: 'Sauna: Erholung und Hitzeanpassung' (05.07.), Sauna und Eis stehen im Wellness-Kommentar des Tages und als Notiz 'Sauna / Kälte'.
@@ -26,7 +27,7 @@ WO STEHT WAS (alles in intervals.icu)
 
 ZUSAMMENARBEIT UND WERKZEUGE
 - Antworten und Plan auf Deutsch. Vor jedem Schreiben erst die Vorschau (ohne --apply) zeigen, dann eintragen.
-- Werkzeug: Python-Paket im GitHub-Repository kai123444/abc, Branch claude/trainingsplan-interval-icu-j2qi2i. Aufruf: python -m trainingsplan <befehl>. Befehle: kontext (kompakter Einstieg, rund 9.000 Zeichen; kontext --profil N für ein Profil, kontext --alles für alles), analyse (Ampel aus HRV, Ruhepuls, Schlaf, Form, Last), anpassen, saison, woche, verpflegung, dm, bibliothek, stufentest, log.
+- Werkzeug: Python-Paket im GitHub-Repository kai123444/abc, neuester Stand auf Branch claude/trainingsplan-intervals-icu-o9m5be (enthält j2qi2i; eine neue Sitzung arbeitet auf dem neuesten claude/trainingsplan-* Branch weiter und trägt ihn hier ein). Aufruf: python -m trainingsplan <befehl>. Befehle: kontext (kompakter Einstieg, rund 9.000 Zeichen; kontext --profil N für ein Profil, kontext --alles für alles), analyse (Ampel aus HRV, Ruhepuls, Schlaf, Form, Last), anpassen, saison, woche, verpflegung, dm, bibliothek, stufentest, log, korrektur (Aktivität mit falscher Distanz/Zeit austauschen, Datei auch für Strava).
 - Zugang: Der intervals.icu-API-Key liegt als Network Secret (Basic Auth, Benutzer API_KEY) in der Cloud-Umgebung 'abc' mit erlaubtem Host intervals.icu; im Code INTERVALS_API_KEY=proxy-injected setzen. Der Key kommt nie in Chat oder Repository.
 - Datenschutz (das Repository Kai123444/abc ist öffentlich): Ins Repository dürfen Code, Planlogik, Workouts, Notiz-Texte, allgemeine Regeln, persönliche Grenzwerte als Parameter (z. B. Ampel HRV/Ruhepuls, Max-HF, Zonen) und Leistungswerte (FTP, Paces, Zeiten, Rennergebnisse, Gewicht für Verpflegungsrichtwerte). Nicht ins Repository: API-Key, E-Mail-Adressen und Gesundheitsdetails (Krankheiten, Verletzungen, Medikamente, Blutwerte, einzelne datierte HRV-, Ruhepuls- und Schlafwerte). Diese stehen nur in intervals.icu (Profil-Notizen, Wellness); der Code liest sie zur Laufzeit von dort (kontext, analyse), statt sie fest einzutragen. Begründungen im Code allgemein formulieren (z. B. 'nach einer Pause'). Wird das Repository privat, darf diese Regel gelockert werden.
 
@@ -34,7 +35,12 @@ REGELN
 - Eigene Einträge des Athleten (DM und Hölle von Q, Vereinstraining, Schultermine, Rennen, Aktivitäten) nicht löschen oder überschreiben; Löschen und Verschieben nur auf Wunsch.
 - Aufbau nach Anpassungsfähigkeit: CTL-Anstieg gestaffelt nach Fitness (Regel vom 14.11.2026): CTL unter 50 bis ca. 6 pro Woche (einmalig 7, z. B. Testwoche oder Ferienblock), CTL 50-75 bis ca. 5, über 75 bis ca. 4; höchstens 3 Aufbauwochen am Stück, nur bei grüner Ampel, Mehrlast vor allem Rad/Schwimmen locker (Details: Notiz 'Wochenstruktur und Kontrolle', 23.11.), Laufumfang höchstens +10 % pro Woche, alle 4 Wochen Erholungswoche. Ampel: Gelb bei HRV 7-Tage-Mittel unter ca. 78 oder Ruhepuls über ca. 51 (Umfang -15 %), Rot bei HRV unter ca. 68 oder Ruhepuls über ca. 54 (Intensität streichen). Sauna und Eisbad vorher eintragen, die Morgenwerte danach werden eingeordnet.
 - Nach Tests Schwellen und Zonen aktualisieren, dann Paces und Prozente der Workouts prüfen.
-- Neue Einheiten immer mit Verpflegungsblock, Intervalle nach Leistung (% FTP), 'm' = Minuten und 'mtr' = Meter in der Workout-Syntax von intervals.icu."""
+- Neue Einheiten immer mit Verpflegungsblock, Intervalle nach Leistung (% FTP), 'm' = Minuten und 'mtr' = Meter in der Workout-Syntax von intervals.icu.
+
+NEUE SITZUNG OHNE CHAT-VERLAUF
+1. python -m trainingsplan kontext (Umgebung abc, INTERVALS_API_KEY=proxy-injected) lesen, bei Bedarf --profil N oder --alles.
+2. Profil 5 (Offene Punkte) und Profil 6 (Verlauf, Analyse, Entscheidungen) sind der aktuelle Stand; dort steht, was als Nächstes ansteht.
+3. Nach jeder Arbeit Profil 6 (VERLAUF/ENTSCHEIDUNGEN) und Profil 5 nachziehen, damit die nächste Sitzung ohne Kontext weitermachen kann."""
 
 
 def kontext_text(client, heute: date, alles: bool = False, profil: int | None = None) -> str:
