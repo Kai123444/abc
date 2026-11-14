@@ -8,7 +8,8 @@ Grundlagen (aus intervals.icu, Strava-Import ab 2020 und Angaben des Athleten):
   bis 22 h, CTL-Maximum 74 (Juli 2021). 2023-2025 fast Pause, 2026 Wiedereinstieg als Triathlet
   (CTL bis 40, jetzt ca. 26).
 * Verfügbar: bis zu 20 h pro Woche. Das ist die Obergrenze für Spitzenblöcke, kein Ziel: geplant
-  wird nach Anpassungsfähigkeit (CTL-Anstieg höchstens ~4,5 pro Woche), nicht nach freier Zeit.
+  wird nach Anpassungsfähigkeit (CTL-Anstieg gestaffelt: unter CTL 50 bis ~6,
+  50-75 bis ~5, darüber bis ~4 pro Woche; siehe FAUSTREGEL), nicht nach freier Zeit.
 * Engpässe: Laufen (bis 2026 kaum Läufe) und Schwimmen -> Lauf-Load steigt nur ~10 % pro Woche,
   Schwimmen ist durch das Vereinstraining (Di/Do je 70 min) fest vorgegeben und wächst in Stufen.
 * Hauptwettkampf: DM Kurzdistanz, 08.08.2027 (1,5 km / 40 km / 10 km; eine Kurzdistanz im Juni 2026 dauerte 2:19 h bei ca. 145 TSS, für die DM
@@ -265,9 +266,23 @@ HITZE = (
     "- Ausrüstung: Rad: Ventilator weg, Rolle im kleinen Raum, Heizlüfter nur mit Abstand und Sicherheit; Lauf: Mütze, Trinkflasche, "
     "Schatten, Wasser über den Kopf.")
 
+FAUSTREGEL = (
+    "FAUSTREGEL BELASTUNGSAUFBAU (angepasst 14.11.2026, ersetzt 'CTL-Anstieg höchstens ca. 4,5 pro Woche')\n"
+    "- CTL unter 50: bis ca. 6 pro Woche, einmalig bis 7 (Testwoche, Ferienblock).\n"
+    "- CTL 50-75: bis ca. 5 pro Woche.\n- CTL über 75: bis ca. 4 pro Woche.\n"
+    "- Höchstens 3 Aufbauwochen am Stück, dann Erholungswoche (Form wieder um 0).\n"
+    "- Nur bei grüner Ampel. Gelb: Wochenziel -15 %, kein Aufbau. Rot: Intensität streichen, kein Aufbau.\n"
+    "- Die Mehrlast kommt vor allem aus lockerem Rad und Schwimmen (Z1-Z2). Laufumfang weiter höchstens +10 % pro Woche, "
+    "Laufintensität und Laufumfang nicht gleichzeitig steigern.\n"
+    "- Nach einer Pause ab 5 Tagen: erste Woche höchstens +3, dann wieder nach Tabelle.\n"
+    "- Form im Aufbau nicht dauerhaft unter ca. -30; Tests nur bei Form über ca. -25.\n"
+    "BEGRÜNDUNG: Bei niedriger CTL sind +6 pro Woche relativ wenig (CTL 30 -> +20 %), bei CTL 80 wären es nur +7 %. "
+    "Die Radsport-Basis aus 2020-2022 (CTL bis 74) trägt einen schnelleren Wiedereinstieg; Laufen ist neu und bleibt bei +10 %. "
+    "Eine Ramp Rate über 8 meldet die Analyse weiter als zu schnell.")
+
 KONTROLLE = (
     "Regeln, die der Plan überwacht:\n"
-    "- CTL-Anstieg höchstens ca. 4,5 pro Woche, Belastungsverhältnis (7 Tage zu Normalwoche) zwischen 0,8 und 1,3.\n"
+    "- CTL-Anstieg gestaffelt nach Fitness (siehe Faustregel oben), Belastungsverhältnis (7 Tage zu Normalwoche) zwischen 0,8 und 1,3.\n"
     "- Lauf-Load wächst höchstens ca. 10-12 % pro Woche; bei Schmerzen im Schienbein/Achilles/Knie "
     "sofort Lauf ersetzen (Rad/Aquajogging). Beinkraft ersetzt keine Laufprogression: den Laufumfang trotzdem bei "
     "höchstens +10 % pro Woche halten und nie zwei lange Läufe in einer Woche. Bergab laufen ist hohe "
@@ -330,10 +345,10 @@ PHASEN: list[tuple[str, str, str]] = [
      "Load 440 -> 550, ca. 13 -> 17 h (KW 48 bereits ca. 13 h), davon Rad 7 -> 10 h (dein Radumfang aus 2021/22 und deine Spitzenwoche vom "
      "07.09. mit 10,5 h Rad). Erster Block 4 Wochen bis 14.12., danach Erholungswoche.\n"
      "Deine Radbasis aus 2020-2022 kommt schnell zurück, Engpässe sind Laufen und Schwimmen.\n"
-     "Erwartung: CTL 31 -> ca. 59 (erste Aufbauwoche einmalig +5, danach +3,5 bis 4,5 pro Woche), Form -17 bis -21 in Belastungswochen, "
+     "Erwartung: CTL 31 -> ca. 59 (erste Aufbauwoche einmalig +5, danach +3,5 bis 4,5 pro Woche; nach der Faustregel vom 14.11. sind unter CTL 50 bis ca. 6 pro Woche möglich, die Wochenziele werden nach den Stufentests neu gesetzt), Form -17 bis -21 in Belastungswochen, "
      "-4 bis 0 in Erholungswochen. In der 3. Belastungswoche sind HRV 5-10 % unter Basis und "
      "Ruhepuls +1-3 bpm normal."),
-    ("2026-11-23", "Wochenstruktur und Kontrolle", WOCHENSTRUKTUR + "\n\n" + KONTROLLE),
+    ("2026-11-23", "Wochenstruktur und Kontrolle", FAUSTREGEL + "\n\n" + WOCHENSTRUKTUR + "\n\n" + KONTROLLE),
     ("2026-11-23", "Krafttraining Kraftraum", KRAFTPLAN),
     ("2026-11-23", "Stabi und Fußkraft: Plan und Progression", STABI),
     ("2026-11-23", "Rad-Intervalle: Plan nach Möglichkeiten und Zielen", RAD_INTERVALLE),
