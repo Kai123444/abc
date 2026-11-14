@@ -257,3 +257,60 @@ class TestAnpassen(unittest.TestCase):
 
 if __name__ == "__main__":
     unittest.main()
+
+
+class TestKorrektur(unittest.TestCase):
+    def _lauf_fit(self):
+        from trainingsplan import korrektur as k
+        f = k._FitSchreiber()
+        t0 = 1_000_000_000
+        f.add("file_id", type=4, manufacturer=1, product=1, serial=1, time_created=t0)
+        dist = 0.0
+        for t in range(0, 101):
+            if 10 < t <= 90:
+                dist += 3.0
+            f.add("record", ts=t0 + t, hr=150, dist=dist * 100)
+        f.add("lap", ts=t0 + 100, idx=0, event=9, event_type=1, start=t0, elapsed=100000, timer=100000,
+              dist=dist * 100, speed=dist / 100 * 1000, maxspeed=3000, sport=1)
+        f.add("session", ts=t0 + 100, idx=0, event=8, event_type=1, start=t0, sport=1, elapsed=100000,
+              timer=100000, dist=dist * 100, speed=dist / 100 * 1000, maxspeed=3000)
+        f.add("activity", ts=t0 + 100, timer=100000, nsess=1, type=0, event=26, event_type=1)
+        return f.bytes()
+
+    def test_lauf_distanz_und_zeit(self):
+        from trainingsplan import korrektur as k
+        neu, info = k.korrigiere_distanz(self._lauf_fit(), 300, 95)
+        p = k.fit_pruefen(neu)
+        self.assertEqual(p["session"][9], 30000)
+        self.assertEqual(p["session"][8], 95000)
+        self.assertAlmostEqual(p["record_distanz_ende"], 300, delta=0.5)
+        self.assertEqual(p["records"], 96)  # t = 0..95
+        self.assertEqual(info["luecke_start_s"], 11)
+
+    def test_bahnen_nur_streichen(self):
+        from trainingsplan.korrektur import bahnen_verteilen
+        wahl = bahnen_verteilen([(120, 2), (60, 4), (240, 4)], 7, 50)
+        self.assertEqual(sum(wahl), 7)
+        self.assertTrue(all(1 <= n <= m for n, m in zip(wahl, [2, 4, 4])))
+        self.assertEqual(wahl, [2, 1, 4])  # 4 Bahnen in 60 s sind unmöglich schnell
+        with self.assertRaises(ValueError):
+            bahnen_verteilen([(60, 2)], 3, 50)
+
+    def test_schwimmen_tcx_zu_fit(self):
+        from trainingsplan import korrektur as k
+        ns = "http://www.garmin.com/xmlschemas/TrainingCenterDatabase/v2"
+
+        def lap(start, dauer, dist):
+            pts = "".join(f"<Trackpoint><Time>2026-11-13T22:{(start + i) // 60:02d}:{(start + i) % 60:02d}Z</Time>"
+                          f"<HeartRateBpm><Value>140</Value></HeartRateBpm></Trackpoint>" for i in range(0, dauer, 10))
+            return (f'<Lap StartTime="2026-11-13T22:{start // 60:02d}:{start % 60:02d}Z"><TotalTimeSeconds>{dauer}'
+                    f"</TotalTimeSeconds><DistanceMeters>{dist}</DistanceMeters><Track>{pts}</Track></Lap>")
+        tcx = (f'<TrainingCenterDatabase xmlns="{ns}"><Activities><Activity Sport="Other">'
+               + lap(0, 120, 200) + lap(120, 30, 0) + lap(150, 240, 400) + "</Activity></Activities></TrainingCenterDatabase>")
+        fit, info = k.schwimmen_tcx_zu_fit(tcx, 400, 50)
+        p = k.fit_pruefen(fit)
+        self.assertEqual(info["bahnen"], 8)
+        self.assertEqual(info["pausen"], 1)
+        self.assertEqual(p["session"][9], 40000)
+        self.assertEqual(p["session"][5], 5)
+        self.assertEqual(sum(1 for x in p["lengths"] if x[12] == 1), 8)

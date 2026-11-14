@@ -12,6 +12,7 @@ import json
 import os
 import urllib.error
 import urllib.parse
+import uuid
 import urllib.request
 from datetime import date
 
@@ -107,6 +108,47 @@ class IntervalsClient:
 
     def delete_event(self, event_id: int) -> None:
         self._request("DELETE", self._athlete(f"/events/{event_id}"))
+
+    # -- Aktivitäten (Korrektur von Dateien) -------------------------------
+    def activity(self, activity_id: str) -> dict:
+        return self._request("GET", f"/activity/{activity_id}")
+
+    def activity_file(self, activity_id: str) -> bytes:
+        """Originaldatei der Aktivität (wie von Uhr/Garmin Connect geliefert)."""
+        req = urllib.request.Request(f"{self.base_url}/activity/{activity_id}/file")
+        req.add_header("Authorization", self._auth)
+        req.add_header("User-Agent", "trainingsplan-sync/1.0")
+        try:
+            with urllib.request.urlopen(req, timeout=self.timeout) as resp:
+                return resp.read()
+        except urllib.error.HTTPError as exc:
+            raise IntervalsError(f"GET /activity/{activity_id}/file -> HTTP {exc.code}") from exc
+
+    def update_activity(self, activity_id: str, felder: dict) -> dict:
+        return self._request("PUT", f"/activity/{activity_id}", body=felder)
+
+    def delete_activity(self, activity_id: str) -> None:
+        self._request("DELETE", f"/activity/{activity_id}")
+
+    def upload_activity(self, dateiname: str, daten: bytes, name: str | None = None,
+                        description: str | None = None) -> str:
+        """Datei (FIT/TCX/GPX) als neue Aktivität hochladen, liefert die neue Aktivitäts-ID."""
+        grenze = uuid.uuid4().hex
+        body = (f"--{grenze}\r\nContent-Disposition: form-data; name=\"file\"; filename=\"{dateiname}\"\r\n"
+                "Content-Type: application/octet-stream\r\n\r\n").encode() + daten + f"\r\n--{grenze}--\r\n".encode()
+        params = {k: v for k, v in (("name", name), ("description", description)) if v}
+        url = f"{self.base_url}{self._athlete('/activities')}"
+        if params:
+            url += "?" + urllib.parse.urlencode(params)
+        req = urllib.request.Request(url, data=body, method="POST")
+        req.add_header("Authorization", self._auth)
+        req.add_header("User-Agent", "trainingsplan-sync/1.0")
+        req.add_header("Content-Type", f"multipart/form-data; boundary={grenze}")
+        try:
+            with urllib.request.urlopen(req, timeout=max(self.timeout, 60)) as resp:
+                return json.loads(resp.read())["id"]
+        except urllib.error.HTTPError as exc:
+            raise IntervalsError(f"Upload -> HTTP {exc.code}: {exc.read().decode(errors='replace')[:300]}") from exc
 
     def upsert_events(self, events: list[dict]) -> list[dict]:
         """Legt geplante Workouts an bzw. aktualisiert sie (Match über external_id)."""

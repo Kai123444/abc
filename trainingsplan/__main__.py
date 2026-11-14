@@ -5,7 +5,9 @@
   anpassen – bereits in intervals.icu geplante Einheiten anpassen
   stufentest – Rad-/Lauf-Stufentest einplanen (--rad DATUM, --lauf DATUM);
              ein vorhandener Test am selben Tag (z.B. FTP-Test) wird ersetzt
-  (sync/anpassen ohne --apply: nur Vorschau, nichts wird geschrieben)
+korrektur – Aktivität mit falscher Distanz/Zeit korrigieren (--aktivitaet ID --distanz M
+           [--zeit mm:ss] [--datei TCX] [--bahn 50]); Datei für Strava in korrekturen/
+  (sync/anpassen/korrektur ohne --apply: nur Vorschau, nichts wird geschrieben)
 """
 
 from __future__ import annotations
@@ -305,10 +307,78 @@ def _saison(client: IntervalsClient, a) -> int:
     return 0
 
 
+def _zeit(text: str | None) -> float | None:
+    if not text:
+        return None
+    teile = [float(x) for x in text.replace(",", ".").split(":")]
+    sek = 0.0
+    for t in teile:
+        sek = sek * 60 + t
+    return sek
+
+
+def _korrektur(client: IntervalsClient, a) -> int:
+    """Aktivität mit falscher Distanz/Zeit korrigieren: Datei nach korrekturen/ schreiben (Vorschau),
+    mit --apply die korrigierte Datei hochladen, Kopplung übernehmen und die alte Aktivität löschen."""
+    import json
+    from . import korrektur
+    if not a.aktivitaet or not a.distanz:
+        print("Fehler: --aktivitaet ID und --distanz METER angeben", file=sys.stderr)
+        return 2
+    alt = client.activity(a.aktivitaet)
+    roh = Path(a.datei).read_bytes() if a.datei else client.activity_file(a.aktivitaet)
+    tag = (alt.get("start_date_local") or "")[:10]
+    ordner = Path("korrekturen"); ordner.mkdir(exist_ok=True)
+    ist_fit = roh[8:12] == b".FIT"
+    if alt.get("type") == "Swim" or not ist_fit:
+        if ist_fit:
+            print("Fehler: Schwimmen braucht die TCX-Datei (Garmin Connect → Aktivität → Zahnrad → "
+                  "Als TCX exportieren) und --datei PFAD", file=sys.stderr)
+            return 2
+        neu, info = korrektur.schwimmen_tcx_zu_fit(roh, a.distanz, a.bahn)
+        p100 = round(info["pace_s_100"])
+        text = (f"Uhr {info['distanz_uhr']:.0f} m -> {info['distanz']:.0f} m ({info['bahnen']} Bahnen à {a.bahn:.0f} m, "
+                f"{info['pausen']} Pausen), {info['aktiv_min']:.1f} min aktiv, Ø {int(p100 // 60)}:{int(p100 % 60):02d}/100 m")
+        for uhr, jetzt, dauer in info["runden"]:
+            if uhr != jetzt:
+                print(f"  Runde {dauer:4d} s: {uhr} -> {jetzt} m")
+        notiz = (f"Korrigierte Datei: Uhr zählte Fehlbahnen ({info['distanz_uhr']:.0f} m), tatsächlich {a.distanz:.0f} m. "
+                 "Nur Bahnen gestrichen, Zeit und Puls original.")
+    else:
+        neu, info = korrektur.korrigiere_distanz(roh, a.distanz, _zeit(a.zeit))
+        pk = round(info["pace_s_km"])
+        text = (f"{a.distanz:.0f} m in {int(round(info['ende_s']) // 60)}:{int(round(info['ende_s']) % 60):02d} min, "
+                f"Ø {int(pk // 60)}:{int(pk % 60):02d}/km, Faktor {info['faktor']:.3f}, "
+                f"Lücke am Start bis {info['luecke_start_s']} s gefüllt; Runden {info['runden']}")
+        notiz = (f"Korrigierte Datei: Distanz auf {a.distanz:.0f} m"
+                 + (f" und Zeit auf {a.zeit} (gestoppt)" if a.zeit else "")
+                 + " gesetzt, Lücken ohne erkannte Bewegung gefüllt. Puls und Kadenz original.")
+    datei = ordner / f"{tag}_{a.aktivitaet}_korrigiert.fit"
+    datei.write_bytes(neu)
+    korrektur.fit_pruefen(neu)
+    print(f"{alt.get('name')} ({tag}): {text}\nDatei: {datei} (auch für Strava)")
+    if not a.apply:
+        print("Vorschau – mit --apply in intervals.icu austauschen (neue Aktivität hochladen, alte löschen).")
+        return 0
+    (ordner / f"{tag}_{a.aktivitaet}_alt.json").write_text(json.dumps(alt, ensure_ascii=False, indent=1), encoding="utf-8")
+    beschreibung = ((alt.get("description") or "").strip() + "\n\n" + notiz).strip()
+    nid = client.upload_activity(datei.name, neu, alt.get("name"), beschreibung)
+    pruef = client.activity(nid)
+    if abs((pruef.get("distance") or 0) - a.distanz) > max(5, a.distanz * 0.01):
+        print(f"Fehler: neue Aktivität {nid} hat {pruef.get('distance')} m – alte bleibt erhalten", file=sys.stderr)
+        return 2
+    if alt.get("paired_event_id"):
+        client.update_activity(nid, {"paired_event_id": alt["paired_event_id"]})
+    client.delete_activity(a.aktivitaet)
+    print(f"✔ ausgetauscht: {a.aktivitaet} gelöscht, neu {nid} ({pruef.get('distance'):.0f} m, "
+          f"bewegt {pruef.get('moving_time')} s); Sicherung {ordner / (tag + '_' + a.aktivitaet + '_alt.json')}")
+    return 0
+
+
 def main(argv: list[str] | None = None) -> int:
     p = argparse.ArgumentParser(prog="trainingsplan", description=__doc__,
                                 formatter_class=argparse.RawDescriptionHelpFormatter)
-    p.add_argument("befehl", choices=["analyse", "sync", "anpassen", "stufentest", "saison", "woche", "log", "verpflegung", "dm", "bibliothek", "kontext", "appdaten", "verein"])
+    p.add_argument("befehl", choices=["analyse", "sync", "anpassen", "stufentest", "saison", "woche", "log", "verpflegung", "dm", "bibliothek", "kontext", "appdaten", "verein", "korrektur"])
     p.add_argument("--basis-ab", type=date.fromisoformat,
                    help="Vergleichszeitraum ab Datum (z.B. 2026-08-01): Normalwochen statt 4 Wochen")
     p.add_argument("--alten-plan-loeschen", action="store_true",
@@ -328,6 +398,11 @@ def main(argv: list[str] | None = None) -> int:
     p.add_argument("--ohne-anpassung", action="store_true", help="Plan unverändert hochladen")
     p.add_argument("--apply", action="store_true", help="wirklich nach intervals.icu schreiben")
     p.add_argument("--bericht", default="berichte", help="Ordner für Markdown-Berichte")
+    p.add_argument("--aktivitaet", help="korrektur: Aktivitäts-ID in intervals.icu, z. B. i209463209")
+    p.add_argument("--distanz", type=float, help="korrektur: richtige Distanz in Metern")
+    p.add_argument("--zeit", help="korrektur: gestoppte Zeit mm:ss (Lauf/Rad), Aktivität endet dort")
+    p.add_argument("--datei", help="korrektur: lokale Datei statt Original aus intervals.icu (Schwimmen: TCX)")
+    p.add_argument("--bahn", type=float, default=50.0, help="korrektur: Beckenlänge in m (Schwimmen)")
     a = p.parse_args(argv)
 
     if a.befehl == "saison" and a.uebersicht:
@@ -358,6 +433,8 @@ def main(argv: list[str] | None = None) -> int:
             return _verein(client, a)
         if a.befehl == "appdaten":
             return _appdaten(client, a)
+        if a.befehl == "korrektur":
+            return _korrektur(client, a)
         if a.befehl == "kontext":
             return _kontext(client, a)
         wellness, akt = _daten(client, a.heute, a.basis_ab)

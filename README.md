@@ -106,3 +106,20 @@ aktualisiert, im Kalender geplante Einheiten, die noch fehlen, werden einsortier
 `python -m trainingsplan kontext` liest alles Wissen über den Athleten aus intervals.icu (Einstiegsnotiz "00 START HIER",
 Profil-Notizen, aktuelle Phase, Woche, Rennen, Bibliothek, Wellness). Mit `--apply` werden Einstiegsnotiz und
 "Saisonübersicht: Woche für Woche" (neu) eingetragen. Persönliche Daten stehen nur in intervals.icu, nicht im Repository.
+
+## Aktivitäten korrigieren (`korrektur`)
+
+Wenn die Uhr Distanz oder Zeit falsch aufzeichnet (Halle, Laufband, Fehlbahnen beim Schwimmen):
+
+```bash
+# Lauf/Rad: Original aus intervals.icu laden, auf 3000 m und gestoppte 11:11 setzen (Vorschau)
+python -m trainingsplan korrektur --aktivitaet i209463209 --distanz 3000 --zeit 11:11
+# Beckenschwimmen: TCX aus Garmin Connect exportieren, Fehlbahnen streichen, 50-m-Becken
+python -m trainingsplan korrektur --aktivitaet i210041489 --distanz 4000 --datei schwimmen.tcx --bahn 50
+# ... mit --apply: neue Datei hochladen, Kopplung an die geplante Einheit übernehmen, alte Aktivität löschen
+```
+
+Die korrigierte FIT-Datei liegt in `korrekturen/` (nicht im Repository) und kann auch bei Strava hochgeladen
+werden. Lauf/Rad: Lücken ohne erkannte Bewegung am Anfang/Ende werden gefüllt, der Tempoverlauf der Uhr
+wird skaliert, Puls und Kadenz bleiben. Schwimmen: Es werden nur Bahnen gestrichen, bis die Distanz stimmt
+und das Tempo der Runden möglichst gleichmäßig ist; die FIT-Datei enthält Bahnen, Pausen und Runden.
