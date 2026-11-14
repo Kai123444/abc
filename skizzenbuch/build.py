@@ -12,6 +12,9 @@ body { font-family: 'Inter', 'DejaVu Sans', sans-serif; font-size: 10pt; line-he
 .page { width: 210mm; height: 297mm; padding: 14mm 14mm 16mm 27mm; position: relative;
         overflow: hidden; page-break-after: always; break-after: page; display: flex; flex-direction: column; }
 .page:last-child { page-break-after: auto; }
+.page.even { padding: 14mm 27mm 16mm 14mm; }
+.page.even .foot, .page.even .blankfoot { left: 14mm; right: 27mm; flex-direction: row-reverse; }
+.blankfoot.filler { color: #aaa; }
 .foot { position: absolute; left: 27mm; right: 14mm; bottom: 8mm; display: flex; justify-content: space-between;
         font-size: 7.5pt; color: #555; border-top: 0.3mm solid #000; padding-top: 1.5mm; }
 .kicker { font-size: 8pt; letter-spacing: .14em; text-transform: uppercase; font-weight: 600; margin-bottom: 1mm; }
@@ -68,22 +71,45 @@ th { background: #e8e8e8; }
 .labb { font: 600 10.5px 'Inter', sans-serif; fill: #000; }
 """
 
-pages = []
-state = {"n": 0}
+pages = []  # (kind, cls, body, section)  kind: text | front | draw
 
 
-def page(body, section="", cls=""):
-    state["n"] += 1
-    n = state["n"]
-    foot = f'<div class="foot"><span>{section}</span><span>{n}</span></div>' if section is not None else ""
-    pages.append(f'<section class="page {cls}">{body}{foot}</section>')
+def page(body, section="", cls="", kind=None):
+    if kind is None:
+        kind = "draw" if '<div class="grow">' in body else ("front" if section is None or cls == "section" else "text")
+    pages.append((kind, cls, body, section))
 
 
 def blank(title="Freie Seite"):
-    state["n"] += 1
-    n = state["n"]
-    pages.append(f'<section class="page"><div class="blankfoot"><span>{title} · Datum: ____________ · '
-                 f'Motiv: ______________________ · Zeit: ______ min</span><span>{n}</span></div></section>')
+    pages.append(("draw", "", None, title))
+
+
+def layout(duplex):
+    """Seiten anordnen. Duplex: Zeichenseiten immer vorne (ungerade), Rückseite leer."""
+    seq = []
+    filler = ("filler", "", None, None)
+    for p in pages:
+        kind = p[0]
+        if duplex and kind in ("front", "draw") and len(seq) % 2 == 1:
+            seq.append(filler)
+        seq.append(p)
+        if duplex and kind == "draw":
+            seq.append(filler)
+    if duplex and len(seq) % 2 == 1:
+        seq.append(filler)
+    out = []
+    for i, (kind, cls, body, section) in enumerate(seq):
+        n = i + 1
+        side = "even" if (duplex and n % 2 == 0) else "odd"
+        if kind == "filler":
+            out.append(f'<section class="page {side}"><div class="blankfoot filler"><span>Diese Seite bleibt absichtlich frei</span><span>{n}</span></div></section>')
+        elif body is None:
+            out.append(f'<section class="page {side}"><div class="blankfoot"><span>{section} · Datum: ____________ · '
+                       f'Motiv: ______________________ · Zeit: ______ min</span><span>{n}</span></div></section>')
+        else:
+            foot = f'<div class="foot"><span>{section}</span><span>{n}</span></div>' if section is not None else ""
+            out.append(f'<section class="page {side} {cls}">{body}{foot}</section>')
+    return out
 
 
 def head(kicker, title, lead=""):
@@ -765,8 +791,14 @@ page(head("Nachschlagen", "Spickzettel",
 for _ in range(6):
     blank()
 
-html = (f'<!doctype html><html lang="de"><head><meta charset="utf-8"><title>Skizzenbuch</title>'
-        f'<style>{CSS}</style></head><body>{"".join(pages)}</body></html>')
-with open(os.path.join(HERE, "skizzenbuch.html"), "w", encoding="utf-8") as fh:
-    fh.write(html)
-print(f"{state['n']} Seiten geschrieben")
+def write(name, duplex):
+    seq = layout(duplex)
+    html = (f'<!doctype html><html lang="de"><head><meta charset="utf-8"><title>Skizzenbuch</title>'
+            f'<style>{CSS}</style></head><body>{"".join(seq)}</body></html>')
+    with open(os.path.join(HERE, name), "w", encoding="utf-8") as fh:
+        fh.write(html)
+    print(f"{name}: {len(seq)} Seiten = {(len(seq) + (1 if duplex else 0)) // (2 if duplex else 1)} Blatt")
+
+
+write("skizzenbuch_beidseitig.html", True)
+write("skizzenbuch_einseitig.html", False)
