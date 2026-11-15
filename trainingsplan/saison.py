@@ -23,24 +23,26 @@ from datetime import date, timedelta
 
 # (Montag, TSS gesamt pro Woche, Erholungs-/Taperwoche?)  – 3 Belastungswochen : 1 Erholungswoche
 WOCHEN: list[tuple[str, int, bool]] = [
-    # Phase 0 Tests (Woche 09.11. mit Rad-Stufentest, Woche 16.11. mit Lauf-Stufentest); kein Deload danach,
-    # der Wiedereinstieg ist kurz: Belastung steigt ab 23.11. (erster Block 4 Wochen, dann Erholungswoche 21.12.)
-    ("2026-11-09", 411, False), ("2026-11-16", 311, False),
+    # Neu gesetzt 15.11.2026 nach dem Rad-Stufentest und der Faustregel vom 14.11. (CTL unter 50 bis ca. 6/Woche):
+    # schnellerer Winteraufbau, Ferien als Blockwochen, Abitur-Wochen 19.04.-09.05. pauschal ca. 570-590 TSS.
+    # Phase 0 Tests (Woche 09.11. mit Rad-Stufentest, Woche 16.11. mit Koppel Harz und Lauf-Stufentest Fr);
+    # erster Block bis 14.12., dann Erholungswoche 21.12.
+    ("2026-11-09", 411, False), ("2026-11-16", 530, False),
     # Phase 1 Grundlage I
-    ("2026-11-23", 440, False), ("2026-11-30", 460, False), ("2026-12-07", 480, False), ("2026-12-14", 500, False),
-    ("2026-12-21", 330, True),
-    ("2026-12-28", 515, False), ("2027-01-04", 535, False), ("2027-01-11", 550, False),
-    ("2027-01-18", 370, True),
+    ("2026-11-23", 480, False), ("2026-11-30", 505, False), ("2026-12-07", 530, False), ("2026-12-14", 550, False),
+    ("2026-12-21", 370, True),
+    ("2026-12-28", 590, False), ("2027-01-04", 610, False), ("2027-01-11", 620, False),
+    ("2027-01-18", 420, True),
     # Phase 2 Grundlage II / Aufbau
-    ("2027-01-25", 560, False), ("2027-02-01", 580, False), ("2027-02-08", 600, False),
-    ("2027-02-15", 400, True),
-    ("2027-02-22", 610, False), ("2027-03-01", 625, False), ("2027-03-08", 640, False),
-    ("2027-03-15", 430, True),
+    ("2027-01-25", 620, False), ("2027-02-01", 650, False), ("2027-02-08", 660, False),
+    ("2027-02-15", 440, True),
+    ("2027-02-22", 660, False), ("2027-03-01", 670, False), ("2027-03-08", 680, False),
+    ("2027-03-15", 460, True),
     # Phase 3 Aufbau intensiv
-    ("2027-03-22", 640, False), ("2027-03-29", 660, False), ("2027-04-05", 680, False),
+    ("2027-03-22", 700, False), ("2027-03-29", 720, False), ("2027-04-05", 690, False),
     ("2027-04-12", 450, True),
-    ("2027-04-19", 680, False), ("2027-04-26", 700, False), ("2027-05-03", 715, False),
-    ("2027-05-10", 470, True),
+    ("2027-04-19", 590, False), ("2027-04-26", 590, False), ("2027-05-03", 570, False),
+    ("2027-05-10", 450, True),
     # Phase 4 Wettkampfvorbereitung (zwei Spitzenblöcke, 18-19 h, Spitzenwochen bis ~21 h möglich)
     ("2027-05-17", 710, False), ("2027-05-24", 730, False), ("2027-05-31", 745, False),
     ("2027-06-07", 480, True),
@@ -58,7 +60,7 @@ TAPER_WOCHEN = {"2027-07-26", "2027-08-02", "2027-08-09", "2027-08-16", "2027-08
 
 # Schwimmen und Kraft sind feste Größen (Vereinstraining, Kraftraum Mo-Do), der Rest geht an Rad/Lauf.
 # Stufen: (gilt ab Datum, Belastungswoche); Erholungswochen = 70 % davon.
-_SCHWIMMEN = [("2026-11-16", 85), ("2027-01-01", 100), ("2027-03-01", 115), ("2027-05-01", 125)]  # 2 x Verein = ca. 2,3 h; später dritte Einheit
+_SCHWIMMEN = [("2026-11-16", 110), ("2027-01-01", 120), ("2027-03-01", 130), ("2027-05-01", 135)]  # ab 15.11.: Schwimmen ist der größte Rückstand (Ziel < 25 min)  # 2 x Verein = ca. 2,3 h; später dritte Einheit
 _KRAFT = [("2026-11-16", 28), ("2027-03-22", 22), ("2027-05-17", 18)]  # Kraftraum: 2x, ab Frühjahr Erhalt
 _TAPER_SCHWIMMEN = {"2027-07-26": 130, "2027-08-02": 70, "2027-08-09": 30,  # Rennwoche inkl. Renn-Schwimmen
                     "2027-08-16": 100, "2027-08-23": 120, "2027-08-30": 90}
@@ -350,7 +352,7 @@ PHASEN: list[tuple[str, str, str]] = [
      "Load 440 -> 550, ca. 13 -> 17 h (KW 48 bereits ca. 13 h), davon Rad 7 -> 10 h (dein Radumfang aus 2021/22 und deine Spitzenwoche vom "
      "07.09. mit 10,5 h Rad). Erster Block 4 Wochen bis 14.12., danach Erholungswoche.\n"
      "Deine Radbasis aus 2020-2022 kommt schnell zurück, Engpässe sind Laufen und Schwimmen.\n"
-     "Erwartung: CTL 31 -> ca. 59 (erste Aufbauwoche einmalig +5, danach +3,5 bis 4,5 pro Woche; nach der Faustregel vom 14.11. sind unter CTL 50 bis ca. 6 pro Woche möglich, die Wochenziele werden nach den Stufentests neu gesetzt), Form -17 bis -21 in Belastungswochen, "
+     "Erwartung (Wochenziele neu ab 15.11.): CTL ca. 38 -> ca. 67 (+4 bis 4,5 pro Woche nach der Faustregel vom 14.11.), Form ca. -20 bis -25 im ersten Block, in späteren Belastungswochen -16 bis -19, "
      "-4 bis 0 in Erholungswochen. In der 3. Belastungswoche sind HRV 5-10 % unter Basis und "
      "Ruhepuls +1-3 bpm normal."),
     ("2026-11-23", "Wochenstruktur und Kontrolle", FAUSTREGEL + "\n\n" + WOCHENSTRUKTUR + "\n\n" + KONTROLLE),
@@ -462,7 +464,12 @@ PHASEN: list[tuple[str, str, str]] = [
 # Testwochen: Verteilung nach den tatsächlich geplanten Einheiten (Stufentests, Vereinstraining, Sportunterricht)
 _SPORT_FEST = {
     "2026-11-09": {"Ride": 167, "Run": 55, "Swim": 157, "Other": 32},  # 24-h-Schwimmen Fr/Sa, Rad-Test So
-    "2026-11-16": {"Ride": 87, "Run": 100, "Swim": 102, "Other": 22},  # Lauf-Stufentest Mi
+    "2026-11-16": {"Ride": 285, "Run": 132, "Swim": 90, "Other": 23},  # Koppel Harz Mo, Lauf-Stufentest Fr, Rad 3 h Sa
+    # Abitur (schriftlich 16.04.-10.05.): weniger Rad, Laufen bleibt stabil (kurze lockere Läufe sind zeitsparend und
+    # vermeiden einen Sprung im Laufumfang zu Phase 4)
+    "2027-04-19": {"Ride": 270, "Run": 168, "Swim": 130, "Other": 22},
+    "2027-04-26": {"Ride": 263, "Run": 175, "Swim": 130, "Other": 22},
+    "2027-05-03": {"Ride": 237, "Run": 176, "Swim": 135, "Other": 22},
 }
 
 
@@ -595,10 +602,10 @@ def phase_fuer(tag: str) -> tuple:
 
 
 def simulation() -> dict[str, tuple[float, float]]:
-    """CTL/ATL am Ende jeder Woche (Startwerte 16.11.: CTL 28, ATL 43; Last gleichmäßig verteilt)."""
+    """CTL/ATL am Ende jeder Woche (Startwerte 16.11.: CTL 31,5, ATL 50; Last gleichmäßig verteilt)."""
     from math import exp
     kc, ka = 1 - exp(-1 / 42), 1 - exp(-1 / 7)
-    ctl, atl = 28.0, 43.0
+    ctl, atl = 31.5, 50.0
     out = {}
     for tag, tss, _ in WOCHEN:
         if tag < "2026-11-16":  # Startwerte gelten für den 16.11.

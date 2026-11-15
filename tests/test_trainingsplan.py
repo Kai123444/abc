@@ -167,7 +167,7 @@ class TestAnpassen(unittest.TestCase):
         h = {tag: saison.stunden(tss, tag, rec) for tag, tss, rec in saison.WOCHEN}
         self.assertLessEqual(max(h.values()), 20)       # nie über deiner Obergrenze
         self.assertGreaterEqual(max(h.values()), 17)    # Spitzenblöcke nutzen die Zeit
-        self.assertLessEqual(h["2026-11-30"], 15)       # Wiedereinstieg bleibt moderat
+        self.assertLessEqual(h["2026-11-30"], 16)       # Wiedereinstieg bleibt moderat (Faustregel 14.11.: bis ca. 6 CTL/Woche)
 
     def test_sauna_eisbad_wird_eingeordnet(self):
         from trainingsplan.analyse import expositionen
