@@ -116,6 +116,8 @@ Wenn die Uhr Distanz oder Zeit falsch aufzeichnet (Halle, Laufband, Fehlbahnen b
 python -m trainingsplan korrektur --aktivitaet i209463209 --distanz 3000 --zeit 11:11
 # Beckenschwimmen: TCX aus Garmin Connect exportieren, Fehlbahnen streichen, 50-m-Becken
 python -m trainingsplan korrektur --aktivitaet i210041489 --distanz 4000 --datei schwimmen.tcx --bahn 50
+# Rolle: Geschwindigkeit falsch (0 km/h oder viel zu hoch) -> aus der Leistung berechnen, an geplante Einheit koppeln
+python -m trainingsplan korrektur --rolle --datei fahrt.fit --event 156088913 --name-neu "Rad locker"
 # ... mit --apply: neue Datei hochladen, Kopplung an die geplante Einheit übernehmen, alte Aktivität löschen
 ```
 

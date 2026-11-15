@@ -314,3 +314,22 @@ class TestKorrektur(unittest.TestCase):
         self.assertEqual(p["session"][9], 40000)
         self.assertEqual(p["session"][5], 5)
         self.assertEqual(sum(1 for x in p["lengths"] if x[12] == 1), 8)
+
+
+class TestRolle(unittest.TestCase):
+    def test_geschwindigkeit_aus_leistung(self):
+        from trainingsplan import korrektur as k
+        f = k._FitSchreiber()
+        t0 = 1_000_000_000
+        f.add("file_id", type=4, manufacturer=1, product=1, serial=1, time_created=t0)
+        k._MSG["rec_p"] = (20, [("ts", 253, "u32"), ("dist", 5, "u32"), ("speed", 6, "u16"), ("p", 7, "u16")])
+        for t in range(0, 601):
+            f.add("rec_p", ts=t0 + t, dist=t * 4000, speed=40000, p=200)  # Rolle meldet 144 km/h
+        f.add("session", ts=t0 + 600, idx=0, event=8, event_type=1, start=t0, sport=2, elapsed=600000,
+              timer=600000, dist=600 * 4000, speed=40000, maxspeed=40000)
+        neu, info = k.rolle_geschwindigkeit(f.bytes())
+        p = k.fit_pruefen(neu)
+        self.assertAlmostEqual(info["vmax_kmh"], k.v_aus_leistung(200) * 3.6, places=3)
+        self.assertTrue(30 < info["vmax_kmh"] < 36)  # 200 W flach ca. 32-34 km/h
+        self.assertAlmostEqual(p["session"][9] / 100, info["distanz_km"] * 1000, delta=1)
+        del k._MSG["rec_p"]

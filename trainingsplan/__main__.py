@@ -6,7 +6,8 @@
   stufentest – Rad-/Lauf-Stufentest einplanen (--rad DATUM, --lauf DATUM);
              ein vorhandener Test am selben Tag (z.B. FTP-Test) wird ersetzt
 korrektur – Aktivität mit falscher Distanz/Zeit korrigieren (--aktivitaet ID --distanz M
-           [--zeit mm:ss] [--datei TCX] [--bahn 50]); Datei für Strava in korrekturen/
+           [--zeit mm:ss] [--datei TCX] [--bahn 50]) oder Rollenfahrt (--rolle --datei FIT
+           [--event ID]); Datei für Strava in korrekturen/
   (sync/anpassen/korrektur ohne --apply: nur Vorschau, nichts wird geschrieben)
 """
 
@@ -317,13 +318,49 @@ def _zeit(text: str | None) -> float | None:
     return sek
 
 
+def _rolle(client: IntervalsClient, a) -> int:
+    """Rollenfahrt mit falscher Geschwindigkeit: aus --datei (oder dem Original von --aktivitaet) die Geschwindigkeit
+    aus der Leistung berechnen; mit --apply als Aktivität hochladen (ersetzt --aktivitaet) und an --event koppeln."""
+    from . import korrektur
+    if not a.datei and not a.aktivitaet:
+        print("Fehler: --datei FIT oder --aktivitaet ID angeben", file=sys.stderr)
+        return 2
+    alt = client.activity(a.aktivitaet) if a.aktivitaet else {}
+    roh = Path(a.datei).read_bytes() if a.datei else client.activity_file(a.aktivitaet)
+    neu, info = korrektur.rolle_geschwindigkeit(roh)
+    korrektur.fit_pruefen(neu)
+    ordner = Path("korrekturen"); ordner.mkdir(exist_ok=True)
+    datei = ordner / ((Path(a.datei).stem if a.datei else a.aktivitaet) + "_rolle.fit")
+    datei.write_bytes(neu)
+    print(f"Distanz {info['distanz_alt_km']:.1f} km -> {info['distanz_km']:.1f} km (virtuell, flach), "
+          f"vmax {info['vmax_kmh']:.0f} km/h\nDatei: {datei} (auch für Strava)")
+    if not a.apply:
+        print("Vorschau – mit --apply hochladen" + (" und die alte Aktivität ersetzen" if a.aktivitaet else "")
+              + (f", gekoppelt an {a.event}" if a.event else "") + ".")
+        return 0
+    notiz = "Geschwindigkeit der Rolle fehlerhaft; virtuelle Geschwindigkeit aus der Leistung berechnet (flach), Leistung/Puls/Trittfrequenz original."
+    beschreibung = ((alt.get("description") or "").strip() + "\n" + notiz).strip()
+    nid = client.upload_activity(datei.name, neu, alt.get("name") or a.name_neu, beschreibung)
+    ziel = a.event or alt.get("paired_event_id")
+    if ziel:
+        client.update_activity(nid, {"paired_event_id": int(ziel)})
+    if a.aktivitaet:
+        client.delete_activity(a.aktivitaet)
+    p = client.activity(nid)
+    print(f"✔ hochgeladen: {nid} ({p.get('type')}, bewegt {p.get('moving_time')} s, {p.get('icu_training_load')} TSS)"
+          + (f", gekoppelt an {ziel}" if ziel else "") + (f"; {a.aktivitaet} gelöscht" if a.aktivitaet else ""))
+    return 0
+
+
 def _korrektur(client: IntervalsClient, a) -> int:
     """Aktivität mit falscher Distanz/Zeit korrigieren: Datei nach korrekturen/ schreiben (Vorschau),
     mit --apply die korrigierte Datei hochladen, Kopplung übernehmen und die alte Aktivität löschen."""
     import json
     from . import korrektur
+    if a.rolle:
+        return _rolle(client, a)
     if not a.aktivitaet or not a.distanz:
-        print("Fehler: --aktivitaet ID und --distanz METER angeben", file=sys.stderr)
+        print("Fehler: --aktivitaet ID und --distanz METER angeben (Rolle: --rolle --datei FIT)", file=sys.stderr)
         return 2
     alt = client.activity(a.aktivitaet)
     roh = Path(a.datei).read_bytes() if a.datei else client.activity_file(a.aktivitaet)
@@ -403,6 +440,9 @@ def main(argv: list[str] | None = None) -> int:
     p.add_argument("--zeit", help="korrektur: gestoppte Zeit mm:ss (Lauf/Rad), Aktivität endet dort")
     p.add_argument("--datei", help="korrektur: lokale Datei statt Original aus intervals.icu (Schwimmen: TCX)")
     p.add_argument("--bahn", type=float, default=50.0, help="korrektur: Beckenlänge in m (Schwimmen)")
+    p.add_argument("--rolle", action="store_true", help="korrektur: Rollenfahrt, Geschwindigkeit aus Leistung berechnen")
+    p.add_argument("--event", help="korrektur --rolle: ID der geplanten Einheit, mit der die Fahrt gekoppelt wird")
+    p.add_argument("--name-neu", default="Rolle", help="korrektur --rolle: Name, wenn keine alte Aktivität ersetzt wird")
     a = p.parse_args(argv)
 
     if a.befehl == "saison" and a.uebersicht:

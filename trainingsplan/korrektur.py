@@ -9,6 +9,9 @@
   Zieldistanz stimmt und das Tempo der Runden möglichst gleichmäßig um den Schnitt liegt. Ergebnis
   ist eine FIT-Datei 'Beckenschwimmen' mit aktiven Bahnen, Pausen-Bahnen und Runden, die Strava und
   intervals.icu mit Pace und Pausen anzeigen.
+* Rolle (FIT): Sendet der Rollentrainer eine falsche Geschwindigkeit (0 km/h beim Treten oder unrealistisch
+  hoch), wird sie aus der Leistung berechnet (flache Straße, wie bei Rollen-Apps üblich). Sonst stimmen
+  Fahrzeit und TSS in intervals.icu nicht. Leistung, Puls und Trittfrequenz bleiben unverändert.
 
 Nur Standardbibliothek. Eingabe/Ausgabe sind Bytes; der CLI-Befehl `korrektur` lädt das Original
 aus intervals.icu, schreibt die Datei nach korrekturen/ und tauscht mit --apply die Aktivität aus.
@@ -207,6 +210,74 @@ def korrigiere_distanz(fit: bytes, distanz_m: float, zeit_s: float | None = None
     out = _fit_schliessen(bytes(d[:hs]), body)
     return out, {"faktor": fak, "luecke_start_s": tt[erst], "ende_s": dauer, "runden": runden,
                  "records_entfernt": len(weg), "pace_s_km": dauer / distanz_m * 1000}
+
+
+# --------------------------------------------------------------------------- Rolle
+def v_aus_leistung(p: float, masse_kg: float = 75.0, cda: float = 0.32, crr: float = 0.004) -> float:
+    """Geschwindigkeit (m/s) auf flacher Straße bei Leistung p (W), Antriebsverlust 2,5 %."""
+    if p <= 0:
+        return 0.0
+    lo, hi = 0.0, 30.0
+    for _ in range(50):
+        m = (lo + hi) / 2
+        if 0.5 * 1.2 * cda * m ** 3 + crr * masse_kg * 9.81 * m < p * 0.975:
+            lo = m
+        else:
+            hi = m
+    return lo
+
+
+def rolle_geschwindigkeit(fit: bytes, masse_kg: float = 75.0) -> tuple[bytes, dict]:
+    """Geschwindigkeit und Distanz einer Rollenfahrt aus der Leistung neu berechnen
+    (Records, Runden, Session); Pausen über 2 s zählen nicht zur Distanz."""
+    d = bytearray(fit)
+    msgs = list(fit_nachrichten(d))
+    recs = [m for m in msgs if m[2] == 20 and 253 in m[3]]
+    alt_dist = None
+    t_prev, dist, vmax, ts_dist = None, 0.0, 0.0, []
+    for _s, _e, _g, fl in recs:
+        t = _get(d, fl[253])
+        p = _get(d, fl[7]) if 7 in fl else 0
+        if 7 in fl and p == _INV[fl[7][1]]:
+            p = 0
+        v = v_aus_leistung(p, masse_kg)
+        vmax = max(vmax, v)
+        if t_prev is not None and t - t_prev <= 2:
+            dist += v * (t - t_prev)
+        t_prev = t
+        if 5 in fl:
+            alt_dist = _get(d, fl[5]) / 100
+            _put(d, fl[5], dist * 100)
+        for f in (6, 73):
+            if f in fl:
+                _put(d, fl[f], v * 1000)
+        ts_dist.append((t, dist))
+
+    def dist_bei(ts):
+        best = 0.0
+        for t, x in ts_dist:
+            if t > ts:
+                break
+            best = x
+        return best
+
+    for _s, _e, g, fl in msgs:
+        if g not in (18, 19) or 2 not in fl:
+            continue
+        a = _get(d, fl[2])
+        el = _get(d, fl[7]) / 1000 if 7 in fl else 0
+        tim = _get(d, fl[8]) / 1000 if 8 in fl else el
+        dd = dist if g == 18 else dist_bei(a + el) - dist_bei(a)
+        if 9 in fl:
+            _put(d, fl[9], dd * 100)
+        avg, mx = (13, 14) if g == 19 else (14, 15)
+        for f, val in ((avg, dd / tim if tim else 0), (mx, vmax), (110 if g == 19 else 124, dd / tim if tim else 0),
+                       (111 if g == 19 else 125, vmax)):
+            if f in fl:
+                _put(d, fl[f], val * 1000)
+    hs = d[0]
+    out = _fit_schliessen(bytes(d[:hs]), bytes(d[hs:-2]))
+    return out, {"distanz_alt_km": (alt_dist or 0) / 1000, "distanz_km": dist / 1000, "vmax_kmh": vmax * 3.6}
 
 
 # --------------------------------------------------------------------------- Schwimmen
