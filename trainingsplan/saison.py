@@ -71,6 +71,11 @@ TSS_PRO_STUNDE = {"Ride": 34, "Run": 48, "Swim": 35, "Other": 14}  # aus deinen 
 # Rad: TSS pro Stunde steigt mit dem Intensitätsanteil (Grundlage Z2 ca. 32, später Schwelle/VO2max/Renntempo)
 _RAD_TSS_H = [("2026-11-16", 32), ("2027-01-25", 35), ("2027-03-22", 38), ("2027-05-17", 40)]
 
+# Zusatztext für einzelne Erholungswochen (Rennen in der Woche)
+ERHOLUNG_ZUSATZ = {
+    "2027-04-12": '\n\nGISAduathlon Sa 17.04. (B-Rennen, DM Duathlon Sprint AK): diese Erholungswoche ist der Mini-Taper, Ablauf im Renneintrag am 17.04. Rennlast ca. 80 TSS ist im Wochenziel enthalten.',
+}
+
 ERHOLUNG_TEXT = ("Fokus auf leichtere Belastungen, reduziertes Volumen und Anpassung des Körpers an "
                  "Trainingsstress (Radfahren, Laufen, Schwimmen, Andere). Intensität behalten, "
                  "Umfang -35 %: je eine kurze Qualitätseinheit pro Sportart, kein langer Tag.")
@@ -530,7 +535,7 @@ def notiz_events(vorhandene_notizen: set[str]) -> list[dict]:
         out.append((montag(tag), name, text, _phasen_ende(name)))
     for tag, _, erholung in WOCHEN:
         if erholung and tag not in TAPER_WOCHEN:
-            out.append((montag(tag), "Erholungswoche", ERHOLUNG_TEXT, None))
+            out.append((montag(tag), "Erholungswoche", ERHOLUNG_TEXT + ERHOLUNG_ZUSATZ.get(montag(tag).isoformat(), ""), None))
     for tag, name, text in RETESTS:
         out.append((date.fromisoformat(tag), name, text, None))
     for tag, name, text in KOPPEL_BRICKS:
@@ -577,7 +582,7 @@ PHASEN_UEBERSICHT = [
 ]
 
 _TESTWOCHEN = {"2027-01-18": "Retest Sa 23.01.", "2027-03-15": "Retest Sa 20.03.",
-               "2027-06-07": "Cottbus Olympische Distanz Sa 12.06.", "2027-07-05": "Generalprobe Sa 10.07.",
+               "2027-04-12": "GISAduathlon Sa 17.04. (B)", "2027-06-07": "Cottbus Olympische Distanz Sa 12.06.", "2027-07-05": "Generalprobe Sa 10.07.",
                "2027-08-23": "Mitteldistanz-Schlüsselwoche (Brick 100 km + 10-14 km)",
                "2027-08-30": "Hölle von Q (Mitteldistanz, B) So 05.09."}
 
@@ -667,6 +672,8 @@ def uebersicht_markdown() -> str:
           "| **08.08.** | **DM Kurzdistanz** | Kurzdistanz | **A** | ~170 TSS | Taper 2 Wochen, siehe Notiz |",
           "| **05.09.** | **Hölle von Q (Harz)** | Mitteldistanz: 2 km / 90 km / 10 km laut Eintrag | **B** | "
           "~300-350 TSS | Schlüsselwoche 23.08., Rennwoche 30.08. mit kurzem Taper, Rad nicht über 75 % FTP |"]
+    z.append("| 17.04. | GISAduathlon Halle (DM Duathlon Sprint AK) | Duathlon Sprint (5 km / 21 km wellig / 3 km) | B | ~80 TSS | "
+             "Erholungswoche 12.04. als Mini-Taper, Start nur ohne Abiturprüfung am 16./19.04.; Datum vorläufig |")
     for tag, name, klasse, kat, dist, tss, hinweis in RENNEN:
         z.append(f"| {date.fromisoformat(tag):%d.%m.} | {name} | {klasse} ({dist}) | {kat[-1]} | ~{tss} TSS | {hinweis} |")
     c, a = sim["renntag"]
@@ -689,6 +696,21 @@ RENNEN: list[tuple[str, str, str, str, str, int, str]] = [
 ]
 
 
+# Rennen mit vollständiger Beschreibung (inkl. Verpflegung) und zugehörige Vorbereitungsnotizen; feste external_id,
+# damit 'saison --apply' sie aktualisiert statt doppelt anzulegen. GISAduathlon: Entscheidung 15.11.2026 (B-Rennen,
+# ersetzt das Radrennen-Fenster 24./25.04.).
+ZUSATZ_EVENTS: list[dict] = [
+    {"category": 'RACE_B', "type": 'Other', "name": 'GISAduathlon Halle (DM Duathlon Sprint AK)', "start_date_local": '2027-04-17T00:00:00', "end_date_local": '2027-04-18T00:00:00', "external_id": 'rennen-2027-04-17-gisaduathlon',
+     "description": "12. GISAduathlon Halle, DM Duathlon Sprint Altersklassen (Ausrichter SV Halle, triathlon-halle.de). Datum vorläufig Sa 17.04.2027 (DTU-Kalender; eine Quelle nennt 25.04.), Ort Lochau/Schkopau bei Halle, abgesperrte Strecke.\nStrecke: Lauf 5 km (1-km-Runden) / Rad 21 km (3 x 7 km, wellig: schnelle Abfahrt, 'Lochauer Speedkurve', 'Döllnitzer Rampe') / Lauf 3 km. Dauer ca. 55-60 min, geschätzte Rennlast ca. 75-85 TSS.\nAnmeldung (Stand 15.11.2026 noch nicht offen): ab Dezember auf triathlon-halle.de prüfen, race result; 2026 Limit 150 Männer, DTU-Startpass Pflicht, Meldeschluss ca. 2 Wochen vorher, Einverständniserklärung unterschrieben mitbringen. Storno-Regeln wegen Abitur prüfen.\nABITUR: Schriftliche Prüfungen ab Fr 16.04. Bei einer Prüfung am 16.04. oder Mo 19.04. nicht starten (Prüfung geht vor).\nRolle im Plan: B-Rennen in der Erholungswoche 12.-18.04. (Phase 3), erster Formtest der Saison, Lauf-Engpass unter Wettkampfbedingungen (8 km Lauf, davon 3 km mit Rad-Beinen). Ersetzt das Radrennen-Fenster 24./25.04.\nTaktik: Lauf 1 kontrolliert (ca. 5-8 s/km langsamer als 5-km-Bestform), Rad hart mit Druck an der Rampe (Rad ist deine Stärke), in der letzten Radrunde Beine lockern, Lauf 2 von Beginn an zügig. Wechsel üben.\nMini-Taper: Mo 60 min Rad locker, Di Schwimmen + 4x1 min Lauf-Renntempo, Mi 45 min Rad mit 3x3 min Renntempo, Do Schwimmen Technik + 15 min Lauf mit 4 Steigerungen, Fr frei (Prüfungsbeginn), Sa Rennen, So 60 min locker Rad.\n\nVerpflegung:\nVortag: kohlenhydratreich ca. 6-7 g/kg (400-470 g), abends ballaststoffarm, 2-3 l trinken.\nRenntag, 3 h vorher: 130-170 g Kohlenhydrate (Weißbrot mit Honig, Haferbrei) und 500 ml; 60 min vorher 500 ml mit 500 mg Natrium; 15 min vor dem Start ein Gel (25 g).\nLauf 1 (ca. 19 min): nichts.\nRad (ca. 33-36 min): Bidon 500 ml mit 40 g Kohlenhydraten und 400 mg Natrium, in der letzten Radrunde ein Gel (25 g) mit Wasser.\nLauf 2 (ca. 11-12 min): nichts, höchstens Wasser.\nSupplements: Koffein 3 mg/kg (ca. 200 mg) 45-60 min vor dem Start nur, wenn vorher im Training getestet (die geplanten Koffein-Tests beginnen erst am 08.05.), sonst nur deinen gewohnten Kaffee. Nur Produkte mit Kölner Liste/Informed Sport (DM, Dopingkontrollen möglich).\nDanach: 80 g Kohlenhydrate und 25 g Eiweiß.\n(Richtwerte für 67 kg, im Training üben.)"},
+    {"category": 'NOTE', "name": 'Erinnerung: Anmeldung GISAduathlon prüfen', "start_date_local": '2026-12-01T00:00:00', "end_date_local": '2026-12-02T00:00:00', "external_id": 'erinnerung-2026-12-01-gisaduathlon',
+     "description": 'Auf triathlon-halle.de (GISA-Duathlon DM Sprint -> Duathlon Anmeldung) prüfen, ob die Anmeldung für den 12. GISAduathlon (vorläufig 17.04.2027) offen ist; früh anmelden (2026 Limit 150 Männer). DTU-Startpass 2027 über den Verein prüfen, Storno-Regeln wegen Abitur lesen. Datum 17.04. vs. 25.04. klären. Ist noch nichts offen: alle 1-2 Wochen erneut schauen.'},
+    {"category": 'NOTE', "name": 'Duathlon-Koppel (Vorbereitung GISAduathlon)', "start_date_local": '2027-04-04T00:00:00', "end_date_local": '2027-04-05T00:00:00', "external_id": 'woche-2027-04-04-duathlon-koppel',
+     "description": 'Ersetzt die Sonntags-Koppel dieser Woche (Ferienende): Lauf-Rad-Lauf wie im Rennen.\n- 15 min einlaufen, 2 km im Renntempo (ca. 3:50-3:55/km)\n- Wechsel, 40 min Rad mit 15 min bei 95-100 % FTP auf welliger Strecke\n- Wechsel, 2 km im Renntempo, 10 min auslaufen\nZiel: zweiten Lauf mit Rad-Beinen kennenlernen, Wechsel üben. Nur bei grüner Ampel.\n\nVerpflegung:\nVorher (2-3 h): 100-130 g Kohlenhydrate.\nWährenddessen: auf dem Rad Bidon mit 30-40 g Kohlenhydraten, Wasser.\nDanach: 80 g Kohlenhydrate und 25 g Eiweiß.\n(Richtwerte für 67 kg, im Training üben.)'},
+    {"category": 'NOTE', "name": 'Koppel mit Lauf-Renntempo (Vorbereitung GISAduathlon)', "start_date_local": '2027-04-11T00:00:00', "end_date_local": '2027-04-12T00:00:00', "external_id": 'woche-2027-04-11-koppel-renntempo',
+     "description": 'Sonntags-Koppel: 60 min Rad locker bis mittel, danach Lauf 3 x 1 km im Duathlon-Renntempo (ca. 3:50/km), 2 min Trabpause, 10 min auslaufen. Letzte harte Laufeinheit vor dem Rennen am 17.04.\n\nVerpflegung:\nWährenddessen: auf dem Rad Bidon mit 30-40 g Kohlenhydraten.\nDanach: 80 g Kohlenhydrate und 25 g Eiweiß.\n(Richtwerte für 67 kg, im Training üben.)'},
+]
+
+
 def rennen_events() -> list[dict]:
     """Rennen des Vorjahres als Platzhalter-Termine (RACE_B/RACE_C) im Kalender."""
     out = []
@@ -699,4 +721,4 @@ def rennen_events() -> list[dict]:
                     "description": (f"{klasse}: {dist}. Geschätzte Rennlast ca. {tss} TSS.\n{hinweis}\n"
                                     "Termin und Distanz laut Athlet."),
                     "external_id": f"saison-rennen-{tag}-{name[:5].lower().strip()}"})
-    return out
+    return out + [dict(e) for e in ZUSATZ_EVENTS]

@@ -52,7 +52,7 @@ Wochenziele in TSS, Stunden grob geschätzt (Rad 34, Lauf 48, Schwimmen 35, Kraf
 | 22.03. | 3 | VO2max | 640 | 17 | 357 | 146 | 115 | 22 | 76 | -8 |
 | 29.03. | 3 | VO2max | 660 | 18 | 371 | 152 | 115 | 22 | 79 | -12 |
 | 05.04. | 3 | VO2max | 680 | 18 | 375 | 168 | 115 | 22 | 82 | -13 |
-| 12.04. | 3 | Erholung | 450 | 12 | 248 | 111 | 80 | 11 | 79 | +4 |
+| 12.04. | 3 | Erholung + GISAduathlon Sa 17.04. (B) | 450 | 12 | 248 | 111 | 80 | 11 | 79 | +4 |
 | 19.04. | 3 | VO2max | 680 | 18 | 375 | 168 | 115 | 22 | 82 | -7 |
 | 26.04. | 3 | VO2max | 700 | 19 | 388 | 175 | 115 | 22 | 85 | -11 |
 | 03.05. | 3 | VO2max | 715 | 19 | 381 | 187 | 125 | 22 | 87 | -13 |
@@ -80,6 +80,7 @@ Wochenziele in TSS, Stunden grob geschätzt (Rad 34, Lauf 48, Schwimmen 35, Kraf
 |---|---|---|---|---|---|
 | **08.08.** | **DM Kurzdistanz** | Kurzdistanz | **A** | ~170 TSS | Taper 2 Wochen, siehe Notiz |
 | **05.09.** | **Hölle von Q (Harz)** | Mitteldistanz: 2 km / 90 km / 10 km laut Eintrag | **B** | ~300-350 TSS | Schlüsselwoche 23.08., Rennwoche 30.08. mit kurzem Taper, Rad nicht über 75 % FTP |
-| 12.06. | Cottbus | Olympische Distanz (Schwimmen 1,5 km / Rad 40 km / Lauf 10 km (Vergleich: Kurzdistanz im Juni 2026 in 2:19 h)) | B | ~150 TSS | B-Rennen und Generalprobe für die DM, 8 Wochen vorher. Mini-Taper Mi-Fr (-40 %): Mo 60 min locker, Di Schwimmen (Verein) + 5x1 min Renntempo Lauf, Mi 45 min Rad mit 3x5 min Renntempo, Do Schwimmen Technik, Fr 30 min locker mit 3x30 s Öffnern. Pacing, Wechsel und Verpflegung wie bei der DM üben. So locker 60 min oder frei, Mo locker, ab Di wieder Belastung. Ersetzt den Formcheck. |
+| 17.04. | GISAduathlon Halle (DM Duathlon Sprint AK) | Duathlon Sprint (5 km / 21 km wellig / 3 km) | B | ~80 TSS | Erholungswoche 12.04. als Mini-Taper, Start nur ohne Abiturprüfung am 16./19.04.; Datum vorläufig |
+| 12.06. | Cottbus | Olympische Distanz (Schwimmen 1,5 km / Rad 40 km / Lauf 10 km (Vergleich: Kurzdistanz im Juni 2026 in 2:19 h)) | B | ~150 TSS | B-Rennen und Generalprobe für die DM, 8 Wochen vorher. Mini-Taper Mi-Fr (-40 %): Mo 60 min locker, Di Schwimmen (Verein) + 5x1 min Renntempo Lauf, Mi 45 min Rad mit 3x5 min Renntempo, Do Schwimmen Technik, Fr frei (kein Training möglich), Sa Rennen. Pacing, Wechsel und Verpflegung wie bei der DM üben. So locker 60 min oder frei, Mo locker, ab Di wieder Belastung. Ersetzt den Formcheck. |
 
 Renntag 08.08.2027 (Prognose am Morgen): CTL 87, ATL 67, Form +20.

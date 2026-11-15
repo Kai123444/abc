@@ -59,9 +59,9 @@ GUT: list[tuple[str, str, int, str]] = [
     ("2027-03-27", "Rad", 125, "RADRENNEN-FENSTER 1: ein Rennen (1,5-2 h) statt der langen Ausfahrt. Dazu Nitrat-Test (siehe Supplement-Plan)."),
     ("2027-03-28", "Lauf", 70, ""),
     ("2027-04-10", "Rad", 125, ""),
-    ("2027-04-24", "Rad", 130, "RADRENNEN-FENSTER 2: ein Rennen (2-2,5 h) statt der langen Ausfahrt. PRÜFPUNKT 1: 130 g/h erstmals im Renntempo, "
-                              "Magen höchstens 3/10."),
-    ("2027-04-25", "Lauf", 80, "Lauf nach dem Rennwochenende, nur locker, Gel in kleinen Portionen."),
+    ("2027-04-24", "Rad", 130, "Radrennen-Fenster 2 entfällt (GISAduathlon 17.04.): lange Ausfahrt mit 2 x 20 min Renntempo. PRÜFPUNKT 1: "
+                              "130 g/h erstmals im Renntempo, Magen höchstens 3/10."),
+    ("2027-04-25", "Lauf", 80, "Lauf locker, Gel in kleinen Portionen."),
     ("2027-05-08", "Rad", 130, "Dazu Koffein-Test 3 mg/kg (200 mg) 45-60 min vor Start."),
     ("2027-05-09", "Lauf", 85, ""),
     ("2027-05-22", "Rad", 130, "RADRENNEN-FENSTER 3: ein Rennen (2-3 h) statt der langen Ausfahrt, dazu Koffein 4 mg/kg (270 mg) und Natrium 800 mg pro Stunde. "
@@ -144,11 +144,16 @@ GUT_REGELN = (
 
 RADRENNEN = [
     ("2027-03-27", "2027-03-28", 125, "1,5-2 h", "Saisonstart, erster Test der Aufnahme im Renntempo"),
-    ("2027-04-24", "2027-04-25", 130, "2-2,5 h", "PRÜFPUNKT 1, nach der Erholungswoche 12.04. frisch"),
+    ("2027-04-24", "2027-04-25", 130, "2-2,5 h", "PRÜFPUNKT 1, nach der Erholungswoche 12.04. frisch"),  # entfällt, siehe RADRENNEN_ENTFAELLT
     ("2027-05-22", "2027-05-23", 130, "2-3 h", "PRÜFPUNKT 2, erster Block der Wettkampfphase, dazu Koffein-Test"),
     ("2027-06-19", "2027-06-20", 130, "2-3 h", "Eine Woche nach Cottbus, Plan auswerten"),
     ("2027-07-03", "2027-07-04", 130, "2-3 h", "Letzte Bestätigung, nur bei grüner Ampel, danach Erholungswoche 05.07."),
 ]
+
+# Fenster, die entfallen (Nummer -> Begründung); die Notiz bleibt mit Hinweis stehen.
+RADRENNEN_ENTFAELLT = {
+    2: 'ENTFÄLLT (Entscheidung 15.11.2026): Statt eines Radrennens ist der GISAduathlon am 17.04. das Rennen im April; das Wochenende liegt außerdem in der schriftlichen Abiturphase. Das Darmtraining 130 g/h am 24.04. bleibt als Trainingseinheit.',
+}
 
 GUT_TERMINE = GUT
 
@@ -445,7 +450,11 @@ def gut_training_events() -> list[dict]:
                 f"Samstagsrennen nur Lauf locker 45 min; bei Sonntagsrennen am Samstag 60-90 min locker. Montag danach nur "
                 f"leichte Beine. Kein Rennen in einer Erholungswoche oder in den 2 Wochen vor Cottbus und der DM. Danach "
                 f"Magen-Notizen (0-10 pro Stunde) und Zielrate in den Wellness-Kommentar schreiben.")
-        out.append({"category": "NOTE", "name": f"Radrennen-Fenster {n}: {sa[8:10]}.{sa[5:7]}./{so[8:10]}.{so[5:7]}. ({rate} g/h)",
+        name = f"Radrennen-Fenster {n}: {sa[8:10]}.{sa[5:7]}./{so[8:10]}.{so[5:7]}. ({rate} g/h)"
+        if n in RADRENNEN_ENTFAELLT:
+            name = f"Radrennen-Fenster {n}: {sa[8:10]}.{sa[5:7]}./{so[8:10]}.{so[5:7]}. ENTFÄLLT"
+            text = RADRENNEN_ENTFAELLT[n] + "\n\n" + text
+        out.append({"category": "NOTE", "name": name,
                     "description": text, "start_date_local": f"{sa}T00:00:00",
                     "external_id": f"verpflegung-rennfenster-{n}"})
     out.append({"category": "NOTE", "name": "Darmtraining: Plan und Regeln", "description": GUT_REGELN,
