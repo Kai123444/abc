@@ -80,7 +80,7 @@ Wochenziele in TSS, Stunden grob geschätzt (Rad 34, Lauf 48, Schwimmen 35, Kraf
 |---|---|---|---|---|---|
 | **08.08.** | **DM Kurzdistanz** | Kurzdistanz | **A** | ~170 TSS | Taper 2 Wochen, siehe Notiz |
 | **05.09.** | **Hölle von Q (Harz)** | Mitteldistanz: 2 km / 90 km / 10 km laut Eintrag | **B** | ~300-350 TSS | Schlüsselwoche 23.08., Rennwoche 30.08. mit kurzem Taper, Rad nicht über 75 % FTP |
-| 17.04. | GISAduathlon Halle (DM Duathlon Sprint AK) | Duathlon Sprint (5 km / 21 km wellig / 3 km) | B | ~80 TSS | Erholungswoche 12.04. als Mini-Taper, Start nur ohne Abiturprüfung am 16./19.04.; Datum vorläufig |
+| 17.04. | GISAduathlon Halle (DM Duathlon Sprint AK) | Duathlon Sprint (5 km / 21 km wellig / 3 km) | B | ~80 TSS | Windschatten erlaubt, kein Zeitfahrmaterial; Erholungswoche 12.04. als Mini-Taper, Start nur ohne Abiturprüfung am 16./19.04.; Datum vorläufig |
 | 12.06. | Cottbus | Olympische Distanz (Schwimmen 1,5 km / Rad 40 km / Lauf 10 km (Vergleich: Kurzdistanz im Juni 2026 in 2:19 h)) | B | ~150 TSS | B-Rennen und Generalprobe für die DM, 8 Wochen vorher. Mini-Taper Mi-Fr (-40 %): Mo 60 min locker, Di Schwimmen (Verein) + 5x1 min Renntempo Lauf, Mi 45 min Rad mit 3x5 min Renntempo, Do Schwimmen Technik, Fr frei (kein Training möglich), Sa Rennen. Pacing, Wechsel und Verpflegung wie bei der DM üben. So locker 60 min oder frei, Mo locker, ab Di wieder Belastung. Ersetzt den Formcheck. |
 
 Renntag 08.08.2027 (Prognose am Morgen): CTL 87, ATL 67, Form +20.
