@@ -177,20 +177,23 @@ def _verpflegung(client: IntervalsClient, a) -> int:
     evs += client.events(heute, date(2027, 9, 30), category="RACE_A,RACE_B,RACE_C")
     aenderungen = []
     for e in evs:
-        block = vp.block_fuer_event(e)
-        if not block:
-            continue
-        neu = vp.mit_block(e.get("description"), block)
-        if neu != (e.get("description") or ""):
-            aenderungen.append((e, neu))
-    for e, _ in aenderungen:
-        print(f"{e['start_date_local'][:10]} {e.get('category', '')[:6]:6} {e['name'][:44]}")
-    print(f"{len(aenderungen)} Einheiten bekommen einen Verpflegungsblock.")
+        if e.get("category") != "WORKOUT":  # Rennen: nur Block, die Rennrate steht im Text
+            block = vp.block_fuer_event(e)
+            neu = vp.mit_block(e.get("description"), block) if block else None
+            felder = {"description": neu} if neu and neu != (e.get("description") or "") else {}
+        else:
+            felder = vp.ergaenze(e)
+        if felder:
+            aenderungen.append((e, felder))
+    for e, f in aenderungen:
+        was = ", ".join(("Block" if k == "description" else f"{f[k]} g KH/h") for k in f)
+        print(f"{e['start_date_local'][:10]} {e.get('category', '')[:6]:6} {e['name'][:44]:44} {was}")
+    print(f"{len(aenderungen)} Einheiten bekommen Verpflegungsblock und/oder Kohlenhydrate pro Stunde.")
     if not a.apply:
         print("Vorschau – mit --apply eintragen.")
         return 0
-    for e, neu in aenderungen:
-        client.update_event(e["id"], {"description": neu})
+    for e, felder in aenderungen:
+        client.update_event(e["id"], felder)
     gewollt = {n["external_id"] for n in vp.gut_training_events()}
     for e in client.events(date(2026, 11, 1), date(2027, 12, 31), category="NOTE"):
         eid = str(e.get("external_id") or "")

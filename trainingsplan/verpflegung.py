@@ -406,6 +406,47 @@ def block_fuer_event(ev: dict) -> str | None:
     return f"{MARKER}:\n{text}\n(Richtwerte für {GEWICHT:.0f} kg, im Training üben.)"
 
 
+_KH_H = re.compile(r"(\d+)(?:\s*-\s*(\d+))?\s*(?:g Kohlenhydrate pro Stunde|g/h)")
+
+
+def kh_pro_stunde(beschreibung: str | None, tag: str | None = None, sport: str | None = None,
+                  minuten: float = 0) -> int | None:
+    """Kohlenhydrate pro Stunde (g/h) für das intervals.icu-Feld 'carbs_per_hour' aus dem Verpflegungsblock:
+    Darmtraining-Rate, sonst die Spanne aus der Zeile 'Währenddessen' (Mitte, auf 5 g gerundet), 'optional'
+    beim Schwimmen 20 g/h, nur Wasser 0. None, wenn kein Block da ist."""
+    m = re.search(r"(?ms)^Verpflegung:\n(.*)\Z", beschreibung or "")
+    if not m:
+        return None
+    block = m.group(1)
+    gut = re.search(r"DARMTRAINING: heutiges Ziel (\d+) g/h", block)
+    if gut:
+        return int(gut.group(1))
+    zeile = next((z for z in block.split("\n") if z.startswith(("Währenddessen", "Rad (", "Lauf ("))), "")
+    treffer = _KH_H.search(zeile)
+    if treffer:
+        lo, hi = int(treffer.group(1)), int(treffer.group(2) or treffer.group(1))
+        return int(round((lo + hi) / 2 / 5) * 5)
+    if "optional" in zeile and "Kohlenhydrat" in zeile:
+        return 20
+    return 0 if zeile else None
+
+
+def ergaenze(ev: dict) -> dict:
+    """Felder, die einer geplanten Einheit fehlen: Verpflegungsblock (nur wenn noch keiner da ist, damit von Hand
+    angepasste Blöcke bleiben) und Kohlenhydrate pro Stunde aus dem Block. Liefert nur geänderte Felder."""
+    aend: dict = {}
+    beschr = ev.get("description") or ""
+    block = None if _BLOCK.search(beschr) else block_fuer_event(ev)
+    if block:
+        neu = mit_block(beschr, block)
+        if neu != beschr:
+            aend["description"] = beschr = neu
+    kh = kh_pro_stunde(beschr)
+    if kh is not None and ev.get("carbs_per_hour") != kh:
+        aend["carbs_per_hour"] = kh
+    return aend
+
+
 def mit_block(beschreibung: str | None, block: str) -> str:
     """Beschreibung ohne alten Verpflegungsblock plus neuem Block."""
     basis = _BLOCK.sub("", (beschreibung or "").rstrip())

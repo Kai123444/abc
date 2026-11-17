@@ -331,6 +331,9 @@ def anwenden(client, apply: bool, kalender: list[dict]) -> dict:
     for w in items:
         fid = ordner_id.get(w["ordner"])
         body = {"folder_id": fid, "name": w["name"], "type": w["type"], "description": w["description"], "tags": w["tags"]}
+        kh = vp.kh_pro_stunde(w["description"])
+        if kh is not None:
+            body["carbs_per_hour"] = kh  # wird beim Ziehen in den Kalender mitgenommen
         if w["type"] in ("WeightTraining", "Other") or not any(l.startswith("-") for l in w["description"].splitlines()):
             body["moving_time"] = w["minuten"] * 60
         vorhanden = vorh_w.get((fid, w["name"].lower()))

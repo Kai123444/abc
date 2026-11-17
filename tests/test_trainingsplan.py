@@ -333,3 +333,21 @@ class TestRolle(unittest.TestCase):
         self.assertTrue(30 < info["vmax_kmh"] < 36)  # 200 W flach ca. 32-34 km/h
         self.assertAlmostEqual(p["session"][9] / 100, info["distanz_km"] * 1000, delta=1)
         del k._MSG["rec_p"]
+
+
+class TestKohlenhydrate(unittest.TestCase):
+    def test_kh_pro_stunde(self):
+        from trainingsplan.verpflegung import kh_pro_stunde, ergaenze
+        self.assertIsNone(kh_pro_stunde("Rad locker"))
+        self.assertEqual(kh_pro_stunde("x\n\nVerpflegung:\nVorher: Banane.\nWährenddessen: 40-60 g Kohlenhydrate pro Stunde, Bidon."), 50)
+        self.assertEqual(kh_pro_stunde("x\n\nVerpflegung:\nWährenddessen: 70-80 g Kohlenhydrate pro Stunde (Darmtraining)"), 75)
+        self.assertEqual(kh_pro_stunde("Verpflegung:\nWährenddessen: nur Wasser."), 0)
+        self.assertEqual(kh_pro_stunde("Verpflegung:\nWährenddessen: Trinkflasche, optional mit 20-30 g Kohlenhydraten."), 20)
+        self.assertEqual(kh_pro_stunde("Verpflegung:\nDARMTRAINING: heutiges Ziel 95 g/h = 63 g + 32 g"), 95)
+        ev = {"category": "WORKOUT", "type": "Ride", "name": "Rad locker", "moving_time": 90 * 60,
+              "start_date_local": "2026-12-01T00:00:00", "description": "- 90m 60%"}
+        f = ergaenze(ev)
+        self.assertIn("Verpflegung:", f["description"])
+        self.assertGreater(f["carbs_per_hour"], 0)
+        ev.update(f)
+        self.assertEqual(ergaenze(ev), {})  # zweiter Lauf ändert nichts

@@ -35,7 +35,7 @@ REGELN
 - Eigene Einträge des Athleten (DM und Hölle von Q, Vereinstraining, Schultermine, Rennen, Aktivitäten) nicht löschen oder überschreiben; Löschen und Verschieben nur auf Wunsch.
 - Aufbau nach Anpassungsfähigkeit: CTL-Anstieg gestaffelt nach Fitness (Regel vom 14.11.2026): CTL unter 50 bis ca. 6 pro Woche (einmalig 7, z. B. Testwoche oder Ferienblock), CTL 50-75 bis ca. 5, über 75 bis ca. 4; höchstens 3 Aufbauwochen am Stück, nur bei grüner Ampel, Mehrlast vor allem Rad/Schwimmen locker (Details: Notiz 'Wochenstruktur und Kontrolle', 23.11.), Laufumfang höchstens +10 % pro Woche, alle 4 Wochen Erholungswoche. Ampel: Gelb bei HRV 7-Tage-Mittel unter ca. 78 oder Ruhepuls über ca. 51 (Umfang -15 %), Rot bei HRV unter ca. 68 oder Ruhepuls über ca. 54 (Intensität streichen). Sauna und Eisbad vorher eintragen, die Morgenwerte danach werden eingeordnet.
 - Nach Tests Schwellen und Zonen aktualisieren, dann Paces und Prozente der Workouts prüfen.
-- Neue Einheiten immer mit Verpflegungsblock, Intervalle nach Leistung (% FTP), 'm' = Minuten und 'mtr' = Meter in der Workout-Syntax von intervals.icu.
+- Neue Einheiten immer mit Verpflegungsblock und dem Feld 'Kohlenhydrate pro Stunde' (carbs_per_hour, aus dem Block: verpflegung.ergaenze bzw. python -m trainingsplan verpflegung --horizont 330 --apply), Intervalle nach Leistung (% FTP), 'm' = Minuten und 'mtr' = Meter in der Workout-Syntax von intervals.icu.
 
 NEUE SITZUNG OHNE CHAT-VERLAUF
 1. python -m trainingsplan kontext (Umgebung abc, INTERVALS_API_KEY=proxy-injected) lesen, bei Bedarf --profil N oder --alles.

@@ -171,8 +171,6 @@ def naechste_woche_events() -> list[dict]:
             ev["category"] = "NOTE"
         else:
             ev.update(category="WORKOUT", type=typ, moving_time=minuten * 60)
-            block = verpflegung.block_fuer_event(ev)
-            if block:
-                ev["description"] = verpflegung.mit_block(ev["description"], block)
+            ev.update(verpflegung.ergaenze(ev))  # Verpflegungsblock + Kohlenhydrate pro Stunde
         out.append(ev)
     return out
