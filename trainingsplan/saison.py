@@ -27,9 +27,9 @@ WOCHEN: list[tuple[str, int, bool]] = [
     # schnellerer Winteraufbau, Ferien als Blockwochen, Abitur-Wochen 19.04.-09.05. pauschal ca. 570-590 TSS.
     # Phase 0 Tests (Woche 09.11. mit Rad-Stufentest, Woche 16.11. mit Koppel Harz und Lauf-Stufentest Fr);
     # erster Block bis 14.12., dann Erholungswoche 21.12.
-    ("2026-11-09", 411, False), ("2026-11-16", 530, False),
+    ("2026-11-09", 411, False), ("2026-11-16", 383, False),
     # Phase 1 Grundlage I
-    ("2026-11-23", 480, False), ("2026-11-30", 505, False), ("2026-12-07", 530, False), ("2026-12-14", 550, False),
+    ("2026-11-23", 553, False), ("2026-11-30", 505, False), ("2026-12-07", 530, False), ("2026-12-14", 550, False),
     ("2026-12-21", 370, True),
     ("2026-12-28", 590, False), ("2027-01-04", 610, False), ("2027-01-11", 620, False),
     ("2027-01-18", 420, True),
@@ -464,7 +464,8 @@ PHASEN: list[tuple[str, str, str]] = [
 # Testwochen: Verteilung nach den tatsächlich geplanten Einheiten (Stufentests, Vereinstraining, Sportunterricht)
 _SPORT_FEST = {
     "2026-11-09": {"Ride": 167, "Run": 55, "Swim": 157, "Other": 32},  # 24-h-Schwimmen Fr/Sa, Rad-Test So
-    "2026-11-16": {"Ride": 285, "Run": 132, "Swim": 90, "Other": 23},  # Koppel Harz Mo, Lauf-Stufentest Fr, Rad 3 h Sa
+    "2026-11-16": {"Ride": 240, "Run": 60, "Swim": 45, "Other": 38},  # Koppel Harz Mo, Di frei (Halskratzen), Kraft Beine Mi, Rad 2:30 Sa
+    "2026-11-23": {"Ride": 253, "Run": 162, "Swim": 110, "Other": 28},  # Lauf-Stufentest Mo 23.11. 10:00 (+73 TSS Lauf)
     # Abitur (schriftlich 16.04.-10.05.): weniger Rad, Laufen bleibt stabil (kurze lockere Läufe sind zeitsparend und
     # vermeiden einen Sprung im Laufumfang zu Phase 4)
     "2027-04-19": {"Ride": 270, "Run": 168, "Swim": 130, "Other": 22},
