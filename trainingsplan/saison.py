@@ -307,7 +307,8 @@ RETESTS = [
     ("2027-01-23", "Retest Stufentests",
      "Rad-Stufentest und Lauf-Stufentest wiederholen (ausgeruht, in der Erholungswoche). "
      "Dazu Schwimmtest CSS: 400 m und 200 m maximal, 10 min Pause dazwischen. Danach FTP, "
-     "Laufschwelle, CSS, LTHR und Zonen in intervals.icu aktualisieren."),
+     "Laufschwelle, CSS, LTHR und Zonen in intervals.icu aktualisieren."
+     + '\n\nRAD diesmal als FELDTEST draußen (Wunsch nach dem Stufentest 15.11.), wenn trocken, kein Frost und windarm, auf flacher Strecke ohne Ampeln/Kreuzungen (Harz-Vorland oder Lausitz):\n- 20 min Einfahren mit 3x1 min zügig (TF 100), 5 min locker\n- 5 min hart (ca. 110 % FTP), 10 min locker\n- 20 min Test: gleichmäßig so hart wie möglich, erste 5 min bewusst kontrolliert (ca. 290 W), letzte 5 min alles\n- 15 min Ausfahren\nAuswertung: FTP draußen = 95 % der 20-min-Leistung, LTHR = Ø Puls der letzten 10 min. Gleicher Leistungsmesser wie im Training. Bei Glätte, Schnee oder starkem Wind: Stufentest auf der Rolle wie am 15.11. und die letzte Stufe wirklich bis zum Abbruch fahren.'),
     ("2027-03-20", "Retest Stufentests",
      "Zweiter Retest: Rad-Stufentest, Lauf-Stufentest, CSS-Test. Vergleich mit November und "
      "Januar zeigt, ob Aufbau und Zonen passen."),
@@ -719,6 +720,13 @@ ZUSATZ_EVENTS: list[dict] = [
 ]
 
 
+def _mit_verpflegung(kat: str, name: str, text: str) -> str:
+    """Rennbeschreibung mit dem Verpflegungsblock, den 'verpflegung --apply' anhängt (damit beide gleich bleiben)."""
+    from . import verpflegung as vp
+    block = vp.block_fuer_event({"category": kat, "name": name, "description": text})
+    return vp.mit_block(text, block) if block else text
+
+
 def rennen_events() -> list[dict]:
     """Rennen des Vorjahres als Platzhalter-Termine (RACE_B/RACE_C) im Kalender."""
     out = []
@@ -726,7 +734,8 @@ def rennen_events() -> list[dict]:
         d = date.fromisoformat(tag)
         out.append({"category": kat, "type": "Other", "name": f"{name} ({klasse})",
                     "start_date_local": f"{tag}T00:00:00",
-                    "description": (f"{klasse}: {dist}. Geschätzte Rennlast ca. {tss} TSS.\n{hinweis}\n"
-                                    "Termin und Distanz laut Athlet."),
+                    "description": _mit_verpflegung(kat, f"{name} ({klasse})",
+                                                    f"{klasse}: {dist}. Geschätzte Rennlast ca. {tss} TSS.\n{hinweis}\n"
+                                                    "Termin und Distanz laut Athlet."),
                     "external_id": f"saison-rennen-{tag}-{name[:5].lower().strip()}"})
     return out + [dict(e) for e in ZUSATZ_EVENTS]
