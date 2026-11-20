@@ -351,3 +351,21 @@ class TestKohlenhydrate(unittest.TestCase):
         self.assertGreater(f["carbs_per_hour"], 0)
         ev.update(f)
         self.assertEqual(ergaenze(ev), {})  # zweiter Lauf ändert nichts
+
+
+class TestBecken(unittest.TestCase):
+    def test_becken_50_auf_25(self):
+        from trainingsplan import korrektur as k
+        f = k._FitSchreiber()
+        t0 = 1_000_000_000
+        f.add("file_id", type=4, manufacturer=1, product=1, serial=1, time_created=t0)
+        for i in range(4):
+            f.add("length", ts=t0 + 30 * (i + 1), idx=i, event=28, event_type=1, start=t0 + 30 * i,
+                  elapsed=30000, timer=30000, speed=50 / 30 * 1000, stroke=0, ltype=1)
+        f.add("session", ts=t0 + 120, idx=0, event=8, event_type=1, start=t0, sport=5, subsport=17, elapsed=120000,
+              timer=120000, dist=20000, speed=50 / 30 * 1000, pool=5000, pool_unit=0, nact=4)
+        neu, info = k.becken_korrigieren(f.bytes(), 25)
+        p = k.fit_pruefen(neu)
+        self.assertEqual(p["session"][9], 10000)
+        self.assertEqual(p["session"][44], 2500)
+        self.assertEqual(info["bahnen_aktiv"], 4)

@@ -355,6 +355,44 @@ def _rolle(client: IntervalsClient, a) -> int:
     return 0
 
 
+def _becken(client: IntervalsClient, a) -> int:
+    """Beckenschwimmen mit falsch eingestellter Beckenlänge (z. B. Uhr auf 50 m, Becken 25 m) korrigieren."""
+    import json
+    from . import korrektur
+    if not a.aktivitaet:
+        print("Fehler: --aktivitaet ID angeben", file=sys.stderr)
+        return 2
+    alt = client.activity(a.aktivitaet)
+    roh = Path(a.datei).read_bytes() if a.datei else client.activity_file(a.aktivitaet)
+    neu, info = korrektur.becken_korrigieren(roh, a.becken)
+    tag = (alt.get("start_date_local") or "")[:10]
+    ordner = Path("korrekturen"); ordner.mkdir(exist_ok=True)
+    datei = ordner / f"{tag}_{a.aktivitaet}_becken{a.becken:.0f}.fit"
+    datei.write_bytes(neu)
+    bew = alt.get("moving_time") or 0
+    pace = bew / info["distanz"] * 100 if info["distanz"] else 0
+    print(f"{alt.get('name')} ({tag}): Becken {info['becken_alt']:.0f} -> {info['becken_neu']:.0f} m, "
+          f"{alt.get('distance'):.0f} m -> {info['distanz']:.0f} m ({info['bahnen_aktiv']} Bahnen), "
+          f"Ø ca. {int(pace // 60)}:{int(pace % 60):02d}/100 m\nDatei: {datei} (auch für Strava)")
+    if not a.apply:
+        print("Vorschau – mit --apply in intervals.icu austauschen (Kopplung mit --event ID).")
+        return 0
+    (ordner / f"{tag}_{a.aktivitaet}_alt.json").write_text(json.dumps(alt, ensure_ascii=False, indent=1), encoding="utf-8")
+    notiz = f"Korrigierte Datei: Uhr war auf {info['becken_alt']:.0f}-m-Becken eingestellt, tatsächlich {a.becken:.0f} m."
+    nid = client.upload_activity(datei.name, neu, alt.get("name"), ((alt.get("description") or "") + "\n" + notiz).strip())
+    p = client.activity(nid)
+    if abs((p.get("distance") or 0) - info["distanz"]) > 5:
+        print(f"Fehler: neue Aktivität {nid} hat {p.get('distance')} m – alte bleibt erhalten", file=sys.stderr)
+        return 2
+    ziel = a.event or alt.get("paired_event_id")
+    if ziel:
+        client.update_activity(nid, {"paired_event_id": int(ziel)})
+    client.delete_activity(a.aktivitaet)
+    print(f"✔ ausgetauscht: {a.aktivitaet} gelöscht, neu {nid} ({p.get('distance'):.0f} m, bewegt {p.get('moving_time')} s)"
+          + (f", gekoppelt an {ziel}" if ziel else ""))
+    return 0
+
+
 def _korrektur(client: IntervalsClient, a) -> int:
     """Aktivität mit falscher Distanz/Zeit korrigieren: Datei nach korrekturen/ schreiben (Vorschau),
     mit --apply die korrigierte Datei hochladen, Kopplung übernehmen und die alte Aktivität löschen."""
@@ -362,6 +400,8 @@ def _korrektur(client: IntervalsClient, a) -> int:
     from . import korrektur
     if a.rolle:
         return _rolle(client, a)
+    if a.becken:
+        return _becken(client, a)
     if not a.aktivitaet or not a.distanz:
         print("Fehler: --aktivitaet ID und --distanz METER angeben (Rolle: --rolle --datei FIT)", file=sys.stderr)
         return 2
@@ -444,6 +484,7 @@ def main(argv: list[str] | None = None) -> int:
     p.add_argument("--datei", help="korrektur: lokale Datei statt Original aus intervals.icu (Schwimmen: TCX)")
     p.add_argument("--bahn", type=float, default=50.0, help="korrektur: Beckenlänge in m (Schwimmen)")
     p.add_argument("--rolle", action="store_true", help="korrektur: Rollenfahrt, Geschwindigkeit aus Leistung berechnen")
+    p.add_argument("--becken", type=float, help="korrektur: richtige Beckenlänge in m, wenn die Uhr falsch eingestellt war")
     p.add_argument("--event", help="korrektur --rolle: ID der geplanten Einheit, mit der die Fahrt gekoppelt wird")
     p.add_argument("--name-neu", default="Rolle", help="korrektur --rolle: Name, wenn keine alte Aktivität ersetzt wird")
     a = p.parse_args(argv)

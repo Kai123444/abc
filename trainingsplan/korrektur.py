@@ -212,6 +212,36 @@ def korrigiere_distanz(fit: bytes, distanz_m: float, zeit_s: float | None = None
                  "records_entfernt": len(weg), "pace_s_km": dauer / distanz_m * 1000}
 
 
+# --------------------------------------------------------------------------- Becken falsch eingestellt
+_SKAL = {20: (5, 6, 73), 19: (9, 13, 14, 110, 111), 18: (9, 14, 15, 124, 125), 101: (6,)}
+
+
+def becken_korrigieren(fit: bytes, bahn_m: float) -> tuple[bytes, dict]:
+    """Beckenschwimmen (FIT von der Uhr) mit falsch eingestellter Beckenlänge: Beckenlänge setzen und alle
+    Distanzen und Geschwindigkeiten im Verhältnis neu/alt skalieren (Records, Runden, Session, Bahnen).
+    Zeiten, Puls, Züge und die Zahl der Bahnen bleiben."""
+    d = bytearray(fit)
+    msgs = list(fit_nachrichten(d))
+    alt = None
+    for _s, _e, g, fl in msgs:
+        if g == 18 and 44 in fl:
+            alt = _get(d, fl[44]) / 100
+    if not alt:
+        raise ValueError("keine Beckenlänge in der Datei (kein Beckenschwimmen?)")
+    fak = bahn_m / alt
+    for _s, _e, g, fl in msgs:
+        for f in _SKAL.get(g, ()):
+            if f in fl and _get(d, fl[f]) != _INV[fl[f][1]]:
+                _put(d, fl[f], _get(d, fl[f]) * fak)
+        if g == 18 and 44 in fl:
+            _put(d, fl[44], bahn_m * 100)
+    hs = d[0]
+    out = _fit_schliessen(bytes(d[:hs]), bytes(d[hs:-2]))
+    info = fit_pruefen(out)
+    return out, {"becken_alt": alt, "becken_neu": bahn_m, "faktor": fak, "distanz": info["session"].get(9, 0) / 100,
+                 "bahnen_aktiv": sum(1 for x in info["lengths"] if x.get(12) == 1)}
+
+
 # --------------------------------------------------------------------------- Rolle
 def v_aus_leistung(p: float, masse_kg: float = 75.0, cda: float = 0.32, crr: float = 0.004) -> float:
     """Geschwindigkeit (m/s) auf flacher Straße bei Leistung p (W), Antriebsverlust 2,5 %."""
