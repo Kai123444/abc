@@ -7,7 +7,7 @@ Wochenziele in TSS, Stunden grob geschätzt (Rad 34, Lauf 48, Schwimmen 35, Kraf
 | Phase | Zeitraum | Belastungsart | Intensitätsverteilung | Load/Woche (ohne Erholung) | Stunden | CTL am Ende |
 |---|---|---|---|---|---|---|
 | 0 Tests | 09.11.-22.11.2026 | Reaktivierung, Leistungsdiagnostik | locker, Tests Sa 14.11./Di 17.11. | 383-411 | 13-13 | 35 |
-| 1 Grundlage I | 23.11.-24.01.2027 | Aerobes Volumen, Technik, Maximalkraft im Kraftraum | ca. 85 % Z1-Z2 / 15 % darüber | 505-620 | 16-19 | 66 |
+| 1 Grundlage I | 23.11.-24.01.2027 | Aerobes Volumen, Technik, Maximalkraft im Kraftraum | ca. 85 % Z1-Z2 / 15 % darüber | 480-620 | 16-19 | 66 |
 | 2 Grundlage II / Aufbau | 25.01.-21.03.2027 | Schwelle, Tempo, aerobe Leistung | ca. 80 / 15 / 5 (pyramidal) | 620-680 | 18-19 | 80 |
 | 3 Aufbau intensiv | 22.03.-16.05.2027 | VO2max, Koppeltraining, lange Ausdauer | ca. 75 / 15 / 10 | 570-720 | 15-19 | 81 |
 | 4 Wettkampfvorbereitung | 17.05.-25.07.2027 | Renntempo, Spezifik, Spitzenvolumen | ca. 75 / 15 / 10 mit Renntempo | 635-760 | 16-19 | 92 |
@@ -32,26 +32,26 @@ Wochenziele in TSS, Stunden grob geschätzt (Rad 34, Lauf 48, Schwimmen 35, Kraf
 |---|---|---|---|---|---|---|---|---|---|---|
 | 09.11. | 0 | Reaktivierung | 411 | 13 | 167 | 55 | 157 | 32 | - | - |
 | 16.11. | 0 | Reaktivierung | 383 | 13 | 240 | 60 | 45 | 38 | 35 | -18 |
-| 23.11. | 1 | Aerobes Volumen | 553 | 16 | 253 | 162 | 110 | 28 | 42 | -28 |
-| 30.11. | 1 | Aerobes Volumen | 505 | 16 | 272 | 95 | 110 | 28 | 46 | -25 |
-| 07.12. | 1 | Aerobes Volumen | 530 | 16 | 290 | 102 | 110 | 28 | 51 | -23 |
-| 14.12. | 1 | Aerobes Volumen | 550 | 17 | 305 | 107 | 110 | 28 | 55 | -22 |
-| 21.12. | 1 | Erholung | 370 | 11 | 206 | 73 | 77 | 14 | 55 | -7 |
+| 23.11. | 1 | Aerobes Volumen | 480 | 16 | 225 | 95 | 105 | 55 | 40 | -23 |
+| 30.11. | 1 | Aerobes Volumen | 505 | 16 | 272 | 95 | 110 | 28 | 45 | -24 |
+| 07.12. | 1 | Aerobes Volumen | 530 | 16 | 290 | 102 | 110 | 28 | 50 | -23 |
+| 14.12. | 1 | Aerobes Volumen | 550 | 17 | 305 | 107 | 110 | 28 | 54 | -22 |
+| 21.12. | 1 | Erholung | 370 | 11 | 206 | 73 | 77 | 14 | 54 | -8 |
 | 28.12. | 1 | Aerobes Volumen | 590 | 18 | 334 | 118 | 110 | 28 | 59 | -17 |
-| 04.01. | 1 | Aerobes Volumen | 610 | 19 | 342 | 120 | 120 | 28 | 64 | -19 |
-| 11.01. | 1 | Aerobes Volumen | 620 | 19 | 349 | 123 | 120 | 28 | 67 | -19 |
-| 18.01. | 1 | Erholung + Retest Sa 23.01. | 420 | 13 | 238 | 84 | 84 | 14 | 66 | -3 |
-| 25.01. | 2 | Schwelle | 620 | 18 | 349 | 123 | 120 | 28 | 70 | -12 |
-| 01.02. | 2 | Schwelle | 650 | 19 | 366 | 136 | 120 | 28 | 73 | -15 |
-| 08.02. | 2 | Schwelle | 660 | 19 | 374 | 138 | 120 | 28 | 77 | -16 |
+| 04.01. | 1 | Aerobes Volumen | 610 | 19 | 342 | 120 | 120 | 28 | 63 | -20 |
+| 11.01. | 1 | Aerobes Volumen | 620 | 19 | 349 | 123 | 120 | 28 | 67 | -20 |
+| 18.01. | 1 | Erholung + Retest Sa 23.01. | 420 | 13 | 238 | 84 | 84 | 14 | 66 | -4 |
+| 25.01. | 2 | Schwelle | 620 | 18 | 349 | 123 | 120 | 28 | 69 | -12 |
+| 01.02. | 2 | Schwelle | 650 | 19 | 366 | 136 | 120 | 28 | 73 | -16 |
+| 08.02. | 2 | Schwelle | 660 | 19 | 374 | 138 | 120 | 28 | 76 | -16 |
 | 15.02. | 2 | Erholung | 440 | 12 | 250 | 92 | 84 | 14 | 74 | +1 |
 | 22.02. | 2 | Schwelle | 660 | 19 | 374 | 138 | 120 | 28 | 77 | -9 |
 | 01.03. | 2 | Schwelle | 670 | 19 | 364 | 148 | 130 | 28 | 80 | -12 |
 | 08.03. | 2 | Schwelle | 680 | 19 | 371 | 151 | 130 | 28 | 83 | -13 |
-| 15.03. | 2 | Erholung + Retest Sa 20.03. | 460 | 13 | 252 | 103 | 91 | 14 | 80 | +4 |
+| 15.03. | 2 | Erholung + Retest Sa 20.03. | 460 | 13 | 252 | 103 | 91 | 14 | 80 | +3 |
 | 22.03. | 3 | VO2max | 700 | 19 | 389 | 159 | 130 | 22 | 83 | -8 |
 | 29.03. | 3 | VO2max | 720 | 19 | 403 | 165 | 130 | 22 | 86 | -12 |
-| 05.04. | 3 | VO2max | 690 | 19 | 371 | 167 | 130 | 22 | 88 | -10 |
+| 05.04. | 3 | VO2max | 690 | 19 | 371 | 167 | 130 | 22 | 88 | -11 |
 | 12.04. | 3 | Erholung + GISAduathlon Sa 17.04. (B) | 450 | 12 | 240 | 108 | 91 | 11 | 84 | +8 |
 | 19.04. | 3 | VO2max | 590 | 16 | 270 | 168 | 130 | 22 | 84 | +3 |
 | 26.04. | 3 | VO2max | 590 | 16 | 263 | 175 | 130 | 22 | 84 | +1 |
